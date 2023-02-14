@@ -13,3 +13,18 @@ C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\refint\TestApp1.dll
 C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.pdb
 C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.genruntimeconfig.cache
 C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\ref\TestApp1.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.exe
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.deps.json
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.runtimeconfig.json
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.pdb
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.csproj.AssemblyReference.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.AssemblyInfoInputs.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.AssemblyInfo.cs
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.csproj.CoreCompileInputs.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\refint\TestApp1.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.pdb
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.genruntimeconfig.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\TestApp1\obj\Debug\net6.0\ref\TestApp1.dll

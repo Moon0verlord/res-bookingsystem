@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\TestApp1\\TestApp1.csproj": {}
+    "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\TestApp1\\TestApp1.csproj": {
+    "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\TestApp1\\TestApp1.csproj",
-        "projectName": "TestApp1",
-        "projectPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\TestApp1\\TestApp1.csproj",
+        "projectUniqueName": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectName": "ConsoleApp1",
+        "projectPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\Eigenaar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\TestApp1\\obj\\",
+        "outputPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eigenaar\\AppData\\Roaming\\NuGet\\NuGet.Config"
