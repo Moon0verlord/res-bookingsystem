@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "m0uw4sOlo9DuW2WLZlyQ1kmz3ID3RyAc9/XjFinj8dXRHnLFe6davTjYL96HzJreBhg3RmExRc7fWcXux2aVoA==",
+  "dgSpecHash": "95mTODnO8gMtPnvKFQL0Ebw6Ry+nKqxION4PPUoxEBs/9KUQBIMJ/Oudk89ojLi1a6O+JIfXgQvdL/cv/Lv9nA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\ProjectB\\Mini Project\\RPG\\RPG.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/RPG.csproj",
+  "expectedPackageFiles": [
+    "/Users/martijnwarnas/.nuget/packages/microsoft.netcore.app.ref/6.0.13/microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
+    "/Users/martijnwarnas/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.13/microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512",
+    "/Users/martijnwarnas/.nuget/packages/microsoft.netcore.app.host.osx-x64/6.0.13/microsoft.netcore.app.host.osx-x64.6.0.13.nupkg.sha512"
+  ],
   "logs": []
 }
