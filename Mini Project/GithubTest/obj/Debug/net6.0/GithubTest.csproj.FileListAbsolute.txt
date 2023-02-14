@@ -1,0 +1,15 @@
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\bin\Debug\net6.0\GithubTest.exe
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\bin\Debug\net6.0\GithubTest.deps.json
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\bin\Debug\net6.0\GithubTest.runtimeconfig.json
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\bin\Debug\net6.0\GithubTest.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\bin\Debug\net6.0\GithubTest.pdb
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.csproj.AssemblyReference.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.AssemblyInfoInputs.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.AssemblyInfo.cs
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.csproj.CoreCompileInputs.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\refint\GithubTest.dll
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.pdb
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\GithubTest.genruntimeconfig.cache
+C:\Users\Eigenaar\OneDrive\Bureaublad\HBO Informatica\Jaar 1\Semester 2\ProjectB\ProjectB\Mini Project\GithubTest\obj\Debug\net6.0\ref\GithubTest.dll
