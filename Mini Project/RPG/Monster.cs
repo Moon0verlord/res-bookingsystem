@@ -1,6 +1,6 @@
 ﻿namespace RPG;
 
-class Monster
+public class Monster
 {
     int ID;
     string Name;

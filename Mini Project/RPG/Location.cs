@@ -1,6 +1,6 @@
 ﻿namespace RPG;
 
-class Location
+public class Location
 {
     public int ID;
     public string Name;

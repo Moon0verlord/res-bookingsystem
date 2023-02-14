@@ -1,8 +1,8 @@
 ﻿namespace RPG;
 
-class Quest
+public class Quest
 {
-    int ID;
-    string Name;
-    string Description;
+    public int ID;
+    public string Name;
+    public string Description;
 }
