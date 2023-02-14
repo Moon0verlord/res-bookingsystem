@@ -1,0 +1,15 @@
+C:\Code\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.exe
+C:\Code\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.deps.json
+C:\Code\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.runtimeconfig.json
+C:\Code\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.dll
+C:\Code\ProjectB\TestApp1\bin\Debug\net6.0\TestApp1.pdb
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.csproj.AssemblyReference.cache
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.AssemblyInfoInputs.cache
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.AssemblyInfo.cs
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.csproj.CoreCompileInputs.cache
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.dll
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\refint\TestApp1.dll
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.pdb
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\TestApp1.genruntimeconfig.cache
+C:\Code\ProjectB\TestApp1\obj\Debug\net6.0\ref\TestApp1.dll
