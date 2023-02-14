@@ -8,7 +8,7 @@ public class Monster
     int MaximumDamage;
     int RewardExperience;
     int RewardGold;
-    List<int> Loot;
+    public List<int> Loot;
     int CurrentHitPoints;
     public Monster(int id, string name,
         string nameplural, int maximumDamage, int rewardExperience, int rewardGold, int loot, int currentHitPoints)
@@ -19,7 +19,7 @@ public class Monster
         MaximumDamage = maximumDamage;
         RewardExperience = rewardExperience;
         RewardGold = rewardGold;
-        Loot.Add(loot);
         CurrentHitPoints = currentHitPoints;
     }
+    
 }
