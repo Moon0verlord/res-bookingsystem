@@ -2,10 +2,17 @@
 
 public class Player
 {
-    public string Name;
-    public int CurrentHP;
-    public int MaxHP;
-    public Weapon CurrentWeapon;
-    public Location CurrentLocation;
-
+    string Name;
+    int MaxHP;
+    int gold;
+    int XP;
+    int level;
+    Weapon CurrentWeapon;
+    Location CurrentLocation;
+    
+    public Player(string name)
+    {
+        Name = name;
+        MaxHP = 100;
+    }
 }
