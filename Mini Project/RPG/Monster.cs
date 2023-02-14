@@ -2,16 +2,16 @@
 
 public class Monster
 {
-    int ID;
+    public int ID;
     string Name;
     string NamePlural;
     int MaximumDamage;
     int RewardExperience;
     int RewardGold;
-    List Loot;
+    List<int> Loot;
     int CurrentHitPoints;
     public Monster(int id, string name,
-        string nameplural, int maximumDamage, int rewardExperience, int rewardGold, List loot, int currentHitPoints)
+        string nameplural, int maximumDamage, int rewardExperience, int rewardGold, int loot, int currentHitPoints)
     {
         ID = id;
         Name = name;
@@ -19,7 +19,7 @@ public class Monster
         MaximumDamage = maximumDamage;
         RewardExperience = rewardExperience;
         RewardGold = rewardGold;
-        Loot = loot;
+        Loot.Add(loot);
         CurrentHitPoints = currentHitPoints;
     }
 }
