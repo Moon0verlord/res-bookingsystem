@@ -8,26 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Eigenaar\\.nuget\\packages\\": {}
+    "C:\\Users\\jonas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
-      "projectName": "ConsoleApp1",
-      "projectPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
-      "packagesPath": "C:\\Users\\Eigenaar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eigenaar\\OneDrive\\Bureaublad\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Mini Project\\ConsoleApp1\\ConsoleApp1\\obj\\",
+      "projectUniqueName": "C:\\Users\\jonas\\Mijn Drive\\Jaar1\\Semester3\\ProjectB\\Mini Project\\GithubTest\\GithubTest\\GithubTest.csproj",
+      "projectName": "GithubTest",
+      "projectPath": "C:\\Users\\jonas\\Mijn Drive\\Jaar1\\Semester3\\ProjectB\\Mini Project\\GithubTest\\GithubTest\\GithubTest.csproj",
+      "packagesPath": "C:\\Users\\jonas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jonas\\Mijn Drive\\Jaar1\\Semester3\\ProjectB\\Mini Project\\GithubTest\\GithubTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Eigenaar\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\jonas\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
-      "sources": {
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",

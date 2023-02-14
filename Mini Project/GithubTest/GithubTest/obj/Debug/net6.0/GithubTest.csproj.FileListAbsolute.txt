@@ -1,0 +1,15 @@
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\bin\Debug\net6.0\GithubTest.exe
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\bin\Debug\net6.0\GithubTest.deps.json
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\bin\Debug\net6.0\GithubTest.runtimeconfig.json
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\bin\Debug\net6.0\GithubTest.dll
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\bin\Debug\net6.0\GithubTest.pdb
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.csproj.AssemblyReference.cache
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.AssemblyInfoInputs.cache
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.AssemblyInfo.cs
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.csproj.CoreCompileInputs.cache
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.dll
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\refint\GithubTest.dll
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.pdb
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\GithubTest.genruntimeconfig.cache
+C:\Users\jonas\Mijn Drive\Jaar1\Semester3\ProjectB\Mini Project\GithubTest\GithubTest\obj\Debug\net6.0\ref\GithubTest.dll
