@@ -10,8 +10,23 @@ public class Program
         Console.WriteLine("But first, who are you?");
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
+        foreach (Weapon weapon in World.Weapons)
+        {
+            if (weapon.ID == World.WEAPON_ID_RUSTY_SWORD)
+            {
+                Player.CurrentWeapon = weapon;
+            }
+        }
+        foreach (Location location in World.Locations)
+        {
+            if (location.ID == World.LOCATION_ID_HOME)
+            {
+                Player.CurrentLocation = location;
+            }
+        }
+        
         Player player = new Player(name,10,10,10,
-        0,1, World.Weapons[0],Player.CurrentLocation);
+        0,1, Player.CurrentWeapon,Player.CurrentLocation);
         while (boolval)
         {
             try
