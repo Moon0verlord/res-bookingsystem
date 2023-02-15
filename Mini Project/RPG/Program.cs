@@ -16,6 +16,11 @@ public class Program
             {
                 case 1:
                     Console.WriteLine(1);
+                    Console.WriteLine($"\nName: {Player.Name}" +
+                                      $"\nCurrent HP:{Player.CurrentHP}" +
+                                      $"\nMax HP: {Player.MaxHP}" +
+                                      $"\nCurrent Weapon: {Player.CurrentWeapon}" +
+                                      $"\nCurrent Location: {Player.CurrentLocation}");
                     break;
                 case 2:
                     Console.WriteLine(2);
