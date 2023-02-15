@@ -1,5 +1,6 @@
 ﻿# Ignore Mac system files
 .DS_store
+.idea
 
 # Ignore obj files
 obj/
