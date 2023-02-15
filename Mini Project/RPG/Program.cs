@@ -67,12 +67,12 @@ public class Program
     public static void fight()
     {
         Random rnd = new Random();
-        var hitChanceRand = rnd.Next(1, 6);
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
         Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
         while (Player.CurrentHP > 0)
         {
+            var hitChanceRand = rnd.Next(1, 6);
             var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
             var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
             if (hitChanceRand / 2 >= 1)
