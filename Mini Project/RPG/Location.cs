@@ -33,4 +33,13 @@ public class Location
         string west = (LocationToWest == null) ? "    " : LocationToWest.Abbreviation;
         return $"Current Location: {Abbreviation}\nGame map: \n" + "\n" + "    " + north + "\n" + west + Abbreviation + east + "\n" + south;
     }
+
+    public string Compass()
+    {
+        string north = (LocationToNorth != null) ? "    N\n    |" : "";
+        string east = (LocationToEast != null) ? "---E" : "";
+        string south = (LocationToSouth != null) ? "    |\n    S" : "";
+        string west = (LocationToWest != null) ? "W---" : "    ";
+        return "\n" + north + "\n" + west + "|" + east + "\n" + south;
+    }
 }

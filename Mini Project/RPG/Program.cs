@@ -30,14 +30,10 @@ public class Program
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}.");
                         break;
                     case 2:
-                        string north = (Player.CurrentLocation.LocationToNorth != null) ? "    N\n    |" : "";
-                        string east = (Player.CurrentLocation.LocationToEast != null) ? "---E" : "";
-                        string south = (Player.CurrentLocation.LocationToSouth != null) ? "    |\n    S" : "";
-                        string west = (Player.CurrentLocation.LocationToWest != null) ? "W---" : "    ";
                         Console.WriteLine("Where would you like to go?");
                         Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                                           $"\nFrom here you can go to:");
-                        Console.WriteLine("\n" + north + "\n" + west + "|" + east + "\n" + south);
+                        Console.WriteLine(Player.CurrentLocation.Compass());
                         Console.WriteLine(Player.CurrentLocation.Map());
                         break;
                     case 3:
