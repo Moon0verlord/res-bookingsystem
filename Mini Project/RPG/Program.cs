@@ -12,7 +12,7 @@ public class Program
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
-        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD);
+        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name,10,10,10,
         0,1, Player.CurrentWeapon,Player.CurrentLocation);
         while (boolval)
@@ -87,7 +87,7 @@ public class Program
                 {
                     Console.WriteLine($"The {monster.Name} has: 0 Hp");
                     Console.WriteLine("You won");
-                    //add item to inventory//
+                    ///Stil need to finish: Player.Inventory.AddItem(null);
                     break;
                 }
                 
