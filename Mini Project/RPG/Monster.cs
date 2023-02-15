@@ -8,7 +8,7 @@ public class Monster
     int MaximumDamage;
     int RewardExperience;
     int RewardGold;
-    public List<int> Loot;
+    public CountedItemList Loot;
     int CurrentHitPoints;
     public Monster(int id, string name,
         string nameplural, int maximumDamage, int rewardExperience, int rewardGold, int loot, int currentHitPoints)
@@ -20,6 +20,7 @@ public class Monster
         RewardExperience = rewardExperience;
         RewardGold = rewardGold;
         CurrentHitPoints = currentHitPoints;
+        
     }
     
 }
