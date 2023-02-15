@@ -24,10 +24,10 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"\nName: {name},\nMax hp: {Player.MaxHP},\n" +
-                                          $"Current hp: {Player.CurrentHP},\n Gold: {Player.Gold},"+
-                        $"\nXp: {Player.XP},\nLevel: {Player.Level}, \n Current Weapon: {Player.CurrentWeapon}," +
-                                          $"\nCurrent Location: {Player.CurrentLocation}");
+                        Console.WriteLine($"Name: {name},\nMax hp: {Player.MaxHP},\n" +
+                                          $"Current hp: {Player.CurrentHP}\nGold: {Player.Gold}"+
+                        $"\nXp: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.name}"+
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}");
                         break;
                     case 2:
                         Console.WriteLine(2);
