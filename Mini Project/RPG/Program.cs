@@ -80,15 +80,16 @@ public class Program
                 Console.WriteLine($"You hit the {monster.Name}!");
                 
                 monster.CurrentHitPoints = monster.CurrentHitPoints- damage;
+                Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
 
                 if (monster.CurrentHitPoints-damage <= 0)
                 {
-                    Console.WriteLine($"You have: 0 Hp");
+                    Console.WriteLine($"The {monster.Name} has: 0 Hp");
                     Console.WriteLine("You won");
                     //add item to inventory//
                     break;
                 }
-                Console.WriteLine($"The {monster.Name} has: 0 Hp");
+                
             }
             else
             {
