@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "GithubTest/1.0.0": {
+      "RPG/1.0.0": {
         "runtime": {
-          "GithubTest.dll": {}
+          "RPG.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "GithubTest/1.0.0": {
+    "RPG/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

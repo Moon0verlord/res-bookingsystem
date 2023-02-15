@@ -3,7 +3,7 @@
 public class Monster
 {
     public int ID;
-    string Name;
+    public static string Name;
     string NamePlural;
     int MaximumDamage;
     int RewardExperience;

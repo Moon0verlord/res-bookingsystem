@@ -27,16 +27,24 @@ public class Program
                         Console.WriteLine($"Name: {name}.\nMax hp: {Player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.");
+                                          $"\nCurrent Location: {Player.CurrentLocation.Description}.");
                         break;
                     case 2:
                         Console.WriteLine("Where would you like to go?");
-                        Console.WriteLine($"You are at {Player.CurrentLocation}.{Player.CurrentLocation.Description}." +
+                        Console.WriteLine($"You are at: {Player.CurrentLocation.Name}." +
                                           $"\nFrom here you can go:");
                         //compass//
+                        Console.WriteLine(Player.CurrentLocation.LocationToNorth.Name);
+                        Console.WriteLine(Player.CurrentLocation.LocationToEast);
                         break;
                     case 3:
-                        Console.WriteLine(3);
+                        Console.WriteLine(Player.CurrentLocation.Description);
+                        if (Player.CurrentLocation.MonsterLivingHere != null)
+                            Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere} attacks!");
+                        else
+                        {
+                            Console.WriteLine("There seems to be nothing here to fight..");
+                        }
                         break;
                     case 4:
                         Console.WriteLine("Goodbye!");
