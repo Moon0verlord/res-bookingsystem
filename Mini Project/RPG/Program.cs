@@ -19,15 +19,15 @@ public class Program
             try
             {
                 Console.WriteLine("What would you like to do (Enter a number?).");
-                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit\n");
+                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Name: {name},\nMax hp: {Player.MaxHP},\n" +
-                                          $"Current hp: {Player.CurrentHP}\nGold: {Player.Gold}"+
-                        $"\nXp: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.name}"+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}");
+                        Console.WriteLine($"Name: {name}.\nMax hp: {Player.MaxHP}.\n" +
+                                          $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
+                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.name}."+
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.");
                         break;
                     case 2:
                         Console.WriteLine(2);
