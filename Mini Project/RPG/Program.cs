@@ -99,6 +99,9 @@ public class Program
             Player.CurrentHP = Player.CurrentHP - monsterDamage;
             Console.WriteLine($"You have: {Player.CurrentHP} Hp");
         }
-        Console.WriteLine("You sadly passed away:(");
+        if (Player.CurrentHP <= 0)
+        {
+            Console.WriteLine("You sadly passed away:(");
+        }
     }
 }
