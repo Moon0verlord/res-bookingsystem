@@ -1,0 +1,38 @@
+Index: Monster.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace RPG;\n\npublic class Monster\n{\n    int ID;\n    string Name;\n    int CurrentHP;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Monster.cs b/Monster.cs
+--- a/Monster.cs	(revision 40949a7e472340ae49365653ababbae8bb28640e)
++++ b/Monster.cs	(date 1676386828661)
+@@ -2,7 +2,7 @@
+ 
+ public class Monster
+ {
+-    int ID;
++    public int ID;
+     string Name;
+     int CurrentHP;
+ }
+\ No newline at end of file
+Index: Location.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace RPG;\n\npublic class Location\n{\n    public int ID;\n    public string Name;\n    public string Description;\n\n    \n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Location.cs b/Location.cs
+--- a/Location.cs	(revision 40949a7e472340ae49365653ababbae8bb28640e)
++++ b/Location.cs	(date 1676386983465)
+@@ -5,6 +5,4 @@
+     public int ID;
+     public string Name;
+     public string Description;
+-
+-    
+ }
+\ No newline at end of file
