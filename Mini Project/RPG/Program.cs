@@ -1,4 +1,4 @@
-﻿namespace RPG;
+﻿using RPG;
 
 public class Program
 {
@@ -24,7 +24,10 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine(1);
+                        Console.WriteLine($"\nName: {name},\nMax hp: {Player.MaxHP},\n" +
+                                          $"Current hp: {Player.CurrentHP},\n Gold: {Player.Gold},"+
+                        $"\nXp: {Player.XP},\nLevel: {Player.Level}, \n Current Weapon: {Player.CurrentWeapon}," +
+                                          $"\nCurrent Location: {Player.CurrentLocation}");
                         break;
                     case 2:
                         Console.WriteLine(2);

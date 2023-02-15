@@ -11,8 +11,10 @@ public class Monster
     public CountedItemList Loot;
     int CurrentHitPoints;
     public Monster(int id, string name,
-        string nameplural, int maximumDamage, int rewardExperience, int rewardGold, int loot, int currentHitPoints)
+        string nameplural, int maximumDamage, int rewardExperience, int rewardGold,
+        int loot, int currentHitPoints)
     {
+        
         ID = id;
         Name = name;
         NamePlural = nameplural;
@@ -20,7 +22,7 @@ public class Monster
         RewardExperience = rewardExperience;
         RewardGold = rewardGold;
         CurrentHitPoints = currentHitPoints;
-        
+        Loot = new CountedItemList();
     }
     
 }
