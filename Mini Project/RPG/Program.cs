@@ -31,11 +31,10 @@ public class Program
                         break;
                     case 2:
                         Console.WriteLine("Where would you like to go?");
-                        Console.WriteLine($"You are at: {Player.CurrentLocation.Name}." +
-                                          $"\nFrom here you can go:");
-                        //compass//
-                        Console.WriteLine(Player.CurrentLocation.LocationToNorth.Name);
-                        Console.WriteLine(Player.CurrentLocation.LocationToEast);
+                        Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+                                          $"\nFrom here you can go to:");
+                        Console.WriteLine(Player.CurrentLocation.Compass());
+                        Console.WriteLine(Player.CurrentLocation.Map());
                         break;
                     case 3:
                         if (Player.CurrentLocation.MonsterLivingHere != null)
