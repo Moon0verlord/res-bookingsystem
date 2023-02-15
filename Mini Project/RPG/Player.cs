@@ -25,5 +25,12 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
     }
-    
+    public static void ViewInventory()
+    {
+        Console.WriteLine("You have the following items in your inventory:");
+        foreach (CountedItem item in Inventory.TheCountedItemList)
+        {
+            Console.WriteLine($"{item}");
+        }
+    }
 }
