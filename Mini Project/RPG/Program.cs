@@ -81,8 +81,9 @@ public class Program
                 
                 monster.CurrentHitPoints = monster.CurrentHitPoints- damage;
 
-                if (monster.CurrentHitPoints <= 0)
+                if (monster.CurrentHitPoints-damage <= 0)
                 {
+                    Console.WriteLine($"You have: 0 Hp");
                     Console.WriteLine("You won");
                     //add item to inventory//
                     break;
