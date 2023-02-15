@@ -31,9 +31,10 @@ public class Program
                         break;
                     case 2:
                         Console.WriteLine("Where would you like to go?");
-                        Console.WriteLine($"You are at {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+                        Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                                           $"\nFrom here you can go:");
                         //compass//
+                        Console.WriteLine(Player.CurrentLocation.LocationToEast);
                         break;
                     case 3:
                         Console.WriteLine(3);
