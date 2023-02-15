@@ -71,7 +71,7 @@ public class Program
         var hitChanceRand = rnd.Next(1, 6);
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
-        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp");
+        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
         while (Player.CurrentHP > 0)
         {
             var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
@@ -81,7 +81,7 @@ public class Program
                 Console.WriteLine($"You hit the {monster.Name}!");
                 
                 monster.CurrentHitPoints = monster.CurrentHitPoints- damage;
-                Console.WriteLine(monster.CurrentHitPoints-damage);
+
                 if (monster.CurrentHitPoints <= 0)
                 {
                     Console.WriteLine("You won");
@@ -93,11 +93,11 @@ public class Program
             else
             {
                 Console.WriteLine("You missed haha");
-                Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp");
+                Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
             }
             Console.WriteLine($"The {monster.Name} hits you!");
             Player.CurrentHP = Player.CurrentHP - monsterDamage;
-            Console.WriteLine($"You have: {Player.CurrentHP} Hp");
+            Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
         }
         if (Player.CurrentHP <= 0)
         {
