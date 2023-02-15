@@ -9,32 +9,34 @@ public class Program
                           "You decide to do what you can to help.");
         while (boolval)
         {
-            Console.WriteLine("What would you like to do (Enter a number?).");
-            Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit\n");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            try
             {
-                case 1:
-                    Console.WriteLine(1);
-                    Console.WriteLine($"\nName: {Player.Name}" +
-                                      $"\nCurrent HP:{Player.CurrentHP}" +
-                                      $"\nMax HP: {Player.MaxHP}" +
-                                      $"\nCurrent Weapon: {Player.CurrentWeapon}" +
-                                      $"\nCurrent Location: {Player.CurrentLocation}");
-                    break;
-                case 2:
-                    Console.WriteLine(2);
-                    break;
-                case 3:
-                    Console.WriteLine(3);
-                    break;
-                case 4:
-                    Console.WriteLine("Goodbye!");
-                    Environment.Exit(0);
-                    break;
-                default:
-                    Console.WriteLine("Unkown");
-                    break;
+                Console.WriteLine("What would you like to do (Enter a number?).");
+                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit\n");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine(1);
+                        break;
+                    case 2:
+                        Console.WriteLine(2);
+                        break;
+                    case 3:
+                        Console.WriteLine(3);
+                        break;
+                    case 4:
+                        Console.WriteLine("Goodbye!");
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Unkown");
+                        break;
+                }
+            }
+            catch (System.FormatException e)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid option.\n");
             }
         }
     }
