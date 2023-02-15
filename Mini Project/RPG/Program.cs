@@ -35,6 +35,7 @@ public class Program
                                           $"\nFrom here you can go:");
                         //compass//
                         Console.WriteLine(Player.CurrentLocation.LocationToEast);
+                        Console.WriteLine(Player.CurrentLocation.LocationToEast);
                         break;
                     case 3:
                         Console.WriteLine(3);
