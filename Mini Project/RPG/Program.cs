@@ -110,13 +110,13 @@ public class Program
                 while (!retry)
                 {
                     var Choice = Console.ReadLine();
-                    if (Choice == "Yes")
+                    if (Choice == "Yes"||Choice == "yes")
                     {
                         Program game = new Program();
                         Main(null);
                     }
 
-                    if (Choice == "No")
+                    if (Choice == "No" || Choice == "no")
                     {
                         Console.WriteLine("Bye!");
                         Environment.Exit(0);
