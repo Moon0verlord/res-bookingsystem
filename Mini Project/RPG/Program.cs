@@ -7,6 +7,11 @@ public class Program
         bool boolval = true;
         Console.WriteLine("The people in your town are being terrorized by giant spiders.\n" +
                           "You decide to do what you can to help.");
+        Console.WriteLine("But first, who are you?");
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine()!;
+        Player player = new Player(name,10,10,10,
+        0,1, World.Weapons[0],Player.CurrentLocation);
         while (boolval)
         {
             try

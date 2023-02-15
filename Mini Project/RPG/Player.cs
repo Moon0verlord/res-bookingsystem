@@ -11,7 +11,8 @@ public class Player
     Weapon CurrentWeapon;
     Location CurrentLocation;
     
-    public Player(string Name, int MaxHP, int CurrentHP, int gold, int XP, int level, Weapon CurrentWeapon, Location CurrentLocation)
+    public Player(string Name, int MaxHP, int CurrentHP, int gold,
+        int XP, int level, Weapon CurrentWeapon, Location CurrentLocation)
     {
         this.Name = Name;
         MaxHP = 100;
