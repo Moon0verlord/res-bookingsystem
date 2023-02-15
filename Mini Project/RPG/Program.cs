@@ -38,6 +38,7 @@ public class Program
                         Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                                           $"\nFrom here you can go to:");
                         Console.WriteLine("\n" + north + "\n" + west + "|" + east + "\n" + south);
+                        Console.WriteLine(Player.CurrentLocation.Map());
                         break;
                     case 3:
                         Console.WriteLine(3);

@@ -12,8 +12,9 @@ public class Location
     public Location LocationToEast;
     public Location LocationToSouth;
     public Location LocationToWest;
+    public string Abbreviation;
 
-    public Location(int id, string name, string desc, Item item, Quest quest, Monster monster)
+    public Location(int id, string name, string desc, Item item, Quest quest, Monster monster, string abb)
     {
         ID = id;
         Name = name;
@@ -21,6 +22,11 @@ public class Location
         ItemRequiredToEnter = item;
         QuestAvailableHere = quest;
         MonsterLivingHere = monster;
+        Abbreviation = abb;
     }
-    
+
+    public string Map()
+    {
+        return "";
+    }
 }
