@@ -27,6 +27,10 @@ public class Location
 
     public string Map()
     {
-        return "";
+        string north = (LocationToNorth == null) ? "" : LocationToNorth.Abbreviation;
+        string east = (LocationToEast == null) ? "" : LocationToEast.Abbreviation;
+        string south = (LocationToSouth == null) ? "" : LocationToSouth.Abbreviation;
+        string west = (LocationToWest == null) ? "" : LocationToWest.Abbreviation;
+        return "\n" + north + "\n" + west + Abbreviation + east + "\n" + south;
     }
 }
