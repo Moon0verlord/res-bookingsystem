@@ -3,13 +3,13 @@
 public class Monster
 {
     public int ID;
-    string Name;
+    public string Name;
     string NamePlural;
-    int MaximumDamage;
+    public static int MaximumDamage;
     int RewardExperience;
     int RewardGold;
     public CountedItemList Loot;
-    int CurrentHitPoints;
+    public int CurrentHitPoints;
     public Monster(int id, string name,
         string nameplural, int maximumDamage, int rewardExperience, int rewardGold,
         int loot, int currentHitPoints)
