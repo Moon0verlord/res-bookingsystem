@@ -1,4 +1,5 @@
-﻿using RPG;
+﻿using System.Net.Mime;
+using RPG;
 
 public class Program
 {
@@ -75,14 +76,14 @@ public class Program
             var hitChanceRand = rnd.Next(1, 6);
             var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
             var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
-            if (hitChanceRand / 2 >= 1)
+            if (hitChanceRand / 2 >= 0.5)
             {
                 Console.WriteLine($"You hit the {monster.Name}!");
                 
                 monster.CurrentHitPoints = monster.CurrentHitPoints- damage;
                 Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
 
-                if (monster.CurrentHitPoints-damage <= 0)
+                if (monster.CurrentHitPoints <= 0)
                 {
                     Console.WriteLine($"The {monster.Name} has: 0 Hp");
                     Console.WriteLine("You won");
@@ -98,11 +99,33 @@ public class Program
             }
             Console.WriteLine($"The {monster.Name} hits you!");
             Player.CurrentHP = Player.CurrentHP - monsterDamage;
+            if (Player.CurrentHP <= 0)
+            {
+                Console.WriteLine("You have: 0 Hp\n");
+                Console.WriteLine("You sadly passed away:(");
+                Console.WriteLine("Would you like to try again?");
+                
+                Console.Write("Yes or no?: ");
+                bool retry = false;
+                while (!retry)
+                {
+                    var Choice = Console.ReadLine();
+                    if (Choice == "Yes")
+                    {
+                        Program game = new Program();
+                        Main(null);
+                    }
+
+                    if (Choice == "No")
+                    {
+                        Console.WriteLine("Bye!");
+                        Environment.Exit(0);
+                    }
+                    Console.Write("The value must be Yes or No, try again: ");
+                }
+            }
             Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
         }
-        if (Player.CurrentHP <= 0)
-        {
-            Console.WriteLine("You sadly passed away:(");
-        }
+        
     }
 }
