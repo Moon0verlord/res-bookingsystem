@@ -30,7 +30,7 @@ public class Location
         string north = (LocationToNorth == null) ? "" : LocationToNorth.Abbreviation;
         string east = (LocationToEast == null) ? "" : LocationToEast.Abbreviation;
         string south = (LocationToSouth == null) ? "" : LocationToSouth.Abbreviation;
-        string west = (LocationToWest == null) ? "" : LocationToWest.Abbreviation;
-        return "\n" + north + "\n" + west + Abbreviation + east + "\n" + south;
+        string west = (LocationToWest == null) ? "    " : LocationToWest.Abbreviation;
+        return $"Current Location: {Abbreviation}\nGame map: \n" + "\n" + "    " + north + "\n" + west + Abbreviation + east + "\n" + south;
     }
 }
