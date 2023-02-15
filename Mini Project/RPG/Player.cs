@@ -2,24 +2,28 @@
 
 public class Player
 {
-    string Name;
-    int MaxHP;
-    int CurrentHP;
-    int gold;
-    int XP;
-    int level;
-    Weapon CurrentWeapon;
-    Location CurrentLocation;
+    public string Name;
+    public static int MaxHP;
+    public static int CurrentHP;
+    public static int Gold;
+    public static int XP;
+    public static int Level;
+    public static Weapon CurrentWeapon;
+    public static Location CurrentLocation;
+    public static CountedItemList Inventory;
     
-    public Player(string Name, int MaxHP, int CurrentHP, int gold, int XP, int level, Weapon CurrentWeapon, Location CurrentLocation)
+    public Player(string Name, int MaxHP, int currentHP, int gold,
+        int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
         MaxHP = 100;
-        this.CurrentHP = CurrentHP;
-        this.gold = gold;
-        this.XP = XP;
-        this.level = level;
-        this.CurrentWeapon = CurrentWeapon;
-        this.CurrentLocation = CurrentLocation;
+        CurrentHP = currentHP;
+        Gold = gold;
+        XP = xp;
+        Level = level;
+        CurrentWeapon = currentWeapon;
+        CurrentLocation = currentLocation;
+        Inventory = new CountedItemList();
     }
+    
 }
