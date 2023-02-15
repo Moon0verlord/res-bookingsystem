@@ -26,7 +26,7 @@ public class Program
                     case 1:
                         Console.WriteLine($"Name: {name}.\nMax hp: {Player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
-                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.name}."+
+                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}.");
                         break;
                     case 2:

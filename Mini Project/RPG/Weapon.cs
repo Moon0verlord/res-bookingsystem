@@ -5,7 +5,7 @@ namespace RPG;
 public class Weapon
 {
     public int ID;
-    public string name;
+    public string Name;
     public string NamePlural;
     public int MinimumDamage;
     public int MaximumDamage;
@@ -13,7 +13,7 @@ public class Weapon
         string nameplural, int minimumDamage, int maximumDamage)
     {
         ID = id;
-        this.name = name;
+        Name = name;
         NamePlural = nameplural;
         MinimumDamage = minimumDamage;
         MaximumDamage = maximumDamage;
