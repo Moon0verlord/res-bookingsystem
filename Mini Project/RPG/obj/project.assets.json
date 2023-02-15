@@ -8,25 +8,27 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/Users/martijnwarnas/.nuget/packages/": {}
+    "C:\\Users\\robin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/RPG.csproj",
+      "projectUniqueName": "C:\\Users\\robin\\Desktop\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Github Repo\\ProjectB\\Mini Project\\RPG\\RPG.csproj",
       "projectName": "RPG",
-      "projectPath": "/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/RPG.csproj",
-      "packagesPath": "/Users/martijnwarnas/.nuget/packages/",
-      "outputPath": "/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/",
+      "projectPath": "C:\\Users\\robin\\Desktop\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Github Repo\\ProjectB\\Mini Project\\RPG\\RPG.csproj",
+      "packagesPath": "C:\\Users\\robin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\robin\\Desktop\\HBO Informatica\\Jaar 1\\Semester 2\\ProjectB\\Github Repo\\ProjectB\\Mini Project\\RPG\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/martijnwarnas/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\robin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://www.nuget.org/api/v2/": {}
       },
       "frameworks": {
         "net6.0": {
@@ -54,26 +56,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.13, 6.0.13]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-x64",
-            "version": "[6.0.13, 6.0.13]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.13, 6.0.13]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
