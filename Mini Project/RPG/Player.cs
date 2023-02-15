@@ -10,6 +10,7 @@ public class Player
     public static int Level;
     public static Weapon CurrentWeapon;
     public static Location CurrentLocation;
+    public static CountedItemList Inventory;
     
     public Player(string Name, int MaxHP, int currentHP, int gold,
         int xp, int level, Weapon currentWeapon, Location currentLocation)
@@ -22,5 +23,7 @@ public class Player
         Level = level;
         CurrentWeapon = currentWeapon;
         CurrentLocation = currentLocation;
+        Inventory = new CountedItemList();
     }
+    
 }
