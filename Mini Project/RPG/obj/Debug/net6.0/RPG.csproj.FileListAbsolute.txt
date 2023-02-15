@@ -1,0 +1,5 @@
+/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/Debug/net6.0/RPG.csproj.AssemblyReference.cache
+/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/Debug/net6.0/RPG.GeneratedMSBuildEditorConfig.editorconfig
+/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/Debug/net6.0/RPG.AssemblyInfoInputs.cache
+/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/Debug/net6.0/RPG.AssemblyInfo.cs
+/Users/martijnwarnas/RiderProjects/ProjectB/Mini Project/RPG/obj/Debug/net6.0/RPG.csproj.CoreCompileInputs.cache
