@@ -10,21 +10,8 @@ public class Program
         Console.WriteLine("But first, who are you?");
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
-        foreach (Weapon weapon in World.Weapons)
-        {
-            if (weapon.ID == World.WEAPON_ID_RUSTY_SWORD)
-            {
-                Player.CurrentWeapon = weapon;
-            }
-        }
-        foreach (Location location in World.Locations)
-        {
-            if (location.ID == World.LOCATION_ID_HOME)
-            {
-                Player.CurrentLocation = location;
-            }
-        }
-        
+        Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
+        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name,10,10,10,
         0,1, Player.CurrentWeapon,Player.CurrentLocation);
         while (boolval)
@@ -50,7 +37,7 @@ public class Program
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Unkown");
+                        Console.WriteLine("Unknown");
                         break;
                 }
             }
