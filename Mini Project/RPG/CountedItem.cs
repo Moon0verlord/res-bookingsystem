@@ -10,6 +10,5 @@ public class CountedItem
         TheItem = theItem;
         Quantity = quantity;
     }
-    //public static Item rockItem = new Item(1, "rock", "rocks");
-    //public CountedItem rockCountedItem = new CountedItem(rockItem, 1);
+    public static CountedItem rocks = new CountedItem(Item.rock, 1);
 }

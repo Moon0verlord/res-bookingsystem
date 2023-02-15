@@ -12,9 +12,8 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
-        //Player.Inventory.AddItem(CountedItem.rockItem);
         Player player = new Player(name,10,10,10,
-        0,1, Player.CurrentWeapon,Player.CurrentLocation);
+        0,1, Player.CurrentWeapon,Player.CurrentLocation,Player.Inventory);
         Player.ViewInventory();
         while (boolval)
         {
