@@ -6,3 +6,4 @@
 # Ignore obj files
 obj/
 idea/
+bin/
