@@ -25,5 +25,21 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
     }
-    
+    public static void ViewInventory()
+    {
+        Console.WriteLine("You have the following items in your inventory:");
+        Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
+
+        foreach (var item in Inventory.TheCountedItemList)
+        {
+            if (item.Quantity == 1)
+            {
+                Console.WriteLine($"{item.Quantity} {item.TheItem.Name}");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Quantity} {item.TheItem.NamePlural}");
+            }
+        }
+    }
 }

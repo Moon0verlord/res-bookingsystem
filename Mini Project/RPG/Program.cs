@@ -16,6 +16,7 @@ public class Program
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name,10,10,10,
         0,1, Player.CurrentWeapon,Player.CurrentLocation);
+
         while (boolval)
         {
             try
