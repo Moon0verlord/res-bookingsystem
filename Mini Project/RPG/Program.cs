@@ -31,6 +31,17 @@ public class Program
                                           $"\nCurrent Location: {Player.CurrentLocation.Description}.");
                         break;
                     case 2:
+                        if (Player.CurrentLocation.QuestAvailableHere != null)
+                        {
+                            // Placeholder to test questing
+                            Console.WriteLine($"There's a Quest available here: {Player.CurrentLocation.QuestAvailableHere.Description}");
+                            Console.WriteLine("Do you accept the quest? y/n");
+                            string answer = Console.ReadLine()!.ToLower();
+                            if (answer == "y")
+                            {
+                                // Player.QuestLog.AddQuest();
+                            }
+                        }
                         Console.WriteLine("Where would you like to go?");
                         Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                                           $"\nFrom here you can go to:");
