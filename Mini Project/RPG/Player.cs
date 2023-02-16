@@ -11,6 +11,7 @@ public class Player
     public static Weapon CurrentWeapon;
     public static Location CurrentLocation;
     public static CountedItemList Inventory;
+    public static QuestList QuestLog;
     
     public Player(string Name, int MaxHP, int currentHP, int gold,
         int xp, int level, Weapon currentWeapon, Location currentLocation)
@@ -24,6 +25,7 @@ public class Player
         CurrentWeapon = currentWeapon;
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
+        QuestLog = new QuestList();
     }
     public static void ViewInventory()
     {
