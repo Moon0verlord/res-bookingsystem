@@ -27,11 +27,18 @@ public class Location
 
     public string Map()
     {
-        string north = (LocationToNorth == null) ? "" : LocationToNorth.Abbreviation;
-        string east = (LocationToEast == null) ? "" : LocationToEast.Abbreviation;
-        string south = (LocationToSouth == null) ? "" : LocationToSouth.Abbreviation;
-        string west = (LocationToWest == null) ? "    " : LocationToWest.Abbreviation;
-        return $"Current Location: {Abbreviation}\nGame map: \n" + "\n" + "    " + north + "\n" + west + Abbreviation + east + "\n" + south;
+        string garden = World.LocationByID(World.LOCATION_ID_ALCHEMISTS_GARDEN).Abbreviation;
+        string town = World.LocationByID(World.LOCATION_ID_TOWN_SQUARE).Abbreviation;
+        string farmer = World.LocationByID(World.LOCATION_ID_FARMHOUSE).Abbreviation;
+        string field = World.LocationByID(World.LOCATION_ID_FARM_FIELD).Abbreviation;
+        string hut = World.LocationByID(World.LOCATION_ID_ALCHEMIST_HUT).Abbreviation;
+        string guard = World.LocationByID(World.LOCATION_ID_GUARD_POST).Abbreviation;
+        string bridge = World.LocationByID(World.LOCATION_ID_BRIDGE).Abbreviation;
+        string spider = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD).Abbreviation;
+        string house = World.LocationByID(World.LOCATION_ID_HOME).Abbreviation;
+        string map = "\n" + String.Format("{0, 3}", garden) + "\n" + String.Format("{0, 3}", hut) + "\n" 
+                     + field + farmer + town + guard + bridge + spider + "\n" + "  " + house + "\n";
+        return $"Current Location: {Abbreviation}\nGame map:\n {map}";
     }
 
     public string Compass()
