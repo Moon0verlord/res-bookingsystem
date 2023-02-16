@@ -19,4 +19,11 @@ public class CountedItemList
     {
         TheCountedItemList.Add(new CountedItem(item,1));
     }
+
+    public void RemoveItem(CountedItem item)
+    {
+        {
+            TheCountedItemList.Remove(item);
+        }
+    }
 }
