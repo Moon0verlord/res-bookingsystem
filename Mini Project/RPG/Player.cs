@@ -44,4 +44,12 @@ public class Player
             }
         }
     }
+    public static void ViewQuestLog()
+    {
+        Console.WriteLine("You have the following quests in your quest log:");
+        foreach (var quest in QuestLog.QuestLog)
+        {
+            Console.WriteLine($"{quest.TheQuest.Name}");
+        }
+    }
 }
