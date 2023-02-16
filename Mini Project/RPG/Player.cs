@@ -13,7 +13,7 @@ public class Player
     public static CountedItemList Inventory;
     
     public Player(string Name, int MaxHP, int currentHP, int gold,
-        int xp, int level, Weapon currentWeapon, Location currentLocation, CountedItemList inventory)
+        int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
         MaxHP = 100;
@@ -28,16 +28,18 @@ public class Player
     public static void ViewInventory()
     {
         Console.WriteLine("You have the following items in your inventory:");
-        Console.WriteLine(CountedItem.rocks);
-        Console.WriteLine(CountedItem.rocks.Quantity);
-        Console.WriteLine(Item.rock);
-        Console.WriteLine(Item.rock.Name);
-        Console.WriteLine(Item.rock.NamePlural);
-        Console.WriteLine(Inventory);
-        //Inventory.AddCountedItem(CountedItem.rocks);
-        Console.WriteLine(Inventory);
-        var countries = new List<string>();
-        Console.WriteLine(countries);
+        Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
 
+        foreach (var item in Inventory.TheCountedItemList)
+        {
+            if (item.Quantity == 1)
+            {
+                Console.WriteLine($"{item.Quantity} {item.TheItem.Name}");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Quantity} {item.TheItem.NamePlural}");
+            }
+        }
     }
 }

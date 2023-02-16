@@ -10,5 +10,5 @@ public class CountedItem
         TheItem = theItem;
         Quantity = quantity;
     }
-    public static CountedItem rocks = new CountedItem(Item.rock, 1);
+    
 }

@@ -13,8 +13,9 @@ public class Program
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name,10,10,10,
-        0,1, Player.CurrentWeapon,Player.CurrentLocation,Player.Inventory);
+        0,1, Player.CurrentWeapon,Player.CurrentLocation);
         Player.ViewInventory();
+        
         while (boolval)
         {
             try
