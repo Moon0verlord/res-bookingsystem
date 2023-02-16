@@ -28,10 +28,10 @@ public class Program
                         Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Description}.");
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
                         foreach (var item in Player.Inventory.TheCountedItemList)
                         {
-                            Console.WriteLine();
+                            Console.WriteLine("\n");
                         }
                         break;
                     case 2:
