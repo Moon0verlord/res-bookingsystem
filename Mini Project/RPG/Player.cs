@@ -52,4 +52,9 @@ public class Player
             Console.WriteLine($"{quest.TheQuest.Name}");
         }
     }
+
+    public static void UseItem()
+    {
+        // TODO: Implement this method
+    }
 }
