@@ -20,6 +20,5 @@ public class Quest
         RewardGold = gold;
         RewardItem = item;
         RewardWeapon = weapon;
-        QuestCompletionItems = new CountedItemList();
     }
 }
