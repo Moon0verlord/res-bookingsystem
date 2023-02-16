@@ -14,7 +14,7 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARM_FIELD);
-        Player player = new Player(name,MaxHP:15,15,10,0,1, Player.CurrentWeapon,Player.CurrentLocation);
+        Player player = new Player(name,15,15,10,0,1, Player.CurrentWeapon,Player.CurrentLocation);
         while (boolval)
         {
             try

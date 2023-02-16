@@ -5,7 +5,7 @@ namespace RPG;
 public class Player
 {
     public string Name;
-    public int MaxHP;
+    public readonly int MaxHP;
     public static int CurrentHP;
     public static int Gold;
     public static int XP;
@@ -18,7 +18,7 @@ public class Player
         int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
-        MaxHP = 100;
+        this.MaxHP = MaxHP;
         CurrentHP = currentHP;
         Gold = gold;
         XP = xp;
