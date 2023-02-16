@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace RPG;
 
 public static class World
@@ -53,7 +56,7 @@ public static class World
         Items.Add(new Item(ITEM_ID_RAT_TAIL, "Rat tail", "Rat tails"));
         Items.Add(new Item(ITEM_ID_PIECE_OF_FUR, "Piece of fur", "Pieces of fur"));
         Items.Add(new Item(ITEM_ID_SNAKE_FANG, "Snake fang", "Snake fangs"));
-        Items.Add(new Item(ITEM_ID_SNAKESKIN, "Snakeskin", "Snakeskins"));
+        Items.Add(new Item(ITEM_ID_SNAKESKIN, "Snakeskin", "Snake skins"));
         Items.Add(new Item(ITEM_ID_SPIDER_FANG, "Spider fang", "Spider fangs"));
         Items.Add(new Item(ITEM_ID_SPIDER_SILK, "Spider silk", "Spider silks"));
         Items.Add(new Item(ITEM_ID_ADVENTURER_PASS, "Adventurer pass", "Adventurer passes"));

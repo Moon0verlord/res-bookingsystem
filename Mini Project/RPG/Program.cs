@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using System;
+using System.Net.Mime;
 using RPG;
 
 public class Program
@@ -15,6 +16,7 @@ public class Program
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD);
         Player player = new Player(name,10,10,10,
         0,1, Player.CurrentWeapon,Player.CurrentLocation);
+
         while (boolval)
         {
             try

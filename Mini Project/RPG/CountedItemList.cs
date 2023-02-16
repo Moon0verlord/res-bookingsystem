@@ -1,4 +1,6 @@
-﻿namespace RPG;
+﻿using System.Collections.Generic;
+
+namespace RPG;
 
 public class CountedItemList
 {
@@ -16,5 +18,12 @@ public class CountedItemList
     public void AddItem(Item item)
     {
         TheCountedItemList.Add(new CountedItem(item,1));
+    }
+
+    public void RemoveItem(CountedItem item)
+    {
+        {
+            TheCountedItemList.Remove(item);
+        }
     }
 }
