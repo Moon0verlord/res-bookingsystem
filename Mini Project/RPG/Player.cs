@@ -5,7 +5,7 @@ namespace RPG;
 public class Player
 {
     public string Name;
-    public static int MaxHP;
+    public int MaxHP;
     public static int CurrentHP;
     public static int Gold;
     public static int XP;

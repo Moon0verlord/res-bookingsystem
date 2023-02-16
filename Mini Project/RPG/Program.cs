@@ -13,10 +13,8 @@ public class Program
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
-        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD);
-        Player player = new Player(name,15,15,10,
-        0,1, Player.CurrentWeapon,Player.CurrentLocation);
-
+        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARM_FIELD);
+        Player player = new Player(name,MaxHP:15,15,10,0,1, Player.CurrentWeapon,Player.CurrentLocation);
         while (boolval)
         {
             try
@@ -27,7 +25,7 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Name: {name}.\nMax hp: {Player.MaxHP}.\n" +
+                        Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
                                           $"\nCurrent Location: {Player.CurrentLocation.Description}.");
@@ -102,6 +100,8 @@ public class Program
                     }
                     Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
                                       $"+{monster.RewardGold} Gold.\n");
+                    Player.XP += monster.RewardExperience;
+                    Player.Gold += monster.RewardGold;
                     break;
                 }
                 Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
