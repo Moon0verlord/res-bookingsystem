@@ -36,8 +36,8 @@ public class Location
         string bridge = World.LocationByID(World.LOCATION_ID_BRIDGE).Abbreviation;
         string spider = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD).Abbreviation;
         string house = World.LocationByID(World.LOCATION_ID_HOME).Abbreviation;
-        string map = "\n" + String.Format("{0, 3}", garden) + "\n" + String.Format("{0, 3}", hut) + "\n" 
-                     + field + farmer + town + guard + bridge + spider + "\n" + "  " + house + "\n";
+        string map = "\n" + String.Format("{0, 5}", garden) + "\n" + String.Format("{0, 5}", hut) + "\n" 
+                     + "  " + field + farmer + town + guard + bridge + spider + "\n" + "    " + house + "\n";
         return $"Current Location: {Abbreviation}\nGame map:\n {map}";
     }
 
