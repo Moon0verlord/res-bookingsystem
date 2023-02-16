@@ -4,10 +4,10 @@ public class Monster
 {
     public int ID;
     public string Name;
-    string NamePlural;
+    public string NamePlural;
     public static int MaximumDamage;
-    int RewardExperience;
-    int RewardGold;
+    public int RewardExperience;
+    public int RewardGold;
     public CountedItemList Loot;
     public int CurrentHitPoints;
     public Monster(int id, string name,
