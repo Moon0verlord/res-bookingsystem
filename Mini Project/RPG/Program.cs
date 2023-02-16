@@ -14,7 +14,7 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_SPIDER_FIELD);
-        Player player = new Player(name,10,10,10,
+        Player player = new Player(name,15,15,10,
         0,1, Player.CurrentWeapon,Player.CurrentLocation);
 
         while (boolval)
@@ -79,7 +79,7 @@ public class Program
             var hitChanceRand = rnd.Next(1, 6);
             var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
             var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
-            if (hitChanceRand / 2 >= 0.5)
+            if (hitChanceRand / 2 > 0.5)
             {
                 Console.WriteLine($"You hit the {monster.Name}!");
                 
@@ -88,23 +88,27 @@ public class Program
                 if (monster.CurrentHitPoints <= 0)
                 {
                     Console.WriteLine($"The {monster.Name} has: 0 Hp");
-                    Console.WriteLine("You won");
+                    Console.WriteLine("You won!");
                     //Loot after fight
+                    Console.WriteLine("You gained:\n");
                     foreach (var monst in World.Monsters)
                     {
                         if (monst.ID == monster.ID)
-                        foreach (var piece in monst.Loot.TheCountedItemList) 
+                            foreach (var piece in monst.Loot.TheCountedItemList)
                         {
-                            Console.WriteLine(piece.TheItem.Name);
+                            Console.WriteLine($"+{piece.TheItem.Name}");
+                            Player.Inventory.AddItem(piece.TheItem);
                         }
                     }
+                    Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
+                                      $"+{monster.RewardGold} Gold.\n");
                     break;
                 }
                 Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
             }
             else
             {
-                Console.WriteLine("You missed haha");
+                Console.WriteLine($"You missed the {monster.Name}!");
                 Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
             }
             Console.WriteLine($"The {monster.Name} hits you!");
