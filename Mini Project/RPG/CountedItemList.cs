@@ -1,4 +1,6 @@
-﻿namespace RPG;
+﻿using System.Collections.Generic;
+
+namespace RPG;
 
 public class CountedItemList
 {
