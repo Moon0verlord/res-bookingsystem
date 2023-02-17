@@ -45,7 +45,7 @@ public class Program
                         if (Player.CurrentLocation.MonsterLivingHere != null 
                             && Player.CurrentLocation.MonsterLivingHere.CurrentHitPoints>0)
                         {
-                            Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.NamePlural} attacks!");
+                            Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.NamePlural} attack!");
                             fight();
                         }
                         else
@@ -92,7 +92,7 @@ public class Program
         Random rnd = new Random();
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
-        Console.WriteLine($"The {monster.NamePlural} has: {monster.CurrentHitPoints} Hp\n");
+        Console.WriteLine($"The {monster.NamePlural} have: {monster.CurrentHitPoints} Hp\n");
         bool brave = true;
         while (brave && Player.CurrentHP > 0)
         {
@@ -159,13 +159,13 @@ public class Program
                     var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
                     if (hitChanceRand / 2 > 0.5)
                     {
-                        Console.WriteLine($"You hit the {monster.Name}!");
+                        Console.WriteLine($"You hit the {monster.NamePlural}!");
 
                         monster.CurrentHitPoints = monster.CurrentHitPoints - damage;
 
                         if (monster.CurrentHitPoints <= 0)
                         {
-                            Console.WriteLine($"The {monster.Name} has: 0 Hp");
+                            Console.WriteLine($"The {monster.Name} have: 0 Hp");
                             Console.WriteLine("You won!");
                             //Loot after fight
                             Console.WriteLine("You gained:\n");
@@ -174,8 +174,11 @@ public class Program
                                 if (monst.ID == monster.ID)
                                     foreach (var piece in monst.Loot.TheCountedItemList)
                                     {
-                                        Console.WriteLine($"+{piece.TheItem.Name}");
-                                        Player.Inventory.AddItem(piece.TheItem);
+                                        Console.WriteLine($"+3 {piece.TheItem.Name}");
+                                        Player.Inventory.TheCountedItemList.Add(
+                                            new CountedItem(new Item(piece.TheItem.ID,
+                                            (piece.TheItem.Name),
+                                            piece.TheItem.NamePlural),3));
                                     }
                             }
 
@@ -187,7 +190,7 @@ public class Program
                             break;
                         }
 
-                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
+                        Console.WriteLine($"The {monster.NamePlural} have: {monster.CurrentHitPoints} Hp\n");
                     }
                     else
                     {
@@ -195,7 +198,7 @@ public class Program
                         Console.WriteLine($"The {monster.NamePlural} has: {monster.CurrentHitPoints} Hp\n");
                     }
 
-                    Console.WriteLine($"The {monster.NamePlural} hits you!");
+                    Console.WriteLine($"The {monster.NamePlural} hit you!");
                     Player.CurrentHP = Player.CurrentHP - monsterDamage;
                     if (Player.CurrentHP <= 0)
                     {
