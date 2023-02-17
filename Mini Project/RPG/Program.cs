@@ -28,7 +28,11 @@ public class Program
                         Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Description}.");
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
+                        foreach (var item in Player.Inventory.TheCountedItemList)
+                        {
+                            Console.WriteLine("\n");
+                        }
                         break;
                     case 2:
                         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
@@ -66,7 +70,7 @@ public class Program
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Unknown");
+                        Console.WriteLine("Unknown input");
                         break;
                 }
             }
@@ -78,81 +82,132 @@ public class Program
         }
     }
 
+    public static void Farmer()
+    {
+        Console.WriteLine();
+    }
+    public static void Alchemist()
+    {
+        Console.WriteLine();
+    }
+    public static void Spider()
+    {
+        Console.WriteLine();
+    }
+    public static void Gate()
+    {
+        Console.WriteLine();
+    }
     public static void fight()
     {
         Random rnd = new Random();
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
         Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-        while (Player.CurrentHP > 0)
+        bool brave = true;
+        while (brave && Player.CurrentHP > 0)
         {
-            var hitChanceRand = rnd.Next(1, 6);
-            var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
-            var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
-            if (hitChanceRand / 2 > 0.5)
+            Console.WriteLine("What would you like to do?:" +
+                          "\nOpen Inventory (type inventory)." +
+                          "\nRun." +
+                          "\nFight." +
+                          "\nObserve.");
+            var fightdo = Console.ReadLine()!.ToLower();
+            //open inventory-ToDO
+            //run???-X
+            //fight-X
+            //observe-ToDo
+            switch (fightdo)
             {
-                Console.WriteLine($"You hit the {monster.Name}!");
-                
-                monster.CurrentHitPoints = monster.CurrentHitPoints- damage;
-
-                if (monster.CurrentHitPoints <= 0)
-                {
-                    Console.WriteLine($"The {monster.Name} has: 0 Hp");
-                    Console.WriteLine("You won!");
-                    //Loot after fight
-                    Console.WriteLine("You gained:\n");
-                    foreach (var monst in World.Monsters)
-                    {
-                        if (monst.ID == monster.ID)
-                            foreach (var piece in monst.Loot.TheCountedItemList)
+                    case "inventory":
+                        Console.WriteLine();
+                        foreach (var item in Player.Inventory.TheCountedItemList)
                         {
-                            Console.WriteLine($"+{piece.TheItem.Name}");
-                            Player.Inventory.AddItem(piece.TheItem);
+                            Console.WriteLine(item);
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "fight":
+                    var hitChanceRand = rnd.Next(1, 6);
+                    var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
+                    var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
+                    if (hitChanceRand / 2 > 0.5)
+                    {
+                        Console.WriteLine($"You hit the {monster.Name}!");
+
+                        monster.CurrentHitPoints = monster.CurrentHitPoints - damage;
+
+                        if (monster.CurrentHitPoints <= 0)
+                        {
+                            Console.WriteLine($"The {monster.Name} has: 0 Hp");
+                            Console.WriteLine("You won!");
+                            //Loot after fight
+                            Console.WriteLine("You gained:\n");
+                            foreach (var monst in World.Monsters)
+                            {
+                                if (monst.ID == monster.ID)
+                                    foreach (var piece in monst.Loot.TheCountedItemList)
+                                    {
+                                        Console.WriteLine($"+{piece.TheItem.Name}");
+                                        Player.Inventory.AddItem(piece.TheItem);
+                                    }
+                            }
+
+                            Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
+                                              $"+{monster.RewardGold} Gold.\n");
+                            Player.XP += monster.RewardExperience;
+                            Player.Gold += monster.RewardGold;
+                            brave = false;
+                            break;
+                        }
+
+                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"You missed the {monster.Name}!");
+                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
+                    }
+
+                    Console.WriteLine($"The {monster.Name} hits you!");
+                    Player.CurrentHP = Player.CurrentHP - monsterDamage;
+                    if (Player.CurrentHP <= 0)
+                    {
+                        Console.WriteLine("You have: 0 Hp\n");
+                        Console.WriteLine("You sadly passed away:(");
+                        Console.WriteLine("Would you like to try again?");
+
+                        Console.Write("Yes or no?: ");
+                        bool retry = false;
+                        while (!retry)
+                        {
+                            var Choice = Console.ReadLine();
+                            if (Choice == "Yes" || Choice == "yes")
+                            {
+                                Program game = new Program();
+                                Main(null);
+                            }
+
+                            if (Choice == "No" || Choice == "no")
+                            {
+                                Console.WriteLine("Bye!");
+                                Environment.Exit(0);
+                            }
+
+                            Console.Write("The value must be Yes or No, try again: ");
                         }
                     }
-                    Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
-                                      $"+{monster.RewardGold} Gold.\n");
-                    Player.XP += monster.RewardExperience;
-                    Player.Gold += monster.RewardGold;
-                    break;
-                }
-                Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-            }
-            else
-            {
-                Console.WriteLine($"You missed the {monster.Name}!");
-                Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-            }
-            Console.WriteLine($"The {monster.Name} hits you!");
-            Player.CurrentHP = Player.CurrentHP - monsterDamage;
-            if (Player.CurrentHP <= 0)
-            {
-                Console.WriteLine("You have: 0 Hp\n");
-                Console.WriteLine("You sadly passed away:(");
-                Console.WriteLine("Would you like to try again?");
-                
-                Console.Write("Yes or no?: ");
-                bool retry = false;
-                while (!retry)
-                {
-                    var Choice = Console.ReadLine();
-                    if (Choice == "Yes"||Choice == "yes")
-                    {
-                        Program game = new Program();
-                        Main(null);
-                    }
 
-                    if (Choice == "No" || Choice == "no")
-                    {
-                        Console.WriteLine("Bye!");
-                        Environment.Exit(0);
-                    }
-                    Console.Write("The value must be Yes or No, try again: ");
-                }
+                    Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
+                    break;
+                    case "run":
+                        Console.WriteLine("You decide to quickly get out of here.");
+                        brave = false;
+                        break;
+                    case "observe":
+                        Console.WriteLine(Player.CurrentLocation.Description);
+                        break;
             }
-            Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
+            }
         }
-        
-        
-    }
 }
