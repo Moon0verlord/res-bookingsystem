@@ -170,7 +170,7 @@ public class Program
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
-            
+            // fight system here to kill all the snakes.
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1)
         {
