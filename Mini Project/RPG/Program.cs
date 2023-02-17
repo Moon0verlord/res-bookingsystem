@@ -39,7 +39,7 @@ public class Program
                         {
                             case 3:
                                 {
-                                    Bridge();
+                                    guardPost();
                                     break;
                                 }
                             case 4:
@@ -224,7 +224,12 @@ public class Program
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity == 3)
                 {
-                    // quest end here
+                    Console.WriteLine("thanks for killing those spiders.\n" +
+                                      "as a reward you getthe Winner's Medal");
+                    Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
+                    Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
+                    Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
+                    Quest.SPIDER_COMPLETION_FLAG = 2;
                 }
             }
             Console.WriteLine("Most of the rats are dead now kill the rest.");
@@ -239,7 +244,7 @@ public class Program
         }
     }
 
-    public static void Bridge()
+    public static void guardPost()
     {
         Console.WriteLine("Guard: 'Turn back at once, peasant! Unless thee hast proof of thy grit.'");
         if (!Player.IsInInventory(World.ITEM_ID_ADVENTURER_PASS))
