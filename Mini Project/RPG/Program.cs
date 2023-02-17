@@ -15,6 +15,9 @@ public class Program
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARM_FIELD);
         Player player = new Player(name,15,15,10,0,1, Player.CurrentWeapon,Player.CurrentLocation);
+        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5,"Apple","Apples"),5));
+        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(World.WEAPON_ID_RUSTY_SWORD,
+            World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD).Name,World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD).NamePlural),1));
         while (boolval)
         {
             try
@@ -27,8 +30,8 @@ public class Program
                     case 1:
                         Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
-                        $"\nXp: {Player.XP}\nLevel: {Player.Level}."+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\n");
+                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
                         Player.ViewInventory();
                         break;
                     case 2:
@@ -93,26 +96,63 @@ public class Program
         while (brave && Player.CurrentHP > 0)
         {
             Console.WriteLine("What would you like to do?:" +
-                          "\nOpen Inventory (type inventory)." +
-                          "\nRun." +
-                          "\nFight." +
-                          "\nObserve.");
-            var fightdo = Console.ReadLine()!.ToLower();
+                          "\n1 Open Inventory (type inventory)." +
+                          "\n2 Run." +
+                          "\n3 Fight." +
+                          "\n4 Observe.");
+            var fightdo = Convert.ToInt32(Console.ReadLine());
             //open inventory-ToDO
             //run???-X
             //fight-X
             //observe-ToDo
             switch (fightdo)
             {
-                    case "inventory":
-                        Console.WriteLine();
+                    case 1:
+                        Player.ViewInventory();
+                        Console.WriteLine("Type the name of an item you'd like to use. Or type 'exit' to leave the inventory.");
+                        var invChoice = Console.ReadLine();
                         foreach (var item in Player.Inventory.TheCountedItemList)
                         {
-                            Console.WriteLine(item);
+                            if (item.TheItem.Name == invChoice)
+                            {
+                                if (item.TheItem.Name == "Apple")
+                                {
+                                    Console.WriteLine("You take eat the apple");
+                                    Console.WriteLine("You get three HP");
+                                    Player.CurrentHP += 3;
+                                    //Remove 1 apple from inventory toDo
+                                    break;
+                                }
+
+                                else if (item.TheItem.Name == Player.CurrentWeapon.Name)
+                                {
+                                    Console.WriteLine("You already have this item equipped");
+                                }
+                                else
+                                {
+                                    foreach (Weapon weapon in World.Weapons)
+                                    {
+                                        if (item.TheItem.Name == weapon.Name)
+                                        {
+                                            Console.WriteLine($"You equip the {item.TheItem.Name}\n");
+                                            Player.CurrentWeapon = weapon;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (invChoice == "Exit"||invChoice=="exit")
+                            {
+                                break;
+                            }
                         }
-                        Console.WriteLine();
                         break;
-                    case "fight":
+                    case 3:
                     var hitChanceRand = rnd.Next(1, 6);
                     var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
                     var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
@@ -185,11 +225,11 @@ public class Program
 
                     Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
                     break;
-                    case "run":
+                    case 2:
                         Console.WriteLine("You decide to quickly get out of here.");
                         brave = false;
                         break;
-                    case "observe":
+                    case 4:
                         Console.WriteLine(Player.CurrentLocation.Description);
                         break;
             }
