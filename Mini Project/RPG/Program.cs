@@ -35,6 +35,8 @@ public class Program
                         }
                         break;
                     case 2:
+                        // todo: !REMOVE PLACEHOLDER!
+                        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
                         switch (Player.CurrentLocation.ID)
                         {
                             case 4:
@@ -60,7 +62,8 @@ public class Program
                         Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                                           $"\nFrom here you can go to:");
                         Console.WriteLine(Player.CurrentLocation.Compass());
-                        Console.WriteLine(Player.CurrentLocation.Map());
+                        Console.WriteLine(Player.CurrentLocation.Map() + "\nEnter a compass direction:");
+                        string direction = Console.ReadLine()!;
                         break;
                     case 3:
                         if (Player.CurrentLocation.MonsterLivingHere != null 
@@ -93,18 +96,28 @@ public class Program
 
     public static void Farmer()
     {
-        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
-        if (Player.CurrentLocation.QuestAvailableHere != null)
+        if (Quest.FARMER_COMPLETION_FLAG == 0)
         {
             // Placeholder to test questing
-            Console.WriteLine($"There's a Quest available here: {Player.CurrentLocation.QuestAvailableHere.Description}");
+            Console.WriteLine("I can't w'rk mine own landeth with those pesky snakes slith'ring 'round! Shall thee help me?");
             Console.WriteLine("Do you accept the quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
             {
                 Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
             }
+
+            Quest.FARMER_COMPLETION_FLAG = 1;
         }
+        else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
+        {
+            
+        }
+        else if (Quest.FARMER_COMPLETION_FLAG == 1)
+        {
+            Console.WriteLine("Please get rid of these snakes already!");
+        }
+        
     }
     public static void Alchemist()
     {
