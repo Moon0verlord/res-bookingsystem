@@ -12,5 +12,4 @@ public class Item
         Name = name;
         NamePlural = namePlural;
     }
-
 }
