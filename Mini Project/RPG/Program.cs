@@ -29,11 +29,9 @@ public class Program
                         Console.WriteLine($"\nName: {name}\nMax HP: {player.MaxHP}\n" +
                                           $"Current HP: {Player.CurrentHP}\nGold: {Player.Gold}" +
                                           $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\nInventory Items:");
-                        foreach (var item in Player.Inventory.TheCountedItemList)
-                        {
-                            Console.WriteLine("\n");
-                        }
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
+                        Player.ViewInventory();
+                        Player.ViewQuestLog();
                         break;
                     case 2:
                         Move();
