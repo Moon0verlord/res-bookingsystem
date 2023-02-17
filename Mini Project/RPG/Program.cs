@@ -13,12 +13,13 @@ public class Program
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
-        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARM_FIELD);
+        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name, 15, 15, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
         while (boolval)
         {
             try
             {
+                Console.WriteLine($"\nYou are at: {Player.CurrentLocation.Name}");
                 Console.WriteLine("What would you like to do (Enter a number?).");
                 Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit");
                 int choice = Convert.ToInt32(Console.ReadLine());
@@ -36,8 +37,7 @@ public class Program
 
                         break;
                     case 2:
-                        // todo: !REMOVE PLACEHOLDER!
-                        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
+                        Move();
                         switch (Player.CurrentLocation.ID)
                         {
                             case 4:
@@ -59,8 +59,6 @@ public class Program
                                 Spider();
                                 break;
                         }
-
-                        Move();
                         break;
                     case 3:
                         if (Player.CurrentLocation.MonsterLivingHere != null
@@ -76,7 +74,7 @@ public class Program
 
                         break;
                     case 4:
-                        Console.WriteLine("Goodbye!");
+                        Console.WriteLine("Thanks for playing!");
                         Environment.Exit(0);
                         break;
                     default:
@@ -149,6 +147,9 @@ public class Program
                 case "L":
                 case "LEAVE":
                     loop = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input.");
                     break;
             }
         }
