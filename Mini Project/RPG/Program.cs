@@ -35,17 +35,26 @@ public class Program
                         }
                         break;
                     case 2:
-                        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
-                        if (Player.CurrentLocation.QuestAvailableHere != null)
+                        switch (Player.CurrentLocation.ID)
                         {
-                            // Placeholder to test questing
-                            Console.WriteLine($"There's a Quest available here: {Player.CurrentLocation.QuestAvailableHere.Description}");
-                            Console.WriteLine("Do you accept the quest? y/n");
-                            string answer = Console.ReadLine()!.ToLower();
-                            if (answer == "y")
+                            case 4:
                             {
-                                Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
+                                Alchemist();
+                                break;
                             }
+                            case 6:
+                            {
+                                Farmer();
+                                break;
+                            }
+                            case 8:
+                            {
+                                Bridge();
+                                break;
+                            }
+                            case 9:
+                                Spider();
+                                break;
                         }
                         Console.WriteLine("Where would you like to go?");
                         Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
@@ -84,7 +93,18 @@ public class Program
 
     public static void Farmer()
     {
-        Console.WriteLine();
+        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
+        if (Player.CurrentLocation.QuestAvailableHere != null)
+        {
+            // Placeholder to test questing
+            Console.WriteLine($"There's a Quest available here: {Player.CurrentLocation.QuestAvailableHere.Description}");
+            Console.WriteLine("Do you accept the quest? y/n");
+            string answer = Console.ReadLine()!.ToLower();
+            if (answer == "y")
+            {
+                Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
+            }
+        }
     }
     public static void Alchemist()
     {
@@ -94,7 +114,7 @@ public class Program
     {
         Console.WriteLine();
     }
-    public static void Gate()
+    public static void Bridge()
     {
         Console.WriteLine();
     }
