@@ -65,7 +65,7 @@ public class Program
                             && Player.CurrentLocation.MonsterLivingHere.CurrentHitPoints > 0)
                         {
                             Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.Name} attacks!");
-                            fight();
+                            // fight();
                         }
                         else
                         {
@@ -181,7 +181,7 @@ public class Program
                                       "For yer effort, I shall grant ye this Adventurer's pass to get across the bridge!");
                     Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SNAKE_FANG), 3));
-                    
+                    Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_FARMERS_FIELD);
                     Quest.FARMER_COMPLETION_FLAG = 2;
                 }
             }
@@ -219,119 +219,6 @@ public class Program
         {
             // guard here
             Console.WriteLine("You have proof");
-        }
-    }
-
-    public static void fight()
-    {
-        Random rnd = new Random();
-        var monster = Player.CurrentLocation.MonsterLivingHere;
-        Console.WriteLine($"You have: {Player.CurrentHP} Hp");
-        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-        bool brave = true;
-        while (brave && Player.CurrentHP > 0)
-        {
-            Console.WriteLine("What would you like to do?:" +
-                              "\nOpen Inventory (type inventory)." +
-                              "\nRun." +
-                              "\nFight." +
-                              "\nObserve.");
-            var fightdo = Console.ReadLine()!.ToLower();
-            //open inventory-ToDO
-            //run???-X
-            //fight-X
-            //observe-ToDo
-            switch (fightdo)
-            {
-                case "inventory":
-                    Console.WriteLine();
-                    foreach (var item in Player.Inventory.TheCountedItemList)
-                    {
-                        Console.WriteLine(item);
-                    }
-                    Console.WriteLine();
-                    break;
-                case "fight":
-                    var hitChanceRand = rnd.Next(1, 6);
-                    var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
-                    var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
-                    if (hitChanceRand / 2 > 0.5)
-                    {
-                        Console.WriteLine($"You hit the {monster.Name}!");
-
-                        monster.CurrentHitPoints = monster.CurrentHitPoints - damage;
-
-                        if (monster.CurrentHitPoints <= 0)
-                        {
-                            Console.WriteLine($"The {monster.Name} has: 0 Hp");
-                            Console.WriteLine("You won!");
-                            //Loot after fight
-                            Console.WriteLine("You gained:\n");
-                            foreach (var monst in World.Monsters)
-                            {
-                                if (monst.ID == monster.ID)
-                                    foreach (var piece in monst.Loot.TheCountedItemList)
-                                    {
-                                        Console.WriteLine($"+{piece.TheItem.Name}");
-                                        Player.Inventory.AddItem(piece.TheItem);
-                                    }
-                            }
-
-                            Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
-                                              $"+{monster.RewardGold} Gold.\n");
-                            Player.XP += monster.RewardExperience;
-                            Player.Gold += monster.RewardGold;
-                            brave = false;
-                            break;
-                        }
-
-                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"You missed the {monster.Name}!");
-                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
-                    }
-
-                    Console.WriteLine($"The {monster.Name} hits you!");
-                    Player.CurrentHP = Player.CurrentHP - monsterDamage;
-                    if (Player.CurrentHP <= 0)
-                    {
-                        Console.WriteLine("You have: 0 Hp\n");
-                        Console.WriteLine("You sadly passed away:(");
-                        Console.WriteLine("Would you like to try again?");
-
-                        Console.Write("Yes or no?: ");
-                        bool retry = false;
-                        while (!retry)
-                        {
-                            var Choice = Console.ReadLine();
-                            if (Choice == "Yes" || Choice == "yes")
-                            {
-                                Program game = new Program();
-                                Main(null);
-                            }
-
-                            if (Choice == "No" || Choice == "no")
-                            {
-                                Console.WriteLine("Bye!");
-                                Environment.Exit(0);
-                            }
-
-                            Console.Write("The value must be Yes or No, try again: ");
-                        }
-                    }
-
-                    Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
-                    break;
-                case "run":
-                    Console.WriteLine("You decide to quickly get out of here.");
-                    brave = false;
-                    break;
-                case "observe":
-                    Console.WriteLine(Player.CurrentLocation.Description);
-                    break;
-            }
         }
     }
 }

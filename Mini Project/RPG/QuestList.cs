@@ -15,5 +15,16 @@ public class QuestList
     {
         QuestLog.Add(quest);
     }
+
+    public void QuestComplete(int id)
+    {
+        foreach (PlayerQuest quest in QuestLog)
+        {
+            if (quest.TheQuest.ID == id)
+            {
+                quest.IsCompleted = true;
+            }
+        }
+    }
     
 }
