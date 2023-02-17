@@ -45,7 +45,7 @@ public class Program
                         if (Player.CurrentLocation.MonsterLivingHere != null 
                             && Player.CurrentLocation.MonsterLivingHere.CurrentHitPoints>0)
                         {
-                            Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.Name} attacks!");
+                            Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.NamePlural} attacks!");
                             fight();
                         }
                         else
@@ -88,10 +88,11 @@ public class Program
     }
     public static void fight()
     {
+        
         Random rnd = new Random();
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
-        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
+        Console.WriteLine($"The {monster.NamePlural} has: {monster.CurrentHitPoints} Hp\n");
         bool brave = true;
         while (brave && Player.CurrentHP > 0)
         {
@@ -190,11 +191,11 @@ public class Program
                     }
                     else
                     {
-                        Console.WriteLine($"You missed the {monster.Name}!");
-                        Console.WriteLine($"The {monster.Name} has: {monster.CurrentHitPoints} Hp\n");
+                        Console.WriteLine($"You missed the {monster.NamePlural}!");
+                        Console.WriteLine($"The {monster.NamePlural} has: {monster.CurrentHitPoints} Hp\n");
                     }
 
-                    Console.WriteLine($"The {monster.Name} hits you!");
+                    Console.WriteLine($"The {monster.NamePlural} hits you!");
                     Player.CurrentHP = Player.CurrentHP - monsterDamage;
                     if (Player.CurrentHP <= 0)
                     {
