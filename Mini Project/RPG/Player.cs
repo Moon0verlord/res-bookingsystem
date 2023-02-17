@@ -29,8 +29,8 @@ public class Player
     }
     public static void ViewInventory()
     {
+        Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.\n");
         Console.WriteLine("You have the following items in your inventory:");
-        Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
 
         foreach (var item in Inventory.TheCountedItemList)
         {
