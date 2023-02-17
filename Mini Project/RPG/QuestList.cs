@@ -15,4 +15,5 @@ public class QuestList
     {
         QuestLog.Add(quest);
     }
+    
 }

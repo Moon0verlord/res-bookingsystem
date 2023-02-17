@@ -171,16 +171,21 @@ public class Program
             }
             else Console.WriteLine("Maybe some other time then.");
         }
-        else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL))
+        else if (Player.IsInInventory(World.ITEM_ID_SNAKE_FANG))
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
             {
-                if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
+                if (InvItem.TheItem.ID == World.ITEM_ID_SNAKE_FANG && InvItem.Quantity == 3)
                 {
-                    // quest end here
+                    Console.WriteLine("Thank ye for gettin' rid of those darned snakes!\n" +
+                                      "For yer effort, I shall grant ye this Adventurer's pass to get across the bridge!");
+                    Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS));
+                    Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SNAKE_FANG), 3));
+                    
+                    Quest.FARMER_COMPLETION_FLAG = 2;
                 }
             }
-            Console.WriteLine("You've killed some rats, but not enough.");
+            Console.WriteLine("You've killed some snakes, but not enough.");
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
