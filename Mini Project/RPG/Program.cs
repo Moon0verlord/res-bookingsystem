@@ -81,7 +81,7 @@ public class Program
                         break;
                 }
             }
-            catch (System.FormatException e)
+            catch (System.FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter a valid option.\n");
             }
@@ -178,7 +178,6 @@ public class Program
         {
             Console.WriteLine("\nFarmer: 'Please get rid of these snakes already!'");
         }
-
     }
 
     public static void Alchemist()
@@ -233,7 +232,6 @@ public class Program
                     {
                         Console.WriteLine(item);
                     }
-
                     Console.WriteLine();
                     break;
                 case "fight":
