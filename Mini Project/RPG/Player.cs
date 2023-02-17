@@ -63,7 +63,7 @@ public class Player
         Console.WriteLine("\nYou have the following quests in your quest log:");
         foreach (var quest in QuestLog.QuestLog)
         {
-            Console.WriteLine($"{quest.TheQuest.Name}");
+            Console.WriteLine($"{quest.TheQuest.Name} | Completed: {quest.IsCompleted}");
         }
     }
 }
