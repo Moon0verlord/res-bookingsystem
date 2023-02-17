@@ -121,6 +121,7 @@ public class Program
                                     Console.WriteLine("You take eat the apple");
                                     Console.WriteLine("You get three HP");
                                     Player.CurrentHP += 3;
+                                    item.UseQuantity();
                                     //Remove 1 apple from inventory toDo
                                     break;
                                 }
