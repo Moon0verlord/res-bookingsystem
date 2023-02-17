@@ -38,26 +38,26 @@ public class Program
                         switch (Player.CurrentLocation.ID)
                         {
                             case 3:
-                             {
-                                 Bridge();
-                                 break;
-                             }
+                                {
+                                    Bridge();
+                                    break;
+                                }
                             case 4:
-                            {
-                                Alchemist();
-                                break;
-                            }
+                                {
+                                    Alchemist();
+                                    break;
+                                }
                             case 6:
                             case 7:
-                            {
-                                Farmer();
-                                break;
-                            }
+                                {
+                                    Farmer();
+                                    break;
+                                }
                             case 9:
-                            {
-                                Spider();
-                                break;
-                            }
+                                {
+                                    Spider();
+                                    break;
+                                }
                         }
                         break;
                     case 3:
@@ -112,7 +112,7 @@ public class Program
                     }
                     else Console.WriteLine("You can't go north.");
                     break;
-                
+
                 case "S":
                 case "SOUTH":
                     if (Player.CurrentLocation.LocationToSouth != null)
@@ -122,7 +122,7 @@ public class Program
                     }
                     else Console.WriteLine("You can't go south.");
                     break;
-                
+
                 case "E":
                 case "EAST":
                     if (Player.CurrentLocation.LocationToEast != null)
@@ -132,7 +132,7 @@ public class Program
                     }
                     else Console.WriteLine("You can't go east.");
                     break;
-                
+
                 case "W":
                 case "WEST":
                     if (Player.CurrentLocation.LocationToWest != null)
@@ -142,12 +142,12 @@ public class Program
                     }
                     else Console.WriteLine("You can't go west.");
                     break;
-                
+
                 case "L":
                 case "LEAVE":
                     loop = false;
                     break;
-                
+
                 default:
                     Console.WriteLine("Invalid input.");
                     break;
@@ -199,7 +199,39 @@ public class Program
 
     public static void Spider()
     {
-        Console.WriteLine();
+        if (Quest.SPIDER_COMPLETION_FLAG == 0)
+        {
+            // Placeholder to test questing
+            Console.WriteLine("You arrive at the bridge. There's a guard trying to calm down the people from the village." +
+            "When they went to the forest they found a spider nest. The guard ask you if you can kill and collect the silk to protect the village");
+            Console.WriteLine("Do you accept his quest? y/n");
+            string answer = Console.ReadLine()!.ToLower();
+            if (answer == "y")
+            {
+                Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
+                Quest.SPIDER_COMPLETION_FLAG = 1;
+            }
+            else Console.WriteLine("Maybe if you want to save the village some time.");
+        }
+        else if (Player.IsInInventory(World.ITEM_ID_SPIDER_SILK))
+        {
+            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
+            {
+                if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity == 3)
+                {
+                    // quest end here
+                }
+            }
+            Console.WriteLine("Most of the rats are dead now kill the rest.");
+        }
+        else if (Quest.SPIDER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 9)
+        {
+            Console.WriteLine("Wow there are a lot of spiders here LETS get to work..");
+        }
+        else if (Quest.SPIDER_COMPLETION_FLAG == 1)
+        {
+            Console.WriteLine("\nGuard: 'go kills those damn spiders!'");
+        }
     }
 
     public static void Bridge()
