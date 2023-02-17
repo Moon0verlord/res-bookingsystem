@@ -10,17 +10,22 @@ public class CountedItemList
     }
     public void AddCountedItem(CountedItem item)
     {
-        TheCountedItemList.Add(item);
-        CountedItem existingCountedItem = (item);
-        if (existingCountedItem != null)
+        bool itemExists = false;
+        foreach (CountedItem countedItem in TheCountedItemList)
         {
-            existingCountedItem.Quantity++;
+            if (countedItem.TheItem.Name == item.TheItem.Name)
+            {
+                countedItem.Quantity++;
+                itemExists = true;
+                break;
+            }
         }
-        else
+        if (!itemExists)
         {
-            TheCountedItemList.Add(new CountedItem(item.TheItem, 1));
+            TheCountedItemList.Add(item);
         }
     }
+
 
     public void AddItem(Item item)
     {

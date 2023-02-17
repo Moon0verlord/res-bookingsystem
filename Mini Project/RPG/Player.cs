@@ -26,13 +26,15 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
         QuestLog = new QuestList();
+        Inventory.AddCountedItem(CountedItem.rocks);
+        Inventory.AddCountedItem(CountedItem.rocks);
     }
+    
     public static void ViewInventory()
     {
-        Console.WriteLine("You have the following items in your inventory:");
         Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
-        Console.WriteLine(Inventory.TheCountedItemList);
-
+        Console.WriteLine("You have the following items in your inventory:");
+        
         foreach (var item in Inventory.TheCountedItemList)
         {
             if (item.Quantity == 1)
@@ -57,6 +59,22 @@ public class Player
 
     public static void UseItem()
     {
-        // TODO: Implement this method
+            Console.WriteLine("Which item would you like to use?");
+            string? itemToUse = Console.ReadLine();
+            foreach (var item in Inventory.TheCountedItemList)
+            {
+                if (item.TheItem.Name == itemToUse)
+                {
+                    item.UseQuantity();
+                    if (item.Quantity == 0)
+                    {
+                        Inventory.RemoveItem(item);
+                    }
+                    Console.WriteLine($"You used {itemToUse}.");
+                    break;
+                }
+            }
     }
 }
+
+// TODO add an (is in inventory) method to check for quest items in inventory and returns true or false
