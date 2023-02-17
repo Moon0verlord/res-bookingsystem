@@ -48,6 +48,7 @@ public class Program
                                 break;
                             }
                             case 6:
+                            case 7:
                             {
                                 Farmer();
                                 break;
@@ -170,9 +171,20 @@ public class Program
             }
             else Console.WriteLine("Maybe some other time then.");
         }
+        else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL))
+        {
+            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
+            {
+                if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
+                {
+                    // quest end here
+                }
+            }
+            Console.WriteLine("You've killed some rats, but not enough.");
+        }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
-            // fight system here to kill all the snakes.
+            Console.WriteLine("There's alot of snakes roaming around this field..");
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1)
         {
