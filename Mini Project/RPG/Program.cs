@@ -193,7 +193,8 @@ public class Program
 
     public static void Bridge()
     {
-        Console.WriteLine();
+        Console.WriteLine("Guard: 'Turn back at once, peasant! Unless thee hast proof of thy grit.'");
+        
     }
 
     public static void fight()

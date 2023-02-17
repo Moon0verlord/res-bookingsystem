@@ -46,6 +46,20 @@ public class Player
             }
         }
     }
+
+    public static bool IsInInventory(Item item)
+    {
+        foreach (CountedItem InvItem in Inventory.TheCountedItemList)
+        {
+            if (InvItem.TheItem.ID == item.ID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     public static void ViewQuestLog()
     {
         Console.WriteLine("You have the following quests in your quest log:");
