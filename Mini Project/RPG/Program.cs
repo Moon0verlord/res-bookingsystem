@@ -85,7 +85,6 @@ public class Program
             {
                 Console.WriteLine("Invalid input. Please enter a valid option.\n");
             }
-
         }
     }
 
@@ -112,6 +111,7 @@ public class Program
                     }
                     else Console.WriteLine("You can't go north.");
                     break;
+                
                 case "S":
                 case "SOUTH":
                     if (Player.CurrentLocation.LocationToSouth != null)
@@ -121,6 +121,7 @@ public class Program
                     }
                     else Console.WriteLine("You can't go south.");
                     break;
+                
                 case "E":
                 case "EAST":
                     if (Player.CurrentLocation.LocationToEast != null)
@@ -129,8 +130,8 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go east.");
-
                     break;
+                
                 case "W":
                 case "WEST":
                     if (Player.CurrentLocation.LocationToWest != null)
@@ -139,12 +140,13 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go west.");
-
                     break;
+                
                 case "L":
                 case "LEAVE":
                     loop = false;
                     break;
+                
                 default:
                     Console.WriteLine("Invalid input.");
                     break;
