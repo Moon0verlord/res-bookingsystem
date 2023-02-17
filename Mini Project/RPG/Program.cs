@@ -94,51 +94,63 @@ public class Program
 
     public static void Move()
     {
-        Console.WriteLine("Where would you like to go?");
-        Console.WriteLine(
-            $"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
-            $"\nFrom here you can go to:");
-        Console.WriteLine(Player.CurrentLocation.Compass());
-        Console.WriteLine(Player.CurrentLocation.Map() + "\nEnter a compass direction:");
-        string direction = Console.ReadLine()!.ToUpper();
-        switch (direction)
+        bool loop = true;
+        while (loop)
         {
-            case "N":
-            case "NORTH":
-                if (Player.CurrentLocation.LocationToNorth != null)
-                {
-                    Player.CurrentLocation = Player.CurrentLocation.LocationToNorth;
-                }
-                else Console.WriteLine("You can't go north.");
+            Console.WriteLine("Where would you like to go?");
+            Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+                              $"\nFrom here you can go to:");
+            Console.WriteLine(Player.CurrentLocation.Compass());
+            Console.WriteLine(Player.CurrentLocation.Map() +
+                              "\nEnter a compass direction or type 'L' to stay where you are: ");
+            string direction = Console.ReadLine()!.ToUpper();
+            switch (direction)
+            {
+                case "N":
+                case "NORTH":
+                    if (Player.CurrentLocation.LocationToNorth != null)
+                    {
+                        Player.CurrentLocation = Player.CurrentLocation.LocationToNorth;
+                        loop = false;
+                    }
+                    else Console.WriteLine("You can't go north.");
 
-                break;
-            case "S":
-            case "SOUTH":
-                if (Player.CurrentLocation.LocationToSouth != null)
-                {
-                    Player.CurrentLocation = Player.CurrentLocation.LocationToSouth;
-                }
-                else Console.WriteLine("You can't go south.");
+                    break;
+                case "S":
+                case "SOUTH":
+                    if (Player.CurrentLocation.LocationToSouth != null)
+                    {
+                        Player.CurrentLocation = Player.CurrentLocation.LocationToSouth;
+                        loop = false;
+                    }
+                    else Console.WriteLine("You can't go south.");
 
-                break;
-            case "E":
-            case "EAST":
-                if (Player.CurrentLocation.LocationToEast != null)
-                {
-                    Player.CurrentLocation = Player.CurrentLocation.LocationToEast;
-                }
-                else Console.WriteLine("You can't go east.");
+                    break;
+                case "E":
+                case "EAST":
+                    if (Player.CurrentLocation.LocationToEast != null)
+                    {
+                        Player.CurrentLocation = Player.CurrentLocation.LocationToEast;
+                        loop = false;
+                    }
+                    else Console.WriteLine("You can't go east.");
 
-                break;
-            case "W":
-            case "WEST":
-                if (Player.CurrentLocation.LocationToWest != null)
-                {
-                    Player.CurrentLocation = Player.CurrentLocation.LocationToWest;
-                }
-                else Console.WriteLine("You can't go west.");
+                    break;
+                case "W":
+                case "WEST":
+                    if (Player.CurrentLocation.LocationToWest != null)
+                    {
+                        Player.CurrentLocation = Player.CurrentLocation.LocationToWest;
+                        loop = false;
+                    }
+                    else Console.WriteLine("You can't go west.");
 
-                break;
+                    break;
+                case "L":
+                case "LEAVE":
+                    loop = false;
+                    break;
+            }
         }
     }
 
