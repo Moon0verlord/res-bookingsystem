@@ -10,5 +10,9 @@ public class CountedItem
         TheItem = theItem;
         Quantity = quantity;
     }
-    
+
+    public void UseQuantity()
+    {
+        Quantity = Quantity - 1;
+    }
 }

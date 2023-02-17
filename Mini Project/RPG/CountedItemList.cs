@@ -12,14 +12,29 @@ public class CountedItemList
     }
     public void AddCountedItem(CountedItem item)
     {
-        TheCountedItemList.Add(item);
+        bool itemExists = false;
+        foreach (CountedItem countedItem in TheCountedItemList)
+        {
+            if (countedItem.TheItem.Name == item.TheItem.Name)
+            {
+                countedItem.Quantity++;
+                itemExists = true;
+                break;
+            }
+        }
+        if (!itemExists)
+        {
+            TheCountedItemList.Add(item);
+        }
     }
+
 
     public void AddItem(Item item)
     {
         TheCountedItemList.Add(new CountedItem(item,1));
     }
 
+    
     public void RemoveItem(CountedItem item)
     {
         {
