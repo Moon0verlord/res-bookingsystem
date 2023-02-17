@@ -58,12 +58,49 @@ public class Program
                                 Spider();
                                 break;
                         }
+
                         Console.WriteLine("Where would you like to go?");
-                        Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
-                                          $"\nFrom here you can go to:");
+                        Console.WriteLine(
+                            $"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+                            $"\nFrom here you can go to:");
                         Console.WriteLine(Player.CurrentLocation.Compass());
                         Console.WriteLine(Player.CurrentLocation.Map() + "\nEnter a compass direction:");
-                        string direction = Console.ReadLine()!;
+                        string direction = Console.ReadLine()!.ToUpper();
+                        switch (direction)
+                        {
+                           case "N":
+                           case "NORTH":
+                               if (Player.CurrentLocation.LocationToNorth != null)
+                               {
+                                   Player.CurrentLocation = Player.CurrentLocation.LocationToNorth;
+                               }
+                               else Console.WriteLine("You can't go north.");
+                               break;
+                           case "S":
+                           case "SOUTH":
+                               if (Player.CurrentLocation.LocationToSouth != null)
+                               {
+                                   Player.CurrentLocation = Player.CurrentLocation.LocationToSouth;
+                               }
+                               else Console.WriteLine("You can't go south.");
+                               break;
+                           case "E":
+                           case "EAST":
+                               if (Player.CurrentLocation.LocationToEast != null)
+                               {
+                                   Player.CurrentLocation = Player.CurrentLocation.LocationToEast;
+                               }
+                               else Console.WriteLine("You can't go east.");
+                               break;
+                           case "W":
+                           case "WEST":
+                               if (Player.CurrentLocation.LocationToWest != null)
+                               {
+                                   Player.CurrentLocation = Player.CurrentLocation.LocationToWest;
+                               }
+                               else Console.WriteLine("You can't go west.");
+                               break;
+                        }
                         break;
                     case 3:
                         if (Player.CurrentLocation.MonsterLivingHere != null 
