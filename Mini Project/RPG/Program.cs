@@ -229,7 +229,7 @@ public class Program
                     Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
-                    Quest.SPIDER_COMPLETION_FLAG = 2;
+                    Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
             }
 
