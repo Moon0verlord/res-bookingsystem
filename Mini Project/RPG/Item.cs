@@ -12,5 +12,4 @@ public class Item
         Name = name;
         NamePlural = namePlural;
     }
-    public static Item rock = new Item(1, "rock", "rocks");
 }

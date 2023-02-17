@@ -74,6 +74,3 @@ public class Player
             }
     }
 }
-
-// TODO add an (is in inventory) method to check for quest items in inventory and returns true or false
-// TODO Add a method to use Potions
