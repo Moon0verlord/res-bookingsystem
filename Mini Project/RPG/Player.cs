@@ -47,11 +47,11 @@ public class Player
         }
     }
 
-    public static bool IsInInventory(Item item)
+    public static bool IsInInventory(int Id)
     {
         foreach (CountedItem InvItem in Inventory.TheCountedItemList)
         {
-            if (InvItem.TheItem.ID == item.ID)
+            if (InvItem.TheItem.ID == Id)
             {
                 return true;
             }

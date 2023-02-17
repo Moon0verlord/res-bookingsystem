@@ -39,6 +39,11 @@ public class Program
                         Move();
                         switch (Player.CurrentLocation.ID)
                         {
+                            case 3:
+                             {
+                                 Bridge();
+                                 break;
+                             }
                             case 4:
                             {
                                 Alchemist();
@@ -49,14 +54,11 @@ public class Program
                                 Farmer();
                                 break;
                             }
-                            case 8:
-                            {
-                                Bridge();
-                                break;
-                            }
                             case 9:
+                            {
                                 Spider();
                                 break;
+                            }
                         }
                         break;
                     case 3:
@@ -194,7 +196,16 @@ public class Program
     public static void Bridge()
     {
         Console.WriteLine("Guard: 'Turn back at once, peasant! Unless thee hast proof of thy grit.'");
-        
+        if (!Player.IsInInventory(World.ITEM_ID_ADVENTURER_PASS))
+        {
+            Console.WriteLine("You have no proof right now. The guard sends you back to the Town Square.");
+            Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_TOWN_SQUARE);
+        }
+        else
+        {
+            // guard here
+            Console.WriteLine("You have proof");
+        }
     }
 
     public static void fight()
