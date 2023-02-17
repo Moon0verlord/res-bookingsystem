@@ -31,6 +31,7 @@ public class Player
     {
         Console.WriteLine("You have the following items in your inventory:");
         Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
+        Console.WriteLine(Inventory.TheCountedItemList);
 
         foreach (var item in Inventory.TheCountedItemList)
         {
@@ -44,6 +45,7 @@ public class Player
             }
         }
     }
+    
     public static void ViewQuestLog()
     {
         Console.WriteLine("You have the following quests in your quest log:");
