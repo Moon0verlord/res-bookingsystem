@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Mime;
-using RPG;
+namespace RPG;
 
 public class Program
 {
@@ -31,6 +31,7 @@ public class Program
                                           $"\nCurrent Location: {Player.CurrentLocation.Description}.");
                         break;
                     case 2:
+                        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARMHOUSE);
                         if (Player.CurrentLocation.QuestAvailableHere != null)
                         {
                             // Placeholder to test questing
@@ -39,7 +40,7 @@ public class Program
                             string answer = Console.ReadLine()!.ToLower();
                             if (answer == "y")
                             {
-                                // Player.QuestLog.AddQuest();
+                                Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
                             }
                         }
                         Console.WriteLine("Where would you like to go?");
