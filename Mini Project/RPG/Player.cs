@@ -36,11 +36,11 @@ public class Player
         {
             if (item.Quantity == 1)
             {
-                Console.WriteLine($"{item.Quantity} {item.TheItem.Name}");
+                Console.WriteLine($"{item.Quantity} {item.TheItem.Name}\n");
             }
             else
             {
-                Console.WriteLine($"{item.Quantity} {item.TheItem.NamePlural}");
+                Console.WriteLine($"{item.Quantity} {item.TheItem.NamePlural}\n");
             }
         }
     }

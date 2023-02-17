@@ -29,10 +29,7 @@ public class Program
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
-                        foreach (var item in Player.Inventory.TheCountedItemList)
-                        {
-                            Console.WriteLine("\n");
-                        }
+                        Player.ViewInventory();
                         break;
                     case 2:
                         Console.WriteLine("Where would you like to go?");
