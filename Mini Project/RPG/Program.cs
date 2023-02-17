@@ -14,7 +14,7 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_FARM_FIELD);
-        Player player = new Player(name,15,15,10,0,1, Player.CurrentWeapon,Player.CurrentLocation);
+        Player player = new Player(name, 15, 15, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
         while (boolval)
         {
             try
@@ -26,13 +26,14 @@ public class Program
                 {
                     case 1:
                         Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
-                                          $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
-                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
+                                          $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}." +
+                                          $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}." +
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
                         foreach (var item in Player.Inventory.TheCountedItemList)
                         {
                             Console.WriteLine("\n");
                         }
+
                         break;
                     case 2:
                         // todo: !REMOVE PLACEHOLDER!
@@ -59,52 +60,11 @@ public class Program
                                 break;
                         }
 
-                        Console.WriteLine("Where would you like to go?");
-                        Console.WriteLine(
-                            $"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
-                            $"\nFrom here you can go to:");
-                        Console.WriteLine(Player.CurrentLocation.Compass());
-                        Console.WriteLine(Player.CurrentLocation.Map() + "\nEnter a compass direction:");
-                        string direction = Console.ReadLine()!.ToUpper();
-                        switch (direction)
-                        {
-                           case "N":
-                           case "NORTH":
-                               if (Player.CurrentLocation.LocationToNorth != null)
-                               {
-                                   Player.CurrentLocation = Player.CurrentLocation.LocationToNorth;
-                               }
-                               else Console.WriteLine("You can't go north.");
-                               break;
-                           case "S":
-                           case "SOUTH":
-                               if (Player.CurrentLocation.LocationToSouth != null)
-                               {
-                                   Player.CurrentLocation = Player.CurrentLocation.LocationToSouth;
-                               }
-                               else Console.WriteLine("You can't go south.");
-                               break;
-                           case "E":
-                           case "EAST":
-                               if (Player.CurrentLocation.LocationToEast != null)
-                               {
-                                   Player.CurrentLocation = Player.CurrentLocation.LocationToEast;
-                               }
-                               else Console.WriteLine("You can't go east.");
-                               break;
-                           case "W":
-                           case "WEST":
-                               if (Player.CurrentLocation.LocationToWest != null)
-                               {
-                                   Player.CurrentLocation = Player.CurrentLocation.LocationToWest;
-                               }
-                               else Console.WriteLine("You can't go west.");
-                               break;
-                        }
+                        Move();
                         break;
                     case 3:
-                        if (Player.CurrentLocation.MonsterLivingHere != null 
-                            && Player.CurrentLocation.MonsterLivingHere.CurrentHitPoints>0)
+                        if (Player.CurrentLocation.MonsterLivingHere != null
+                            && Player.CurrentLocation.MonsterLivingHere.CurrentHitPoints > 0)
                         {
                             Console.WriteLine($"The {Player.CurrentLocation.MonsterLivingHere.Name} attacks!");
                             fight();
@@ -113,6 +73,7 @@ public class Program
                         {
                             Console.WriteLine("There seems to be nothing here to fight..");
                         }
+
                         break;
                     case 4:
                         Console.WriteLine("Goodbye!");
@@ -127,7 +88,57 @@ public class Program
             {
                 Console.WriteLine("Invalid input. Please enter a valid option.\n");
             }
-            
+
+        }
+    }
+
+    public static void Move()
+    {
+        Console.WriteLine("Where would you like to go?");
+        Console.WriteLine(
+            $"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+            $"\nFrom here you can go to:");
+        Console.WriteLine(Player.CurrentLocation.Compass());
+        Console.WriteLine(Player.CurrentLocation.Map() + "\nEnter a compass direction:");
+        string direction = Console.ReadLine()!.ToUpper();
+        switch (direction)
+        {
+            case "N":
+            case "NORTH":
+                if (Player.CurrentLocation.LocationToNorth != null)
+                {
+                    Player.CurrentLocation = Player.CurrentLocation.LocationToNorth;
+                }
+                else Console.WriteLine("You can't go north.");
+
+                break;
+            case "S":
+            case "SOUTH":
+                if (Player.CurrentLocation.LocationToSouth != null)
+                {
+                    Player.CurrentLocation = Player.CurrentLocation.LocationToSouth;
+                }
+                else Console.WriteLine("You can't go south.");
+
+                break;
+            case "E":
+            case "EAST":
+                if (Player.CurrentLocation.LocationToEast != null)
+                {
+                    Player.CurrentLocation = Player.CurrentLocation.LocationToEast;
+                }
+                else Console.WriteLine("You can't go east.");
+
+                break;
+            case "W":
+            case "WEST":
+                if (Player.CurrentLocation.LocationToWest != null)
+                {
+                    Player.CurrentLocation = Player.CurrentLocation.LocationToWest;
+                }
+                else Console.WriteLine("You can't go west.");
+
+                break;
         }
     }
 
@@ -136,7 +147,8 @@ public class Program
         if (Quest.FARMER_COMPLETION_FLAG == 0)
         {
             // Placeholder to test questing
-            Console.WriteLine("I can't w'rk mine own landeth with those pesky snakes slith'ring 'round! Shall thee help me?");
+            Console.WriteLine(
+                "I can't w'rk mine own landeth with those pesky snakes slith'ring 'round! Shall thee help me?");
             Console.WriteLine("Do you accept the quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
@@ -148,26 +160,30 @@ public class Program
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
-            
+
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1)
         {
             Console.WriteLine("Please get rid of these snakes already!");
         }
-        
+
     }
+
     public static void Alchemist()
     {
         Console.WriteLine();
     }
+
     public static void Spider()
     {
         Console.WriteLine();
     }
+
     public static void Bridge()
     {
         Console.WriteLine();
     }
+
     public static void fight()
     {
         Random rnd = new Random();
@@ -178,10 +194,10 @@ public class Program
         while (brave && Player.CurrentHP > 0)
         {
             Console.WriteLine("What would you like to do?:" +
-                          "\nOpen Inventory (type inventory)." +
-                          "\nRun." +
-                          "\nFight." +
-                          "\nObserve.");
+                              "\nOpen Inventory (type inventory)." +
+                              "\nRun." +
+                              "\nFight." +
+                              "\nObserve.");
             var fightdo = Console.ReadLine()!.ToLower();
             //open inventory-ToDO
             //run???-X
@@ -189,15 +205,16 @@ public class Program
             //observe-ToDo
             switch (fightdo)
             {
-                    case "inventory":
-                        Console.WriteLine();
-                        foreach (var item in Player.Inventory.TheCountedItemList)
-                        {
-                            Console.WriteLine(item);
-                        }
-                        Console.WriteLine();
-                        break;
-                    case "fight":
+                case "inventory":
+                    Console.WriteLine();
+                    foreach (var item in Player.Inventory.TheCountedItemList)
+                    {
+                        Console.WriteLine(item);
+                    }
+
+                    Console.WriteLine();
+                    break;
+                case "fight":
                     var hitChanceRand = rnd.Next(1, 6);
                     var damage = rnd.Next(Player.CurrentWeapon.MinimumDamage, Player.CurrentWeapon.MaximumDamage);
                     var monsterDamage = rnd.Next(1, Monster.MaximumDamage);
@@ -270,14 +287,14 @@ public class Program
 
                     Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
                     break;
-                    case "run":
-                        Console.WriteLine("You decide to quickly get out of here.");
-                        brave = false;
-                        break;
-                    case "observe":
-                        Console.WriteLine(Player.CurrentLocation.Description);
-                        break;
-            }
+                case "run":
+                    Console.WriteLine("You decide to quickly get out of here.");
+                    brave = false;
+                    break;
+                case "observe":
+                    Console.WriteLine(Player.CurrentLocation.Description);
+                    break;
             }
         }
+    }
 }
