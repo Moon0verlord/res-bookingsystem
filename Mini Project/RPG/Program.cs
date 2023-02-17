@@ -30,8 +30,8 @@ public class Program
                     case 1:
                         Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
-                        $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}."+
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
+                        $"\nXp: {Player.XP}\nLevel: {Player.Level}."+
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\n");
                         Player.ViewInventory();
                         break;
                     case 2:
