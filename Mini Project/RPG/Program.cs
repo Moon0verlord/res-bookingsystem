@@ -26,15 +26,14 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
-                                          $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}." +
-                                          $"\nXp: {Player.XP}\nLevel: {Player.Level}.\nCurrent Weapon: {Player.CurrentWeapon.Name}." +
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}.\nInventory Items:");
+                        Console.WriteLine($"\nName: {name}\nMax HP: {player.MaxHP}\n" +
+                                          $"Current HP: {Player.CurrentHP}\nGold: {Player.Gold}" +
+                                          $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\nInventory Items:");
                         foreach (var item in Player.Inventory.TheCountedItemList)
                         {
                             Console.WriteLine("\n");
                         }
-
                         break;
                     case 2:
                         Move();
@@ -95,7 +94,7 @@ public class Program
         bool loop = true;
         while (loop)
         {
-            Console.WriteLine("Where would you like to go?");
+            Console.WriteLine("\nWhere would you like to go?");
             Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                               $"\nFrom here you can go to:");
             Console.WriteLine(Player.CurrentLocation.Compass());
@@ -112,7 +111,6 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go north.");
-
                     break;
                 case "S":
                 case "SOUTH":
@@ -122,7 +120,6 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go south.");
-
                     break;
                 case "E":
                 case "EAST":
@@ -160,24 +157,24 @@ public class Program
         if (Quest.FARMER_COMPLETION_FLAG == 0)
         {
             // Placeholder to test questing
-            Console.WriteLine(
-                "I can't w'rk mine own landeth with those pesky snakes slith'ring 'round! Shall thee help me?");
-            Console.WriteLine("Do you accept the quest? y/n");
+            Console.WriteLine("You arrive at a worn-down farmhouse. An old farmer approaches you:\n" +
+                "Farmer: 'I can't w'rk mine own landeth with those pesky snakes slith'ring 'round! Shall thee help me?'");
+            Console.WriteLine("Do you accept his quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
             {
                 Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
+                Quest.FARMER_COMPLETION_FLAG = 1;
             }
-
-            Quest.FARMER_COMPLETION_FLAG = 1;
+            else Console.WriteLine("Maybe some other time then.");
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
-
+            
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1)
         {
-            Console.WriteLine("Please get rid of these snakes already!");
+            Console.WriteLine("\nFarmer: 'Please get rid of these snakes already!'");
         }
 
     }
