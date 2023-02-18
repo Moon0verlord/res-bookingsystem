@@ -178,13 +178,13 @@ public class Program
         }
         else if (Player.IsInInventory(World.ITEM_ID_SNAKE_FANG))
         {
-            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
+            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_SNAKE_FANG && InvItem.Quantity == 3)
                 {
                     Console.WriteLine("Thank ye for gettin' rid of those darned snakes!\n" +
                                       "For yer effort, I shall grant ye this Adventurer's pass to get across the bridge!");
-                    Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS));
+                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS),1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SNAKE_FANG), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_FARMERS_FIELD);
                     Quest.FARMER_COMPLETION_FLAG = 2;
@@ -220,13 +220,13 @@ public class Program
 
         else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL))
         {
-            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
+            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
                 {
                     Console.WriteLine("thanks for killing those spiders.\n" +
                                       "as a reward you getthe Winner's Medal");
-                    Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
+                    Player.Inventory.AddCountedItem(new CountedItem (World.ItemByID(World.ITEM_ID_WINNERS_MEDAL),1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
