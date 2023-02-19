@@ -189,9 +189,8 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_FARMERS_FIELD);
                     Quest.FARMER_COMPLETION_FLAG = 2;
                 }
+                else Console.WriteLine("You've killed some snakes, but not enough.");
             }
-
-            Console.WriteLine("You've killed some snakes, but not enough.");
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
