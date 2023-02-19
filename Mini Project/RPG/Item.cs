@@ -12,4 +12,5 @@ public class Item
         Name = name;
         NamePlural = namePlural;
     }
+    public static Item apple = new Item(119, "apple", "apples");
 }

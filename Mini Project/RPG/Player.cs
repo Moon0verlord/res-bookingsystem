@@ -28,6 +28,7 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
         QuestLog = new QuestList();
+        Inventory.AddCountedItem(CountedItem.apples);
     }
     public static void ViewInventory()
     {
@@ -64,6 +65,34 @@ public class Player
         foreach (var quest in QuestLog.QuestLog)
         {
             Console.WriteLine($"{quest.TheQuest.Name} | Completed: {quest.IsCompleted}");
+        }
+    }
+    public static void UseItem()
+    {
+        Console.WriteLine("Which item would you like to use?");
+        string? itemToUse = Console.ReadLine();
+        itemToUse = itemToUse?.ToLower();
+        foreach (var item in Inventory.TheCountedItemList)
+        {
+            if (item.TheItem.Name == itemToUse)
+            {
+                if (item.TheItem.Name == "apple")
+                {
+                    Player.CurrentHP += 3;
+                    item.UseQuantity();
+                    if (item.Quantity == 0)
+                    {
+                        Inventory.RemoveItem(item);
+                    }
+                    Console.WriteLine($"You used {itemToUse}.");
+                    break;
+                }
+
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }
