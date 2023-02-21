@@ -232,9 +232,8 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
+                else Console.WriteLine("You've killed some rats, but I can still see some.");
             }
-
-            Console.WriteLine("You've killed some rats, but I can still see some.");
         }
 
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 5)
@@ -277,8 +276,8 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
                     Quest.SPIDER_COMPLETION_FLAG = 2;
                 }
+                else Console.WriteLine("Most of the rats are dead now kill the rest.");
             }
-            Console.WriteLine("Most of the rats are dead now kill the rest.");
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 9)
         {
