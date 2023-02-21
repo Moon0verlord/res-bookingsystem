@@ -189,7 +189,10 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_FARMERS_FIELD);
                     Quest.FARMER_COMPLETION_FLAG = 2;
                 }
-                else Console.WriteLine("You've killed some snakes, but not enough.");
+                else if (InvItem.TheItem.ID == World.ITEM_ID_SNAKE_FANG && InvItem.Quantity != 3)
+                {
+                    Console.WriteLine("You've killed some snakes, but not enough.");
+                }
             }
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
@@ -213,6 +216,7 @@ public class Program
             if (answer == "y")
             {
                 Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
+                Quest.ALCHEMIST_COMPLETION_FLAG = 1;
             }
             else Console.WriteLine("Maybe another time.");
         }
@@ -231,7 +235,10 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
-                else Console.WriteLine("Alchemist: 'You've killed some rats, but I can still see some around.'");
+                else if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity != 3)
+                {
+                    Console.WriteLine("Alchemist: 'You've killed some rats, but I can still see some around.'");
+                }
             }
         }
 
@@ -275,7 +282,10 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
                     Quest.SPIDER_COMPLETION_FLAG = 2;
                 }
-                else Console.WriteLine("Guard: 'There are still spiders roaming around!'");
+                else if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity != 3)
+                {
+                    Console.WriteLine("Guard: 'There are still spiders roaming around!'");
+                }
             }
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 9)
