@@ -23,12 +23,12 @@ public class Program
             try
             {
                 Console.WriteLine("What would you like to do (Enter a number?).");
-                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit");
+                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Equip Item from inventory\n5: Quit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"Name: {name}.\nMax hp: {player.MaxHP}.\n" +
+                        Console.WriteLine($"Name: {name}.\nMax hp: {Player.MaxHP}.\n" +
                                           $"Current hp: {Player.CurrentHP}.\nGold: {Player.Gold}."+
                         $"\nXp: {Player.XP}\nLevel: {Player.Level}."+
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}.\n");
@@ -54,6 +54,54 @@ public class Program
                         }
                         break;
                     case 4:
+                        Player.ViewInventory();
+                        Console.WriteLine("Type the name of an item you'd like to use. Or type 'exit' to leave the inventory.");
+                        var invChoice = Console.ReadLine();
+                        foreach (var item in Player.Inventory.TheCountedItemList)
+                        {
+                            if (item.TheItem.Name == invChoice)
+                            {
+                                if (item.TheItem.Name == "Apple"&&Player.CurrentHP!=Player.MaxHP)
+                                {
+                                    Console.WriteLine("You eat the apple");
+                                    Console.WriteLine("You get three HP");
+                                    Player.CurrentHP += 3;
+                                    item.UseQuantity();
+                                    //Remove 1 apple from inventory toDo
+                                    break;
+                                }
+
+                                if (item.TheItem.Name == Player.CurrentWeapon.Name)
+                                {
+                                    Console.WriteLine("You already have this item equipped");
+                                }
+                                else
+                                {
+                                    foreach (Weapon weapon in World.Weapons)
+                                    {
+                                        if (item.TheItem.Name == weapon.Name)
+                                        {
+                                            Console.WriteLine($"You equip the {item.TheItem.Name}\n");
+                                            Player.CurrentWeapon = weapon;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine($"You cant use the {item.TheItem.Name} right now");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            if (invChoice == "Exit"||invChoice=="exit")
+                            {
+                                break;
+                            }
+                        }
+                        break;
+                    case 5:
                         Console.WriteLine("Goodbye!");
                         Environment.Exit(0);
                         break;
@@ -102,10 +150,6 @@ public class Program
                           "\n3 Fight." +
                           "\n4 Observe.");
             var fightdo = Convert.ToInt32(Console.ReadLine());
-            //open inventory-ToDO
-            //run???-X
-            //fight-X
-            //observe-ToDo
             switch (fightdo)
             {
                     case 1:
@@ -116,9 +160,9 @@ public class Program
                         {
                             if (item.TheItem.Name == invChoice)
                             {
-                                if (item.TheItem.Name == "Apple")
+                                if (item.TheItem.Name == "Apple"&&Player.CurrentHP!=Player.MaxHP)
                                 {
-                                    Console.WriteLine("You take eat the apple");
+                                    Console.WriteLine("You eat the apple");
                                     Console.WriteLine("You get three HP");
                                     Player.CurrentHP += 3;
                                     item.UseQuantity();
@@ -126,7 +170,7 @@ public class Program
                                     break;
                                 }
 
-                                else if (item.TheItem.Name == Player.CurrentWeapon.Name)
+                                if (item.TheItem.Name == Player.CurrentWeapon.Name)
                                 {
                                     Console.WriteLine("You already have this item equipped");
                                 }
@@ -142,7 +186,8 @@ public class Program
                                         }
                                         else
                                         {
-                                            continue;
+                                            Console.WriteLine($"You cant use the {item.TheItem.Name} right now");
+                                            break;
                                         }
                                     }
                                 }
