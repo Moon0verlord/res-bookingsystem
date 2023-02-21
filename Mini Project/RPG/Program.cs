@@ -32,7 +32,6 @@ public class Program
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
                         Player.ViewInventory();
                         Player.ViewQuestLog();
-                        Player.UseItem();
                         break;
                     case 2:
                         Move();
@@ -208,7 +207,7 @@ public class Program
         if (Quest.ALCHEMIST_COMPLETION_FLAG == 0)
         {
             Console.WriteLine(
-                "Those rats art nibbling on mine own h'rbs! I couldst very much useth an adventur'r to taketh careth of those folk …");
+                "Alchemist: 'Those rats art nibbling on mine own h'rbs! I couldst very much useth an adventur'r to taketh careth of those folk'");
             Console.WriteLine("Do you accept his quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
@@ -224,26 +223,26 @@ public class Program
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
                 {
-                    Console.WriteLine("thanks for killing those rats.\n" +
-                                      "as a reward you get a club!");
+                    Console.WriteLine("Alchemist: 'Thanks for killing those rats!'\n" +
+                                      "'I shall grant you this club as reward.'");
                     // TODO: Add a club to the player's inventory
                     Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.WEAPON_ID_CLUB), 1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
-                else Console.WriteLine("You've killed some rats, but I can still see some.");
+                else Console.WriteLine("Alchemist: 'You've killed some rats, but I can still see some around.'");
             }
         }
 
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 5)
         {
-            Console.WriteLine("There are still loads of rats in my garden...");
+            Console.WriteLine("There are alot of rats scurrying around in this garden..");
         }
 
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1)
         {
-            Console.WriteLine("Why hast thou not killed those rats yet?");
+            Console.WriteLine("Alchemist: 'Why hast thou not killed those rats yet?'");
         }
     }
 
@@ -253,7 +252,7 @@ public class Program
         {
             // Placeholder to test questing
             Console.WriteLine("You arrive at the bridge. There's a guard trying to calm down the people from the village." +
-            "When they went to the forest they found a spider nest. The guard ask you if you can kill and collect the silk to protect the village");
+            " When they went to the forest they found a spider nest. The guard ask you if you can kill and collect the silk to protect the village");
             Console.WriteLine("Do you accept his quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
@@ -261,7 +260,7 @@ public class Program
                 Player.QuestLog.AddQuest(new PlayerQuest(Player.CurrentLocation.QuestAvailableHere, false));
                 Quest.SPIDER_COMPLETION_FLAG = 1;
             }
-            else Console.WriteLine("Maybe if you want to save the village some time.");
+            else Console.WriteLine("Guard: 'Maybe if you want to save the village some other time.'");
         }
         else if (Player.IsInInventory(World.ITEM_ID_SPIDER_SILK))
         {
@@ -269,23 +268,23 @@ public class Program
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity == 3)
                 {
-                    Console.WriteLine("thanks for killing those spiders.\n" +
-                                      "as a reward you get the Winner's Medal");
+                    Console.WriteLine("Guard: 'Thank you for killing those damned spiders!'\n" +
+                                        "The whole village gives you the Winner's Medal for your accomplishment.");
                     Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
                     Quest.SPIDER_COMPLETION_FLAG = 2;
                 }
-                else Console.WriteLine("Most of the rats are dead now kill the rest.");
+                else Console.WriteLine("Guard: 'There are still spiders roaming around!'");
             }
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 9)
         {
-            Console.WriteLine("Wow there are a lot of spiders here LETS get to work..");
+            Console.WriteLine("You see alot of large spiders crawling around..");
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1)
         {
-            Console.WriteLine("\nGuard: 'go kills those damn spiders!'");
+            Console.WriteLine("\nGuard: 'Someone go kill those damn spiders!'");
         }
     }
 
@@ -299,7 +298,7 @@ public class Program
         }
         else
         {
-            // guard here
+            // temp
             Console.WriteLine("You have proof");
         }
     }
