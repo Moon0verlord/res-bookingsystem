@@ -5,6 +5,7 @@ namespace RPG;
 public class Player
 {
     public string Name;
+    public static bool PassedBridge;
     public readonly int MaxHP;
     public static int CurrentHP;
     public static int Gold;
@@ -20,6 +21,7 @@ public class Player
     {
         this.Name = Name;
         this.MaxHP = MaxHP;
+        PassedBridge = false;
         CurrentHP = currentHP;
         Gold = gold;
         XP = xp;

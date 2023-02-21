@@ -309,16 +309,19 @@ public class Program
 
     public static void guardPost()
     {
-        Console.WriteLine("Guard: 'Turn back at once, peasant! Unless thee hast proof of thy grit.'");
-        if (!Player.IsInInventory(World.ITEM_ID_ADVENTURER_PASS))
+        if (!Player.PassedBridge)
         {
-            Console.WriteLine("You have no proof right now. The guard sends you back to the Town Square.");
-            Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_TOWN_SQUARE);
-        }
-        else
-        {
-            // temp
-            Console.WriteLine("You have proof");
+            Console.WriteLine("Guard: 'Turn back at once, peasant! Unless thee hast proof of thy grit.'");
+            if (!Player.IsInInventory(World.ITEM_ID_ADVENTURER_PASS))
+            {
+                Console.WriteLine("You have no proof right now. The guard sends you back to the Town Square.");
+                Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_TOWN_SQUARE);
+            }
+            else
+            {
+                Console.WriteLine("Guard: 'Hmm... Your pass checks out, you may cross the bridge.'");
+                Player.PassedBridge = true;
+            }
         }
     }
 
