@@ -327,7 +327,50 @@ public class Program
             {
                 case 1:
                     Player.ViewInventory();
-                    Player.UseItem();
+                    Console.WriteLine(
+                        "Type the name of an item you'd like to use. Or type 'exit' to leave the inventory.");
+                    var invChoice = Console.ReadLine();
+                    foreach (var item in Player.Inventory.TheCountedItemList)
+                    {
+                        if (item.TheItem.Name == invChoice)
+                        {
+                            if (item.TheItem.Name == "Apple")
+                            {
+                                Console.WriteLine("You take eat the apple");
+                                Console.WriteLine("You get three HP");
+                                Player.CurrentHP += 3;
+                                item.UseQuantity();
+                                //Remove 1 apple from inventory toDo
+                                break;
+                            }
+
+                            else if (item.TheItem.Name == Player.CurrentWeapon.Name)
+                            {
+                                Console.WriteLine("You already have this item equipped");
+                            }
+                            else
+                            {
+                                foreach (Weapon weapon in World.Weapons)
+                                {
+                                    if (item.TheItem.Name == weapon.Name)
+                                    {
+                                        Console.WriteLine($"You equip the {item.TheItem.Name}\n");
+                                        Player.CurrentWeapon = weapon;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (invChoice == "Exit" || invChoice == "exit")
+                        {
+                            break;
+                        }
+                    }
                     break;
                 case 3:
                     var hitChanceRand = rnd.Next(1, 6);
