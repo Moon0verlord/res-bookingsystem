@@ -29,7 +29,8 @@ public class Program
                         Console.WriteLine($"\nName: {name}\nMax HP: {player.MaxHP}\n" +
                                           $"Current HP: {Player.CurrentHP}\nGold: {Player.Gold}" +
                                           $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\n" +
+                                          $"Quests Completed: \n");
                         Player.ViewInventory();
                         Player.ViewQuestLog();
                         Player.UseItem();
@@ -76,8 +77,17 @@ public class Program
 
                         break;
                     case 4:
-                        Console.WriteLine("Thanks for playing!");
-                        Environment.Exit(0);
+                        if (Quest.FARMER_COMPLETION_FLAG == 2 && Quest.ALCHEMIST_COMPLETION_FLAG == 2 && Quest.SPIDER_COMPLETION_FLAG == 2)
+                        {
+                            Console.WriteLine("After defeating all the monsters in town, you're hailed as a hero!\n" +
+                                              "Congratulations, you win!\n" + "Thanks for playing!");
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Thanks for playing!");
+                            Environment.Exit(0);
+                        }
                         break;
                     default:
                         Console.WriteLine("Unknown input");
@@ -226,7 +236,6 @@ public class Program
                 {
                     Console.WriteLine("thanks for killing those rats.\n" +
                                       "as a reward you get a club!");
-                    // TODO: Add a club to the player's inventory
                     Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.WEAPON_ID_CLUB), 1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
