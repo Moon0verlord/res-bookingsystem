@@ -185,7 +185,7 @@ public class Program
                 {
                     Console.WriteLine("Thank ye for gettin' rid of those darned snakes!\n" +
                                       "For yer effort, I shall grant ye this Adventurer's pass to get across the bridge!");
-                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS),1));
+                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.ITEM_ID_ADVENTURER_PASS), 1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SNAKE_FANG), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_FARMERS_FIELD);
                     Quest.FARMER_COMPLETION_FLAG = 2;
@@ -224,11 +224,12 @@ public class Program
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
                 {
-                    Console.WriteLine("thanks for killing those spiders.\n" +
-                                      "as a reward you getthe Winner's Medal");
-                    Player.Inventory.AddCountedItem(new CountedItem (World.ItemByID(World.ITEM_ID_WINNERS_MEDAL),1));
-                    Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
-                    Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
+                    Console.WriteLine("thanks for killing those rats.\n" +
+                                      "as a reward you get a club!");
+                    // TODO: Add a club to the player's inventory
+                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.WEAPON_ID_CLUB), 1));
+                    Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
+                    Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
             }
@@ -270,7 +271,7 @@ public class Program
                 if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity == 3)
                 {
                     Console.WriteLine("thanks for killing those spiders.\n" +
-                                      "as a reward you getthe Winner's Medal");
+                                      "as a reward you get the Winner's Medal");
                     Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
