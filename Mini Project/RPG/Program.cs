@@ -237,8 +237,8 @@ public class Program
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
                 {
-                    Console.WriteLine("thanks for killing those rats.\n" +
-                                      "as a reward you get a club!");
+                    Console.WriteLine("Alchemist: 'Thank you for killing those damned rats!'\n" +
+                                      "The alchemist gives you a club as reward.");
                     Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.WEAPON_ID_CLUB), 1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
