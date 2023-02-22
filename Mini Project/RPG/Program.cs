@@ -349,6 +349,7 @@ public class Program
 
     public static void fight()
     {
+        var fightdo = 0;
         Random rnd = new Random();
         var monster = Player.CurrentLocation.MonsterLivingHere;
         Console.WriteLine($"You have: {Player.CurrentHP} Hp");
@@ -361,11 +362,15 @@ public class Program
                               "\n2: Run." +
                               "\n3: Fight." +
                               "\n4: Observe.");
-            var fightdo = Convert.ToInt32(Console.ReadLine());
-            //open inventory-ToDO
-            //run???-X
-            //fight-X
-            //observe-ToDo
+            try
+            {
+                fightdo = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid option.\n");
+            }
+
             switch (fightdo)
             {
                 case 1:
@@ -499,6 +504,9 @@ public class Program
                     break;
                 case 4:
                     Console.WriteLine(Player.CurrentLocation.Description);
+                    break;
+                default:
+                    Console.WriteLine("Incorrect input");
                     break;
             }
         }
