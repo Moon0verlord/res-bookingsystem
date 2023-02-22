@@ -38,7 +38,16 @@ public class CountedItemList
     public void RemoveItem(CountedItem item)
     {
         {
-            TheCountedItemList.Remove(item);
+            CountedItem ItemToRemove = null;
+            foreach (CountedItem CountItem in TheCountedItemList)
+            {
+                if (CountItem.TheItem.ID == item.TheItem.ID)
+                {
+                    ItemToRemove = CountItem;
+                    break;
+                }
+            }
+            if (ItemToRemove != null) TheCountedItemList.Remove(ItemToRemove);
         }
     }
 }
