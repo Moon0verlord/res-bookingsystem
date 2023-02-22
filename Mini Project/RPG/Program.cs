@@ -23,7 +23,7 @@ public class Program
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name, 25, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
-        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5,"Apple","Apples"),5));
+        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5, "Apple", "Apples"), 5));
         while (boolval)
         {
             try
@@ -126,6 +126,7 @@ public class Program
         bool loop = true;
         while (loop)
         {
+            Console.Clear();
             Console.WriteLine("\nWhere would you like to go?");
             Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
                               $"\nFrom here you can go to:");
