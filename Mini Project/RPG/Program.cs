@@ -186,7 +186,7 @@ public class Program
             }
             else Console.WriteLine("Maybe some other time then.");
         }
-        else if (Player.IsInInventory(World.ITEM_ID_SNAKE_FANG) && Quest.FARMER_COMPLETION_FLAG == 1)
+        else if (Player.IsInInventory(World.ITEM_ID_SNAKE_FANG))
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
@@ -231,7 +231,7 @@ public class Program
             else Console.WriteLine("Maybe another time.");
         }
 
-        else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL) && Quest.ALCHEMIST_COMPLETION_FLAG == 1)
+        else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL))
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
@@ -278,7 +278,7 @@ public class Program
             }
             else Console.WriteLine("Guard: 'Maybe if you want to save the village some other time.'");
         }
-        else if (Player.IsInInventory(World.ITEM_ID_SPIDER_SILK) && Quest.SPIDER_COMPLETION_FLAG == 1)
+        else if (Player.IsInInventory(World.ITEM_ID_SPIDER_SILK))
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
             {
