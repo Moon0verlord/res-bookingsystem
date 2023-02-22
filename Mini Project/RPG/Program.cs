@@ -21,17 +21,15 @@ public class Program
             {
                 Console.WriteLine($"\nYou are at: {Player.CurrentLocation.Name}");
                 Console.WriteLine("What would you like to do (Enter a number?).");
-                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit");
+                Console.WriteLine("1: See game stats\n2: Move\n3: Fight\n4: Quit" + (Quest.GameDone() ? " and end the game." : null));
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"\nName: {name}\nMax HP: {player.MaxHP}\n" +
-                                          $"Current HP: {Player.CurrentHP}\nGold: {Player.Gold}" +
+                        Console.WriteLine($"\nName: {name}\nHP: {Player.CurrentHP}/{player.MaxHP}\nGold: {Player.Gold}" +
                                           $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
-                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\n" +
-                                          $"Quests Completed: \n");
-                        Player.ViewInventory();
+                                          $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
+                                          Player.ViewInventory();
                         Player.ViewQuestLog();
                         break;
                     case 2:
@@ -76,7 +74,7 @@ public class Program
 
                         break;
                     case 4:
-                        if (Quest.FARMER_COMPLETION_FLAG == 2 && Quest.ALCHEMIST_COMPLETION_FLAG == 2 && Quest.SPIDER_COMPLETION_FLAG == 2)
+                        if (Quest.GameDone())
                         {
                             Console.WriteLine("After defeating all the monsters in town, you're hailed as a hero!\n" +
                                               "Congratulations, you win!\n" + "Thanks for playing!");

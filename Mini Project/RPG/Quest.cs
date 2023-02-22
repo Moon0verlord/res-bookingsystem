@@ -28,4 +28,13 @@ public class Quest
         ALCHEMIST_COMPLETION_FLAG = 0;
         SPIDER_COMPLETION_FLAG = 0;
     }
+    public static bool GameDone()
+    {
+        if (FARMER_COMPLETION_FLAG == 2 && ALCHEMIST_COMPLETION_FLAG == 2 && SPIDER_COMPLETION_FLAG == 2)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

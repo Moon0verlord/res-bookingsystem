@@ -16,11 +16,11 @@ public class Player
     public static CountedItemList Inventory;
     public static QuestList QuestLog;
     
-    public Player(string Name, int MaxHP, int currentHP, int gold,
+    public Player(string Name, int maxHP, int currentHP, int gold,
         int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
-        this.MaxHP = MaxHP;
+        this.MaxHP = maxHP;
         PassedBridge = false;
         CurrentHP = currentHP;
         Gold = gold;
