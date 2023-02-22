@@ -4,7 +4,7 @@ public class Player
 {
     public string Name;
     public static bool PassedBridge;
-    public readonly int MaxHP;
+    public static int MaxHP;
     public static int CurrentHP;
     public static int Gold;
     public static int XP;
@@ -14,11 +14,11 @@ public class Player
     public static CountedItemList Inventory;
     public static QuestList QuestLog;
     
-    public Player(string Name, int MaxHP, int currentHP, int gold,
+    public Player(string Name, int maxHP, int currentHP, int gold,
         int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
-        this.MaxHP = MaxHP;
+        MaxHP = maxHP;
         CurrentHP = currentHP;
         Gold = gold;
         XP = xp;

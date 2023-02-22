@@ -23,6 +23,7 @@ public class Program
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
         Player player = new Player(name, 25, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
+        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5,"Apple","Apples"),5));
         while (boolval)
         {
             try
@@ -34,7 +35,7 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine($"\nName: {name}\nHP: {Player.CurrentHP}/{player.MaxHP}\nGold: {Player.Gold}" +
+                        Console.WriteLine($"\nName: {name}\nHP: {Player.CurrentHP}/{Player.MaxHP}\nGold: {Player.Gold}" +
                                           $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
                         Player.ViewInventory();
@@ -68,7 +69,6 @@ public class Program
                                     break;
                                 }
                         }
-
                         break;
                     case 3:
                         if (Player.CurrentLocation.MonsterLivingHere != null
@@ -371,22 +371,24 @@ public class Program
                     Player.ViewInventory();
                     Console.WriteLine(
                         "Type the name of an item you'd like to use. Or type 'exit' to leave the inventory.");
-                    var invChoice = Console.ReadLine();
+                    var invChoice = Console.ReadLine()!.ToLower();
                     foreach (var item in Player.Inventory.TheCountedItemList)
                     {
-                        if (item.TheItem.Name == invChoice)
+                        if (item.TheItem.Name.ToLower() == invChoice)
                         {
-                            if (item.TheItem.Name == "Apple")
+                            if (item.TheItem.Name.ToLower() == "apple")
                             {
-                                Console.WriteLine("You take eat the apple");
-                                Console.WriteLine("You get three HP");
-                                Player.CurrentHP += 3;
+                                Console.WriteLine("You eat the apple");
+                                int beforeheal = Player.CurrentHP;
+                                if (Player.CurrentHP + 3 >= Player.MaxHP) Player.CurrentHP = Player.MaxHP;
+                                else Player.CurrentHP += 3;
+                                Console.WriteLine($"You heal {Player.CurrentHP - beforeheal} HP");
                                 item.UseQuantity();
                                 //Remove 1 apple from inventory toDo
                                 break;
                             }
 
-                            else if (item.TheItem.Name == Player.CurrentWeapon.Name)
+                            else if (item.TheItem.Name.ToLower() == Player.CurrentWeapon.Name.ToLower())
                             {
                                 Console.WriteLine("You already have this item equipped");
                             }
@@ -394,7 +396,7 @@ public class Program
                             {
                                 foreach (Weapon weapon in World.Weapons)
                                 {
-                                    if (item.TheItem.Name == weapon.Name)
+                                    if (item.TheItem.Name.ToLower() == weapon.Name.ToLower())
                                     {
                                         Console.WriteLine($"You equip the {item.TheItem.Name}\n");
                                         Player.CurrentWeapon = weapon;
