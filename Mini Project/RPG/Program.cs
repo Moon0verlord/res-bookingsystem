@@ -6,8 +6,15 @@ public class Program
 {
     static void Main(string[] args)
     {
+        // Console.WriteLine("██████╗ ██████╗  ██████╗      ██████╗  █████╗ ███╗   ███╗███████╗" + "\n" +
+        //                   "██╔══██╗██╔══██╗██╔════╝     ██╔════╝ ██╔══██╗████╗ ████║██╔════╝" + "\n" +
+        //                   "██████╔╝██████╔╝██║  ███╗    ██║  ███╗███████║██╔████╔██║█████╗" + "\n" +
+        //                   "██╔══██╗██╔═══╝ ██║   ██║    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝" + "\n" +
+        //                   "██║  ██║██║     ╚██████╔╝    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗" + "\n" +
+        //                   "╚═╝  ╚═╝╚═╝      ╚═════╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
+        // LoadingScreen();
         var boolval = true;
-        Console.WriteLine("The people in your town are being terrorized by giant spiders.\n" +
+        Console.WriteLine("\nThe people in your town are being terrorized by giant spiders.\n" +
                           "You decide to do what you can to help.");
         Console.WriteLine("But first, who are you?");
         Console.Write("Enter your name: ");
@@ -96,6 +103,19 @@ public class Program
                 Console.WriteLine("Invalid input. Please enter a valid option.\n");
             }
         }
+    }
+
+    public static void LoadingScreen()
+    {
+        string loading = "Loading...";
+        for (int i = 0; i < 6; i++)
+        {
+            loading = (loading == "Loading...") ? "Loading" : (loading + ".");
+            Console.Write("                       " + loading + "\r");
+            Thread.Sleep(500);
+        }
+
+        Console.Clear();
     }
 
     public static void Move()
