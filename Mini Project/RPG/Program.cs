@@ -6,13 +6,13 @@ public class Program
 {
     static void Main(string[] args)
     {
-        // Console.WriteLine("██████╗ ██████╗  ██████╗      ██████╗  █████╗ ███╗   ███╗███████╗" + "\n" +
-        //                   "██╔══██╗██╔══██╗██╔════╝     ██╔════╝ ██╔══██╗████╗ ████║██╔════╝" + "\n" +
-        //                   "██████╔╝██████╔╝██║  ███╗    ██║  ███╗███████║██╔████╔██║█████╗" + "\n" +
-        //                   "██╔══██╗██╔═══╝ ██║   ██║    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝" + "\n" +
-        //                   "██║  ██║██║     ╚██████╔╝    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗" + "\n" +
-        //                   "╚═╝  ╚═╝╚═╝      ╚═════╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
-        // LoadingScreen();
+        Console.WriteLine("██████╗ ██████╗  ██████╗      ██████╗  █████╗ ███╗   ███╗███████╗" + "\n" +
+                          "██╔══██╗██╔══██╗██╔════╝     ██╔════╝ ██╔══██╗████╗ ████║██╔════╝" + "\n" +
+                          "██████╔╝██████╔╝██║  ███╗    ██║  ███╗███████║██╔████╔██║█████╗" + "\n" +
+                          "██╔══██╗██╔═══╝ ██║   ██║    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝" + "\n" +
+                          "██║  ██║██║     ╚██████╔╝    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗" + "\n" +
+                          "╚═╝  ╚═╝╚═╝      ╚═════╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
+        LoadingScreen();
         var boolval = true;
         Console.WriteLine("\nThe people in your town are being terrorized by giant spiders.\n" +
                           "You decide to do what you can to help.");
@@ -21,7 +21,7 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
-        Player player = new Player(name, 50, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
+        Player player = new Player(name, 100, 100, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
         while (boolval)
         {
             try
@@ -36,7 +36,7 @@ public class Program
                         Console.WriteLine($"\nName: {name}\nHP: {Player.CurrentHP}/{player.MaxHP}\nGold: {Player.Gold}" +
                                           $"\nXP: {Player.XP}\nLevel: {Player.Level}\nCurrent Weapon: {Player.CurrentWeapon.Name}" +
                                           $"\nCurrent Location: {Player.CurrentLocation.Name}\n");
-                                          Player.ViewInventory();
+                        Player.ViewInventory();
                         Player.ViewQuestLog();
                         break;
                     case 2:
@@ -300,13 +300,13 @@ public class Program
         }
         else if (Player.IsInInventory(World.ITEM_ID_SPIDER_SILK) && Quest.SPIDER_COMPLETION_FLAG == 1)
         {
-            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList)
+            foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
                 if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity == 3)
                 {
                     Console.WriteLine("Guard: 'Thank you for killing those damned spiders!'\n" +
                                         "The whole village gives you the Winner's Medal for your accomplishment.");
-                    Player.Inventory.AddItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL));
+                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.ITEM_ID_WINNERS_MEDAL), 1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_SPIDER_SILK), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_COLLECT_SPIDER_SILK);
                     Quest.SPIDER_COMPLETION_FLAG = 2;
