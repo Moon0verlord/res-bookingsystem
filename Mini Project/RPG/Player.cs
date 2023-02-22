@@ -3,6 +3,7 @@
 public class Player
 {
     public string Name;
+    public static bool PassedBridge;
     public readonly int MaxHP;
     public static int CurrentHP;
     public static int Gold;
@@ -26,6 +27,7 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
         QuestLog = new QuestList();
+        PassedBridge = false;
     }
     
     public static void ViewInventory()
@@ -46,12 +48,25 @@ public class Player
         }
     }
     
+    public static bool IsInInventory(int Id)
+    {
+        foreach (CountedItem InvItem in Inventory.TheCountedItemList)
+        {
+            if (InvItem.TheItem.ID == Id)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     public static void ViewQuestLog()
     {
-        Console.WriteLine("You have the following quests in your quest log:");
+        Console.WriteLine("\nYou have the following quests in your quest log:");
         foreach (var quest in QuestLog.QuestLog)
         {
-            Console.WriteLine($"{quest.TheQuest.Name}");
+            Console.WriteLine($"{quest.TheQuest.Name} | {quest.IsCompleted}");
         }
     }
 
