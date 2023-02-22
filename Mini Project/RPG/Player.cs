@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace RPG;
+﻿namespace RPG;
 
 public class Player
 {
     public string Name;
-    public static bool PassedBridge;
     public readonly int MaxHP;
     public static int CurrentHP;
     public static int Gold;
@@ -16,12 +13,11 @@ public class Player
     public static CountedItemList Inventory;
     public static QuestList QuestLog;
     
-    public Player(string Name, int maxHP, int currentHP, int gold,
+    public Player(string Name, int MaxHP, int currentHP, int gold,
         int xp, int level, Weapon currentWeapon, Location currentLocation)
     {
         this.Name = Name;
-        this.MaxHP = maxHP;
-        PassedBridge = false;
+        this.MaxHP = MaxHP;
         CurrentHP = currentHP;
         Gold = gold;
         XP = xp;
@@ -30,11 +26,13 @@ public class Player
         CurrentLocation = currentLocation;
         Inventory = new CountedItemList();
         QuestLog = new QuestList();
-        Inventory.AddCountedItem(CountedItem.apples);
     }
+    
     public static void ViewInventory()
     {
+        Console.WriteLine($"Your current weapon is: {CurrentWeapon.Name}.");
         Console.WriteLine("You have the following items in your inventory:");
+        
         foreach (var item in Inventory.TheCountedItemList)
         {
             if (item.Quantity == 1)
@@ -47,40 +45,24 @@ public class Player
             }
         }
     }
-
-    public static bool IsInInventory(int Id)
-    {
-        foreach (CountedItem InvItem in Inventory.TheCountedItemList)
-        {
-            if (InvItem.TheItem.ID == Id)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
     
     public static void ViewQuestLog()
     {
-        Console.WriteLine("\nYou have the following quests in your quest log:");
+        Console.WriteLine("You have the following quests in your quest log:");
         foreach (var quest in QuestLog.QuestLog)
         {
-            Console.WriteLine($"{quest.TheQuest.Name} | Completed: {quest.IsCompleted}");
+            Console.WriteLine($"{quest.TheQuest.Name}");
         }
     }
+
     public static void UseItem()
     {
-        Console.WriteLine("Which item would you like to use?");
-        string? itemToUse = Console.ReadLine();
-        itemToUse = itemToUse?.ToLower();
-        foreach (var item in Inventory.TheCountedItemList)
-        {
-            if (item.TheItem.Name == itemToUse)
+            Console.WriteLine("Which item would you like to use?");
+            string? itemToUse = Console.ReadLine();
+            foreach (var item in Inventory.TheCountedItemList)
             {
-                if (item.TheItem.Name == "apple")
+                if (item.TheItem.Name == itemToUse)
                 {
-                    Player.CurrentHP += 3;
                     item.UseQuantity();
                     if (item.Quantity == 0)
                     {
@@ -89,12 +71,6 @@ public class Player
                     Console.WriteLine($"You used {itemToUse}.");
                     break;
                 }
-
             }
-            else
-            {
-                break;
-            }
-        }
     }
 }
