@@ -21,7 +21,7 @@ public class Program
         string name = Console.ReadLine()!;
         Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
-        Player player = new Player(name, 100, 100, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
+        Player player = new Player(name, 25, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
         while (boolval)
         {
             try
@@ -227,7 +227,7 @@ public class Program
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 7)
         {
-            Console.WriteLine("There's alot of snakes roaming around this field..");
+            Console.WriteLine("\nThere's alot of snakes roaming around this field..");
         }
         else if (Quest.FARMER_COMPLETION_FLAG == 1)
         {
@@ -273,12 +273,12 @@ public class Program
 
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 5)
         {
-            Console.WriteLine("There are alot of rats scurrying around in this garden..");
+            Console.WriteLine("\nThere are alot of rats scurrying around in this garden..");
         }
 
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1)
         {
-            Console.WriteLine("Alchemist: 'Why hast thou not killed those rats yet?'");
+            Console.WriteLine("\nAlchemist: 'Why hast thou not killed those rats yet?'");
         }
     }
 
@@ -288,7 +288,7 @@ public class Program
         {
             // Placeholder to test questing
             Console.WriteLine("You arrive at the bridge. There's a guard trying to calm down the people from the village." +
-            " When they went to the forest they found a spider nest. The guard ask you if you can kill and collect the silk to protect the village");
+            "\nWhen they went to the forest they found a spider nest. The guard ask you if you can kill and collect the silk to protect the village");
             Console.WriteLine("Do you accept his quest? y/n");
             string answer = Console.ReadLine()!.ToLower();
             if (answer == "y")
@@ -313,13 +313,13 @@ public class Program
                 }
                 else if (InvItem.TheItem.ID == World.ITEM_ID_SPIDER_SILK && InvItem.Quantity != 3)
                 {
-                    Console.WriteLine("Guard: 'There are still spiders roaming around!'");
+                    Console.WriteLine("\nGuard: 'There are still spiders roaming around!'");
                 }
             }
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 9)
         {
-            Console.WriteLine("You see alot of large spiders crawling around..");
+            Console.WriteLine("\nYou see alot of large spiders crawling around..");
         }
         else if (Quest.SPIDER_COMPLETION_FLAG == 1)
         {
