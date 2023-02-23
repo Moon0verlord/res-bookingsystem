@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Mime;
 namespace RPG;
-
 public class Program
 {
     static void Main(string[] args)
@@ -20,13 +19,15 @@ public class Program
         Console.WriteLine("But first, who are you?");
         Console.Write("Enter your name: ");
         string name = Console.ReadLine()!;
-        Player.CurrentWeapon = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
-        Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
-        Player player = new Player(name, 25, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
-        Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5, "Apple", "Apples"), 5));
-        while (boolval)
-        {
-            try
+        var rusty_sword = World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD);
+        Player.CurrentWeapon = rusty_sword;
+         Player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
+         Player player = new Player(name, 25, 25, 10, 0, 1, Player.CurrentWeapon, Player.CurrentLocation);
+         Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(rusty_sword.ID,rusty_sword.Name,rusty_sword.NamePlural),1));
+         Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(5,"Apple","Apples"),5));
+         while (boolval)
+         {
+             try
             {
                 Console.WriteLine($"\nYou are at: {Player.CurrentLocation.Name}");
                 Console.WriteLine("What would you like to do (Enter a number?).");
@@ -81,7 +82,6 @@ public class Program
                         {
                             Console.WriteLine("There seems to be nothing here to fight..");
                         }
-
                         break;
                     case 4:
                         if (Quest.GameDone())
@@ -107,7 +107,6 @@ public class Program
             }
         }
     }
-
     public static void LoadingScreen()
     {
         string loading = "Loading...";
@@ -117,19 +116,17 @@ public class Program
             Console.Write("                       " + loading + "\r");
             Thread.Sleep(500);
         }
-
         Console.Clear();
     }
-
     public static void Move()
     {
-        bool loop = true;
-        while (loop)
-        {
-            Console.Clear();
-            Console.WriteLine("\nWhere would you like to go?");
-            Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
-                              $"\nFrom here you can go to:");
+         bool loop = true;
+         while (loop)
+         {
+             Console.Clear();
+             Console.WriteLine("\nWhere would you like to go?");
+             Console.WriteLine($"You are at: {Player.CurrentLocation.Name}.\n{Player.CurrentLocation.Description}." +
+                               $"\nFrom here you can go to:");
             Console.WriteLine(Player.CurrentLocation.Compass());
             Console.WriteLine(Player.CurrentLocation.Map() +
                               "\nEnter a compass direction or type 'L' to stay where you are: ");
@@ -144,9 +141,7 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go north.");
-
                     break;
-
                 case "S":
                 case "SOUTH":
                     if (Player.CurrentLocation.LocationToSouth != null)
@@ -155,9 +150,7 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go south.");
-
                     break;
-
                 case "E":
                 case "EAST":
                     if (Player.CurrentLocation.LocationToEast != null)
@@ -166,9 +159,7 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go east.");
-
                     break;
-
                 case "W":
                 case "WEST":
                     if (Player.CurrentLocation.LocationToWest != null)
@@ -177,21 +168,17 @@ public class Program
                         loop = false;
                     }
                     else Console.WriteLine("You can't go west.");
-
                     break;
-
                 case "L":
                 case "LEAVE":
                     loop = false;
                     break;
-
                 default:
                     Console.WriteLine("Invalid input.");
                     break;
             }
         }
     }
-
     public static void Farmer()
     {
         if (Quest.FARMER_COMPLETION_FLAG == 0)
@@ -236,9 +223,9 @@ public class Program
             Console.WriteLine("\nFarmer: 'Please get rid of these snakes already!'");
         }
     }
-
     public static void Alchemist()
     {
+        var Club = World.WeaponByID(World.WEAPON_ID_CLUB);
         if (Quest.ALCHEMIST_COMPLETION_FLAG == 0)
         {
             Console.WriteLine(
@@ -252,7 +239,6 @@ public class Program
             }
             else Console.WriteLine("Maybe another time.");
         }
-
         else if (Player.IsInInventory(World.ITEM_ID_RAT_TAIL) && Quest.ALCHEMIST_COMPLETION_FLAG == 1)
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
@@ -261,7 +247,7 @@ public class Program
                 {
                     Console.WriteLine("Alchemist: 'Thank you for killing those damned rats!'\n" +
                                       "The alchemist gives you a club as reward.");
-                    Player.Inventory.AddCountedItem(new CountedItem(World.ItemByID(World.WEAPON_ID_CLUB), 1));
+                    Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(Club.ID,Club.Name,Club.NamePlural),1));
                     Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
@@ -272,18 +258,15 @@ public class Program
                 }
             }
         }
-
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1 && Player.CurrentLocation.ID == 5)
         {
             Console.WriteLine("\nThere are alot of rats scurrying around in this garden..");
         }
-
         else if (Quest.ALCHEMIST_COMPLETION_FLAG == 1)
         {
             Console.WriteLine("\nAlchemist: 'Why hast thou not killed those rats yet?'");
         }
     }
-
     public static void Spider()
     {
         if (Quest.SPIDER_COMPLETION_FLAG == 0)
@@ -328,7 +311,6 @@ public class Program
             Console.WriteLine("\nGuard: 'Someone go kill those damn spiders!'");
         }
     }
-
     public static void guardPost()
     {
         if (!Player.PassedBridge)
@@ -346,7 +328,6 @@ public class Program
             }
         }
     }
-
     public static void fight()
     {
         var fightdo = 0;
@@ -366,11 +347,10 @@ public class Program
             {
                 fightdo = Convert.ToInt32(Console.ReadLine());
             }
-            catch (System.FormatException)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid option.\n");
+            catch (System.FormatException){
+                
+                    Console.WriteLine("Only numbers please.\n");
             }
-
             switch (fightdo)
             {
                 case 1:
@@ -384,16 +364,22 @@ public class Program
                         {
                             if (item.TheItem.Name.ToLower() == "apple")
                             {
-                                Console.WriteLine("You eat the apple");
                                 int beforeheal = Player.CurrentHP;
-                                if (Player.CurrentHP + 3 >= Player.MaxHP) Player.CurrentHP = Player.MaxHP;
-                                else Player.CurrentHP += 3;
-                                Console.WriteLine($"You heal {Player.CurrentHP - beforeheal} HP");
-                                item.UseQuantity();
+                                if (Player.CurrentHP >= Player.MaxHP)
+                                {
+                                    Console.WriteLine("You arent too wounded yet to heal");
+                                    Player.CurrentHP = Player.MaxHP;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You eat the apple");
+                                    Player.CurrentHP += 3;
+                                    Console.WriteLine($"You heal {Player.CurrentHP - beforeheal} HP");
+                                    item.UseQuantity();
+                                }
                                 //Remove 1 apple from inventory toDo
                                 break;
                             }
-
                             else if (item.TheItem.Name.ToLower() == Player.CurrentWeapon.Name.ToLower())
                             {
                                 Console.WriteLine("You already have this item equipped");
@@ -415,7 +401,6 @@ public class Program
                                 }
                             }
                         }
-
                         if (invChoice == "Exit" || invChoice == "exit")
                         {
                             break;
@@ -429,9 +414,7 @@ public class Program
                     if (hitChanceRand / 2 > 0.5)
                     {
                         Console.WriteLine($"You hit the {monster.NamePlural}!");
-
                         monster.CurrentHitPoints = monster.CurrentHitPoints - damage;
-
                         if (monster.CurrentHitPoints <= 0)
                         {
                             Console.WriteLine($"The {monster.Name} have: 0 Hp");
@@ -450,7 +433,6 @@ public class Program
                                                 piece.TheItem.NamePlural), 3));
                                     }
                             }
-
                             Console.WriteLine($"+{monster.RewardExperience}Xp.\n" +
                                               $"+{monster.RewardGold} Gold.\n");
                             Player.XP += monster.RewardExperience;
@@ -458,7 +440,6 @@ public class Program
                             brave = false;
                             break;
                         }
-
                         Console.WriteLine($"The {monster.NamePlural} have: {monster.CurrentHitPoints} Hp\n");
                     }
                     else
@@ -466,7 +447,6 @@ public class Program
                         Console.WriteLine($"You missed the {monster.NamePlural}!");
                         Console.WriteLine($"The {monster.NamePlural} has: {monster.CurrentHitPoints} Hp\n");
                     }
-
                     Console.WriteLine($"The {monster.NamePlural} hit you!");
                     Player.CurrentHP = Player.CurrentHP - monsterDamage;
                     if (Player.CurrentHP <= 0)
@@ -474,7 +454,6 @@ public class Program
                         Console.WriteLine("You have: 0 Hp\n");
                         Console.WriteLine("You sadly passed away:(");
                         Console.WriteLine("Would you like to try again?");
-
                         Console.Write("Yes or no?: ");
                         bool retry = false;
                         while (!retry)
@@ -485,17 +464,14 @@ public class Program
                                 Program game = new Program();
                                 Main(null);
                             }
-
                             if (Choice == "No" || Choice == "no")
                             {
                                 Console.WriteLine("Bye!");
                                 Environment.Exit(0);
                             }
-
                             Console.Write("The value must be Yes or No, try again: ");
                         }
                     }
-
                     Console.WriteLine($"You have: {Player.CurrentHP} Hp\n");
                     break;
                 case 2:
@@ -504,9 +480,6 @@ public class Program
                     break;
                 case 4:
                     Console.WriteLine(Player.CurrentLocation.Description);
-                    break;
-                default:
-                    Console.WriteLine("Incorrect input");
                     break;
             }
         }
