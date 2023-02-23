@@ -116,6 +116,9 @@ public class Program
             Console.Write("                       " + loading + "\r");
             Thread.Sleep(500);
         }
+        loading = "                Press any key to continue.\r";
+        Console.WriteLine(loading);
+        var x = Console.ReadLine();
         Console.Clear();
     }
     public static void Move()
