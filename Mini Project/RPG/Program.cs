@@ -257,7 +257,7 @@ public class Program
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
-                else if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity != 3)
+                else if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity > 1 && InvItem.Quantity<3)
                 {
                     Console.WriteLine("Alchemist: 'You've killed some rats, but I can still see some around.'");
                 }
