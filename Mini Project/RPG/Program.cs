@@ -243,12 +243,17 @@ public class Program
         {
             foreach (CountedItem InvItem in Player.Inventory.TheCountedItemList.ToList())
             {
+                if (InvItem.TheItem.ID == World.ITEM_ID_PIECE_OF_FUR && InvItem.Quantity == 3)
+                {
+                    Player.Inventory.TheCountedItemList.Remove(InvItem);
+                }
                 if (InvItem.TheItem.ID == World.ITEM_ID_RAT_TAIL && InvItem.Quantity == 3)
                 {
                     Console.WriteLine("Alchemist: 'Thank you for killing those damned rats!'\n" +
                                       "The alchemist gives you a club as reward.");
                     Player.Inventory.TheCountedItemList.Add(new CountedItem(new Item(Club.ID,Club.Name,Club.NamePlural),1));
-                    Player.Inventory.RemoveItem(new CountedItem(World.ItemByID(World.ITEM_ID_RAT_TAIL), 3));
+                    Player.Inventory.TheCountedItemList.Remove(InvItem);
+                    Player.Inventory.TheCountedItemList.Remove(new CountedItem(World.ItemByID(World.ITEM_ID_PIECE_OF_FUR), 3));
                     Player.QuestLog.QuestComplete(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
                     Quest.ALCHEMIST_COMPLETION_FLAG = 2;
                 }
