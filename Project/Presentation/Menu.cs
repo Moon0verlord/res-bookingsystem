@@ -18,8 +18,13 @@ static class Menu
             case "1":
             UserLogin.Start();
             break;
-            
             case"2":
+                break;
+            case"3":
+                break;
+            case"4":
+                break;
+            case"5":
                 break;
             default: 
             {
