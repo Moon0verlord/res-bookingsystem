@@ -15,6 +15,7 @@ class AccountModel
     [JsonPropertyName("fullName")]
     public string FullName { get; set; }
 
+    public bool loggedIn;
     public AccountModel(int id, string emailAddress, string password, string fullName)
     {
         Id = id;
