@@ -6,8 +6,11 @@ static class Menu
     //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
-        Console.WriteLine("Enter 1 to login");
-        Console.WriteLine("Enter 2 to do something else in the future");
+        Console.WriteLine("[1] to login");
+        Console.WriteLine("[2] to get the restaurant information");
+        Console.WriteLine("[3] to get Schedule/ availability");
+        Console.WriteLine("[4] to view the current menu");
+        Console.WriteLine("[5] to make a reservation with your email");
 
         string input = Console.ReadLine();
         if (input == "1")
