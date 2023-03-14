@@ -11,29 +11,34 @@ static class Menu
         Console.WriteLine("[3] to get Schedule/ availability");
         Console.WriteLine("[4] to view the current menu");
         Console.WriteLine("[5] to make a reservation with your email");
+        Console.WriteLine("[6] to leave");
 
-        string input = Console.ReadLine();
-        switch (input)
+        string input = Console.ReadLine()!;
+        while (true)
         {
-            case "1":
-            UserLogin.Start();
-            break;
-            case"2":
-                break;
-            case"3":
-                break;
-            case"4":
-                break;
-            case"5":
-                break;
-            default: 
+            switch (input)
             {
-                Console.WriteLine("Invalid input");
-                Start();
-                break;
+                case "1":
+                    UserLogin.Start();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "q":
+                    Environment.Exit(0);
+                    break;
+                default:
+                {
+                    Console.WriteLine("Invalid input");
+                    Start();
+                    break;
+                }
             }
         }
-
-
     }
 }
