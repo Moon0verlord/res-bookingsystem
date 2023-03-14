@@ -11,7 +11,7 @@ static class Menu
         Console.WriteLine("[3] to get Schedule/ availability");
         Console.WriteLine("[4] to view the current menu");
         Console.WriteLine("[5] to make a reservation with your email");
-        Console.WriteLine("[6] to leave");
+        Console.WriteLine("[q] to leave");
 
         string input = Console.ReadLine()!;
         while (true)
