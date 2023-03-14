@@ -13,19 +13,22 @@ static class Menu
         Console.WriteLine("[5] to make a reservation with your email");
 
         string input = Console.ReadLine();
-        if (input == "1")
+        switch (input)
         {
+            case "1":
             UserLogin.Start();
+            break;
+            
+            case"2":
+                break;
+            default: 
+            {
+                Console.WriteLine("Invalid input");
+                Start();
+                break;
+            }
         }
-        else if (input == "2")
-        {
-            Console.WriteLine("This feature is not yet implemented");
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            Start();
-        }
+
 
     }
 }
