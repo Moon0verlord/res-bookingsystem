@@ -22,6 +22,9 @@ static class Menu
                         UserLogin.Start();
                         break;
                     case 1:
+                        restaurantInfo.Start();
+                        Console.WriteLine("Press any key to return back to main menu.");
+                        Console.ReadKey(true);
                         break;
                     case 5:
                         System.Environment.Exit(0);
