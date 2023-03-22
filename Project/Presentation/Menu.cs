@@ -14,6 +14,7 @@ static class Menu
             Console.WriteLine("[3] to get Schedule/ availability");
             Console.WriteLine("[4] to view the current menu");
             Console.WriteLine("[5] to make a reservation with your email");
+            Console.WriteLine("[6] to view the menu");
             Console.WriteLine("[q] to leave");
         
         string input = Console.ReadLine()!;
@@ -38,6 +39,8 @@ static class Menu
                 case "4":
                     break;
                 case "5":
+                    break;
+                case "6":
                     break;
                 case "q":
                     Environment.Exit(0);
