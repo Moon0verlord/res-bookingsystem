@@ -7,8 +7,10 @@ static class Menu
 {
    public static void ViewMenu()
     {
-        StreamReader reader = new("~/DataSources/Dishes.json");
+        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
+        StreamReader reader = new(path);
         string json2string = reader.ReadToEnd();
+        // change list of objects to jsoon array
         List<string> listOfObjects = JsonConvert.DeserializeObject<List<string>>(json2string)!;
         reader.Close();
         reader.Dispose();
