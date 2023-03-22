@@ -1,23 +1,30 @@
-﻿namespace Project.Presentation;
+﻿using Newtonsoft.Json.Linq;
+
+namespace Project.Presentation;
 
 using Newtonsoft.Json;
 
 
-static class Menu
+public static class Dishes
 {
-   public static void ViewMenu()
+    // W.I.P - View dishes method
+    // doesnt work with full program execute it seperately
+    // set json back to DataSources
+    
+    public static void JsonCursor()
     {
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
-        StreamReader reader = new(path);
-        string json2string = reader.ReadToEnd();
-        // change list of objects to jsoon array
-        List<string> listOfObjects = JsonConvert.DeserializeObject<List<string>>(json2string)!;
-        reader.Close();
-        reader.Dispose();
-        Console.WriteLine("The menu is: ");
-        foreach (string item in listOfObjects)
+        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, "Dishes.json"));
+        string json = File.ReadAllText(path);
+        JObject menu = JObject.Parse(json);
+        Console.WriteLine("Dishes:");
+        Console.WriteLine("-------");
+        Console.WriteLine("Vegan:");
+        foreach (var course in menu["vegan"]["2_courses"])
         {
-            Console.WriteLine(item);
+            string appetizer = (string)course["appetizer"];
+            string entree = (string)course["entree"];
+            Console.WriteLine($"Appetizer: {appetizer}");
+            Console.WriteLine($"Entree: {entree}");
         }
     }
 }
