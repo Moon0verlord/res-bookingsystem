@@ -1,4 +1,4 @@
-public class ManagerMenu
+class ManagerMenu:Menu
 {
     
 }

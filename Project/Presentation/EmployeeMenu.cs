@@ -1,4 +1,4 @@
-public class EmployeeMenu
+class EmployeeMenu:Menu
 {
     
 }
