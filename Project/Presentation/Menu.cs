@@ -28,18 +28,18 @@ static class Menu
             else
             {
                 Console.WriteLine("[5] to make a reservation");
-                
+
             }
 
             Console.WriteLine("[6] to view the menu");
             Console.WriteLine("[q] to leave");
-        
-        string input = Console.ReadLine()!;
-        
+
+            string input = Console.ReadLine()!;
+
             switch (input)
             {
                 case "1":
-                    if (acc==null||acc.loggedIn == false)
+                    if (acc == null || acc.loggedIn == false)
                     {
                         UserLogin.Start();
                         break;
@@ -51,6 +51,7 @@ static class Menu
                     }
                     break;
                 case "2":
+                    restaurantInfo.Start();
                     break;
                 case "3":
                     break;
@@ -64,11 +65,11 @@ static class Menu
                     Environment.Exit(0);
                     break;
                 default:
-                {
-                    Console.WriteLine("Invalid input");
-                    Start();
-                    break;
-                }
+                    {
+                        Console.WriteLine("Invalid input");
+                        Start();
+                        break;
+                    }
             }
         }
     }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/martijnwarnas/RiderProjects/ProjectB/Project/Project.csproj": {}
+    "C:\\Users\\robin\\OneDrive - Hogeschool Rotterdam\\Semester 2\\Project B\\ProjectB\\ProjectB\\Project\\Project.csproj": {}
   },
   "projects": {
-    "/Users/martijnwarnas/RiderProjects/ProjectB/Project/Project.csproj": {
+    "C:\\Users\\robin\\OneDrive - Hogeschool Rotterdam\\Semester 2\\Project B\\ProjectB\\ProjectB\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/martijnwarnas/RiderProjects/ProjectB/Project/Project.csproj",
+        "projectUniqueName": "C:\\Users\\robin\\OneDrive - Hogeschool Rotterdam\\Semester 2\\Project B\\ProjectB\\ProjectB\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "/Users/martijnwarnas/RiderProjects/ProjectB/Project/Project.csproj",
-        "packagesPath": "/Users/martijnwarnas/.nuget/packages/",
-        "outputPath": "/Users/martijnwarnas/RiderProjects/ProjectB/Project/obj/",
+        "projectPath": "C:\\Users\\robin\\OneDrive - Hogeschool Rotterdam\\Semester 2\\Project B\\ProjectB\\ProjectB\\Project\\Project.csproj",
+        "packagesPath": "C:\\Users\\robin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\robin\\OneDrive - Hogeschool Rotterdam\\Semester 2\\Project B\\ProjectB\\ProjectB\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/martijnwarnas/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\robin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.406/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }
