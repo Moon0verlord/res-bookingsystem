@@ -2,7 +2,7 @@ using System.Data;
 
 static class Menu
 {
-    static private MenuLogic myMenu = new MenuLogic();
+    static private MenuLogic _myMenu = new MenuLogic();
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
@@ -15,7 +15,7 @@ static class Menu
             {
                 string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail"};
                 string prompt = "\nMenu:";
-                int input = myMenu.RunMenu(options, prompt);
+                int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
                     case 0:
@@ -34,7 +34,7 @@ static class Menu
             {
                 string[] options = { "Log out", "Information", "Schedule", "View current menu", "Make reservation"};
                 string prompt = $"\nWelcome {acc.FullName}.:";
-                int input = myMenu.RunMenu(options, prompt);
+                int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
                     case 0:
