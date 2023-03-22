@@ -14,7 +14,7 @@ static class UserLogin
         {
             string prompt = "Welcome to the log in menu.\n";
             string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
-                "Enter password" + $"{(userPassword == null ? "" : $": {userPassword}")}", 
+                "Enter password" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}", 
                 "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
             int selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
