@@ -12,7 +12,7 @@ class ReservationsLogic
             options[counter] = i.ToString();
             counter++;
         }
-        string prompt = $"make a reservation for one these months\n{DateTime.UtcNow.Date.Year}";
+        string prompt = $"make a reservation for one these months: \n{DateTime.UtcNow.Date.Year}";
         
         int input = _myMenu.RunMenu(options, prompt);
     }
