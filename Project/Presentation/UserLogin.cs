@@ -4,10 +4,12 @@ static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
     static private MenuLogic myMenu = new MenuLogic();
-    private static string  userEmail = null;
-    private static string userPassword = null;
+    private static string  userEmail;
+    private static string userPassword;
     public static void Start()
     {
+        userEmail = null;
+        userPassword = null;
         while (true)
         {
             string prompt = "Welcome to the log in menu.\n";
@@ -105,7 +107,6 @@ static class UserLogin
                             Console.WriteLine("No account found with that email and password.\nIf you have no account yet, create one in the log in menu.");
                             Thread.Sleep(3500);
                             Console.ResetColor();
-                            Start();
                             break;
                         }
                     }
