@@ -4,10 +4,6 @@
       {
         "appetizer": "Roasted Carrot and Lentil Salad",
         "entree": "Chickpea Curry with Basmati Rice"
-      },
-      {
-        "appetizer": "Spicy Kale Chips",
-        "entree": "Vegan Pad Thai"
       }
     ],
     "3_courses": [
@@ -15,11 +11,6 @@
         "appetizer": "Vegan Caesar Salad",
         "entree": "Grilled Portobello Mushroom Steaks",
         "dessert": "Vegan Chocolate Mousse"
-      },
-      {
-        "appetizer": "Roasted Beet and Citrus Salad",
-        "entree": "Vegan Stuffed Peppers",
-        "dessert": "Coconut Milk Ice Cream"
       }
     ],
     "4_courses": [
@@ -28,16 +19,78 @@
         "soup": "Roasted Butternut Squash Soup",
         "entree": "Vegan Lasagna",
         "dessert": "Raw Vegan Cheesecake"
-      },
+      }
+    ]
+  },
+  "fish": {
+    "2_courses": [
       {
-        "appetizer": "Crispy Zucchini Fries",
-        "soup": "Miso Soup",
-        "entree": "Vegan Shepherd's Pie",
-        "dessert": "Vegan Brownies"
+        "appetizer": "Lobster Bisque",
+        "entree": "Pan-Seared Salmon with Lemon Butter Sauce"
+      }
+    ],
+    "3_courses": [
+      {
+        "appetizer": "Shrimp Cocktail",
+        "entree": "Cedar Plank Salmon with Herb Butter",
+        "dessert": "Key Lime Pie"
+      }
+    ],
+    "4_courses": [
+      {
+        "appetizer": "Tuna Tartare with Avocado and Mango",
+        "soup": "Lobster Bisque",
+        "entree": "Pan-Seared Scallops with Truffle Risotto",
+        "dessert": "Chocolate Torte"
+      }
+    ]
+  },
+  "meat": {
+    "2_courses": [
+      {
+        "appetizer": "Caesar Salad",
+        "entree": "Grilled Ribeye Steak with Red Wine Sauce"
+      }
+    ],
+    "3_courses": [
+      {
+        "appetizer": "Butternut Squash Soup",
+        "entree": "Roasted Chicken with Garlic and Herb Butter",
+        "dessert": "Apple Tart"
+      }
+    ],
+    "4_courses": [
+      {
+        "appetizer": "Beef Carpaccio with Arugula and Parmesan",
+        "soup": "Tomato Bisque",
+        "entree": "Braised Short Ribs with Creamy Polenta",
+        "dessert": "Crème Brûlée"
+      }
+    ]
+  },
+  "vegetarian": {
+    "2_courses": [
+      {
+        "appetizer": "Mixed Green Salad",
+        "entree": "Roasted Vegetable Risotto"
+      }
+    ],
+    "3_courses": [
+      {
+        "appetizer": "Roasted Beet Salad",
+        "entree": "Eggplant Parmesan with Tomato Sauce",
+        "dessert": "Vegan Chocolate Mousse"
+      }
+    ],
+    "4_courses": [
+      {
+        "appetizer": "Caprese Salad",
+        "soup": "Butternut Squash Soup",
+        "entree": "Grilled Portobello Mushroom with Quinoa and Roasted Vegetables",
+        "dessert": "Mixed Berry Sorbet"
       }
     ]
   }
 }
-  
   
   

@@ -6,10 +6,8 @@ using Newtonsoft.Json;
 
 public static class Dishes
 {
+    // TODO add Add Dish method
     static private MenuLogic _myMenu = new MenuLogic();
-    // W.I.P - View dishes method
-    // doesnt work with full program execute it seperately
-    // set json back to DataSources
     public static void WelcomeMenu()
     {
         string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Back to main menu"};
