@@ -8,12 +8,29 @@ static class Menu
     {
         while (true)
         {
-        
-            Console.WriteLine("[1] to login");
+
+            if (acc == null || acc.loggedIn == false)
+            {
+                Console.WriteLine("[1] to login");
+            }
+            else
+            {
+                Console.WriteLine("[1] to logout");
+            }
+
             Console.WriteLine("[2] to get the restaurant information");
             Console.WriteLine("[3] to get Schedule/ availability");
             Console.WriteLine("[4] to view the current menu");
-            Console.WriteLine("[5] to make a reservation with your email");
+            if (acc == null || acc.loggedIn == false)
+            {
+                Console.WriteLine("[5] to make a reservation with your email");
+            }
+            else
+            {
+                Console.WriteLine("[5] to make a reservation");
+                
+            }
+
             Console.WriteLine("[6] to view the menu");
             Console.WriteLine("[q] to leave");
         
@@ -29,7 +46,8 @@ static class Menu
                     }
                     else
                     {
-                        Console.WriteLine("Already Logged in");
+                        Console.WriteLine("Succesfully logged out.");
+                        Start(null);
                     }
                     break;
                 case "2":
