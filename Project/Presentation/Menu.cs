@@ -13,7 +13,7 @@ static class Menu
         {
             while (true)
             {
-                string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail"};
+                string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail", "Quit"};
                 string prompt = "\nMenu:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -22,6 +22,9 @@ static class Menu
                         UserLogin.Start();
                         break;
                     case 1:
+                        break;
+                    case 5:
+                        System.Environment.Exit(0);
                         break;
                     default:
                         break;
@@ -32,8 +35,8 @@ static class Menu
         {
             while (true)
             {
-                string[] options = { "Log out", "Information", "Schedule", "View current menu", "Make reservation"};
-                string prompt = $"\nWelcome {acc.FullName}.:";
+                string[] options = { "Log out", "Information", "Schedule", "View current menu", "Make reservation", "Quit (and log out)"};
+                string prompt = $"\nWelcome {acc.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -49,6 +52,9 @@ static class Menu
                         }
                         break;
                     case 1:
+                        break;
+                    case 5:
+                        System.Environment.Exit(0);
                         break;
                     default:
                         break;
