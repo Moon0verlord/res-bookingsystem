@@ -1,4 +1,4 @@
-class Menu
+static class Menu
 {
 
     //This shows the menu. You can call back to this method to show the menu again
