@@ -48,6 +48,15 @@ static class UserLogin
                     else
                     {
                         Console.Clear();
+                        var emailExists = accountsLogic.GetByEmail(userEmail);
+                        if (emailExists != null)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nAccount already exists with this e-mail.");
+                            Thread.Sleep(2000);
+                            Console.ResetColor();
+                            Start();
+                        }
                         Console.Write("Please enter your full name: ");
                         string fullName = Console.ReadLine()!;
                         Console.ForegroundColor = ConsoleColor.Green;
