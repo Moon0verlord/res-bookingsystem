@@ -23,8 +23,19 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("Enter your password: ");
                     userPassword = Console.ReadLine()!;
-                    options[1] += $": {userPassword}";
+                    Console.Clear();
+                    Console.Write("For verification you must enter your password again: ");
+                    string verifyUserPassword = Console.ReadLine()!;
+                    if (userPassword == verifyUserPassword)
+                        options[1] += $": {userPassword}";
+                    else
+                    {
+                        Console.WriteLine("\nEntered verification password was different than original, please try again.");
+                        Thread.Sleep(2000);
+                        userPassword = null;
+                    }
                     break;
+                
                 case 2:
                     Menu.Start();
                     break;
