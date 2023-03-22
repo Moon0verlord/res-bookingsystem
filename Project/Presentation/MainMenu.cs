@@ -41,9 +41,9 @@ static class Menu
                 switch (input)
                 {
                     case 0:
-                        if (acc.loggedIn)
+                        if  (acc.loggedIn == true)
                         {
-                            Start();
+                            Menu.Start();
                             break;
                         }
                         else
@@ -52,13 +52,6 @@ static class Menu
                         }
                         break;
                     case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        Reservation.ResStart();
                         break;
                     case 5:
                         System.Environment.Exit(0);

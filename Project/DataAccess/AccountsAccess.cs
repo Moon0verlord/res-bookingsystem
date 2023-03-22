@@ -19,9 +19,13 @@ static class AccountsAccess
         File.WriteAllText(path, json);
     }
 
-    public static void AddAccount()
+    public static AccountModel AddAccount(string email, string password, string name)
     {
-        
+        var allAccounts = LoadAll();
+        AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, password, name);
+        allAccounts.Add(newAccount);
+        WriteAll(allAccounts);
+        return allAccounts[^1];
     }
 
 
