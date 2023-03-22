@@ -36,8 +36,8 @@ static class UserLogin
                 if (acc != null)
                 {
                     Console.Clear();
-                    Console.WriteLine("Welcome back " + acc.FullName);
-                    Console.WriteLine("Your email number is " + acc.EmailAddress);
+                    Console.WriteLine("Welcome back " + acc.FullName + "!");
+                    Console.WriteLine("Your email is " + acc.EmailAddress);
                     acc.loggedIn = true;
                     Thread.Sleep(2000);
                     Menu.Start(acc);
