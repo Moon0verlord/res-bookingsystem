@@ -46,7 +46,12 @@ static class Menu
                     case 0:
                         if  (acc.loggedIn == true)
                         {
-                            Menu.Start();
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Are you sure? (y/n): ");
+                            Console.ResetColor();
+                            string userAnswer = Console.ReadLine()!;
+                            if (userAnswer == "y" || userAnswer == "Y") Menu.Start();
                             break;
                         }
                         else
