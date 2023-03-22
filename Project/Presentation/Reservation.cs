@@ -1,9 +1,11 @@
-public class Reservation
+using System.ComponentModel.Design;
+
+public static class Reservation
 {
-    public void ResStart()
+    static private ReservationsLogic reserv = new ReservationsLogic();
+    public static void ResStart()
     {
-        Console.WriteLine("When would you like to make a reservation?");
-        var res_date = Console.ReadLine();
+        reserv.ReservationsMenu();
         //show available hours on requested date
         //User can select an hour
         //back to menu
