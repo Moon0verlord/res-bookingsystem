@@ -7,40 +7,51 @@ static class Menu
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
-    public static void Start(AccountModel acc = null, int input = default)
+    public static void Start(AccountModel acc = null)
     {
-        while (true)
+        if (acc == null)
         {
-            switch (input)
+            while (true)
             {
-                case 0:
-                    if (acc==null||acc.loggedIn == false)
-                    {
+                string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail"};
+                string prompt = "\nMenu:";
+                int input = myMenu.RunMenu(options, prompt);
+                switch (input)
+                {
+                    case 0:
                         UserLogin.Start();
                         break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Already Logged in");
-                    }
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                // case "4":
-                //     break;
-                // case "5":
-                //     break;
-                // case "q":
-                //     Environment.Exit(0);
-                //     break;
-                default:
+                    case 1:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        else if (acc != null && acc.loggedIn)
+        {
+            while (true)
+            {
+                string[] options = { "Log out", "Information", "Schedule", "View current menu", "Make reservation"};
+                string prompt = $"\nWelcome {acc.FullName}.:";
+                int input = myMenu.RunMenu(options, prompt);
+                switch (input)
                 {
-                    string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail"};
-                    string prompt = "Menu:\n";
-                    int selectedOption = myMenu.RunMenu(options, prompt);
-                    break;
+                    case 0:
+                        if  (acc.loggedIn == true)
+                        {
+                            Menu.Start();
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Already logged out");
+                        }
+                        break;
+                    case 1:
+                        break;
+                    default:
+                        break;
                 }
             }
         }

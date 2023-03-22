@@ -7,7 +7,7 @@ static class UserLogin
         string userEmail = null;
         string userPassword = null;
         string prompt = "Welcome to the log in menu.\n";
-        string[] options = { "Enter e-mail", "Enter password" };
+        string[] options = { "Enter e-mail", "Enter password", "Quit" };
         while (true)
         {
             int selectedIndex = myMenu.RunMenu(options, prompt);
@@ -25,6 +25,9 @@ static class UserLogin
                     userPassword = Console.ReadLine()!;
                     options[1] += $": {userPassword}";
                     break;
+                case 2:
+                    Menu.Start();
+                    break;
             }
 
             if (userEmail != null && userPassword != null )
@@ -37,12 +40,13 @@ static class UserLogin
                     Console.WriteLine("Your email number is " + acc.EmailAddress);
                     acc.loggedIn = true;
                     Thread.Sleep(2000);
-                    Menu.Start(acc, 999);
+                    Menu.Start(acc);
                     break;
                 }
                 else
                 {
                     Console.WriteLine("No account found with that email and password");
+                    Thread.Sleep(2000);
                     Menu.Start();
                     break;
                 }
