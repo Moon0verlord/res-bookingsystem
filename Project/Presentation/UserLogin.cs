@@ -4,14 +4,16 @@ static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
     static private MenuLogic myMenu = new MenuLogic();
+    private static string  userEmail = null;
+    private static string userPassword = null;
     public static void Start()
     {
-        string userEmail = null;
-        string userPassword = null;
-        string prompt = "Welcome to the log in menu.\n";
-        string[] options = { "Enter e-mail", "Enter password", "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
         while (true)
         {
+            string prompt = "Welcome to the log in menu.\n";
+            string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
+                "Enter password" + $"{(userPassword == null ? "" : $": {userPassword}")}", 
+                "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
             int selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
@@ -19,7 +21,15 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("Enter your e-mail: ");
                     userEmail = Console.ReadLine()!;
-                    options[0] += $": {userEmail}";
+                    if (userEmail.Contains("@") == false)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid email.\nA valid email must contain a '@' character.");
+                        Console.ResetColor();
+                        userEmail = null;
+                        Thread.Sleep(3000);
+                    }
                     break;
                 case 1:
                     Console.Clear();
@@ -29,14 +39,14 @@ static class UserLogin
                     Console.Write("For verification you must enter your password again: ");
                     string verifyUserPassword = Console.ReadLine()!;
                     if (userPassword == verifyUserPassword)
-                        options[1] += $": {userPassword}";
+                        break;
                     else
                     {
                         Console.WriteLine("\nEntered verification password was different than original, please try again.");
                         Thread.Sleep(2000);
                         userPassword = null;
+                        break;
                     }
-                    break;
                 case 2:
                     if (userEmail == null || userPassword == null)
                     {
