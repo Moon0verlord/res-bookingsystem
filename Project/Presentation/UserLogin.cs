@@ -45,7 +45,24 @@ static class UserLogin
                         Thread.Sleep(1500);
                         Console.ResetColor();
                     }
-                    else CreateAccount(userEmail, userPassword);
+                    else
+                    {
+                        Console.Clear();
+                        Console.Write("Please enter your full name: ");
+                        string fullName = Console.ReadLine()!;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Clear();
+                        Console.WriteLine($"\nFull name: {fullName}\nE-mail: {userEmail}\nPassword: {userPassword}\nAre you sure you want to make an account with these credentials? (y/n)");
+                        Console.ResetColor();
+                        string answer = Console.ReadLine()!;
+                        if (answer == "y" || answer == "Y")
+                        {
+                            var newAccount = CreateAccount(userEmail, userPassword, fullName);
+                            accountsLogic.UpdateList(newAccount);
+                        }
+                        else Start();
+                        
+                    }
                     break;
                 case 3:
                     if (userEmail != null && userPassword != null )
@@ -88,11 +105,9 @@ static class UserLogin
         }
     }
     
-    public static void CreateAccount(string email, string password)
+    public static AccountModel CreateAccount(string email, string password, string name)
     {
-        while (true)
-        {
-            
-        }
+        var newAccount = AccountsAccess.AddAccount(email, password, name);
+        return newAccount;
     }
 }
