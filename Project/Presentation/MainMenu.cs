@@ -22,8 +22,6 @@ static class Menu
                         UserLogin.Start();
                         break;
                     case 1:
-                        break;
-                    case 2:
                         restaurantInfo.Start();
                         break;
                     case 5:
@@ -55,6 +53,7 @@ static class Menu
                         }
                         break;
                     case 1:
+                        restaurantInfo.Start();
                         break;
                     case 5:
                         System.Environment.Exit(0);
