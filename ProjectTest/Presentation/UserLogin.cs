@@ -5,41 +5,47 @@ static class UserLogin
 
     public static void Start()
     {
-        
+        string userEmail = null;
+        string userPassword = null;
+        string prompt = "Welcome to the log in menu.\n";
+        string[] options = { "Enter e-mail", "Enter password" };
         while (true)
         {
-            string prompt = "Welcome to the log in menu.\n";
-            string[] options = { "Enter e-mail", "Enter password" };
             int selectedIndex = Menu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
                 case 0:
                     Console.Clear();
                     Console.Write("Enter your e-mail: ");
-                    string userEmail = Console.ReadLine()!;
-                    options[0] = options[0] + $": {userEmail}";
-                    Console.WriteLine();
+                    userEmail = Console.ReadLine()!;
+                    options[0] += $": {userEmail}";
                     break;
                 case 1:
                     Console.Clear();
                     Console.Write("Enter your password: ");
-                    string userPassword = Console.ReadLine()!;
+                    userPassword = Console.ReadLine()!;
                     options[1] += $": {userPassword}";
                     break;
             }
-        }
 
-//         AccountModel acc = accountsLogic.CheckLogin(email, password);
-//         if (acc != null)
-//         {
-//             Console.WriteLine("Welcome back " + acc.FullName);
-//             Console.WriteLine("Your email number is " + acc.EmailAddress);
-//             acc.loggedIn = true;
-//             Menu.Start(acc);
-//         }
-//         else
-//         {
-//             Console.WriteLine("No account found with that email and password");
-//         }
-     }
+            if (userEmail != null && userPassword != null )
+            { 
+                AccountModel acc = accountsLogic.CheckLogin(userEmail, userPassword);
+                if (acc != null)
+                {
+                    Console.WriteLine("Welcome back " + acc.FullName);
+                    Console.WriteLine("Your email number is " + acc.EmailAddress);
+                    acc.loggedIn = true;
+                    Menu.Start(acc);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("No account found with that email and password");
+                    Menu.Start();
+                    break;
+                }
+            }
+        }
+    }
 }
