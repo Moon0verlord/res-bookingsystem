@@ -1,8 +1,7 @@
 static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
-
-
+    static private MenuLogic myMenu = new MenuLogic();
     public static void Start()
     {
         string userEmail = null;
@@ -11,7 +10,7 @@ static class UserLogin
         string[] options = { "Enter e-mail", "Enter password" };
         while (true)
         {
-            int selectedIndex = Menu.RunMenu(options, prompt);
+            int selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
                 case 0:
@@ -33,10 +32,12 @@ static class UserLogin
                 AccountModel acc = accountsLogic.CheckLogin(userEmail, userPassword);
                 if (acc != null)
                 {
+                    Console.Clear();
                     Console.WriteLine("Welcome back " + acc.FullName);
                     Console.WriteLine("Your email number is " + acc.EmailAddress);
                     acc.loggedIn = true;
-                    Menu.Start(acc);
+                    Thread.Sleep(2000);
+                    Menu.Start(acc, 999);
                     break;
                 }
                 else
