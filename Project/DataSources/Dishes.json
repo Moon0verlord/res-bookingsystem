@@ -1,0 +1,42 @@
+{
+  "vegan": {
+    "2_courses": [
+      {
+        "appetizer": "Roasted Carrot and Lentil Salad",
+        "entree": "Chickpea Curry with Basmati Rice"
+      },
+      {
+        "appetizer": "Spicy Kale Chips",
+        "entree": "Vegan Pad Thai"
+      }
+    ],
+    "3_courses": [
+      {
+        "appetizer": "Vegan Caesar Salad",
+        "entree": "Grilled Portobello Mushroom Steaks",
+        "dessert": "Vegan Chocolate Mousse"
+      },
+      {
+        "appetizer": "Roasted Beet and Citrus Salad",
+        "entree": "Vegan Stuffed Peppers",
+        "dessert": "Coconut Milk Ice Cream"
+      }
+    ],
+    "4_courses": [
+      {
+        "appetizer": "Tomato and Basil Bruschetta",
+        "soup": "Roasted Butternut Squash Soup",
+        "entree": "Vegan Lasagna",
+        "dessert": "Raw Vegan Cheesecake"
+      },
+      {
+        "appetizer": "Crispy Zucchini Fries",
+        "soup": "Miso Soup",
+        "entree": "Vegan Shepherd's Pie",
+        "dessert": "Vegan Brownies"
+      }
+    ]
+  }
+  
+  
+  

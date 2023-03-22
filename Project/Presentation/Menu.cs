@@ -1,31 +1,21 @@
 ﻿namespace Project.Presentation;
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
-public class Menu
-{
-    public List<Course> Courses { get; set; }
-}
 
-public class Course
+static class Menu
 {
-    public string Appetizer { get; set; }
-    public string Soup { get; set; }
-    public string Entree { get; set; }
-    public string Dessert { get; set; }
-}
-
-public void ReadAndDisplayJson(string json)
-{
-    StreamReader reader = new StreamReader("Dishes.json");
-    string jsonString = reader.ReadToEnd();
-    reader.Close();
-    var Menus = JsonConvert.DeserializeObject<List<Menu>>(json);
-    foreach (var item in Menus)
+   public static void ViewMenu()
     {
-        Console.WriteLine("Menu");
-        Console.WriteLine(item.Courses);
+        StreamReader reader = new("~/DataSources/Dishes.json");
+        string json2string = reader.ReadToEnd();
+        List<string> listOfObjects = JsonConvert.DeserializeObject<List<string>>(json2string)!;
+        reader.Close();
+        reader.Dispose();
+        Console.WriteLine("The menu is: ");
+        foreach (string item in listOfObjects)
+        {
+            Console.WriteLine(item);
+        }
     }
 }

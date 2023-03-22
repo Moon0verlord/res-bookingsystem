@@ -1,6 +1,7 @@
 using System.Data;
+using Project.Presentation;
 
-static class Menu
+static class MainMenu
 {
     static private MenuLogic _myMenu = new MenuLogic();
 
@@ -23,6 +24,9 @@ static class Menu
                         break;
                     case 1:
                         break;
+                    case 3:
+                        Menu.ViewMenu();
+                        break;
                     case 5:
                         System.Environment.Exit(0);
                         break;
@@ -43,7 +47,7 @@ static class Menu
                     case 0:
                         if  (acc.loggedIn == true)
                         {
-                            Menu.Start();
+                            MainMenu.Start();
                             break;
                         }
                         else
@@ -52,6 +56,9 @@ static class Menu
                         }
                         break;
                     case 1:
+                        break;
+                    case 3:
+                        Menu.ViewMenu();
                         break;
                     case 5:
                         System.Environment.Exit(0);
