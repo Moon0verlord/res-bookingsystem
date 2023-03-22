@@ -1,6 +1,6 @@
 static class restaurantInfo
 {
-    static string Infomation =
+    static string Information =
 @"
 /Restaurant name/
 
@@ -24,7 +24,7 @@ Kom terug op een later moment om te zien of er al events zijn.
 
     public static void Start()
     {
-        Console.WriteLine(Infomation);
+        Console.WriteLine(Information);
         Console.WriteLine(Contact);
         Console.WriteLine(Events); // later nog de echte events toevoegen
     }
