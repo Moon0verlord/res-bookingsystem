@@ -25,7 +25,7 @@ static class MainMenu
                     case 1:
                         break;
                     case 3:
-                        Dishes.JsonCursor();
+                        Dishes.WelcomeMenu();
                             Thread.Sleep(5000);;
                         break;
                     case 5:
@@ -59,7 +59,7 @@ static class MainMenu
                     case 1:
                         break;
                     case 3:
-                        Dishes.JsonCursor();;
+                        Dishes.WelcomeMenu();;
                         break;
                     case 5:
                         System.Environment.Exit(0);
