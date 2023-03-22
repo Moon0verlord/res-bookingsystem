@@ -7,3 +7,12 @@
 obj/
 idea/
 bin/
+obj\
+idea\
+bin\
+
+# Shared objects
+.dll
+.exe
+.cache
+.com
