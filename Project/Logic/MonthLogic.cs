@@ -2,11 +2,16 @@ using System.Globalization;
 
 class MonthLogic
 {
-    public void Month(int month)
+    public void Month(string[]Prompt,int month)
     {
-        
-        Start(month);
-        
+        if (month <= Prompt.Length&&Prompt[month] == "Go Back")
+        {
+            Menu.Start();
+        }
+        else
+        {
+            Start(month);
+        }
     }
     
     public static void Start(int month)
@@ -17,14 +22,14 @@ class MonthLogic
             {
                 if(runs>=DateTime.Today.Day)
                 {
-                    dayArray[runs-(int)DateTime.Today.Day] = runs.ToString();
+                    dayArray[runs-DateTime.Today.Day] = runs.ToString();
                 }
             
             }
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
-                menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
+                menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek) }\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
@@ -69,11 +74,6 @@ class MonthLogic
             if (printPrompt) Console.Write(prompt);
             for (int i = 0; i < _options.Length; i++)
             {
-                if (i % 7 == 0)
-                {
-                    Console.WriteLine();
-                }
-
                 if (i == _currentIndex)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;

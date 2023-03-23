@@ -27,7 +27,7 @@ static class Menu
                         Console.ReadKey(true);
                         break;
                     case 4:
-                        Reservation.ResStart();
+                        Reservation.ResStart(acc);
                         break;
                     case 5:
                         System.Environment.Exit(0);
@@ -65,7 +65,7 @@ static class Menu
                     case 1:
                         break;
                     case 4:
-                        Reservation.ResStart();
+                        Reservation.ResStart(acc);
                         break;
                     case 5:
                         System.Environment.Exit(0);

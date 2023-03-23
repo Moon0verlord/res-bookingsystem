@@ -1,9 +1,9 @@
 using System.ComponentModel.Design;
 
-public static class Reservation
+static class Reservation
 {
     static private ReservationsLogic reserv = new ReservationsLogic();
-    public static void ResStart()
+    public static void ResStart(AccountModel acc = null)
     {
         reserv.ReservationsMenu();
         //show available hours on requested date
