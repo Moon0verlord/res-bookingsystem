@@ -2,7 +2,6 @@
 {
     static void Main()
     {
-        //Menu.Start();
-        Reservation.ResStart();
+        Menu.Start();
     }
 }
