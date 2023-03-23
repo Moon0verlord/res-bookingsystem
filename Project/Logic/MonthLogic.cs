@@ -1,9 +1,12 @@
+using System.Globalization;
+
 class MonthLogic
 {
     public void Month(int month)
     {
         
         Start(month);
+        
     }
     
     public static void Start(int month)
@@ -31,61 +34,61 @@ class MonthLogic
             }
             else
             {
-                menu.RunMenu(dayArray, $"{monthConvert(DateTime.Today.Year,month, DateTime.DaysInMonth(DateTime.Today.Year, month))}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
+                DateTime date = new DateTime(2023, month, DateTime.DaysInMonth(2023, month));
+                menu.RunMenu(dayArray, $"{FirstDayOfMonth(date,1)}\t" +
+                                       $"{FirstDayOfMonth(date, 2)}\t" +
+                                       $"{FirstDayOfMonth(date, 3)}\t" +
+                                       $"{FirstDayOfMonth(date, 4)}\t" +
+                                       $"{FirstDayOfMonth(date, 5)}\t" +
+                                       $"{FirstDayOfMonth(date, 6)}\t"+
+                                       $"{FirstDayOfMonth(date, 7)}\t");
+
             }
         }
-
-        public static string DayConvert(int value)
+    public static string DayConvert(int value)
         {
             var day = Enum.GetName(typeof(DayOfWeek), value % 7);
             day = day.Substring(0, 3);
             return day;
         }
-        public static string monthConvert(int year,int month,int days=31)
-        {
-            DateTime now = new DateTime(year,month,days);
-            var startDate = new DateTime(now.Year, now.Month, 1);
-            var endDate = startDate.AddMonths(1).AddDays(-1);
-            return startDate.DayOfWeek.ToString();
-        }
-    
+    public static string FirstDayOfMonth(DateTime dt,int day)
+    {
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(
+            (new DateTime(dt.Year, dt.Month, day).DayOfWeek));
+
     }
 
-class MonthDayLogic
-{
-    
+    class MonthDayLogic
+    {
+
         private int _currentIndex = 0;
         private string[] _options = null;
+
         public void DisplayOptions(string prompt, bool printPrompt)
         {
             if (printPrompt) Console.Write(prompt);
             for (int i = 0; i < _options.Length; i++)
             {
-                if (i%7 == 0)
+                if (i % 7 == 0)
                 {
                     Console.WriteLine();
                 }
-                
+
                 if (i == _currentIndex)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.BackgroundColor = ConsoleColor.Gray;
-                        
-                    Console.Write(_options[i]+"\t");
+
+                    Console.Write(_options[i] + "\t");
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write(_options[i]+"\t");
+                    Console.Write(_options[i] + "\t");
                 }
             }
+
             Console.ResetColor();
         }
 
@@ -95,7 +98,7 @@ class MonthDayLogic
             ConsoleKey keyPressed;
             Console.Clear();
             do
-            { 
+            {
                 Console.SetCursorPosition(0, 0);
                 DisplayOptions(prompt, printPrompt);
                 ConsoleKeyInfo selectedKey = Console.ReadKey(true);
@@ -113,8 +116,9 @@ class MonthDayLogic
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
-        
+
             return _currentIndex;
         }
-    
+
+    }
 }
