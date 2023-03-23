@@ -22,6 +22,9 @@ static class Menu
                         UserLogin.Start();
                         break;
                     case 1:
+                        restaurantInfo.Start();
+                        Console.WriteLine("Press any key to return back to main menu.");
+                        Console.ReadKey(true);
                         break;
                     case 5:
                         System.Environment.Exit(0);
@@ -43,7 +46,12 @@ static class Menu
                     case 0:
                         if  (acc.loggedIn == true)
                         {
-                            Menu.Start();
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Are you sure? (y/n): ");
+                            Console.ResetColor();
+                            string userAnswer = Console.ReadLine()!;
+                            if (userAnswer == "y" || userAnswer == "Y") Menu.Start();
                             break;
                         }
                         else
