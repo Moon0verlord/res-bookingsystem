@@ -21,13 +21,13 @@ static class UserLogin
             {
                 case 0:
                     Console.Clear();
-                    Console.Write("Enter your e-mail: ");
+                    Console.Write("\n Enter your e-mail: ");
                     userEmail = Console.ReadLine()!;
                     if (userEmail.Contains("@") == false)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid email.\nA valid email must contain a '@' character.");
+                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character.");
                         Console.ResetColor();
                         userEmail = null;
                         Thread.Sleep(3000);
@@ -35,16 +35,18 @@ static class UserLogin
                     break;
                 case 1:
                     Console.Clear();
-                    Console.Write("Enter your password: ");
+                    Console.Write("\n Enter your password: ");
                     userPassword = Console.ReadLine()!;
                     Console.Clear();
-                    Console.Write("For verification you must enter your password again: ");
+                    Console.Write("\n For verification you must enter your password again: ");
                     string verifyUserPassword = Console.ReadLine()!;
                     if (userPassword == verifyUserPassword)
                         break;
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nEntered verification password was different than original, please try again.");
+                        Console.ResetColor();
                         Thread.Sleep(2000);
                         userPassword = null;
                         break;
@@ -67,22 +69,23 @@ static class UserLogin
                             Console.WriteLine("\nAccount already exists with this e-mail.");
                             Thread.Sleep(2000);
                             Console.ResetColor();
-                            Start();
                         }
-                        Console.Write("Please enter your full name: ");
-                        string fullName = Console.ReadLine()!;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Clear();
-                        Console.WriteLine($"\nFull name: {fullName}\nE-mail: {userEmail}\nPassword: {userPassword}\nAre you sure you want to make an account with these credentials? (y/n)");
-                        Console.ResetColor();
-                        string answer = Console.ReadLine()!;
-                        if (answer == "y" || answer == "Y")
+                        else
                         {
-                            var newAccount = CreateAccount(userEmail, userPassword, fullName);
-                            accountsLogic.UpdateList(newAccount);
+                            Console.Write("Please enter your full name: ");
+                            string fullName = Console.ReadLine()!;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Clear();
+                            Console.WriteLine(
+                                $"\nFull name: {fullName}\nE-mail: {userEmail}\nPassword: {userPassword}\nAre you sure you want to make an account with these credentials? (y/n)");
+                            Console.ResetColor();
+                            string answer = Console.ReadLine()!;
+                            if (answer == "y" || answer == "Y")
+                            {
+                                var newAccount = CreateAccount(userEmail, userPassword, fullName);
+                                accountsLogic.UpdateList(newAccount);
+                            }
                         }
-                        else Start();
-                        
                     }
                     break;
                 case 3:
