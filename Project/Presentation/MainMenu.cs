@@ -26,6 +26,9 @@ static class Menu
                         Console.WriteLine("Press any key to return back to main menu.");
                         Console.ReadKey(true);
                         break;
+                    case 4:
+                        Reservation.ResStart();
+                        break;
                     case 5:
                         System.Environment.Exit(0);
                         break;
