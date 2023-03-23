@@ -5,7 +5,7 @@ class ReservationsLogic
     static private ReservationsLogic reserv = new ReservationsLogic();
     static private MenuLogic _myMenu = new MenuLogic();
 
-    static void SwitchMonthMethod(string[]Prompt,string Month)
+    public static void SwitchMonthMethod(string[]Prompt,string Month)
     {
         if (Month == "Go Back")
         {
@@ -18,11 +18,9 @@ class ReservationsLogic
             string desiredMonth = Month;
             string[] MonthNames=CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
             monthIndex = Array.IndexOf(MonthNames, desiredMonth)+1;
-        
+            
             month.Month(Prompt,monthIndex);
         }
-        
-        
     }
     public void ReservationsMenu()
     {

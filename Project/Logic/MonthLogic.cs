@@ -2,6 +2,10 @@ using System.Globalization;
 
 class MonthLogic
 {
+    
+    static private ReservationsLogic reserv = new ReservationsLogic();
+    static private MenuLogic _myMenu = new MenuLogic();
+
     public void Month(string[]Prompt,int month)
     {
         if (month <= Prompt.Length&&Prompt[month] == "Go Back")
@@ -14,39 +18,49 @@ class MonthLogic
         }
     }
     
-    public static void Start(int month)
+    public void Start(int month)
         {
             var current_days = DateTime.DaysInMonth(DateTime.Now.Year, month);
-            var dayArray = new string[current_days-DateTime.Today.Day+1];
+            var dayArray = new string[current_days+1-DateTime.Today.Day+1];
             for (int runs = DateTime.Today.Day; runs <= current_days; runs++)
             {
                 if(runs>=DateTime.Today.Day)
                 {
                     dayArray[runs-DateTime.Today.Day] = runs.ToString();
                 }
+                if(runs==current_days)
+                {
+                    dayArray[runs-DateTime.Today.Day] = runs.ToString();
+                    dayArray[^1] = "Go Back";
+                }
             
             }
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
-                menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
-                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
-            }
-            else
-            {
-                DateTime date = new DateTime(2023, month, DateTime.DaysInMonth(2023, month));
-                menu.RunMenu(dayArray, $"{FirstDayOfMonth(date,1)}\t" +
-                                       $"{FirstDayOfMonth(date, 2)}\t" +
-                                       $"{FirstDayOfMonth(date, 3)}\t" +
-                                       $"{FirstDayOfMonth(date, 4)}\t" +
-                                       $"{FirstDayOfMonth(date, 5)}\t" +
-                                       $"{FirstDayOfMonth(date, 6)}\t"+
-                                       $"{FirstDayOfMonth(date, 7)}\t");
+
+                while (true)
+                {
+                    {
+                        int input = menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
+                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
+
+                        if (dayArray[input] == "Go Back")
+                        {
+                            reserv.ReservationsMenu();
+                        }
+                        else
+                        {
+                            Console.WriteLine(dayArray[input]);
+                        }
+                        Thread.Sleep(1000);
+                    }
+                }
 
             }
         }
