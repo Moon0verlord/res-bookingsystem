@@ -29,7 +29,7 @@ class MonthLogic
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
-                menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek) }\t" +
+                menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
                                        $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
@@ -71,9 +71,13 @@ class MonthLogic
 
         public void DisplayOptions(string prompt, bool printPrompt)
         {
-            if (printPrompt) Console.Write(prompt);
+            if (printPrompt) Console.WriteLine(prompt);
             for (int i = 0; i < _options.Length; i++)
             {
+                if (i % 7 == 0)
+                {
+                    Console.WriteLine();
+                }
                 if (i == _currentIndex)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
