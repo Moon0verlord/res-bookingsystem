@@ -25,8 +25,7 @@ class ReservationsLogic
     public void ReservationsMenu()
     {
         var options = new string[2];
-            var counter = 0;
-            options[counter] = DateTimeFormatInfo.CurrentInfo.GetMonthName(cur_month);
+        options[0] = DateTimeFormatInfo.CurrentInfo.GetMonthName(cur_month);
             options[^1] = "Go Back";
             string prompt = $"make a reservation for one these months: \n{DateTime.UtcNow.Date.Year}";
             while (true)

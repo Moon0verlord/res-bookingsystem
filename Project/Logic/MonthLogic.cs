@@ -22,6 +22,23 @@ class MonthLogic
         {
             var current_days = DateTime.DaysInMonth(DateTime.Now.Year, month);
             var dayArray = new string[current_days+1-DateTime.Today.Day+1];
+            var Times = new string[13];
+            var counter = 0;
+            for (int hours = 16; hours < 22; hours++)
+            {
+                for(int minutes = 0;minutes<=30;minutes+=30)
+                {
+                    Times[counter] = new TimeSpan(hours, minutes, 0).ToString();
+                    if(hours == 21 && minutes == 30)
+                    {
+                        Times[counter] = new TimeSpan(hours, minutes, 0).ToString();
+                        Times[^1] = "Go Back";
+                    }
+                    counter++;
+                }
+                
+            }
+            
             for (int runs = DateTime.Today.Day; runs <= current_days; runs++)
             {
                 if(runs>=DateTime.Today.Day)
@@ -35,10 +52,10 @@ class MonthLogic
                 }
             
             }
+            
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
-
                 while (true)
                 {
                     {
@@ -56,7 +73,18 @@ class MonthLogic
                         }
                         else
                         {
-                            Console.WriteLine(dayArray[input]);
+                            int dayInput = menu.RunMenu(Times.ToArray(),dayArray[input]);
+                            
+                                switch (Times[dayInput])
+                                {
+                                    case "Go Back":
+                                        Start(month);
+                                        break;
+                                    default:
+                                        Console.WriteLine(Times[dayInput]);
+                                        break;
+                                }
+                            
                         }
                         Thread.Sleep(1000);
                     }
