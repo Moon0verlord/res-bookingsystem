@@ -7,7 +7,6 @@ namespace Project.Presentation;
 public static class Dishes
 {
     
-    // TODO add Add Dish method
     static private MenuLogic _myMenu = new MenuLogic();
     public static void WelcomeMenu()
     {
@@ -39,7 +38,7 @@ public static class Dishes
 
     public static void JsonCursor(string choice)
     {
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, "Dishes.json"));
+        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, "Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
         Console.WriteLine("Dishes:");
@@ -84,22 +83,5 @@ public static class Dishes
             MainMenu.Start();
         }
     }
-
-    public static void AddDish()
-    {
-        //string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
-        string json = File.ReadAllText("Dishes.json");
-        JObject menu = JObject.Parse(json);
-        Console.WriteLine("Which type of dish would you like to add?");
-        JObject Vegetarian = (JObject)menu["vegetarian"];
-        JArray vm = (JArray)Vegetarian["2_courses"];
-        vm.Add(new JObject(new JProperty("appetizer", "test"), new JProperty("entree", "test")));
-        Console.WriteLine(menu.ToString());
-        // move json back to DataSources
-        // ask what type of dish
-        // ask what course
-        // add course to json
-        File.WriteAllText("Dishes.json", menu.ToString());
-        
-    }
+    
 }
