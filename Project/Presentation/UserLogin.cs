@@ -99,7 +99,7 @@ static class UserLogin
                             Console.WriteLine("Your email is " + acc.EmailAddress);
                             acc.loggedIn = true;
                             Thread.Sleep(2000);
-                            Menu.Start(acc);
+                            MainMenu.Start(acc);
                             break;
                         }
                         else
@@ -122,7 +122,7 @@ static class UserLogin
                     }
                     break;
                 case 4:
-                    Menu.Start();
+                    MainMenu.Start();
                     break;
             }
         }

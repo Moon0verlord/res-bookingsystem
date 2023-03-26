@@ -1,6 +1,6 @@
 using System.Data;
 
-static class Menu
+static class MainMenu
 {
     static private MenuLogic _myMenu = new MenuLogic();
 
@@ -54,7 +54,7 @@ static class Menu
                             Console.Write("Are you sure? (y/n): ");
                             Console.ResetColor();
                             string userAnswer = Console.ReadLine()!;
-                            if (userAnswer == "y" || userAnswer == "Y") Menu.Start();
+                            if (userAnswer == "y" || userAnswer == "Y") MainMenu.Start();
                             break;
                         }
                         else

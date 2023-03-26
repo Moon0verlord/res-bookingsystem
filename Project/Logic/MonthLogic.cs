@@ -10,7 +10,7 @@ class MonthLogic
     {
         if (month <= Prompt.Length&&Prompt[month] == "Go Back")
         {
-            Menu.Start();
+            MainMenu.Start();
         }
         else
         {
