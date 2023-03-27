@@ -84,4 +84,29 @@ public static class Dishes
         }
     }
     
+    // W.I.P - skeleton for managing dishes in the menu
+    public static void ManageMenu()
+    {
+        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
+        string json = File.ReadAllText("Dishes.json");
+        JObject menu = JObject.Parse(json);
+        Console.WriteLine("Which type of dish would you like to add?");
+        JObject Vegetarian = (JObject)menu["vegetarian"];
+        JArray vm = (JArray)Vegetarian["2_courses"];
+        // prints out the vegetarian appetizers
+        foreach (var item in vm)
+        {
+            Console.WriteLine(item["appetizer"]);
+        }
+        vm.Add(new JObject(new JProperty("appetizer", "test"), new JProperty("entree", "test")));
+        //Console.WriteLine(menu.ToString());
+        // move json back to DataSources
+        // ask what type of dish
+        // ask what course
+        // add course to json
+        
+        File.WriteAllText("Menu.json", Vegetarian.ToString());
+        
+    }
+
 }
