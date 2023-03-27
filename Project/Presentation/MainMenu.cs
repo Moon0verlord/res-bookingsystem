@@ -1,4 +1,5 @@
 using System.Data;
+using Project.Presentation;
 
 static class MainMenu
 {
@@ -69,6 +70,9 @@ static class MainMenu
                         }
                         break;
                     case 1:
+                        break;
+                    case 3:
+                        Dishes.WelcomeMenu();;
                         break;
                     case 2:
                         Reservation.ResStart(acc);
