@@ -5,6 +5,7 @@ class MonthLogic
     
     static private ReservationsLogic reserv = new ReservationsLogic();
     static private MenuLogic _myMenu = new MenuLogic();
+    
 
     public void Month(string[]Prompt,int month)
     {
@@ -63,7 +64,7 @@ class MonthLogic
                 }
 
             }
-        }
+    }
     public static string DayConvert(int value)
         {
             var day = Enum.GetName(typeof(DayOfWeek), value % 7);
