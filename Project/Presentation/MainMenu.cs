@@ -31,7 +31,8 @@ static class MainMenu
                         //
                          break;
                     case 3:
-                        //
+                        Dishes.WelcomeMenu();
+                        Thread.Sleep(5000);;
                          break;
                     case 4:
                         Reservation.ResStart(acc);
@@ -72,14 +73,12 @@ static class MainMenu
                     case 1:
                         break;
                     case 3:
-                        Dishes.WelcomeMenu();;
+                        Dishes.WelcomeMenu();
+                        Thread.Sleep(5000);;
                         break;
                     case 2:
                         Reservation.ResStart(acc);
                         break;
-                    case 3:
-                        //
-                         break;
                     case 4:
                         //
                          break;
