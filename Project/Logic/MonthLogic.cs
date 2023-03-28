@@ -47,6 +47,15 @@ class MonthLogic:MonthTimeModels
                                         break;
                                     default:
                                         TableLogic.Start();
+                                        foreach (var item in TableLogic.isTableFree)
+                                        {
+                                            foreach (var items in item.Value)
+                                            {
+                                                Console.WriteLine(item.Key+"\t "+items.Key+":"+ (items.Value?"Free":"Occupied"));
+                                               
+                                            }
+                                        }
+                                        Thread.Sleep(10000);
                                         break;
                                 }
                             

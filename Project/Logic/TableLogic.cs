@@ -13,7 +13,7 @@ class TableLogic
     }
 
     public TableLogic(){
-        for (int i = 0; i < 9; i++)
+        for (int i = 1; i < 9; i++)
         {
             if(!isTableFree.ContainsKey(i))
             {
