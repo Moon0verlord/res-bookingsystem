@@ -34,7 +34,7 @@ class MonthLogic:MonthTimeModels
 
                         if (dayArray[input] == "Go Back")
                         {
-                            _reserv.ReservationsMenu();
+                            _reserv.ReservationsMenu(null);
                         }
                         else
                         {
