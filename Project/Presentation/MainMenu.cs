@@ -30,7 +30,7 @@ static class MainMenu
                         break;
                     case 1:
                         restaurantInfo.Start();
-                        Console.WriteLine("Press any key to return back to main menu.");
+                        Console.WriteLine("Press any key to return back to main menu");
                         Console.ReadKey(true);
                         break;
                     case 2:

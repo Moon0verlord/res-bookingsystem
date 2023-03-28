@@ -12,7 +12,7 @@ static class UserLogin
         userPassword = null;
         while (true)
         {
-            var prompt = "Welcome to the log in menu.\n";
+            var prompt = "Welcome to the log in menu. \n";
             string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
                 "Enter password" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}", 
                 "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
