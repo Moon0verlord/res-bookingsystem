@@ -1,9 +1,9 @@
 using System.Globalization;
 class ReservationsLogic
 {
-    static private int cur_month = DateTime.UtcNow.Date.Month;
-    static private ReservationsLogic reserv = new ReservationsLogic();
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static readonly int CurMonth = DateTime.UtcNow.Date.Month;
+    
+    private static readonly MenuLogic _myMenu = new MenuLogic();
 
     public static void SwitchMonthMethod(string[]Prompt,string Month)
     {
@@ -25,9 +25,9 @@ class ReservationsLogic
     public void ReservationsMenu()
     {
         var options = new string[2];
-        options[0] = DateTimeFormatInfo.CurrentInfo.GetMonthName(cur_month);
+        options[0] = DateTimeFormatInfo.CurrentInfo.GetMonthName(CurMonth);
             options[^1] = "Go Back";
-            string prompt = $"make a reservation for one these months: \n{DateTime.UtcNow.Date.Year}";
+            string prompt = $"make a reservation for this month: \n{DateTime.UtcNow.Date.Year}";
             while (true)
             {
                 int input = _myMenu.RunMenu(options, prompt);

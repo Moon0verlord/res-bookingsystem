@@ -1,10 +1,10 @@
 class MonthLogic:MonthTimeModels
 {
-    private static ReservationsLogic reserv = new ReservationsLogic();
-    private static MenuLogic _myMenu = new MenuLogic();
-    public void Month(string[]Prompt,int month)
+    private static ReservationsLogic _reserv = new ReservationsLogic();
+    
+    public void Month(string[] prompt,int month)
     {
-        if (month <= Prompt.Length&&Prompt[month] == "Go Back")
+        if (month <= prompt.Length&&prompt[month] == "Go Back")
         {
             MainMenu.Start();
         }
@@ -17,7 +17,7 @@ class MonthLogic:MonthTimeModels
     public void Start(int month)
     {
             var dayArray = MonthTimeModels.DaysMonth(month);
-            var Times = MonthTimeModels.Hours();
+            var times = MonthTimeModels.Hours();
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
@@ -34,19 +34,19 @@ class MonthLogic:MonthTimeModels
 
                         if (dayArray[input] == "Go Back")
                         {
-                            reserv.ReservationsMenu();
+                            _reserv.ReservationsMenu();
                         }
                         else
                         {
-                            int dayInput = menu.RunMenu(Times.ToArray(),dayArray[input]);
+                            int dayInput = menu.RunMenu(times.ToArray(),dayArray[input]);
                             
-                                switch (Times[dayInput])
+                                switch (times[dayInput])
                                 {
                                     case "Go Back":
                                         Start(month);
                                         break;
                                     default:
-                                        Console.WriteLine(Times[dayInput]);
+                                        Console.WriteLine(times[dayInput]);
                                         Thread.Sleep(1000);
                                         Start(month);
                                         break;
@@ -62,13 +62,13 @@ class MonthLogic:MonthTimeModels
     class MonthDayLogic
     {
 
-        private int _currentIndex = 0;
+        private int _currentIndex;
         private string[] _options = null;
 
-        public void DisplayOptions(string prompt, bool printPrompt)
+        private void DisplayOptions(string prompt, bool printPrompt)
         {
             if (printPrompt) Console.WriteLine(prompt);
-            for (int i = 0; i < _options.Length; i++)
+            for (var i = 0; i < _options.Length; i++)
             {
                 if (i % 7 == 0)
                 {
