@@ -4,7 +4,7 @@ using Project.Presentation;
 static class MainMenu
 {
     static private MenuLogic _myMenu = new MenuLogic();
-    static public AccountModel Account;
+    static public AccountModel Account { get; set; }
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
