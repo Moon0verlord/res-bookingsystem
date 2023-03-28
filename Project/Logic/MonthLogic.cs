@@ -1,12 +1,7 @@
-using System.Globalization;
-
-class MonthLogic
+class MonthLogic:MonthTimeModels
 {
-    
-    static private ReservationsLogic reserv = new ReservationsLogic();
-    static private MenuLogic _myMenu = new MenuLogic();
-    
-
+    private static ReservationsLogic reserv = new ReservationsLogic();
+    private static MenuLogic _myMenu = new MenuLogic();
     public void Month(string[]Prompt,int month)
     {
         if (month <= Prompt.Length&&Prompt[month] == "Go Back")
@@ -53,7 +48,6 @@ class MonthLogic
                                     default:
                                         Console.WriteLine(Times[dayInput]);
                                         Thread.Sleep(1000);
-                                        
                                         Start(month);
                                         break;
                                 }
@@ -65,19 +59,6 @@ class MonthLogic
 
             }
     }
-    public static string DayConvert(int value)
-        {
-            var day = Enum.GetName(typeof(DayOfWeek), value % 7);
-            day = day.Substring(0, 3);
-            return day;
-        }
-    public static string FirstDayOfMonth(DateTime dt,int day)
-    {
-        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(
-            (new DateTime(dt.Year, dt.Month, day).DayOfWeek));
-
-    }
-
     class MonthDayLogic
     {
 
