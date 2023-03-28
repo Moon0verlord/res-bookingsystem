@@ -46,9 +46,7 @@ class MonthLogic:MonthTimeModels
                                         Start(month);
                                         break;
                                     default:
-                                        Console.WriteLine(times[dayInput]);
-                                        Thread.Sleep(1000);
-                                        Start(month);
+                                        TableLogic.Start();
                                         break;
                                 }
                             

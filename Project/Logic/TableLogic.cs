@@ -1,6 +1,6 @@
 class TableLogic
 {
-    public IDictionary<int, Dictionary<int, bool>> isTableFree = new Dictionary<int, Dictionary<int, bool>>();
+    public static IDictionary<int, Dictionary<int, bool>> isTableFree = new Dictionary<int, Dictionary<int, bool>>();
 
     public void occupyTable(int tableNumber)
     {
@@ -13,25 +13,33 @@ class TableLogic
     }
 
     public TableLogic(){
-        for (int i = 1; i < 9; i++)
+        for (int i = 0; i < 9; i++)
         {
-            isTableFree.Add(i, new Dictionary<int, bool>());
-            isTableFree[i].Add(2, true);
+            if(!isTableFree.ContainsKey(i))
+            {
+                isTableFree.Add(i, new Dictionary<int, bool>());
+                isTableFree[i].Add(2, true);
+            }
         }
         for (int j = 9; j < 14; j++)
         {
-            isTableFree.Add(j, new Dictionary<int, bool>());
-            isTableFree[j].Add(4, true);
+            if(!isTableFree.ContainsKey(j))
+            {
+                isTableFree.Add(j, new Dictionary<int, bool>());
+                isTableFree[j].Add(4, true);
+            }
         }
         for (int k = 14; k < 16; k++)
         {
-            isTableFree.Add(k, new Dictionary<int, bool>());
-            isTableFree[k].Add(6, true);
+            if(!isTableFree.ContainsKey(k))
+            {
+                isTableFree.Add(k, new Dictionary<int, bool>());
+                isTableFree[k].Add(6, true);
+            }
         }
-        ShowTable();
     }
 
-    public void ShowTable()
+    public static void ShowTable()
     {
         bool firstTable2 = true;
         bool firstTable4 = true;
@@ -98,7 +106,7 @@ class TableLogic
         }
     }
 
-    public TableLogic Start()
+    public static TableLogic Start()
     {
         TableLogic table = new TableLogic();
         return table;
