@@ -1,7 +1,9 @@
-public class MonthTimeModels
+using System.Globalization;
+public abstract class MonthTimeModels
 {
     //This class is used to initialized the Times array and dayArray in monthlogic.cs
     // Its here to keep the other code more clean
+    //Its als o used to house the following methods: DayConvert and firstdaymonth
     public static string[] Hours()
     {
         var Times = new string[13];
@@ -18,9 +20,7 @@ public class MonthTimeModels
                 }
                 counter++;
             }
-                
         }
-
         return Times;
     }
 
@@ -43,5 +43,18 @@ public class MonthTimeModels
         }
 
         return dayArray;
+    }
+    //Returns the name of the day of the week
+    public static string DayConvert(int value)
+    {
+        var day = Enum.GetName(typeof(DayOfWeek), value % 7);
+        day = day.Substring(0, 3);
+        return day;
+    }
+    // gets the first day of a month and returns an abbreviated string: Mon Tue etc
+    public static string FirstDayOfMonth(DateTime dt,int day)
+    {
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(
+            (new DateTime(dt.Year, dt.Month, day).DayOfWeek));
     }
 }

@@ -1,15 +1,10 @@
-using System.Globalization;
-
-class MonthLogic
+class MonthLogic:MonthTimeModels
 {
+    private static ReservationsLogic _reserv = new ReservationsLogic();
     
-    static private ReservationsLogic reserv = new ReservationsLogic();
-    static private MenuLogic _myMenu = new MenuLogic();
-    
-
-    public void Month(string[]Prompt,int month)
+    public void Month(string[] prompt,int month)
     {
-        if (month <= Prompt.Length&&Prompt[month] == "Go Back")
+        if (month <= prompt.Length&&prompt[month] == "Go Back")
         {
             MainMenu.Start();
         }
@@ -22,7 +17,7 @@ class MonthLogic
     public void Start(int month)
     {
             var dayArray = MonthTimeModels.DaysMonth(month);
-            var Times = MonthTimeModels.Hours();
+            var times = MonthTimeModels.Hours();
             MonthDayLogic menu = new MonthDayLogic();
             if (month == DateTime.Today.Month)
             {
@@ -39,21 +34,20 @@ class MonthLogic
 
                         if (dayArray[input] == "Go Back")
                         {
-                            reserv.ReservationsMenu();
+                            _reserv.ReservationsMenu();
                         }
                         else
                         {
-                            int dayInput = menu.RunMenu(Times.ToArray(),dayArray[input]);
+                            int dayInput = menu.RunMenu(times.ToArray(),dayArray[input]);
                             
-                                switch (Times[dayInput])
+                                switch (times[dayInput])
                                 {
                                     case "Go Back":
                                         Start(month);
                                         break;
                                     default:
-                                        Console.WriteLine(Times[dayInput]);
+                                        Console.WriteLine(times[dayInput]);
                                         Thread.Sleep(1000);
-                                        
                                         Start(month);
                                         break;
                                 }
@@ -65,29 +59,16 @@ class MonthLogic
 
             }
     }
-    public static string DayConvert(int value)
-        {
-            var day = Enum.GetName(typeof(DayOfWeek), value % 7);
-            day = day.Substring(0, 3);
-            return day;
-        }
-    public static string FirstDayOfMonth(DateTime dt,int day)
-    {
-        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(
-            (new DateTime(dt.Year, dt.Month, day).DayOfWeek));
-
-    }
-
     class MonthDayLogic
     {
 
-        private int _currentIndex = 0;
+        private int _currentIndex;
         private string[] _options = null;
 
-        public void DisplayOptions(string prompt, bool printPrompt)
+        private void DisplayOptions(string prompt, bool printPrompt)
         {
             if (printPrompt) Console.WriteLine(prompt);
-            for (int i = 0; i < _options.Length; i++)
+            for (var i = 0; i < _options.Length; i++)
             {
                 if (i % 7 == 0)
                 {

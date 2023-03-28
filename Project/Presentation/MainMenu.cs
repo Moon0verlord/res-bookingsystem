@@ -1,10 +1,11 @@
 using System.Data;
 using Project.Presentation;
 
+
 static class MainMenu
 {
-    static private MenuLogic _myMenu = new MenuLogic();
-    static public AccountModel Account { get; set; }
+    private static MenuLogic _myMenu = new MenuLogic();
+    static public AccountModel Account;
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
@@ -43,14 +44,13 @@ static class MainMenu
                         Reservation.ResStart(Account);
                         break;
                     case 5:
-                        System.Environment.Exit(0);
+                        Environment.Exit(0);
                         break;
-                    default:
-                        break;
+                    
                 }
             }
         }
-        else if (Account != null && Account.loggedIn)
+        if (Account != null && Account.loggedIn)
         {
             while (true)
             {
@@ -60,7 +60,7 @@ static class MainMenu
                 switch (input)
                 {
                     case 0:
-                        if  (Account.loggedIn == true)
+                        if  (Account.loggedIn)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -72,7 +72,6 @@ static class MainMenu
                                 Account = null;
                                 Start();
                             }
-                            break;
                         }
                         else
                         {
@@ -80,21 +79,22 @@ static class MainMenu
                         }
                         break;
                     case 1:
+                        restaurantInfo.Start();
+                        Console.WriteLine("Press any key to return back to main menu.");
+                        Console.ReadKey(true);
+                        break;
+                    case 2:
+                        Reservation.ResStart(Account);
                         break;
                     case 3:
                         Dishes.WelcomeMenu();
                         Thread.Sleep(5000);;
                         break;
-                    case 2:
-                        Reservation.ResStart(Account);
-                        break;
                     case 4:
                         Reservation.ResStart(Account);
                          break;
                     case 5:
-                        System.Environment.Exit(0);
-                        break;
-                    default:
+                        Environment.Exit(0);
                         break;
                 }
             }
