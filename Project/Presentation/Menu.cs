@@ -7,12 +7,12 @@ namespace Project.Presentation;
 public static class Dishes
 {
     
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static readonly MenuLogic MyMenu = new();
     public static void WelcomeMenu()
     {
         string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Back to main menu"};
         string prompt = "\nSelect a course to view the dishes:";
-        int input = _myMenu.RunMenu(options, prompt);
+        int input = MyMenu.RunMenu(options, prompt);
         switch (input)
         {
             case 0:
@@ -47,8 +47,8 @@ public static class Dishes
         Console.WriteLine("2 Courses:");
         foreach (var course in menu[choice]["2_courses"])
         {
-            string appetizer = (string)course["appetizer"];
-            string entree = (string)course["entree"];
+            string appetizer = (string)course["appetizer"]!;
+            string entree = (string)course["entree"]!;
             Console.WriteLine($"Appetizer: {appetizer}");
             Console.WriteLine($"Entree: {entree}");
             Console.WriteLine();
@@ -57,9 +57,9 @@ public static class Dishes
         Console.WriteLine("3 Courses:");
         foreach (var course in menu[choice]["3_courses"])
         {
-            string appetizer = (string)course["appetizer"];
-            string entree = (string)course["entree"];
-            string dessert = (string)course["dessert"];
+            string appetizer = (string)course["appetizer"]!;
+            string entree = (string)course["entree"]!;
+            string dessert = (string)course["dessert"]!;
             Console.WriteLine($"Appetizer: {appetizer}");
             Console.WriteLine($"Entree: {entree}");
             Console.WriteLine($"Dessert: {dessert}");
@@ -69,10 +69,10 @@ public static class Dishes
         Console.WriteLine("4 Courses:");
         foreach (var course in menu[choice]["4_courses"])
         {
-            string appetizer = (string)course["appetizer"];
-            string soup = (string)course["soup"];
-            string entree = (string)course["entree"];
-            string dessert = (string)course["dessert"];
+            string appetizer = (string)course["appetizer"]!;
+            string soup = (string)course["soup"]!;
+            string entree = (string)course["entree"]!;
+            string dessert = (string)course["dessert"]!;
             Console.WriteLine($"Appetizer: {appetizer}");
             Console.WriteLine($"Soup: {soup}");
             Console.WriteLine($"Entree: {entree}");

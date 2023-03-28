@@ -2,8 +2,8 @@ using System.Drawing;
 
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
-    static private MenuLogic myMenu = new MenuLogic();
+    static private AccountsLogic accountsLogic = new ();
+    static private MenuLogic myMenu = new ();
     private static string  userEmail;
     private static string userPassword;
     public static void Start()
@@ -12,11 +12,11 @@ static class UserLogin
         userPassword = null;
         while (true)
         {
-            string prompt = "Welcome to the log in menu.\n";
+            var prompt = "Welcome to the log in menu.\n";
             string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
                 "Enter password" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}", 
                 "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
-            int selectedIndex = myMenu.RunMenu(options, prompt);
+            var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
                 case 0:
@@ -39,11 +39,10 @@ static class UserLogin
                     userPassword = Console.ReadLine()!;
                     Console.Clear();
                     Console.Write("\n For verification you must enter your password again: ");
-                    string verifyUserPassword = Console.ReadLine()!;
+                    var verifyUserPassword = Console.ReadLine()!;
                     if (userPassword == verifyUserPassword)
                         break;
-                    else
-                    {
+                {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nEntered verification password was different than original, please try again.");
                         Console.ResetColor();
@@ -73,13 +72,13 @@ static class UserLogin
                         else
                         {
                             Console.Write("Please enter your full name: ");
-                            string fullName = Console.ReadLine()!;
+                            var fullName = Console.ReadLine()!;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(
                                 $"\nFull name: {fullName}\nE-mail: {userEmail}\nPassword: {userPassword}\nAre you sure you want to make an account with these credentials? (y/n)");
                             Console.ResetColor();
-                            string answer = Console.ReadLine()!;
+                            var answer = Console.ReadLine()!;
                             if (answer == "y" || answer == "Y")
                             {
                                 var newAccount = CreateAccount(userEmail, userPassword, fullName);
@@ -100,7 +99,6 @@ static class UserLogin
                             acc.loggedIn = true;
                             Thread.Sleep(2000);
                             MainMenu.Start(acc);
-                            break;
                         }
                         else
                         {
@@ -110,7 +108,6 @@ static class UserLogin
                             Console.WriteLine("No account found with that email and password.\nIf you have no account yet, create one in the log in menu.");
                             Thread.Sleep(3500);
                             Console.ResetColor();
-                            break;
                         }
                     }
                     else
@@ -128,7 +125,7 @@ static class UserLogin
         }
     }
     
-    public static AccountModel CreateAccount(string email, string password, string name)
+    private static AccountModel CreateAccount(string email, string password, string name)
     {
         var newAccount = AccountsAccess.AddAccount(email, password, name);
         return newAccount;
