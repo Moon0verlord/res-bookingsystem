@@ -2,6 +2,6 @@
 {
     static void Main()
     {
-        Menu.Start();
+        MainMenu.Start();
     }
 }
