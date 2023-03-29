@@ -47,8 +47,32 @@
 
         Console.ResetColor();
     }
+    
+    public void DisplayTimeOptions(string prompt, bool printPrompt)
+    {
+        if (printPrompt) Console.WriteLine(prompt);
+        Console.WriteLine();
+        for (int i = 0; i < _options.Length; i++)
+        {
+            if (i == _currentIndex)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.Write(_options[i]);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.Write(_options[i]);
+            }
+            Console.Write("\t");
+        }
 
-    public int RunMenu(string[] options, string prompt, bool printPrompt = true)
+        Console.ResetColor();
+    }
+
+    public int RunMenu(string[] options, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
         _options = options;
         ConsoleKey keyPressed;
@@ -56,20 +80,39 @@
         do
         { 
             Console.SetCursorPosition(0, 0);
-            DisplayOptions(prompt, printPrompt);
+            if (!displayTime) DisplayOptions(prompt, printPrompt);
+            else if (displayTime) DisplayTimeOptions(prompt, printPrompt);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;
-            switch (keyPressed)
+            if (sideways)
             {
-                case ConsoleKey.UpArrow:
-                    _currentIndex--;
-                    if (_currentIndex <= -1) _currentIndex = _options.Length - 1;
-                    break;
-                case ConsoleKey.DownArrow:
-                    _currentIndex++;
-                    if (_currentIndex == _options.Length) _currentIndex = 0;
-                    break;
+                switch (keyPressed)
+                {
+                    case ConsoleKey.LeftArrow:
+                        _currentIndex--;
+                        if (_currentIndex <= -1) _currentIndex = _options.Length - 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        _currentIndex++;
+                        if (_currentIndex == _options.Length) _currentIndex = 0;
+                        break;
+                }
             }
+            else
+            {
+                switch (keyPressed)
+                {
+                    case ConsoleKey.UpArrow:
+                        _currentIndex--;
+                        if (_currentIndex <= -1) _currentIndex = _options.Length - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        _currentIndex++;
+                        if (_currentIndex == _options.Length) _currentIndex = 0;
+                        break;
+                }
+            }
+            
 
         } while (keyPressed != ConsoleKey.Enter);
         

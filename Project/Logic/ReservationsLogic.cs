@@ -16,4 +16,70 @@ class ReservationsLogic
 
         return thisWeek;
     }
+
+    public List<TimeSpan> PopulateTimes()
+    {
+        var timeList = new List<TimeSpan>();
+        for (int hours = 16; hours < 22; hours++)
+        {
+            for(int minutes = 0;minutes<=30;minutes+=30)
+            {
+                timeList.Add(new TimeSpan(hours, minutes, 0));
+                if(hours == 21 && minutes == 30)
+                {
+                    break;
+                }
+            }
+        }
+        
+        return timeList;
+    }
+
+    public List<ReservationModel> PopulateTables(DateTime res_Date)
+    {
+        List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
+        Dictionary<string, List<ReservationModel>> allTables = new Dictionary<string, List<ReservationModel>>();
+        List<ReservationModel> tablesToAdd = new List<ReservationModel>();
+
+        for (int i = 1; i <= 15; i++)
+        {
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
+            if (tablesWithThisID.Count() >= 1)
+            {
+                foreach (ReservationModel table in tablesWithThisID)
+                {
+                    if (table.Date == res_Date)
+                    {
+                        table.isReserved = true;
+                        tablesToAdd.Add(table);
+                    }
+                    else
+                    {
+                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                        resm.isReserved = false;
+                        tablesToAdd.Add(resm);
+                    }
+                }
+            }
+            else
+            {
+                ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                resm.isReserved = false;
+                tablesToAdd.Add(resm);
+            }
+        }
+
+        return tablesToAdd;
+    }
+
+
+    public void CreateReservation()
+    {
+        // List<string> tableListSizes = new List<string>();
+        // while (i <= dict.Value)
+        // {
+        //     tableListSizes.Add($"{i}:\t");
+        //     i++;
+        // }
+    }
 }

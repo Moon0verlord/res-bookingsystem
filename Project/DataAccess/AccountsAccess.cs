@@ -25,6 +25,13 @@ static class AccountsAccess
         File.WriteAllText(acc_path, json);
     }
 
+    public static void WriteAllReservations(List<ReservationModel> reservations)
+    {
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string json = JsonSerializer.Serialize(reservations, options);
+        File.WriteAllText(res_path, json);
+    }
+
     public static AccountModel AddAccount(string email, string password, string name)
     {
         var allAccounts = LoadAll();

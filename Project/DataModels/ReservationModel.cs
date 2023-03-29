@@ -14,7 +14,7 @@ class ReservationModel
     
     public bool isReserved { get; set; }
     
-    public ReservationModel(int id, string emailAddress, DateTime date, string fullName)
+    public ReservationModel(int id, string emailAddress, DateTime date)
     {
         Id = id;
         EmailAddress = emailAddress;
