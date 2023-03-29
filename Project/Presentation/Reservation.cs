@@ -1,4 +1,5 @@
 using System.ComponentModel.Design;
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 static class Reservation
 {
@@ -9,8 +10,21 @@ static class Reservation
         Console.Clear();
         if (acc == null)
         {
-            Console.Write("\nPlease enter your email to make a reservation: ");
-            string email = Console.ReadLine()!;
+            string email;
+            while (true)
+            {
+                Console.Clear();
+                Console.Write("\nPlease enter your email to make a reservation: ");
+                email = Console.ReadLine()!;
+                if (!email.Contains("@") || email.Length < 3)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nPlease enter a valid email.");
+                    Thread.Sleep(2000);
+                    Console.ResetColor();
+                }
+                else break;
+            }
             ResMenu(email);  
         }
         else
@@ -33,10 +47,10 @@ static class Reservation
         }
         var dictChoice = _myMenu.RunMenu(thisWeek, "", false);
         DateTime res_Date = ChooseTime(dictChoice);
-        ChooseTable(res_Date);
+        int chosenTable = ChooseTable(res_Date);
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
-        Console.WriteLine($"Date: {res_Date.Date.ToString("dd-MM-yyyy")}" +
+        Console.WriteLine($"Email:{email}\nReserved table number: {chosenTable}\nDate: {res_Date.Date.ToString("dd-MM-yyyy")}" +
                           $"\nTime: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nAre you sure you want to reserve this date? (y/n): ");
         Console.ResetColor();
         string answer = Console.ReadLine()!;
@@ -44,7 +58,10 @@ static class Reservation
         {
             case "y": 
             case "Y":
-                Reservations.CreateReservation();
+                Reservations.CreateReservation(email, res_Date, chosenTable);
+                Console.Clear();
+                Console.WriteLine("\nReservation has been made.");
+                Thread.Sleep(1500);
                 break;
         }
     }
@@ -60,17 +77,11 @@ static class Reservation
         return res_Date;
     }
 
-    public static void ChooseTable(DateTime res_Date)
+    public static int ChooseTable(DateTime res_Date)
     {
-        var tablePairs = Reservations.PopulateTables(res_Date);
-        List<ReservationModel> tablesOnly = new List<ReservationModel>();
-        foreach (KeyValuePair<string, List<ReservationModel>> Keyvp in tablePairs)
-        {
-            foreach (ReservationModel resm in Keyvp.Value)
-            {
-                tablesOnly.Add(resm);
-            }
-            tablesOnly.Add(null);
-        }
+        //todo: remove test comments
+        var tablesOnly = Reservations.PopulateTables(res_Date);
+        int selectedTable = _myMenu.RunTableMenu(tablesOnly, "", false);
+        return selectedTable;
     }
 }

@@ -36,15 +36,15 @@ class ReservationsLogic
         return timeList;
     }
 
-    public Dictionary<string, List<ReservationModel>> PopulateTables(DateTime res_Date)
+    public List<ReservationModel> PopulateTables(DateTime res_Date)
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
-        Dictionary<string, List<ReservationModel>> allTables = new Dictionary<string, List<ReservationModel>>();
         List<ReservationModel> tablesToAdd = new List<ReservationModel>();
 
         for (int i = 1; i <= 15; i++)
         {
             IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
+            if (i == 1 || i == 9 || i == 14) tablesToAdd.Add(null);
             if (tablesWithThisID.Count() >= 1)
             {
                 foreach (ReservationModel table in tablesWithThisID)
@@ -67,21 +67,14 @@ class ReservationsLogic
                 resm.isReserved = false;
                 tablesToAdd.Add(resm);
             }
-            if (i == 8) allTables.Add("2 person tables", tablesToAdd.Where(i => i.Id <= 8).ToList());
-            if (i == 13) allTables.Add("4 person tables", tablesToAdd.Where(i => i.Id > 8).ToList());
-            if (i == 15) allTables.Add("6 person tables", tablesToAdd.Where(i => i.Id > 13).ToList());
         }
-        return allTables;
+        return tablesToAdd;
     }
 
 
-    public void CreateReservation()
+    public void CreateReservation(string email, DateTime res_Date, int chosenTable)
     {
-        // List<string> tableListSizes = new List<string>();
-        // while (i <= dict.Value)
-        // {
-        //     tableListSizes.Add($"{i}:\t");
-        //     i++;
-        // }
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date);
+        AccountsAccess.AddReservation(newReservation);
     }
 }

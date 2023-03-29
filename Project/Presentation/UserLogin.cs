@@ -23,11 +23,11 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("\n Enter your e-mail: ");
                     userEmail = Console.ReadLine()!;
-                    if (userEmail.Contains("@") == false)
+                    if (!userEmail.Contains("@") || userEmail.Length < 3)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character.");
+                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character and be longer than 3 characters.");
                         Console.ResetColor();
                         userEmail = null;
                         Thread.Sleep(3000);

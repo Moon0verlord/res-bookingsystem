@@ -9,6 +9,7 @@
         // testacc.isReserved = true;
         // test.Add(testacc);
         // AccountsAccess.AddReservation(testacc);
+        Console.Clear();
         MainMenu.Start();
     }
 }
