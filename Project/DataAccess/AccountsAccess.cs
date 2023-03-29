@@ -43,6 +43,7 @@ static class AccountsAccess
 
     public static void AddReservation(ReservationModel resm)
     {
+        resm.isReserved = true;
         var allReservations = LoadAllReservations();
         allReservations.Add(resm);
         WriteAllReservations(allReservations);

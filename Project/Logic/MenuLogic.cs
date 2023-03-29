@@ -190,6 +190,7 @@
     
     public int RunTableMenu(List<ReservationModel> tables, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
+        _currentIndex = 1;
         ConsoleKey keyPressed;
         Console.Clear();
         AddForbiddenIndexes(tables);
@@ -221,19 +222,28 @@
                 {
                     case ConsoleKey.UpArrow:
                         _currentIndex--;
-                        if (forbiddenIndex.Contains(_currentIndex)) _currentIndex--;
-                        if (_currentIndex <= -1) _currentIndex = tables.Count - 1;
+                        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex <= -1)
+                        {
+                            _currentIndex--;
+                            if (_currentIndex <= -1) _currentIndex = tables.Count - 1;
+                        }
                         break;
                     case ConsoleKey.DownArrow:
                         _currentIndex++;
-                        if (_currentIndex == tables.Count) _currentIndex = 0;
-                        if (forbiddenIndex.Contains(_currentIndex)) _currentIndex++;
+                        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex >= tables.Count)
+                        {
+                            _currentIndex++;
+                            if (_currentIndex >= tables.Count) _currentIndex = 0;
+                        }
                         break;
                 }
             }
         } while (keyPressed != ConsoleKey.Enter);
-        
-        return _currentIndex;
+
+        // Due to null values in lists to print table sizes, the indexes need to be corrected accordingly.
+        if (_currentIndex > 14) return _currentIndex - 2;
+        else if (_currentIndex > 9) return _currentIndex - 1;
+        else return _currentIndex;
     }
 
     public void AddForbiddenIndexes(List<ReservationModel> tables)
