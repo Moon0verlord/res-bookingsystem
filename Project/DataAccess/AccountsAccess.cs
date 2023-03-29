@@ -41,6 +41,12 @@ static class AccountsAccess
         return allAccounts[^1];
     }
 
+    public static void AddReservation(ReservationModel resm)
+    {
+        var allReservations = LoadAllReservations();
+        allReservations.Add(resm);
+        WriteAllReservations(allReservations);
+    }
 
 
 }

@@ -2,7 +2,13 @@
   {
     "table_id": 3,
     "emailAddress": null,
+    "res_date": "2023-03-29T17:30:00+02:00",
+    "isReserved": true
+  },
+  {
+    "table_id": 6,
+    "emailAddress": null,
     "res_date": "2023-03-29T16:30:00+02:00",
-    "isReserved": false
+    "isReserved": true
   }
 ]

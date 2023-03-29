@@ -1,3 +1,4 @@
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 class ReservationsLogic
 {
@@ -35,7 +36,7 @@ class ReservationsLogic
         return timeList;
     }
 
-    public List<ReservationModel> PopulateTables(DateTime res_Date)
+    public Dictionary<string, List<ReservationModel>> PopulateTables(DateTime res_Date)
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
         Dictionary<string, List<ReservationModel>> allTables = new Dictionary<string, List<ReservationModel>>();
@@ -50,7 +51,6 @@ class ReservationsLogic
                 {
                     if (table.Date == res_Date)
                     {
-                        table.isReserved = true;
                         tablesToAdd.Add(table);
                     }
                     else
@@ -67,9 +67,11 @@ class ReservationsLogic
                 resm.isReserved = false;
                 tablesToAdd.Add(resm);
             }
+            if (i == 8) allTables.Add("2 person tables", tablesToAdd.Where(i => i.Id <= 8).ToList());
+            if (i == 13) allTables.Add("4 person tables", tablesToAdd.Where(i => i.Id > 8).ToList());
+            if (i == 15) allTables.Add("6 person tables", tablesToAdd.Where(i => i.Id > 13).ToList());
         }
-
-        return tablesToAdd;
+        return allTables;
     }
 
 

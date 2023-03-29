@@ -62,7 +62,15 @@ static class Reservation
 
     public static void ChooseTable(DateTime res_Date)
     {
-        var allTables = Reservations.PopulateTables(res_Date);
-        
+        var tablePairs = Reservations.PopulateTables(res_Date);
+        List<ReservationModel> tablesOnly = new List<ReservationModel>();
+        foreach (KeyValuePair<string, List<ReservationModel>> Keyvp in tablePairs)
+        {
+            foreach (ReservationModel resm in Keyvp.Value)
+            {
+                tablesOnly.Add(resm);
+            }
+            tablesOnly.Add(null);
+        }
     }
 }
