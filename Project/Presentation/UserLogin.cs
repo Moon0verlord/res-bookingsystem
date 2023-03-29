@@ -12,7 +12,7 @@ static class UserLogin
         userPassword = null;
         while (true)
         {
-            var prompt = "Welcome to the log in menu.\n";
+            var prompt = "Welcome to the log in menu. \n";
             string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
                 "Enter password" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}", 
                 "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
@@ -23,11 +23,11 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("\n Enter your e-mail: ");
                     userEmail = Console.ReadLine()!;
-                    if (userEmail.Contains("@") == false)
+                    if (!userEmail.Contains("@") || userEmail.Length < 3)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character.");
+                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character and be longer than 3 characters.");
                         Console.ResetColor();
                         userEmail = null;
                         Thread.Sleep(3000);

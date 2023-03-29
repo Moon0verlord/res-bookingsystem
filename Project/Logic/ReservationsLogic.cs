@@ -1,45 +1,80 @@
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 class ReservationsLogic
 {
-    private static readonly int CurMonth = DateTime.UtcNow.Date.Month;
+    public static readonly string CurMonth = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
     
-    private static readonly MenuLogic _myMenu = new MenuLogic();
+    // empty constructor to call CurMonth
+    public ReservationsLogic() {}
 
-    public static void SwitchMonthMethod(string[]Prompt,string Month)
+    public List<DateTime> PopulateDates()
     {
-        if (Month == "Go Back")
+        var thisWeek = new List<DateTime>();
+        for (int i = 0; i <= 6; i++)
         {
-            MainMenu.Start();
+            thisWeek.Add(DateTime.Today.AddDays(i));
         }
-        else
-        {
-            MonthLogic month = new MonthLogic();
-            int monthIndex;
-            string desiredMonth = Month;
-            string[] MonthNames=CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-            monthIndex = Array.IndexOf(MonthNames, desiredMonth)+1;
-            
-            month.Month(Prompt,monthIndex);
-        }
+
+        return thisWeek;
     }
-    public void ReservationsMenu()
+
+    public List<TimeSpan> PopulateTimes()
     {
-        var options = new string[2];
-        options[0] = DateTimeFormatInfo.CurrentInfo.GetMonthName(CurMonth);
-            options[^1] = "Go Back";
-            string prompt = $"make a reservation for this month: \n{DateTime.UtcNow.Date.Year}";
-            while (true)
+        var timeList = new List<TimeSpan>();
+        for (int hours = 16; hours < 22; hours++)
+        {
+            for(int minutes = 0;minutes<=30;minutes+=30)
             {
-                int input = _myMenu.RunMenu(options, prompt);
-                switch (input)
+                timeList.Add(new TimeSpan(hours, minutes, 0));
+                if(hours == 21 && minutes == 30)
                 {
-                    case 0:
-                        SwitchMonthMethod(options, options[input]);
-                        break;
-                    case 1:
-                        SwitchMonthMethod(options, options[input]);
-                        break;
+                    break;
                 }
             }
+        }
+        
+        return timeList;
+    }
+
+    public List<ReservationModel> PopulateTables(DateTime res_Date)
+    {
+        List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
+        List<ReservationModel> tablesToAdd = new List<ReservationModel>();
+
+        for (int i = 1; i <= 15; i++)
+        {
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
+            if (i == 1 || i == 9 || i == 14) tablesToAdd.Add(null);
+            if (tablesWithThisID.Count() >= 1)
+            {
+                foreach (ReservationModel table in tablesWithThisID)
+                {
+                    if (table.Date == res_Date)
+                    {
+                        tablesToAdd.Add(table);
+                    }
+                    else
+                    {
+                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                        resm.isReserved = false;
+                        tablesToAdd.Add(resm);
+                    }
+                }
+            }
+            else
+            {
+                ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                resm.isReserved = false;
+                tablesToAdd.Add(resm);
+            }
+        }
+        return tablesToAdd;
+    }
+
+
+    public void CreateReservation(string email, DateTime res_Date, int chosenTable)
+    {
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date);
+        AccountsAccess.AddReservation(newReservation);
     }
 }
