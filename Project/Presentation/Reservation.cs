@@ -79,7 +79,6 @@ static class Reservation
 
     public static int ChooseTable(DateTime res_Date)
     {
-        //todo: remove test comments
         var tablesOnly = Reservations.PopulateTables(res_Date);
         int selectedTable = _myMenu.RunTableMenu(tablesOnly, "", false);
         return selectedTable;

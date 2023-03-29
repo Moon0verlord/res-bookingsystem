@@ -1,26 +1,8 @@
 [
   {
-    "table_id": 3,
-    "emailAddress": null,
-    "res_date": "2023-03-29T17:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 6,
-    "emailAddress": null,
-    "res_date": "2023-03-29T16:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 9,
-    "emailAddress": "n@bc",
-    "res_date": "2023-03-29T21:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 15,
-    "emailAddress": "n@B.c",
-    "res_date": "2023-04-04T18:00:00+02:00",
+    "table_id": 2,
+    "emailAddress": "n@b.,c",
+    "res_date": "2023-03-29T16:00:00+02:00",
     "isReserved": true
   }
 ]
