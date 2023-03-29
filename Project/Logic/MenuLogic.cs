@@ -76,7 +76,7 @@
         return _currentIndex;
     }
     
-    public int RunMenu(List<DateTime> options, string prompt, bool printPrompt = true)
+    public Dictionary<int, DateTime> RunMenu(List<DateTime> options, string prompt, bool printPrompt = true)
     {
         _options = options.Select(i => i.Day.ToString()).ToArray();
         ConsoleKey keyPressed;
@@ -97,9 +97,9 @@
                     if (_currentIndex == options.Count) _currentIndex = 0;
                     break;
             }
-
+    
         } while (keyPressed != ConsoleKey.Enter);
-        
-        return _currentIndex;
+
+        return new Dictionary<int, DateTime>() { { _currentIndex, options[_currentIndex] } };
     }
 }
