@@ -7,7 +7,7 @@ public class ReservationModel
     public int Id { get; set; }
 
     [JsonPropertyName("emailAddress")]
-    private string EmailAddress { get; set; }
+    public string EmailAddress { get; set; }
 
     [JsonPropertyName("res_date")]
     public DateTime Date { get; set; }
