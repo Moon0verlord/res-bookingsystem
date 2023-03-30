@@ -10,22 +10,48 @@ static class Reservation
         Console.Clear();
         if (acc == null)
         {
-            string email;
-            while (true)
+            string email = null;
+            bool loop = true;
+            while (loop)
             {
                 Console.Clear();
-                Console.Write("\nPlease enter your email to make a reservation: ");
-                email = Console.ReadLine()!;
-                if (!email.Contains("@") || email.Length < 3)
+                string prompt = "Please enter your email to make a reservation.";
+                string[] options = { $"Enter e-mail" + (email == null ? "\n" : $": {email}\n"),"Continue", "Quit" };
+                int selectedIndex = _myMenu.RunMenu(options, prompt);
+                switch (selectedIndex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nPlease enter a valid email.");
-                    Thread.Sleep(2000);
-                    Console.ResetColor();
+                    case 0:
+                        Console.Clear();
+                        Console.Write("\n Enter your e-mail: ");
+                        email = Console.ReadLine()!;
+                        if (!email.Contains("@") || email.Length < 3)
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character and be longer than 3 characters.");
+                            Console.ResetColor();
+                            email = null;
+                            Thread.Sleep(3000);
+                        }
+                        break;
+                    case 1:
+                        if (email != null)
+                        {
+                            loop = false;
+                            ResMenu(email);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nPlease enter a valid email first.");
+                            Console.ResetColor();
+                        }
+                        break;
+                    case 2:
+                        MainMenu.Start();
+                        break;
                 }
-                else break;
             }
-            ResMenu(email);  
         }
         else
         {
