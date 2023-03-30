@@ -1,4 +1,4 @@
-static class restaurantInfo
+class restaurantInfo:IMenuLogic
 {
     static string Information =
 @"
