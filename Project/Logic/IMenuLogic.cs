@@ -1,8 +1,6 @@
 
 
 public interface IMenuLogic
-{
-    public static void Start()
-    {
-    }
+{ 
+    public static void Start() { }
 }

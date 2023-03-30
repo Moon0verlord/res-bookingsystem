@@ -81,10 +81,9 @@ static class Reservation
                           $"\nTime: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nAre you sure you want to reserve this date? (y/n): ");
         Console.ResetColor();
         string answer = Console.ReadLine()!;
-        switch (answer)
+        switch (answer.ToLower())
         {
-            case "y": 
-            case "Y":
+            case "y":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
                 Console.Clear();
                 Console.WriteLine("\nReservation has been made.");
