@@ -2,7 +2,7 @@ using System.Data;
 using Project.Presentation;
 
 
-class MainMenu:IMenuLogic
+static class MainMenu
 {
     private static MenuLogic _myMenu = new MenuLogic();
     static public AccountModel Account { get; set; }

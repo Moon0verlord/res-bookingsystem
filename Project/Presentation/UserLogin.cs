@@ -1,6 +1,6 @@
 using System.Drawing;
 
-class UserLogin:IMenuLogic
+static class UserLogin
 {
     static private AccountsLogic accountsLogic = new ();
     static private MenuLogic myMenu = new ();
