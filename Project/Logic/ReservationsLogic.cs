@@ -10,7 +10,7 @@ class ReservationsLogic
     public List<DateTime> PopulateDates()
     {
         var thisWeek = new List<DateTime>();
-        for (int i = 0; i <= 6; i++)
+        for (int i = DateTime.Now.Day; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
         {
             thisWeek.Add(DateTime.Today.AddDays(i));
         }
