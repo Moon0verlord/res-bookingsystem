@@ -44,6 +44,7 @@ static class Reservation
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nPlease enter a valid email first.");
+                            Thread.Sleep(1800);
                             Console.ResetColor();
                         }
                         break;
