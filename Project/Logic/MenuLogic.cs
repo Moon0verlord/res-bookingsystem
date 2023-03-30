@@ -89,7 +89,7 @@
                 else Console.ForegroundColor = ConsoleColor.Green;
                 if (i == _currentIndex)
                 {
-                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine($"Table {tables[i].Id}: {(tables[i].isReserved ? "Occupied" : "Available")}");
                 }
                 else
