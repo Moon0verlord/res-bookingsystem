@@ -1,4 +1,4 @@
-class TableLogic
+class TableLogic:IMenuLogic
 {
     public static IDictionary<int, Dictionary<int, bool>> isTableFree = new Dictionary<int, Dictionary<int, bool>>();
 

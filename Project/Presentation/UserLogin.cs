@@ -2,8 +2,8 @@ using System.Drawing;
 
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new ();
-    static private MenuLogic myMenu = new ();
+    private static AccountsLogic accountsLogic = new ();
+    private static MenuLogic myMenu = new ();
     private static string  userEmail;
     private static string userPassword;
     public static void Start()

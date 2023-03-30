@@ -36,7 +36,7 @@ public static class Dishes
         }
     }
 
-    public static void JsonCursor(string choice)
+    private static void JsonCursor(string choice)
     {
         string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
