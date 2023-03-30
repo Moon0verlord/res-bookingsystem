@@ -14,7 +14,7 @@ class MonthLogic:MonthTimeModels
         }
     }
     
-    public void Start(int month)
+    private void Start(int month)
     {
             var dayArray = MonthTimeModels.DaysMonth(month);
             var times = MonthTimeModels.Hours();

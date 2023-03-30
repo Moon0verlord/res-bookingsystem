@@ -25,7 +25,7 @@ static class AccountsAccess
         File.WriteAllText(acc_path, json);
     }
 
-    public static void WriteAllReservations(List<ReservationModel> reservations)
+    private static void WriteAllReservations(List<ReservationModel> reservations)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(reservations, options);
