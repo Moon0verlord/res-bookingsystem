@@ -20,6 +20,7 @@ class MainMenu:IMenuLogic
         {
             while (true)
             {
+                // main menu functionality for non-logged in users.
                 string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail", "Quit"};
                 string prompt = "\nMenu:";
                 int input = _myMenu.RunMenu(options, prompt);
@@ -35,7 +36,7 @@ class MainMenu:IMenuLogic
                         break;
                     case 2:
                         //
-                         break;
+                        break;
                     case 3:
                         Dishes.WelcomeMenu();
                         Thread.Sleep(5000);;
