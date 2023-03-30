@@ -4,7 +4,7 @@
     private string[] _options = null;
     private List<string> sizes = new List<string>();
     private List<int> forbiddenIndex = new List<int>();
-    public void DisplayOptions(string prompt, bool printPrompt)
+    private void DisplayOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
         for (int i = 0; i < _options.Length; i++)
@@ -26,7 +26,7 @@
         Console.ResetColor();
     }
     
-    public void DisplayDateOptions(string prompt, bool printPrompt)
+    private void DisplayDateOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
         Console.WriteLine("\n" + "\n" + "\n");
@@ -50,7 +50,7 @@
         Console.ResetColor();
     }
     
-    public void DisplayTimeOptions(string prompt, bool printPrompt)
+    private void DisplayTimeOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
         Console.WriteLine();
@@ -74,7 +74,7 @@
         Console.ResetColor();
     }
     
-    public void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
+    private void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
     {
         sizes.Add("table for 2");
         sizes.Add("table for 4");
@@ -246,7 +246,7 @@
         else return _currentIndex;
     }
 
-    public void AddForbiddenIndexes(List<ReservationModel> tables)
+    private void AddForbiddenIndexes(List<ReservationModel> tables)
     {
         try
         {

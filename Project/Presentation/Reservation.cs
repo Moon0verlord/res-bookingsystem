@@ -92,7 +92,7 @@ static class Reservation
         }
     }
 
-    public static DateTime ChooseTime(Dictionary<int, DateTime> dictChoice)
+    private static DateTime ChooseTime(Dictionary<int, DateTime> dictChoice)
     {
         Console.Clear();
         string prompt = "Please pick a time for your selected date " +
@@ -103,7 +103,7 @@ static class Reservation
         return res_Date;
     }
 
-    public static int ChooseTable(DateTime res_Date)
+    private static int ChooseTable(DateTime res_Date)
     {
         var tablesOnly = Reservations.PopulateTables(res_Date);
         int selectedTable = _myMenu.RunTableMenu(tablesOnly, "", false);
