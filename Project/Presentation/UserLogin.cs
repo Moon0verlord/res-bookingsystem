@@ -2,9 +2,9 @@ using System.Drawing;
 
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new ();
-    static private MenuLogic myMenu = new ();
-    private static string  userEmail;
+    static private AccountsLogic accountsLogic = new();
+    static private MenuLogic myMenu = new();
+    private static string userEmail;
     private static string userPassword;
     public static void Start()
     {
@@ -12,22 +12,22 @@ static class UserLogin
         userPassword = null;
         while (true)
         {
-            var prompt = "Welcome to the log in menu. \n";
-            string[] options = { $"Enter e-mail" + (userEmail == null ? "" : $": {userEmail}"), 
-                "Enter password" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}", 
-                "No account?\n  >Create one here with current credentials<", "Login with current credentials", "Quit" };
+            var prompt = "Welkom in het log in menu. \n";
+            string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
+                "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
+                "Nog geen account?\n  >Log in with huidige gegevens<", "Log in met hudige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
                 case 0:
                     Console.Clear();
-                    Console.Write("\n Enter your e-mail: ");
+                    Console.Write("\n vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
                     if (!userEmail.Contains("@") || userEmail.Length < 3)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character and be longer than 3 characters.");
+                        Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                         Console.ResetColor();
                         userEmail = null;
                         Thread.Sleep(3000);
@@ -35,16 +35,16 @@ static class UserLogin
                     break;
                 case 1:
                     Console.Clear();
-                    Console.Write("\n Enter your password: ");
+                    Console.Write("\n Vull hier uw wachtwoord in: ");
                     userPassword = Console.ReadLine()!;
                     Console.Clear();
-                    Console.Write("\n For verification you must enter your password again: ");
+                    Console.Write("\n Vull uw wachtwoord opnieuw in voor bevestiging: ");
                     var verifyUserPassword = Console.ReadLine()!;
                     if (userPassword == verifyUserPassword)
                         break;
-                {
+                    {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nEntered verification password was different than original, please try again.");
+                        Console.WriteLine("\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
                         Console.ResetColor();
                         Thread.Sleep(2000);
                         userPassword = null;
@@ -54,7 +54,7 @@ static class UserLogin
                     if (userEmail == null || userPassword == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nPlease enter your credentials first to create an account with them.");
+                        Console.WriteLine("\nVul uw gegevens in op een account aan te maken.");
                         Thread.Sleep(1500);
                         Console.ResetColor();
                     }
@@ -65,21 +65,21 @@ static class UserLogin
                         if (emailExists != null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nAccount already exists with this e-mail.");
+                            Console.WriteLine("\nEr bestaat al een account met deze e-mail.");
                             Thread.Sleep(2000);
                             Console.ResetColor();
                         }
                         else
                         {
-                            Console.Write("Please enter your full name: ");
+                            Console.Write("Vul hier uw voledige naam in: ");
                             var fullName = Console.ReadLine()!;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(
-                                $"\nFull name: {fullName}\nE-mail: {userEmail}\nPassword: {userPassword}\nAre you sure you want to make an account with these credentials? (y/n)");
+                                $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: {userPassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
-                            if (answer == "y" || answer == "Y")
+                            if (answer == "j" || answer == "J")
                             {
                                 var newAccount = CreateAccount(userEmail, userPassword, fullName);
                                 accountsLogic.UpdateList(newAccount);
@@ -88,14 +88,14 @@ static class UserLogin
                     }
                     break;
                 case 3:
-                    if (userEmail != null && userPassword != null )
-                    { 
+                    if (userEmail != null && userPassword != null)
+                    {
                         AccountModel acc = accountsLogic.CheckLogin(userEmail, userPassword);
                         if (acc != null)
                         {
                             Console.Clear();
-                            Console.WriteLine("Welcome back " + acc.FullName + "!");
-                            Console.WriteLine("Your email is " + acc.EmailAddress);
+                            Console.WriteLine("Welkom terug " + acc.FullName + "!");
+                            Console.WriteLine("Uw e-mail is " + acc.EmailAddress);
                             acc.loggedIn = true;
                             Thread.Sleep(2000);
                             MainMenu.Start(acc);
@@ -104,8 +104,8 @@ static class UserLogin
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"E-mail: {userEmail}\nPassword: {userPassword}");
-                            Console.WriteLine("No account found with that email and password.\nIf you have no account yet, create one in the log in menu.");
+                            Console.WriteLine($"E-mail: {userEmail}\nWachtwoord: {userPassword}");
+                            Console.WriteLine("Geen account gevonden met deze e-mail en wachtoword.\nAls u nog geen account heeft kunt u er een aanmaken in het login menu.");
                             Thread.Sleep(3500);
                             Console.ResetColor();
                         }
@@ -113,7 +113,7 @@ static class UserLogin
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nPlease enter your credentials first.");
+                        Console.WriteLine("\nVul eerst uw gegevens in.");
                         Thread.Sleep(1500);
                         Console.ResetColor();
                     }
@@ -124,7 +124,7 @@ static class UserLogin
             }
         }
     }
-    
+
     private static AccountModel CreateAccount(string email, string password, string name)
     {
         var newAccount = AccountsAccess.AddAccount(email, password, name);

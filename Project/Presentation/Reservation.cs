@@ -15,20 +15,20 @@ static class Reservation
             while (loop)
             {
                 Console.Clear();
-                string prompt = "Please enter your email to make a reservation.";
-                string[] options = { $"Enter e-mail" + (email == null ? "\n" : $": {email}\n"),"Continue", "Quit" };
+                string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
+                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan", "Afsluiten" };
                 int selectedIndex = _myMenu.RunMenu(options, prompt);
                 switch (selectedIndex)
                 {
                     case 0:
                         Console.Clear();
-                        Console.Write("\n Enter your e-mail: ");
+                        Console.Write("\n Vul hier uw e-mail in: ");
                         email = Console.ReadLine()!;
                         if (!email.Contains("@") || email.Length < 3)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nInvalid email.\nA valid email must contain a '@' character and be longer than 3 characters.");
+                            Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                             Console.ResetColor();
                             email = null;
                             Thread.Sleep(3000);
@@ -43,7 +43,7 @@ static class Reservation
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nPlease enter a valid email first.");
+                            Console.Write("\n vul hier uw e-mail in: ");
                             Thread.Sleep(1800);
                             Console.ResetColor();
                         }
@@ -66,7 +66,7 @@ static class Reservation
     public static void ResMenu(string email)
     {
         Console.Clear();
-        Console.WriteLine($"You can only make reservations for the current month ({ReservationsLogic.CurMonth})\nPick a day of the week: \n");
+        Console.WriteLine($"U kunt alleen een reservatie maken voor de hudige maand ({ReservationsLogic.CurMonth})\nKies een dag van de week: \n");
         var thisWeek = Reservations.PopulateDates();
         foreach (DateTime date in thisWeek)
         {
@@ -77,16 +77,16 @@ static class Reservation
         int chosenTable = ChooseTable(res_Date);
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
-        Console.WriteLine($"Email:{email}\nReserved table number: {chosenTable}\nDate: {res_Date.Date.ToString("dd-MM-yyyy")}" +
-                          $"\nTime: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nAre you sure you want to reserve this date? (y/n): ");
+        Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {res_Date.Date.ToString("dd-MM-yyyy")}" +
+                          $"\nTijd: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
         Console.ResetColor();
         string answer = Console.ReadLine()!;
         switch (answer.ToLower())
         {
-            case "y":
+            case "j":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
                 Console.Clear();
-                Console.WriteLine("\nReservation has been made.");
+                Console.WriteLine("\nReservatie is gemaakt.");
                 Thread.Sleep(1500);
                 break;
         }
@@ -95,7 +95,7 @@ static class Reservation
     public static DateTime ChooseTime(Dictionary<int, DateTime> dictChoice)
     {
         Console.Clear();
-        string prompt = "Please pick a time for your selected date " +
+        string prompt = "Kies hier een tijd voor de geselcteerde datum " +
                           $"({dictChoice.Select(i => i.Value).FirstOrDefault().ToString("dd-MM-yyyy")})";
         var timeList = Reservations.PopulateTimes();
         int selectIndex = _myMenu.RunMenu(timeList.Select(i => i.ToString("hh\\:mm")).ToArray(), prompt, sideways: true, displayTime: true);

@@ -25,7 +25,7 @@
 
         Console.ResetColor();
     }
-    
+
     public void DisplayDateOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
@@ -49,7 +49,7 @@
 
         Console.ResetColor();
     }
-    
+
     public void DisplayTimeOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
@@ -73,12 +73,12 @@
 
         Console.ResetColor();
     }
-    
+
     public void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
     {
-        sizes.Add("table for 2");
-        sizes.Add("table for 4");
-        sizes.Add("table for 6");
+        sizes.Add("Tafel voor 2");
+        sizes.Add("Tafel voor 4");
+        sizes.Add("Tafel voor 6");
         if (printPrompt) Console.WriteLine(prompt);
         Console.WriteLine();
         for (int i = 0; i < tables.Count; i++)
@@ -90,12 +90,12 @@
                 if (i == _currentIndex)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine($"Table {tables[i].Id}: {(tables[i].isReserved ? "Occupied" : "Available")}");
+                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"Table {tables[i].Id}: {(tables[i].isReserved ? "Occupied" : "Available")}");
+                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
             }
             else
@@ -119,7 +119,7 @@
         ConsoleKey keyPressed;
         Console.Clear();
         do
-        { 
+        {
             Console.SetCursorPosition(0, 0);
             if (!displayTime) DisplayOptions(prompt, printPrompt);
             else if (displayTime) DisplayTimeOptions(prompt, printPrompt);
@@ -153,13 +153,13 @@
                         break;
                 }
             }
-            
+
 
         } while (keyPressed != ConsoleKey.Enter);
-        
+
         return _currentIndex;
     }
-    
+
     public Dictionary<int, DateTime> RunMenu(List<DateTime> options, string prompt, bool printPrompt = true)
     {
         _currentIndex = 0;
@@ -182,12 +182,12 @@
                     if (_currentIndex == options.Count) _currentIndex = 0;
                     break;
             }
-    
+
         } while (keyPressed != ConsoleKey.Enter);
 
         return new Dictionary<int, DateTime>() { { _currentIndex, options[_currentIndex] } };
     }
-    
+
     public int RunTableMenu(List<ReservationModel> tables, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
         _currentIndex = 1;
@@ -268,7 +268,7 @@
         }
         catch (ArgumentOutOfRangeException)
         {
-            
+
         }
     }
 }

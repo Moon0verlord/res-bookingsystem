@@ -2,7 +2,7 @@ using System.Data;
 using Project.Presentation;
 
 
-class MainMenu:IMenuLogic
+class MainMenu : IMenuLogic
 {
     private static MenuLogic _myMenu = new MenuLogic();
     static public AccountModel Account { get; set; }
@@ -21,8 +21,8 @@ class MainMenu:IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Log in", "Information", "Schedule", "View current menu", "Make reservation with e-mail", "Quit"};
-                string prompt = "\nMenu:";
+                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Aflsluiten" };
+                string prompt = "\nHoofdmenu:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -31,7 +31,7 @@ class MainMenu:IMenuLogic
                         break;
                     case 1:
                         restaurantInfo.Start();
-                        Console.WriteLine("Press any key to return back to main menu");
+                        Console.WriteLine("Druk om een knop om terug te gaan naar het hoofdmenu");
                         Console.ReadKey(true);
                         break;
                     case 2:
@@ -39,15 +39,15 @@ class MainMenu:IMenuLogic
                         break;
                     case 3:
                         Dishes.WelcomeMenu();
-                        Thread.Sleep(5000);;
-                         break;
+                        Thread.Sleep(5000); ;
+                        break;
                     case 4:
                         Reservation.ResStart(Account);
                         break;
                     case 5:
                         Environment.Exit(0);
                         break;
-                    
+
                 }
             }
         }
@@ -55,20 +55,20 @@ class MainMenu:IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Log out", "Information", "Schedule", "View current menu", "Make reservation", "Quit (and log out)"};
-                string prompt = $"\nWelcome {Account.FullName}:";
+                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Aflsluiten (En gelijk uitloggen)" };
+                string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
                     case 0:
-                        if  (Account.loggedIn)
+                        if (Account.loggedIn)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("Are you sure? (y/n): ");
+                            Console.Write("Weet u het zeker? (j/n): ");
                             Console.ResetColor();
                             string userAnswer = Console.ReadLine()!;
-                            if (userAnswer == "y" || userAnswer == "Y")
+                            if (userAnswer == "j" || userAnswer == "J")
                             {
                                 Account = null;
                                 Start();
@@ -76,12 +76,12 @@ class MainMenu:IMenuLogic
                         }
                         else
                         {
-                            Console.WriteLine("Already logged out");
+                            Console.WriteLine("U bent al uitgelogd");
                         }
                         break;
                     case 1:
                         restaurantInfo.Start();
-                        Console.WriteLine("Press any key to return back to main menu.");
+                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
                         Console.ReadKey(true);
                         break;
                     case 2:
@@ -89,11 +89,11 @@ class MainMenu:IMenuLogic
                         break;
                     case 3:
                         Dishes.WelcomeMenu();
-                        Thread.Sleep(5000);;
+                        Thread.Sleep(5000); ;
                         break;
                     case 4:
                         Reservation.ResStart(Account);
-                         break;
+                        break;
                     case 5:
                         Environment.Exit(0);
                         break;

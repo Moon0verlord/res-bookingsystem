@@ -1,97 +1,97 @@
 {
-  "vegan": {
-    "2_courses": [
+  "Vegetarisch": {
+    "2_Gangen": [
       {
-        "appetizer": "Roasted Carrot and Lentil Salad",
-        "entree": "Chickpea Curry with Basmati Rice"
+        "Voorgerecht": "Roasted Carrot and Lentil Salad",
+        "Maaltijd": "Chickpea Curry with Basmati Rice"
       }
     ],
-    "3_courses": [
+    "3_Gangen": [
       {
-        "appetizer": "Vegan Caesar Salad",
-        "entree": "Grilled Portobello Mushroom Steaks",
-        "dessert": "Vegan Chocolate Mousse"
+        "Voorgerecht": "Vegan Caesar Salad",
+        "Maaltijd": "Grilled Portobello Mushroom Steaks",
+        "Nagerecht": "Vegan Chocolate Mousse"
       }
     ],
-    "4_courses": [
+    "4_Gangen": [
       {
-        "appetizer": "Tomato and Basil Bruschetta",
-        "soup": "Roasted Butternut Squash Soup",
-        "entree": "Vegan Lasagna",
-        "dessert": "Raw Vegan Cheesecake"
+        "Voorgerecht": "Tomato and Basil Bruschetta",
+        "Soep": "Roasted Butternut Squash Soep",
+        "Maaltijd": "Vegan Lasagna",
+        "Nagerecht": "Raw Vegan Cheesecake"
       }
     ]
   },
-  "fish": {
-    "2_courses": [
+  "Vis": {
+    "2_Gangen": [
       {
-        "appetizer": "Lobster Bisque",
-        "entree": "Pan-Seared Salmon with Lemon Butter Sauce"
+        "Voorgerecht": "Lobster Bisque",
+        "Maaltijd": "Pan-Seared Salmon with Lemon Butter Sauce"
       }
     ],
-    "3_courses": [
+    "3_Gangen": [
       {
-        "appetizer": "Shrimp Cocktail",
-        "entree": "Cedar Plank Salmon with Herb Butter",
-        "dessert": "Key Lime Pie"
+        "Voorgerecht": "Shrimp Cocktail",
+        "Maaltijd": "Cedar Plank Salmon with Herb Butter",
+        "Nagerecht": "Key Lime Pie"
       }
     ],
-    "4_courses": [
+    "4_Gangen": [
       {
-        "appetizer": "Tuna Tartare with Avocado and Mango",
-        "soup": "Lobster Bisque",
-        "entree": "Pan-Seared Scallops with Truffle Risotto",
-        "dessert": "Chocolate Torte"
+        "Voorgerecht": "Tuna Tartare with Avocado and Mango",
+        "Soep": "Lobster Bisque",
+        "Maaltijd": "Pan-Seared Scallops with Truffle Risotto",
+        "Nagerecht": "Chocolate Torte"
       }
     ]
   },
-  "meat": {
-    "2_courses": [
+  "Vlees": {
+    "2_Gangen": [
       {
-        "appetizer": "Caesar Salad",
-        "entree": "Grilled Ribeye Steak with Red Wine Sauce"
+        "Voorgerecht": "Caesar Salad",
+        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce"
       }
     ],
-    "3_courses": [
+    "3_Gangen": [
       {
-        "appetizer": "Butternut Squash Soup",
-        "entree": "Roasted Chicken with Garlic and Herb Butter",
-        "dessert": "Apple Tart"
+        "Voorgerecht": "Butternut Squash Soep",
+        "Maaltijd": "Roasted Chicken with Garlic and Herb Butter",
+        "Nagerecht": "Apple Tart"
       }
     ],
-    "4_courses": [
+    "4_Gangen": [
       {
-        "appetizer": "Beef Carpaccio with Arugula and Parmesan",
-        "soup": "Tomato Bisque",
-        "entree": "Braised Short Ribs with Creamy Polenta",
-        "dessert": "Crème Brûlée"
+        "Voorgerecht": "Beef Carpaccio with Arugula and Parmesan",
+        "Soep": "Tomato Bisque",
+        "Maaltijd": "Braised Short Ribs with Creamy Polenta",
+        "Nagerecht": "Crème Brûlée"
       }
     ]
   },
-  "vegetarian": {
-    "2_courses": [
+  "Veganistisch": {
+    "2_Gangen": [
       {
-        "appetizer": "Mixed Green Salad",
-        "entree": "Roasted Vegetable Risotto"
+        "Voorgerecht": "Mixed Green Salad",
+        "Maaltijd": "Roasted Vegetable Risotto"
       },
       {
-        "appetizer": "Tomato and Basil Bruschetta",
-        "entree": "Spinach and Feta Stuffed Portobello Mushrooms"
+        "Voorgerecht": "Tomato and Basil Bruschetta",
+        "Maaltijd": "Spinach and Feta Stuffed Portobello Mushrooms"
       }
     ],
-    "3_courses": [
+    "3_Gangen": [
       {
-        "appetizer": "Roasted Beet Salad",
-        "entree": "Eggplant Parmesan with Tomato Sauce",
-        "dessert": "Vegan Chocolate Mousse"
+        "Voorgerecht": "Roasted Beet Salad",
+        "Maaltijd": "Eggplant Parmesan with Tomato Sauce",
+        "Nagerecht": "Vegan Chocolate Mousse"
       }
     ],
-    "4_courses": [
+    "4_Gangen": [
       {
-        "appetizer": "Caprese Salad",
-        "soup": "Butternut Squash Soup",
-        "entree": "Grilled Portobello Mushroom with Quinoa and Roasted Vegetables",
-        "dessert": "Mixed Berry Sorbet"
+        "Voorgerecht": "Caprese Salad",
+        "Soep": "Butternut Squash Soep",
+        "Maaltijd": "Grilled Portobello Mushroom with Quinoa and Roasted Vegetables",
+        "Nagerecht": "Mixed Berry Sorbet"
       }
     ]
   }

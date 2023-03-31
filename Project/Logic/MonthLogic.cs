@@ -1,10 +1,10 @@
-class MonthLogic:MonthTimeModels
+class MonthLogic : MonthTimeModels
 {
     private static ReservationsLogic _reserv = new ReservationsLogic();
-    
-    public void Month(string[] prompt,int month)
+
+    public void Month(string[] prompt, int month)
     {
-        if (month <= prompt.Length&&prompt[month] == "Go Back")
+        if (month <= prompt.Length && prompt[month] == "Ga terug")
         {
             MainMenu.Start();
         }
@@ -13,58 +13,58 @@ class MonthLogic:MonthTimeModels
             Start(month);
         }
     }
-    
+
     public void Start(int month)
     {
-            var dayArray = MonthTimeModels.DaysMonth(month);
-            var times = MonthTimeModels.Hours();
-            MonthDayLogic menu = new MonthDayLogic();
-            if (month == DateTime.Today.Month)
+        var dayArray = MonthTimeModels.DaysMonth(month);
+        var times = MonthTimeModels.Hours();
+        MonthDayLogic menu = new MonthDayLogic();
+        if (month == DateTime.Today.Month)
+        {
+            while (true)
             {
-                while (true)
                 {
+                    int input = menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
+
+                    if (dayArray[input] == "Ga terug")
                     {
-                        int input = menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
-
-                        if (dayArray[input] == "Go Back")
-                        {
-                            Reservation.ResMenu(null);
-                        }
-                        else
-                        {
-                            int dayInput = menu.RunMenu(times.ToArray(),dayArray[input]);
-                            
-                                switch (times[dayInput])
-                                {
-                                    case "Go Back":
-                                        Start(month);
-                                        break;
-                                    default:
-                                        TableLogic.Start();
-                                        foreach (var item in TableLogic.isTableFree)
-                                        {
-                                            foreach (var items in item.Value)
-                                            {
-                                                Console.WriteLine(item.Key+"\t "+items.Key+":"+ (items.Value?"Free":"Occupied"));
-                                               
-                                            }
-                                        }
-                                        Thread.Sleep(10000);
-                                        break;
-                                }
-                            
-                        }
-                        
+                        Reservation.ResMenu(null);
                     }
-                }
+                    else
+                    {
+                        int dayInput = menu.RunMenu(times.ToArray(), dayArray[input]);
 
+                        switch (times[dayInput])
+                        {
+                            case "Ga terug":
+                                Start(month);
+                                break;
+                            default:
+                                TableLogic.Start();
+                                foreach (var item in TableLogic.isTableFree)
+                                {
+                                    foreach (var items in item.Value)
+                                    {
+                                        Console.WriteLine(item.Key + "\t " + items.Key + ":" + (items.Value ? "beschikbaar" : "Bezt"));
+
+                                    }
+                                }
+                                Thread.Sleep(10000);
+                                break;
+                        }
+
+                    }
+
+                }
             }
+
+        }
     }
     class MonthDayLogic
     {

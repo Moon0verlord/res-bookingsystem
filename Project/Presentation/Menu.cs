@@ -6,32 +6,32 @@ namespace Project.Presentation;
 
 public static class Dishes
 {
-    
+
     private static readonly MenuLogic MyMenu = new();
     public static void WelcomeMenu()
     {
-        string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Back to main menu"};
-        string prompt = "\nSelect a course to view the dishes:";
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een maaltijd voor de gerechten:";
         int input = MyMenu.RunMenu(options, prompt);
         switch (input)
         {
             case 0:
-                JsonCursor("vegetarian");
+                JsonCursor("Vegetarisch");
                 break;
             case 1:
-                JsonCursor("fish");
+                JsonCursor("Vis");
                 break;
             case 2:
-                JsonCursor("meat");
+                JsonCursor("Vlees");
                 break;
             case 3:
-                JsonCursor("vegan");
+                JsonCursor("Veganistisch");
                 break;
             case 4:
                 MainMenu.Start();
                 break;
             default:
-                Console.WriteLine("Please enter a valid number");
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
     }
@@ -41,47 +41,47 @@ public static class Dishes
         string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        Console.WriteLine("Dishes:");
+        Console.WriteLine("gerechten:");
         Console.WriteLine("-------");
 
-        Console.WriteLine("2 Courses:");
-        foreach (var course in menu[choice]["2_courses"])
+        Console.WriteLine("2 Gangen:");
+        foreach (var course in menu[choice]["2_Gangen"])
         {
-            string appetizer = (string)course["appetizer"]!;
-            string entree = (string)course["entree"]!;
-            Console.WriteLine($"Appetizer: {appetizer}");
-            Console.WriteLine($"Entree: {entree}");
+            string appetizer = (string)course["Voorgerecht"]!;
+            string entree = (string)course["Maaltijd"]!;
+            Console.WriteLine($"Voorgerecht: {appetizer}");
+            Console.WriteLine($"Maaltijd: {entree}");
             Console.WriteLine();
         }
 
-        Console.WriteLine("3 Courses:");
-        foreach (var course in menu[choice]["3_courses"])
+        Console.WriteLine("3 Gangen:");
+        foreach (var course in menu[choice]["3_Gangen"])
         {
-            string appetizer = (string)course["appetizer"]!;
-            string entree = (string)course["entree"]!;
-            string dessert = (string)course["dessert"]!;
-            Console.WriteLine($"Appetizer: {appetizer}");
-            Console.WriteLine($"Entree: {entree}");
-            Console.WriteLine($"Dessert: {dessert}");
+            string appetizer = (string)course["Voorgerecht"]!;
+            string entree = (string)course["Maaltijd"]!;
+            string dessert = (string)course["Nagerecht"]!;
+            Console.WriteLine($"Voorgerecht: {appetizer}");
+            Console.WriteLine($"Maaltijd: {entree}");
+            Console.WriteLine($"Nagerecht: {dessert}");
             Console.WriteLine();
         }
 
-        Console.WriteLine("4 Courses:");
-        foreach (var course in menu[choice]["4_courses"])
+        Console.WriteLine("4 Gangen:");
+        foreach (var course in menu[choice]["4_Gangen"])
         {
-            string appetizer = (string)course["appetizer"]!;
-            string soup = (string)course["soup"]!;
-            string entree = (string)course["entree"]!;
-            string dessert = (string)course["dessert"]!;
-            Console.WriteLine($"Appetizer: {appetizer}");
-            Console.WriteLine($"Soup: {soup}");
-            Console.WriteLine($"Entree: {entree}");
-            Console.WriteLine($"Dessert: {dessert}");
+            string appetizer = (string)course["Voorgerecht"]!;
+            string soup = (string)course["Soep"]!;
+            string entree = (string)course["Maaltijd"]!;
+            string dessert = (string)course["Nagerecht"]!;
+            Console.WriteLine($"Voorgerecht: {appetizer}");
+            Console.WriteLine($"Soep: {soup}");
+            Console.WriteLine($"Maaltijd: {entree}");
+            Console.WriteLine($"Nagerecht: {dessert}");
             Console.WriteLine();
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine("Druk op een knop om verder te gaan");
             Console.ReadKey();
             MainMenu.Start();
         }
     }
-    
+
 }
