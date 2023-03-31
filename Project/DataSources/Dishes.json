@@ -2,228 +2,228 @@
   "vegetarisch": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Roasted Carrot and Lentil Salad",
-        "Maaltijd": "Chickpea Curry with Basmati Rice"
+        "Voorgerecht": "Geroosterde Wortel en Linzen Salade",
+        "Maaltijd": "Kikkererwten Curry met Basmati Rijst"
       },
       {
-        "Voorgerecht": "Vegan Caesar Salad",
-        "Maaltijd": "Mushroom Stroganoff"
+        "Voorgerecht": "Veganistische Caesar Salade",
+        "Maaltijd": "Paddenstoelen Stroganoff"
       },
       {
-        "Voorgerecht": "Raw Vegetable Spring Rolls",
-        "Maaltijd": "Thai Green Curry with Tofu"
+        "Voorgerecht": "Rauwe Groenten Spring Rolls",
+        "Maaltijd": "Thaise Groene Curry met Tofu"
       },
       {
-        "Voorgerecht": "Zucchini and Corn Fritters",
-        "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries"
+        "Voorgerecht": "Courgette en Maïs Fritters",
+        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
       }
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Vegan Caesar Salad",
-        "Maaltijd": "Grilled Portobello Mushroom Steaks",
-        "Nagerecht": "Vegan Chocolate Mousse"
+        "Voorgerecht": "Veganistische Caesar Salade",
+        "Maaltijd": "Gegrilde Portobello Paddenstoelen Steaks",
+        "Nagerecht": "Veganistische Chocolade Mousse"
       },
       {
-        "Voorgerecht": "Roasted Tomato and Garlic Soep",
-        "Maaltijd": "Braised Tempeh with Sweet Potatoes and Kale",
-        "Nagerecht": "Coconut Milk Panna Cotta"
+        "Voorgerecht": "Geroosterde Tomaat en Knoflook Soep",
+        "Maaltijd": "Gestoofde Tempeh met Zoete Aardappelen en Boerenkool",
+        "Nagerecht": "Kokosmelk Panna Cotta"
       },
       {
-        "Voorgerecht": "Vegan Deviled Eggs",
-        "Maaltijd": "Jackfruit Carnitas Tacos with Guacamole",
-        "Nagerecht": "Blueberry Lemon Cheesecake Bars"
+        "Voorgerecht": "Veganistische Deviled Eggs",
+        "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
+        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars"
       },
       {
-        "Voorgerecht": "Vegan Tuna Salad on Crostini",
-        "Maaltijd": "Roasted Cauliflower Steaks with Chimichurri Sauce",
-        "Nagerecht": "Strawberry Shortcake"
+        "Voorgerecht": "Veganistische Tonijn Salade op Crostini",
+        "Maaltijd": "Geroosterde Bloemkool Steaks met Chimichurri Saus",
+        "Nagerecht": "Aardbeien Shortcake"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Tomato and Basil Bruschetta",
-        "Soep": "Roasted Butternut Squash Soep",
-        "Maaltijd": "Vegan Lasagna",
-        "Nagerecht": "Raw Vegan Cheesecake"
+        "Voorgerecht": "Tomaten en Basilicum Bruschetta",
+        "Soep": "Geroosterde Butternut Squash Soep",
+        "Maaltijd": "Veganistische Lasagne",
+        "Nagerecht": "Rauwe Veganistische Cheesecake"
       },
       {
-        "Voorgerecht": "Baba Ghanoush with Pita",
-        "Soep": "Curried Carrot and Coconut Soep",
-        "Maaltijd": "Lentil Shepherd's Pie",
-        "Nagerecht": "Pumpkin Spice Cake"
+        "Voorgerecht": "Baba Ghanoush met Pita",
+        "Soep": "Gekruide Wortel en Kokos Soep",
+        "Maaltijd": "Linzen Shepherd's Pie",
+        "Nagerecht": "Pompoentaart met Kruiden"
       },
       {
-        "Voorgerecht": "Cauliflower Buffalo Wings",
-        "Soep": "Vegan Cream of Mushroom Soep",
-        "Maaltijd": "Chickpea and Spinach Stuffed Sweet Potatoes",
-        "Nagerecht": "Vegan Lemon Bars"
+        "Voorgerecht": "Bloemkool Buffalo Wings",
+        "Soep": "Veganistische Champignon Soep",
+        "Maaltijd": "Kikkererwten en Spinazie Gevulde Zoete Aardappelen",
+        "Nagerecht": "Veganistische Citroen Bars"
       },
       {
-        "Voorgerecht": "Vegan Sushi Rolls",
+        "Voorgerecht": "Veganistische Sushi Rolls",
         "Soep": "Tom Kha Gai Soep",
-        "Maaltijd": "Vegan Pot Pie",
-        "Nagerecht": "Chocolate Avocado Mousse"
+        "Maaltijd": "Veganistische Pot Pie",
+        "Nagerecht": "Chocolade Avocado Mousse"
       }
     ]
   },
   "Vis": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Lobster Bisque",
-        "Maaltijd": "Pan-Seared Salmon with Lemon Butter Sauce"
+        "Voorgerecht": "Kreeftenbisque",
+        "Maaltijd": "Zalmfilet met citroenbotersaus"
       },
       {
-        "Voorgerecht": "Crispy Calamari with Spicy Aioli",
-        "Maaltijd": "Grilled Swordfish with Mango Salsa"
+        "Voorgerecht": "Krokante inktvisringen met pittige aioli",
+        "Maaltijd": "Gegrilde zwaardvis met mangosalsa"
       },
       {
-        "Voorgerecht": "Crab Cakes with Remoulade Sauce",
-        "Maaltijd": "Blackened Red Snapper with Creole Sauce"
+        "Voorgerecht": "Crab cakes met remouladesaus",
+        "Maaltijd": "Zwarte snapper met Creoolse saus"
       },
       {
-        "Voorgerecht": "Smoked Salmon Crostini",
-        "Maaltijd": "Grilled Tuna Steak with Ginger Soy Glaze"
+        "Voorgerecht": "Gerookte zalm op crostini",
+        "Maaltijd": "Gegrilde tonijnsteak met gember-sojasaus"
       }
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Shrimp Cocktail",
-        "Maaltijd": "Cedar Plank Salmon with Herb Butter",
-        "Nagerecht": "Key Lime Pie"
+        "Voorgerecht": "Garnalencocktail",
+        "Maaltijd": "Zalmfilet op cederhout met kruidenboter",
+        "Nagerecht": "Key lime pie"
       },
       {
-        "Voorgerecht": "Oysters Rockefeller",
-        "Maaltijd": "Baked Stuffed Shrimp with Crabmeat Stuffing",
-        "Nagerecht": "Chocolate Molten Lava Cake"
+        "Voorgerecht": "Oesters Rockefeller",
+        "Maaltijd": "Gevulde garnalen met krabvulling uit de oven",
+        "Nagerecht": "Chocolade lavacake"
       },
       {
-        "Voorgerecht": "Clam Chowder",
-        "Maaltijd": "Grilled Mahi Mahi with Pineapple Salsa",
-        "Nagerecht": "Crème Brûlée"
+        "Voorgerecht": "Clam chowder",
+        "Maaltijd": "Gegrilde Mahi Mahi met ananassalsa",
+        "Nagerecht": "Crème brûlée"
       },
       {
-        "Voorgerecht": "Tuna Poke Bowl",
-        "Maaltijd": "Pan-Seared Halibut with Tomato and Basil Sauce",
-        "Nagerecht": "Lemon Sorbet"
+        "Voorgerecht": "Tuna poke bowl",
+        "Maaltijd": "Gebakken heilbotfilet met tomaten-basilsaus",
+        "Nagerecht": "Citroensorbet"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Tuna Tartare with Avocado and Mango",
-        "Soep": "Lobster Bisque",
-        "Maaltijd": "Pan-Seared Scallops with Truffle Risotto",
-        "Nagerecht": "Chocolate Torte"
+        "Voorgerecht": "Tartaar van tonijn met avocado en mango",
+        "Soep": "Kreeftenbisque",
+        "Maaltijd": "Gebakken coquilles met truffelrisotto",
+        "Nagerecht": "Chocoladetaart"
       },
       {
-        "Voorgerecht": "Crab Stuffed Mushrooms",
-        "Soep": "New England Clam Chowder",
-        "Maaltijd": "Grilled Sea Bass with Lemon Caper Sauce",
-        "Nagerecht": "Vanilla Bean Panna Cotta"
+        "Voorgerecht": "Gevulde champignons met krab",
+        "Soep": "New England clam chowder",
+        "Maaltijd": "Gegrilde zeebaars met citroen-kappersaus",
+        "Nagerecht": "Vanille panna cotta"
       },
       {
-        "Voorgerecht": "Shrimp Scampi",
-        "Soep": "Tomato and Fennel Soep",
-        "Maaltijd": "Grilled Salmon with Honey Mustard Glaze",
-        "Nagerecht": "Raspberry Sorbet"
+        "Voorgerecht": "Scampi in knoflookolie",
+        "Soep": "Tomaten-venkelsoep",
+        "Maaltijd": "Gegrilde zalmfilet met honing-mosterdglaasje",
+        "Nagerecht": "Raspberry sorbet"
       },
       {
-        "Voorgerecht": "Fish Tacos with Mango Salsa",
-        "Soep": "Coconut Shrimp Bisque",
-        "Maaltijd": "Pan-Seared Cod with Roasted Garlic Butter",
-        "Nagerecht": "Key Lime Cheesecake"
+        "Voorgerecht": "Vis-taco's met mangosalsa",
+        "Soep": "Kokos-shrimpbisque",
+        "Maaltijd": "Gebakken kabeljauw met geroosterde knoflookboter",
+        "Nagerecht": "Key lime cheesecake"
       }
     ]
   },
   "Vlees": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Caesar Salad",
-        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce"
+        "Voorgerecht": "Caesar Salade",
+        "Maaltijd": "Gegrilde Ribeye Steak met Rode Wijnsaus"
       },
       {
-        "Voorgerecht": "Spinach and Artichoke Dip",
-        "Maaltijd": "Filet Mignon with Mushroom Sauce"
+        "Voorgerecht": "Spinazie en Artisjok Dip",
+        "Maaltijd": "Filet Mignon met Champignonsaus"
       },
       {
-        "Voorgerecht": "Shrimp Cocktail",
-        "Maaltijd": "Pan-Seared Salmon with Lemon Butter Sauce"
+        "Voorgerecht": "Garnalencocktail",
+        "Maaltijd": "Op de Huid Gebakken Zalm met Citroenbotersaus"
       },
       {
-        "Voorgerecht": "Fried Calamari",
-        "Maaltijd": "Veal Parmesan with Marinara Sauce"
+        "Voorgerecht": "Gefrituurde Calamares",
+        "Maaltijd": "Kalfsparmezaan met Marinara Saus"
       }
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Butternut Squash Soep",
-        "Maaltijd": "Roasted Chicken with Garlic and Herb Butter",
-        "Nagerecht": "Apple Tart"
+        "Voorgerecht": "Butternut Pompoensoep",
+        "Maaltijd": "Geroosterde Kip met Knoflook en Kruidenboter",
+        "Nagerecht": "Appeltaart"
       },
       {
-        "Voorgerecht": "Lobster Bisque",
-        "Maaltijd": "Grilled New York Strip Steak with Garlic Butter",
-        "Nagerecht": "Chocolate Cake"
+        "Voorgerecht": "Kreeftenbisque",
+        "Maaltijd": "Gegrilde New York Strip Steak met Knoflookboter",
+        "Nagerecht": "Chocoladetaart"
       },
       {
-        "Voorgerecht": "Caesar Salad",
-        "Maaltijd": "Braised Lamb Shanks with Rosemary and Red Wine",
+        "Voorgerecht": "Caesar Salade",
+        "Maaltijd": "Gestoofde Lamsschenkel met Rozemarijn en Rode Wijn",
         "Nagerecht": "Tiramisu"
       },
       {
-        "Voorgerecht": "French Onion Soep",
-        "Maaltijd": "Pan-Seared Duck Breast with Cherry Sauce",
+        "Voorgerecht": "Franse Uiensoep",
+        "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
         "Nagerecht": "Crème Brûlée"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Beef Carpaccio with Arugula and Parmesan",
-        "Soep": "Tomato Bisque",
-        "Maaltijd": "Braised Short Ribs with Creamy Polenta",
+        "Voorgerecht": "Beef Carpaccio met Rucola en Parmezaan",
+        "Soep": "Tomatenbisque",
+        "Maaltijd": "Gestoofde Korte Ribs met Romige Polenta",
         "Nagerecht": "Crème Brûlée"
       },
       {
-        "Voorgerecht": "Pan-Seared Scallops with Lemon Garlic Butter",
-        "Soep": "Cream of Mushroom Soep",
-        "Maaltijd": "Roasted Rack of Lamb with Rosemary and Garlic",
-        "Nagerecht": "Chocolate Mousse"
+        "Voorgerecht": "Op de Huid Gebakken Coquilles met Citroen Knoflookboter",
+        "Soep": "Room van Champignonsoep",
+        "Maaltijd": "Geroosterde Lamscarré met Rozemarijn en Knoflook",
+        "Nagerecht": "Chocolademousse"
       },
       {
-        "Voorgerecht": "Crispy Fried Chicken Wings",
+        "Voorgerecht": "Krokante Gefrituurde Kippenvleugels",
         "Soep": "Clam Chowder",
-        "Maaltijd": "Prime Rib with Horseradish Sauce",
+        "Maaltijd": "Prime Rib met Mierikswortelsaus",
         "Nagerecht": "Key Lime Pie"
       },
       {
-        "Voorgerecht": "Shrimp Scampi",
-        "Soep": "Cream of Broccoli Soep",
-        "Maaltijd": "Beef Wellington with Mushroom Duxelles",
-        "Nagerecht": "Bread Pudding with Bourbon Sauce"
+        "Voorgerecht": "Garnalen Scampi",
+        "Soep": "Room van Broccolisoep",
+        "Maaltijd": "Beef Wellington met Champignon Duxelles",
+        "Nagerecht": "Broodpudding met Bourbon Saus"
       }
     ]
   },
   "veganistisch": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Mixed Green Salad",
-        "Maaltijd": "Roasted Vegetable Risotto"
+        "Voorgerecht": "Gemengde Groene Salade",
+        "Maaltijd": "Geroosterde Groenten Risotto"
       },
       {
-        "Voorgerecht": "Tomato and Basil Bruschetta",
-        "Maaltijd": "Spinach and Feta Stuffed Portobello Mushrooms"
+        "Voorgerecht": "Tomaten en Basilicum Bruschetta",
+        "Maaltijd": "Gevulde Portobello Champignons met Spinazie en Feta"
       },
       {
-        "Voorgerecht": "Roasted Red Pepper Hummus with Pita",
-        "Maaltijd": "Pesto Pasta with Grilled Vegetables"
+        "Voorgerecht": "Geroosterde Rode Paprika Hummus met Pita",
+        "Maaltijd": "Pesto Pasta met Gegrilde Groenten"
       },
       {
-        "Voorgerecht": "Grilled Peach and Arugula Salad",
-        "Maaltijd": "Wild Mushroom and Truffle Risotto"
+        "Voorgerecht": "Gegrilde Perzik en Rucola Salade",
+        "Maaltijd": "Wilde Paddestoelen en Truffel Risotto"
       },
       {
-        "Voorgerecht": "Grilled Asparagus with Lemon and Parmesan",
-        "Maaltijd": "Cauliflower and Chickpea Curry"
+        "Voorgerecht": "Gegrilde Asperges met Citroen en Parmezaanse Kaas",
+        "Maaltijd": "Bloemkool en Kikkererwten Curry"
       },
       {
         "Voorgerecht": "test",
@@ -232,42 +232,42 @@
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Roasted Beet Salad",
-        "Maaltijd": "Eggplant Parmesan with Tomato Sauce",
-        "Nagerecht": "Vegan Chocolate Mousse"
+        "Voorgerecht": "Geroosterde Bieten Salade",
+        "Maaltijd": "Eggplant Parmesan met Tomatensaus",
+        "Nagerecht": "Veganistische Chocolademousse"
       },
       {
-        "Voorgerecht": "Sweet Potato and Black Bean Tacos",
-        "Maaltijd": "Zucchini and Sun-Dried Tomato Pasta",
-        "Nagerecht": "Coconut Milk Rice Pudding"
+        "Voorgerecht": "Zoete Aardappel en Zwarte Bonen Tacos",
+        "Maaltijd": "Courgette en Zongedroogde Tomaten Pasta",
+        "Nagerecht": "Kokosmelk Rijstpudding"
       },
       {
-        "Voorgerecht": "Chilled Gazpacho",
-        "Maaltijd": "Butternut Squash and Sage Risotto",
-        "Nagerecht": "Mixed Berry Tart"
+        "Voorgerecht": "Koude Gazpacho",
+        "Maaltijd": "Butternut Squash en Salie Risotto",
+        "Nagerecht": "Gemengde Bessentaart"
       },
       {
-        "Voorgerecht": "Crispy Fried Artichokes",
-        "Maaltijd": "Roasted Garlic and Tomato Linguine",
-        "Nagerecht": "Lemon Olive Oil Cake"
+        "Voorgerecht": "Krokante Gebakken Artisjokken",
+        "Maaltijd": "Geroosterde Knoflook en Tomaat Linguine",
+        "Nagerecht": "Citroen Olijfolie Taart"
       },
       {
-        "Voorgerecht": "Grilled Halloumi and Watermelon Salad",
-        "Maaltijd": "Mushroom and Spinach Lasagna",
-        "Nagerecht": "Strawberry Rhubarb Crisp"
+        "Voorgerecht": "Gegrilde Halloumi en Watermeloen Salade",
+        "Maaltijd": "Champignon en Spinazie Lasagne",
+        "Nagerecht": "Aardbeien Rabarber Crisp"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Caprese Salad",
+        "Voorgerecht": "Caprese Salade",
         "Soep": "Butternut Squash Soep",
-        "Maaltijd": "Grilled Portobello Mushroom with Quinoa and Roasted Vegetables",
-        "Nagerecht": "Mixed Berry Sorbet"
+        "Maaltijd": "Gegrilde Portobello Champignon met Quinoa en Geroosterde Groenten",
+        "Nagerecht": "Gemengde Bessensorbet"
       },
       {
-        "Voorgerecht": "Roasted Fennel and Orange Salad",
-        "Soep": "Creamy Tomato and Basil Soep",
-        "Maaltijd": "Grilled Tofu and Vegetable Kebabs",
+        "Voorgerecht": "Geroosterde Venkel en Sinaasappel Salade",
+        "Soep": "Romige Tomaat en Basilicum Soep",
+        "Maaltijd": "Gegrilde Tofu en Groente Kebabs",
         "Nagerecht": "Raspberry Sorbet"
       },
       {
@@ -281,13 +281,8 @@
         "Soep": "Curried Carrot Soep",
         "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries",
         "Nagerecht": "Dark Chocolate Truffles"
-      },
-      {
-        "Voorgerecht": "Crispy Artichoke Hearts with Lemon Aioli",
-        "Soep": "Creamy Mushroom and Wild Rice Soep",
-        "Maaltijd": "Roasted Vegetable Lasagna",
-        "Nagerecht": "Apple Galette"
       }
     ]
   }
 }
+    
