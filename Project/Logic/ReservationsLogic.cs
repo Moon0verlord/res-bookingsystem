@@ -10,11 +10,19 @@ class ReservationsLogic
     public List<DateTime> PopulateDates()
     {
         var thisWeek = new List<DateTime>();
-        for (int i = DateTime.Now.Day; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+        var DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+        for (int i = DateTime.Now.Day; i <= DaysInMonth; i++)
         {
-            thisWeek.Add(DateTime.Today.AddDays(i));
+            if (i == DaysInMonth)
+            {
+                thisWeek.Add(new DateTime(DateTime.Now.Year, DateTime.Now.Month,
+                    DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)));
+            }
+            else
+            {
+                thisWeek.Add(DateTime.Today.AddDays(i));
+            }
         }
-
         return thisWeek;
     }
 
