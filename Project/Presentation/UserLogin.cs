@@ -15,7 +15,7 @@ static class UserLogin
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
-                "Nog geen account?\n  >Log in with huidige gegevens<", "Log in met hudige gegevens", "Afsluiten" };
+                "Nog geen account?\n  >Log in met huidige gegevens<", "Log in met huidige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
@@ -35,10 +35,10 @@ static class UserLogin
                     break;
                 case 1:
                     Console.Clear();
-                    Console.Write("\n Vull hier uw wachtwoord in: ");
+                    Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = Console.ReadLine()!;
                     Console.Clear();
-                    Console.Write("\n Vull uw wachtwoord opnieuw in voor bevestiging: ");
+                    Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
                     var verifyUserPassword = Console.ReadLine()!;
                     if (userPassword == verifyUserPassword)
                         break;
@@ -71,7 +71,7 @@ static class UserLogin
                         }
                         else
                         {
-                            Console.Write("Vul hier uw voledige naam in: ");
+                            Console.Write("Vul hier uw volledige naam in: ");
                             var fullName = Console.ReadLine()!;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
@@ -105,7 +105,7 @@ static class UserLogin
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine($"E-mail: {userEmail}\nWachtwoord: {userPassword}");
-                            Console.WriteLine("Geen account gevonden met deze e-mail en wachtoword.\nAls u nog geen account heeft kunt u er een aanmaken in het login menu.");
+                            Console.WriteLine("Geen account gevonden met deze e-mail en wachtwoord.\nAls u nog geen account heeft kunt u er een aanmaken in het login menu.");
                             Thread.Sleep(3500);
                             Console.ResetColor();
                         }

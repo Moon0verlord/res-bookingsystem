@@ -21,7 +21,7 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Aflsluiten" };
+                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
                 string prompt = "\nHoofdmenu:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -55,7 +55,7 @@ class MainMenu : IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Aflsluiten (En gelijk uitloggen)" };
+                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten (En gelijk uitloggen)" };
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)

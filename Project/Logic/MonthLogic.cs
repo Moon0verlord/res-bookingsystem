@@ -51,7 +51,7 @@ class MonthLogic : MonthTimeModels
                                 {
                                     foreach (var items in item.Value)
                                     {
-                                        Console.WriteLine(item.Key + "\t " + items.Key + ":" + (items.Value ? "beschikbaar" : "Bezt"));
+                                        Console.WriteLine(item.Key + "\t " + items.Key + ":" + (items.Value ? "beschikbaar" : "Bezet"));
 
                                     }
                                 }

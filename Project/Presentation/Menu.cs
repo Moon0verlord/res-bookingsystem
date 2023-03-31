@@ -41,6 +41,7 @@ public static class Dishes
         string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
+        Console.Clear();
         Console.WriteLine("gerechten:");
         Console.WriteLine("-------");
 
