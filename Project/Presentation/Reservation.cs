@@ -83,7 +83,7 @@ static class Reservation
         string answer = Console.ReadLine()!;
         switch (answer.ToLower())
         {
-            case "j":
+            case "ja": case "j": case "Ja":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");

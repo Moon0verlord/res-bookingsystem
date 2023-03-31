@@ -64,5 +64,17 @@
     "emailAddress": "@@@@@",
     "res_date": "2023-04-30T18:30:00+02:00",
     "isReserved": true
+  },
+  {
+    "table_id": 16,
+    "emailAddress": "n@b.c",
+    "res_date": "2023-05-01T16:00:00+02:00",
+    "isReserved": true
+  },
+  {
+    "table_id": 13,
+    "emailAddress": "n@b.c",
+    "res_date": "2023-05-01T21:30:00+02:00",
+    "isReserved": true
   }
 ]
