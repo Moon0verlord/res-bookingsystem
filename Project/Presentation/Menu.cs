@@ -151,7 +151,10 @@ public static class Dishes
         JObject dishtoadd = (JObject)DishArray.ElementAt(0);
         menuCourse[0] = dishtoadd;
         File.WriteAllText("Menu.json", MenuOBJ.ToString());
-
+        Console.WriteLine("Dish added to menu");
+        Console.WriteLine("Press any key to continue");
+        Console.ReadKey();
+        MainMenu.Start();
         // Reminder move json back to DataSources folder
         // TODO: Make a function That displays dishes using the menu framework
     }
