@@ -87,49 +87,73 @@ public static class Dishes
     // W.I.P - working skeleton for managing dishes in the menu
     public static void ManageMenu()
     {
-       
-        Console.WriteLine("Which type of dish would you like to add?");
-        Console.WriteLine("1. Vegetarian");
-        Console.WriteLine("2. Fish");
-        Console.WriteLine("3. Meat");
-        Console.WriteLine("4. Vegan");
-        Console.WriteLine("5. Back to main menu");
-        //console.readline - string choice1 = "Vegetarisch";
-        Console.WriteLine("Which course would you like to add?");
-        Console.WriteLine("1. 2 Courses");
-        Console.WriteLine("2. 3 Courses");
-        Console.WriteLine("3. 4 Courses");
-        Console.WriteLine("4. Back to main menu");
-        //console.readline - string choice2 = "4_Gangen";
+        string type = "";
+        string course = "";
         
-        // TODO better naming for json variables
-        //TODO Turn skeleton into a fully working method
+        string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Back to main menu"};
+        string prompt = "\nWhich type of dish would you like to add?:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                type = "Vegetarisch";
+                break;
+            case 1:
+                type = "Vis";
+                break;
+            case 2:
+                type = "Vlees";
+                break;
+            case 3:
+                type = "Veganistisch";
+                break;
+            case 4:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Please enter a valid number");
+                break;
+        }
+        
+        string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Back to main menu"};
+        string prompt2 = "\nWhich course would you like to add?:";
+        int input2 = _myMenu.RunMenu(options2, prompt2);
+        switch (input)
+        {
+            case 0:
+                course = "2_Gangen";
+                break;
+            case 1:
+                course = "3_Gangen";
+                break;
+            case 2:
+                course = "4_Gangen";
+                break;
+            case 3:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Please enter a valid number");
+                break;
+        }
+        
+        // grabs dishes from json
         string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
         string json = File.ReadAllText("Dishes.json");
         JObject dishes = JObject.Parse(json);
-
+        JObject dish = (JObject)dishes[type];
+        JArray DishArray = (JArray)dish[course];
+        // grabs menu from json
         string menu = File.ReadAllText("Menu.json");
-        JObject menuobj = JObject.Parse(menu);
+        JObject MenuOBJ = JObject.Parse(menu);
+        // adds dish to menu
+        JArray menuCourse = (JArray)MenuOBJ[type][course];
+        JObject dishtoadd = (JObject)DishArray.ElementAt(0);
+        menuCourse[0] = dishtoadd;
+        File.WriteAllText("Menu.json", MenuOBJ.ToString());
 
-        string choice1 = "Vegetarisch";
-        string choice2 = "4_Gangen";
-
-        JObject dish = (JObject)dishes[choice1];
-        JArray vm = (JArray)dish[choice2];
-        JObject itemA = (JObject)vm.ElementAt(0);
-
-        JArray vm2 = (JArray)menuobj[choice1][choice2];
-        vm2.Add(itemA);
-
-        File.WriteAllText("Menu.json", menuobj.ToString());
-
-        // move json back to DataSources
-        // ask what type of dish
-        // ask what course
-        // add course to json
-        
-        //File.WriteAllText("Menu.json", vm[0].ToString());
-        
+        // Reminder move json back to DataSources folder
+        // TODO: Make a function That displays dishes using the menu framework
     }
 
 }
