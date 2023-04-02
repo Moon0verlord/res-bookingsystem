@@ -87,6 +87,7 @@ public static class Dishes
     // W.I.P - working skeleton for managing dishes in the menu
     public static void ManageMenu()
     {
+        // BUG - 2nd menu remembers and reuses index of first choice
         string type = "";
         string course = "";
         
