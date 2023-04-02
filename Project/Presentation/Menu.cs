@@ -84,10 +84,9 @@ public static class Dishes
         }
     }
     
-    // W.I.P - working skeleton for managing dishes in the menu
+    // W.I.P - managing dishes in the menu
     public static void ManageMenu()
     {
-        // BUG - 2nd menu remembers and reuses index of first choice
         string type = "";
         string course = "";
         
@@ -119,7 +118,7 @@ public static class Dishes
         string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Back to main menu"};
         string prompt2 = "\nWhich course would you like to add?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
-        switch (input)
+        switch (input2)
         {
             case 0:
                 course = "2_Gangen";
