@@ -78,7 +78,7 @@ public static class Dishes
             Console.WriteLine($"Entree: {entree}");
             Console.WriteLine($"Dessert: {dessert}");
             Console.WriteLine();
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine("Press any key to continue.....");
             Console.ReadKey();
             MainMenu.Start();
         }
@@ -148,11 +148,12 @@ public static class Dishes
         JObject MenuOBJ = JObject.Parse(menu);
         // adds dish to menu
         JArray menuCourse = (JArray)MenuOBJ[type][course];
+        // temporary solution to add the first dish in the array  
         JObject dishtoadd = (JObject)DishArray.ElementAt(0);
         menuCourse[0] = dishtoadd;
         File.WriteAllText("Menu.json", MenuOBJ.ToString());
-        Console.WriteLine("Dish added to menu");
-        Console.WriteLine("Press any key to continue");
+        Console.WriteLine($"{dishtoadd} has been added to the menu");
+        Console.WriteLine("Press any key to continue.....");
         Console.ReadKey();
         MainMenu.Start();
         // Reminder move json back to DataSources folder
