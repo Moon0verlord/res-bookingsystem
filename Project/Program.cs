@@ -1,6 +1,4 @@
-﻿using Project.Logic;
-
-public class Program
+﻿public class Program
 {
     private static void Main()
     {

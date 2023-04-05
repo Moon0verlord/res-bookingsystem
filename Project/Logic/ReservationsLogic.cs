@@ -7,18 +7,26 @@ class ReservationsLogic
     // empty constructor to call CurMonth
     public ReservationsLogic() {}
 
-    public List<DateTime> PopulateDates()
+    public DateTime[,] PopulateDates()
     {
-        DateTime[,] dates = new DateTime[7,7]; //! todo: remove test
-        
-        var thisMonth = new List<DateTime>();
+        int rowCount = 0;
+        int columnCount = 0;
+        int amountOfRows = (int)DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) / 7;
+        DateTime[,] dates = new DateTime[amountOfRows,7];
         DateTime currentDate = DateTime.Today;
         do
         {
-            thisMonth.Add(currentDate);
+            if (currentDate.Date != DateTime.MinValue) dates[rowCount, columnCount] = currentDate.Date;
+            columnCount++;
+            if (columnCount % 7 == 0)
+            {
+                rowCount++;
+                columnCount = 0;
+            }
             currentDate = currentDate.AddDays(1);
         } while (currentDate.Month == DateTime.Today.Month);
-        return thisMonth;
+
+        return dates;
     }
 
     public List<TimeSpan> PopulateTimes()

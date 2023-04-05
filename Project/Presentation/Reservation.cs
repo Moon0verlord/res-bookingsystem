@@ -3,7 +3,8 @@ using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 static class Reservation
 {
-    private static MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _my1DMenu = new MenuLogic();
+    private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
     public static void ResStart(AccountModel acc = null)
     {
@@ -17,7 +18,7 @@ static class Reservation
                 Console.Clear();
                 string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
                 string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan", "Afsluiten" };
-                int selectedIndex = _myMenu.RunMenu(options, prompt);
+                int selectedIndex = _my1DMenu.RunMenu(options, prompt);
                 switch (selectedIndex)
                 {
                     case 0:
@@ -66,30 +67,29 @@ static class Reservation
     public static void ResMenu(string email)
     {
         Console.Clear();
-        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een dag van de week: \n");
         var thisMonth = Reservations.PopulateDates();
-        foreach (DateTime date in thisMonth)
+        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum: \n");
+        for (int i = 0; i < thisMonth.GetLength(1); i++)
         {
-            Console.Write($"{date.ToString("ddd", CultureInfo.InvariantCulture)}\t");
+            Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
-        var dictChoice = _myMenu.RunMenu(thisMonth, "", false);
-        DateTime res_Date = ChooseTime(dictChoice); 
-        int chosenTable = ChooseTable(res_Date);
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Clear();
-        Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {res_Date.Date.ToString("dd-MM-yyyy")}" +
-                          $"\nTijd: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
-        Console.ResetColor();
-        string answer = Console.ReadLine()!;
-        switch (answer.ToLower())
-        {
-            case "ja": case "j":
-                Reservations.CreateReservation(email, res_Date, chosenTable);
-                Console.Clear();
-                Console.WriteLine("\nReservatie is gemaakt.");
-                Thread.Sleep(1500);
-                break;
-        }
+        var chosenDate = _my2DMenu.RunMenu(thisMonth, "", false);
+        // int chosenTable = ChooseTable(res_Date);
+        // Console.ForegroundColor = ConsoleColor.Green;
+        // Console.Clear();
+        // Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+        //                   $"\nTijd: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
+        // Console.ResetColor();
+        // string answer = Console.ReadLine()!;
+        // switch (answer.ToLower())
+        // {
+        //     case "ja": case "j":
+        //         Reservations.CreateReservation(email, res_Date, chosenTable);
+        //         Console.Clear();
+        //         Console.WriteLine("\nReservatie is gemaakt.");
+        //         Thread.Sleep(1500);
+        //         break;
+        // }
     }
 
     public static DateTime ChooseTime(Dictionary<int, DateTime> dictChoice)
@@ -98,7 +98,7 @@ static class Reservation
         string prompt = "Kies hier een tijd voor de geselcteerde datum " +
                           $"({dictChoice.Select(i => i.Value).FirstOrDefault().ToString("dd-MM-yyyy")})";
         var timeList = Reservations.PopulateTimes();
-        int selectIndex = _myMenu.RunMenu(timeList.Select(i => i.ToString("hh\\:mm")).ToArray(), prompt, sideways: true, displayTime: true);
+        int selectIndex = _my1DMenu.RunMenu(timeList.Select(i => i.ToString("hh\\:mm")).ToArray(), prompt, sideways: true, displayTime: true);
         DateTime res_Date = dictChoice.Select(i => i.Value).FirstOrDefault().Date + timeList[selectIndex];
         return res_Date;
     }
@@ -106,7 +106,7 @@ static class Reservation
     public static int ChooseTable(DateTime res_Date)
     {
         var tablesOnly = Reservations.PopulateTables(res_Date);
-        int selectedTable = _myMenu.RunTableMenu(tablesOnly, "", false);
+        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", false);
         return selectedTable;
     }
 }
