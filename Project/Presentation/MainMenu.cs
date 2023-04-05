@@ -1,6 +1,6 @@
 using System.Data;
 using Project.Presentation;
-
+using Newtonsoft.Json;
 
 class MainMenu : IMenuLogic
 {
@@ -59,7 +59,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     //Verander menu includes price changing
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen",""};
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht"};
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
@@ -112,11 +112,20 @@ class MainMenu : IMenuLogic
                         {
                             Console.WriteLine("U bent al uitgelogd");
                         }
-
+                        break;
+                    case 1:
+                        Console.WriteLine("Reserveringen");
+                        break;
+                    case 2:
+                        foreach (var item in AccountsAccess.LoadAllReservations())
+                        {
+                            Console.WriteLine(item.ToString());
+                        }
                         break;
                 }
             }
         }
+        //User Login
         if (Account != null && Account.loggedIn)
         {
             while (true)

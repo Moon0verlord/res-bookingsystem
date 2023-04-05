@@ -6,5 +6,13 @@
     "fullName": "Manager",
     "Employee": true,
     "Manager": true
+  },
+  {
+    "id": 2,
+    "emailAddress": "Employee@res.nl",
+    "password": "xyz",
+    "fullName": "employee",
+    "Employee": true,
+    "Manager": false
   }
 ]
