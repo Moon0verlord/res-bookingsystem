@@ -68,12 +68,13 @@ static class Reservation
     {
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
-        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum: \n");
+        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
         for (int i = 0; i < thisMonth.GetLength(1); i++)
         {
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
         var chosenDate = _my2DMenu.RunMenu(thisMonth, "", false);
+        if (chosenDate == default(DateTime)) ResStart();
         // int chosenTable = ChooseTable(res_Date);
         // Console.ForegroundColor = ConsoleColor.Green;
         // Console.Clear();

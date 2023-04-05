@@ -11,6 +11,7 @@ class ReservationsLogic
     {
         int rowCount = 0;
         int columnCount = 0;
+        // Kijk hoeveel rijen de array nodig heeft door de maand op te delen in weken
         int amountOfRows = (int)DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) / 7;
         DateTime[,] dates = new DateTime[amountOfRows,7];
         DateTime currentDate = DateTime.Today;
