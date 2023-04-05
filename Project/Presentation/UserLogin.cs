@@ -76,12 +76,13 @@ static class UserLogin
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(
-                                $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: {userPassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
+                                $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: " +
+                                $"{userPassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
                             if (answer == "j" || answer == "J")
                             {
-                                var newAccount = CreateAccount(userEmail, userPassword, fullName);
+                                var newAccount = CreateAccount(userEmail, userPassword, fullName,false,false);
                                 accountsLogic.UpdateList(newAccount);
                             }
                         }
@@ -125,9 +126,9 @@ static class UserLogin
         }
     }
 
-    private static AccountModel CreateAccount(string email, string password, string name)
+    private static AccountModel CreateAccount(string email, string password, string name,bool IsEmployee,bool IsManager)
     {
-        var newAccount = AccountsAccess.AddAccount(email, password, name);
+        var newAccount = AccountsAccess.AddAccount(email, password, name,IsEmployee,IsManager);
         return newAccount;
     }
 }
