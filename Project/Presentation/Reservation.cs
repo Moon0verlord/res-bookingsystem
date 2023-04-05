@@ -66,14 +66,14 @@ static class Reservation
     public static void ResMenu(string email)
     {
         Console.Clear();
-        Console.WriteLine($"U kunt alleen een reservatie maken voor de hudige maand ({ReservationsLogic.CurMonth})\nKies een dag van de week: \n");
-        var thisWeek = Reservations.PopulateDates();
-        foreach (DateTime date in thisWeek)
+        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een dag van de week: \n");
+        var thisMonth = Reservations.PopulateDates();
+        foreach (DateTime date in thisMonth)
         {
             Console.Write($"{date.ToString("ddd", CultureInfo.InvariantCulture)}\t");
         }
-        var dictChoice = _myMenu.RunMenu(thisWeek, "", false);
-        DateTime res_Date = ChooseTime(dictChoice);
+        var dictChoice = _myMenu.RunMenu(thisMonth, "", false);
+        DateTime res_Date = ChooseTime(dictChoice); 
         int chosenTable = ChooseTable(res_Date);
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
@@ -83,7 +83,7 @@ static class Reservation
         string answer = Console.ReadLine()!;
         switch (answer.ToLower())
         {
-            case "ja": case "j": case "Ja":
+            case "ja": case "j":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");

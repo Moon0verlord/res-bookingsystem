@@ -9,21 +9,16 @@ class ReservationsLogic
 
     public List<DateTime> PopulateDates()
     {
-        var thisWeek = new List<DateTime>();
-        var DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-        for (int i = DateTime.Now.Day; i <= DaysInMonth; i++)
+        DateTime[,] dates = new DateTime[7,7]; //! todo: remove test
+        
+        var thisMonth = new List<DateTime>();
+        DateTime currentDate = DateTime.Today;
+        do
         {
-            if (i == DaysInMonth)
-            {
-                thisWeek.Add(new DateTime(DateTime.Now.Year, DateTime.Now.Month,
-                    DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)));
-            }
-            else
-            {
-                thisWeek.Add(DateTime.Today.AddDays(i));
-            }
-        }
-        return thisWeek;
+            thisMonth.Add(currentDate);
+            currentDate = currentDate.AddDays(1);
+        } while (currentDate.Month == DateTime.Today.Month);
+        return thisMonth;
     }
 
     public List<TimeSpan> PopulateTimes()
