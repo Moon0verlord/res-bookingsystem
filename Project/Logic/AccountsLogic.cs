@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class AccountsLogic
+class AccountsLogic:IMenuLogic
 {
     private List<AccountModel> _accounts;
 
@@ -41,11 +41,11 @@ class AccountsLogic
 
     public AccountModel GetById(int id)
     {
-        return _accounts.Find(i => i.Id == id);
+        return _accounts.Find(i => i.Id == id)!;
     }
 
     public AccountModel GetByEmail(string email)
-        => _accounts.Find(i => i.EmailAddress == email);
+        => _accounts.Find(i => i.EmailAddress == email)!;
     public AccountModel CheckLogin(string email, string password)
     {
         if (email == null || password == null)
@@ -53,7 +53,7 @@ class AccountsLogic
             return null;
         }
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
-        return CurrentAccount;
+        return CurrentAccount!;
     }
 }
 

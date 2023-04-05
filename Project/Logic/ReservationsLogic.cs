@@ -1,45 +1,87 @@
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 class ReservationsLogic
 {
-    static private int cur_month = DateTime.UtcNow.Date.Month;
-    static private ReservationsLogic reserv = new ReservationsLogic();
-    static private MenuLogic _myMenu = new MenuLogic();
+    public static readonly string CurMonth = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
+    
+    // empty constructor to call CurMonth
+    public ReservationsLogic() {}
 
-    public static void SwitchMonthMethod(string[]Prompt,string Month)
+    public List<DateTime> PopulateDates()
     {
-        if (Month == "Go Back")
+        var thisWeek = new List<DateTime>();
+        var DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+        for (int i = DateTime.Now.Day; i <= DaysInMonth; i++)
         {
-            MainMenu.Start();
+            if(i!=DaysInMonth){
+            thisWeek.Add(DateTime.Today.AddDays(i));
         }
-        else
-        {
-            MonthLogic month = new MonthLogic();
-            int monthIndex;
-            string desiredMonth = Month;
-            string[] MonthNames=CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-            monthIndex = Array.IndexOf(MonthNames, desiredMonth)+1;
-            
-            month.Month(Prompt,monthIndex);
-        }
-    }
-    public void ReservationsMenu()
-    {
-        var options = new string[2];
-        options[0] = DateTimeFormatInfo.CurrentInfo.GetMonthName(cur_month);
-            options[^1] = "Go Back";
-            string prompt = $"make a reservation for one these months: \n{DateTime.UtcNow.Date.Year}";
-            while (true)
+            else if (i == DaysInMonth)
             {
-                int input = _myMenu.RunMenu(options, prompt);
-                switch (input)
+                thisWeek.Add(new DateTime(DateTime.Now.Year, DateTime.Now.Month,
+                    DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)));
+            }
+        }
+        return thisWeek;
+    }
+
+    public List<TimeSpan> PopulateTimes()
+    {
+        var timeList = new List<TimeSpan>();
+        for (int hours = 16; hours < 22; hours++)
+        {
+            for(int minutes = 0;minutes<=30;minutes+=30)
+            {
+                timeList.Add(new TimeSpan(hours, minutes, 0));
+                if(hours == 21 && minutes == 30)
                 {
-                    case 0:
-                        SwitchMonthMethod(options, options[input]);
-                        break;
-                    case 1:
-                        SwitchMonthMethod(options, options[input]);
-                        break;
+                    break;
                 }
             }
+        }
+        
+        return timeList;
+    }
+
+    public List<ReservationModel> PopulateTables(DateTime res_Date)
+    {
+        List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
+        List<ReservationModel> tablesToAdd = new List<ReservationModel>();
+
+        for (int i = 1; i <= 15; i++)
+        {
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
+            if (i == 1 || i == 9 || i == 14) tablesToAdd.Add(null);
+            if (tablesWithThisID.Count() >= 1)
+            {
+                foreach (ReservationModel table in tablesWithThisID)
+                {
+                    if (table.Date == res_Date)
+                    {
+                        tablesToAdd.Add(table);
+                    }
+                    else
+                    {
+                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                        resm.isReserved = false;
+                        tablesToAdd.Add(resm);
+                    }
+                }
+            }
+            else
+            {
+                ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                resm.isReserved = false;
+                tablesToAdd.Add(resm);
+            }
+        }
+        return tablesToAdd;
+    }
+
+
+    public void CreateReservation(string email, DateTime res_Date, int chosenTable)
+    {
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date);
+        AccountsAccess.AddReservation(newReservation);
     }
 }

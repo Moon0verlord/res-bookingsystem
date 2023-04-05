@@ -1,15 +1,10 @@
-using System.Globalization;
-
-class MonthLogic
+class MonthLogic : MonthTimeModels
 {
-    
-    static private ReservationsLogic reserv = new ReservationsLogic();
-    static private MenuLogic _myMenu = new MenuLogic();
-    
+    private static ReservationsLogic _reserv = new ReservationsLogic();
 
-    public void Month(string[]Prompt,int month)
+    public void Month(string[] prompt, int month)
     {
-        if (month <= Prompt.Length&&Prompt[month] == "Go Back")
+        if (month <= prompt.Length && prompt[month] == "Ga terug")
         {
             MainMenu.Start();
         }
@@ -18,76 +13,69 @@ class MonthLogic
             Start(month);
         }
     }
-    
+
     public void Start(int month)
     {
-            var dayArray = MonthTimeModels.DaysMonth(month);
-            var Times = MonthTimeModels.Hours();
-            MonthDayLogic menu = new MonthDayLogic();
-            if (month == DateTime.Today.Month)
-            {
-                while (true)
-                {
-                    {
-                        int input = menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
-                                                           $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
-
-                        if (dayArray[input] == "Go Back")
-                        {
-                            reserv.ReservationsMenu();
-                        }
-                        else
-                        {
-                            int dayInput = menu.RunMenu(Times.ToArray(),dayArray[input]);
-                            
-                                switch (Times[dayInput])
-                                {
-                                    case "Go Back":
-                                        Start(month);
-                                        break;
-                                    default:
-                                        Console.WriteLine(Times[dayInput]);
-                                        Thread.Sleep(1000);
-                                        
-                                        Start(month);
-                                        break;
-                                }
-                            
-                        }
-                        
-                    }
-                }
-
-            }
-    }
-    public static string DayConvert(int value)
+        var dayArray = MonthTimeModels.DaysMonth(month);
+        var times = MonthTimeModels.Hours();
+        MonthDayLogic menu = new MonthDayLogic();
+        if (month == DateTime.Today.Month)
         {
-            var day = Enum.GetName(typeof(DayOfWeek), value % 7);
-            day = day.Substring(0, 3);
-            return day;
+            while (true)
+            {
+                {
+                    int input = menu.RunMenu(dayArray, $"{DayConvert((int)DateTime.Today.DayOfWeek)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 1)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 2)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 3)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 4)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 5)}\t" +
+                                                       $"{DayConvert((int)DateTime.Today.DayOfWeek + 6)}\t");
+
+                    if (dayArray[input] == "Ga terug")
+                    {
+                        Reservation.ResMenu(null);
+                    }
+                    else
+                    {
+                        int dayInput = menu.RunMenu(times.ToArray(), dayArray[input]);
+
+                        switch (times[dayInput])
+                        {
+                            case "Ga terug":
+                                Start(month);
+                                break;
+                            default:
+                                TableLogic.Start();
+                                foreach (var item in TableLogic.isTableFree)
+                                {
+                                    foreach (var items in item.Value)
+                                    {
+                                        Console.WriteLine(item.Key + "\t " + items.Key + ":" + (items.Value ? "beschikbaar" : "Bezet"));
+
+                                    }
+                                }
+                                Thread.Sleep(10000);
+                                break;
+                        }
+
+                    }
+
+                }
+            }
+
         }
-    public static string FirstDayOfMonth(DateTime dt,int day)
-    {
-        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(
-            (new DateTime(dt.Year, dt.Month, day).DayOfWeek));
-
     }
-
     class MonthDayLogic
     {
 
-        private int _currentIndex = 0;
+        private int _currentIndex;
         private string[] _options = null;
 
-        public void DisplayOptions(string prompt, bool printPrompt)
+        private void DisplayOptions(string prompt, bool printPrompt)
         {
             if (printPrompt) Console.WriteLine(prompt);
-            for (int i = 0; i < _options.Length; i++)
+            for (var i = 0; i < _options.Length; i++)
             {
                 if (i % 7 == 0)
                 {
