@@ -83,7 +83,9 @@ static class Reservation
         string answer = Console.ReadLine()!;
         switch (answer.ToLower())
         {
-            case "ja": case "j": case "Ja":
+            case "ja":
+            case "j":
+            case "Ja":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");
@@ -108,5 +110,24 @@ static class Reservation
         var tablesOnly = Reservations.PopulateTables(res_Date);
         int selectedTable = _myMenu.RunTableMenu(tablesOnly, "", false);
         return selectedTable;
+    }
+
+    public static void ViewRes(string Email)
+    {
+        Console.Clear();
+        bool CheckIfRes = false;
+        List<ReservationModel> AllRes = AccountsAccess.LoadAllReservations();
+        foreach (ReservationModel res in AllRes)
+        {
+            if (Email == res.EmailAddress && res.Date > DateTime.Now)
+            {
+                Console.WriteLine($"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}.");
+                CheckIfRes = true;
+            }
+        }
+        if (CheckIfRes == false)
+        {
+            Console.WriteLine("Er staan nog geen reserveringen open met dit emailaddres.");
+        }
     }
 }

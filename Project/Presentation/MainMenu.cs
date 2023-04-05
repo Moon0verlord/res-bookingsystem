@@ -55,7 +55,7 @@ class MainMenu : IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten (En gelijk uitloggen)" };
+                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Reserveringen bekijken", "Afsluiten (En gelijk uitloggen)" };
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -95,6 +95,11 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 5:
+                        Reservation.ViewRes(Account.EmailAddress);
+                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
+                        Console.ReadKey(true);
+                        break;
+                    case 6:
                         Environment.Exit(0);
                         break;
                 }
