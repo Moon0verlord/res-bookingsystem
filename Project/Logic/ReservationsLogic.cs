@@ -13,14 +13,13 @@ class ReservationsLogic
         var DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
         for (int i = DateTime.Now.Day; i <= DaysInMonth; i++)
         {
-            if (i == DaysInMonth)
+            if(i!=DaysInMonth){
+            thisWeek.Add(DateTime.Today.AddDays(i));
+        }
+            else if (i == DaysInMonth)
             {
                 thisWeek.Add(new DateTime(DateTime.Now.Year, DateTime.Now.Month,
                     DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)));
-            }
-            else
-            {
-                thisWeek.Add(DateTime.Today.AddDays(i));
             }
         }
         return thisWeek;
