@@ -11,7 +11,7 @@ public static class Dishes
     public static void WelcomeMenu()
     {
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Terug naar hoofdmenu" };
-        string prompt = "\nSelect a course to view the dishes:";
+        string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
@@ -31,7 +31,7 @@ public static class Dishes
                 MainMenu.Start();
                 break;
             default:
-                Console.WriteLine("Please enter a valid number");
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
     }
@@ -91,7 +91,7 @@ public static class Dishes
         string course = "";
         
         string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Terug naar hoofdmenu"};
-        string prompt = "\nWhich type of dish would you like to add?:";
+        string prompt = "\nWelk type gerecht zou je willen toevoegen?:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
@@ -111,12 +111,12 @@ public static class Dishes
                 MainMenu.Start();
                 break;
             default:
-                Console.WriteLine("Please enter a valid number");
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
         
         string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Terug naar hoofdmenu"};
-        string prompt2 = "\nWhich course would you like to add?:";
+        string prompt2 = "\nWelke Maaltijd wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
         switch (input2)
         {
@@ -133,7 +133,7 @@ public static class Dishes
                 MainMenu.Start();
                 break;
             default:
-                Console.WriteLine("Please enter a valid number");
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
         
@@ -154,9 +154,9 @@ public static class Dishes
         File.WriteAllText(path2, MenuOBJ.ToString());
         // displays added dish
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"\n{dishtoadd} has been added to the menu\n");
+        Console.WriteLine($"\n{dishtoadd} is toegevoegd aan het menu\n");
         Console.ResetColor();
-        Console.WriteLine("Press any key to continue.....");
+        Console.WriteLine("Druk op een willekeurige toets om verder te gaan.....");
         Console.ReadKey();
         MainMenu.Start();
     }
@@ -197,7 +197,7 @@ public static class Dishes
         }
         // returns selection
         string[] options = { dish1, dish2, dish3, dish4, "Terug naar hoofdmenu"};
-        string prompt2 = "\nWhich course would you like to add?:";
+        string prompt2 = "\nWelke Maaltijd wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options, prompt2);
         switch (input2)
         {
@@ -213,7 +213,7 @@ public static class Dishes
                 MainMenu.Start();
                 break;
             default:
-                Console.WriteLine("Please enter a valid number");
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
 
