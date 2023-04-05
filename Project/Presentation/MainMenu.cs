@@ -51,55 +51,6 @@ class MainMenu : IMenuLogic
                 }
             }
         }
-        if (Account != null && Account.loggedIn)
-        {
-            while (true)
-            {
-                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten (En gelijk uitloggen)" };
-                string prompt = $"\nWelkom {Account.FullName}:";
-                int input = _myMenu.RunMenu(options, prompt);
-                switch (input)
-                {
-                    case 0:
-                        if (Account.loggedIn)
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("Weet u het zeker? (j/n): ");
-                            Console.ResetColor();
-                            string userAnswer = Console.ReadLine()!;
-                            if (userAnswer == "j" || userAnswer == "J")
-                            {
-                                Account = null;
-                                Start();
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("U bent al uitgelogd");
-                        }
-                        break;
-                    case 1:
-                        restaurantInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        Console.ReadKey(true);
-                        break;
-                    case 2:
-                        Reservation.ResStart(Account);
-                        break;
-                    case 3:
-                        Dishes.WelcomeMenu();
-                        Thread.Sleep(5000); ;
-                        break;
-                    case 4:
-                        Reservation.ResStart(Account);
-                        break;
-                    case 5:
-                        Environment.Exit(0);
-                        break;
-                }
-            }
-        }
         if (Account != null && Account.loggedIn && Account.IsEmployee)
         {
             if (Account.IsManager)
@@ -162,6 +113,55 @@ class MainMenu : IMenuLogic
                             Console.WriteLine("U bent al uitgelogd");
                         }
 
+                        break;
+                }
+            }
+        }
+        if (Account != null && Account.loggedIn)
+        {
+            while (true)
+            {
+                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten (En gelijk uitloggen)" };
+                string prompt = $"\nWelkom {Account.FullName}:";
+                int input = _myMenu.RunMenu(options, prompt);
+                switch (input)
+                {
+                    case 0:
+                        if (Account.loggedIn)
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Weet u het zeker? (j/n): ");
+                            Console.ResetColor();
+                            string userAnswer = Console.ReadLine()!;
+                            if (userAnswer == "j" || userAnswer == "J")
+                            {
+                                Account = null;
+                                Start();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("U bent al uitgelogd");
+                        }
+                        break;
+                    case 1:
+                        restaurantInfo.Start();
+                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
+                        Console.ReadKey(true);
+                        break;
+                    case 2:
+                        Reservation.ResStart(Account);
+                        break;
+                    case 3:
+                        Dishes.WelcomeMenu();
+                        Thread.Sleep(5000); ;
+                        break;
+                    case 4:
+                        Reservation.ResStart(Account);
+                        break;
+                    case 5:
+                        Environment.Exit(0);
                         break;
                 }
             }
