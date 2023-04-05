@@ -1,6 +1,6 @@
 using System.Data;
 using Project.Presentation;
-
+using Newtonsoft.Json;
 
 class MainMenu : IMenuLogic
 {
@@ -51,6 +51,81 @@ class MainMenu : IMenuLogic
                 }
             }
         }
+        if (Account != null && Account.loggedIn && Account.IsEmployee)
+        {
+            if (Account.IsManager)
+            {
+                //Manager menu
+                while (true)
+                {
+                    //Verander menu includes price changing
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht"};
+                    string prompt = $"\nWelkom {Account.FullName}:";
+                    int input = _myMenu.RunMenu(options, prompt);
+                    switch (input)
+                    {
+                        case 0:
+                            if (Account.loggedIn)
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("Weet u het zeker? (j/n): ");
+                                Console.ResetColor();
+                                string userAnswer = Console.ReadLine()!;
+                                if (userAnswer == "j" || userAnswer == "J")
+                                {
+                                    Account = null;
+                                    Start();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("U bent al uitgelogd");
+                            }
+                            break;
+                    }
+                }
+            }
+            //Employee menu
+            while (true)
+            {
+                string[] options = { "Uitloggen", "Overzicht Reserveringen","Contact Gegevens"};
+                string prompt = $"\nWelkom {Account.FullName}:";
+                int input = _myMenu.RunMenu(options, prompt);
+                switch (input)
+                {
+                    case 0:
+                        if (Account.loggedIn)
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Weet u het zeker? (j/n): ");
+                            Console.ResetColor();
+                            string userAnswer = Console.ReadLine()!;
+                            if (userAnswer == "j" || userAnswer == "J")
+                            {
+                                Account = null;
+                                Start();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("U bent al uitgelogd");
+                        }
+                        break;
+                    case 1:
+                        Console.WriteLine("Reserveringen");
+                        break;
+                    case 2:
+                        foreach (var item in AccountsAccess.LoadAllReservations())
+                        {
+                            Console.WriteLine(item.ToString());
+                        }
+                        break;
+                }
+            }
+        }
+        //User Login
         if (Account != null && Account.loggedIn)
         {
             while (true)
