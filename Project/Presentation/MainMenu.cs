@@ -89,7 +89,7 @@ class MainMenu : IMenuLogic
             //Employee menu
             while (true)
             {
-                string[] options = { "Uitloggen", "Overzicht Reserveringen","Contact Gegevens"};
+                string[] options = { "Uitloggen", "Reserveringen","Gegevens"};
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -114,13 +114,13 @@ class MainMenu : IMenuLogic
                         }
                         break;
                     case 1:
-                        Console.WriteLine("Reserveringen");
+                        
+                        Console.WriteLine("Hello WOrld");
+                        Thread.Sleep(5000); 
                         break;
                     case 2:
-                        foreach (var item in AccountsAccess.LoadAllReservations())
-                        {
-                            Console.WriteLine(item.ToString());
-                        }
+                        
+                        EmployeeManagerLogic.Start();
                         break;
                 }
             }

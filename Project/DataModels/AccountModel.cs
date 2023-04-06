@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-class AccountModel
+public class AccountModel:IComparable<AccountModel>
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -31,6 +31,17 @@ class AccountModel
         FullName = fullName;
         IsEmployee = isemployee;
         IsManager = ismanager;
+    }
+    // can only be placed here, is used in EmployeeManagerLogic
+    public int CompareTo(AccountModel other)
+    {
+        if (other == null) { return 1;}
+        int res = EmailAddress.CompareTo(other.EmailAddress);
+        if (res == 0) 
+        {
+            res = Id.CompareTo(other.Id);
+        }
+        return res;
     }
 
 }
