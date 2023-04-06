@@ -25,7 +25,7 @@ public class EmployeeManagerLogic : IMenuLogic
 
                 break;
             case 1:
-                Console.WriteLine("Who are you looking for?");
+                Console.WriteLine("Wie zoek je naar?");
                 string person = Console.ReadLine();
                 GetCustomer<string>(person);
                 break;
@@ -60,7 +60,7 @@ public class EmployeeManagerLogic : IMenuLogic
                 {
                     case 0:
                         Console.Clear();
-                        Console.WriteLine("Accounts gesorteerd 1-10");
+                        Console.WriteLine("Accounts gesorteerd laagst-hoogst");
                         foreach (var account in Useraccounts)
                         {
                             Console.WriteLine(
@@ -71,7 +71,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     case 1:
                         Console.Clear();
                         Useraccounts.Reverse();
-                        Console.WriteLine("Accounts gesorteerd 10-1");
+                        Console.WriteLine("Accounts gesorteerd hoogst-laagst");
                         foreach (var account in Useraccounts)
                         {
                             Console.WriteLine(

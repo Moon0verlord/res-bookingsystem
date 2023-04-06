@@ -10,7 +10,7 @@ class MainMenu : IMenuLogic
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
-    public static void Start(AccountModel acc = null)
+    public static void Start(AccountModel? acc = null)
     {
         if (Account == null)
         {
