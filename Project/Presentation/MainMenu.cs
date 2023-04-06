@@ -119,7 +119,6 @@ class MainMenu : IMenuLogic
                         Thread.Sleep(5000); 
                         break;
                     case 2:
-                        
                         EmployeeManagerLogic.Start();
                         break;
                 }
