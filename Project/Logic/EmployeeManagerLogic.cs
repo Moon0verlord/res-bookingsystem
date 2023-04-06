@@ -38,12 +38,25 @@ public class EmployeeManagerLogic : IMenuLogic
         var Useraccounts = AccountsAccess.LoadAll().FindAll(x => x.IsEmployee == false);
         if (item is string)
         {
+            List<string> accountsFound = new List<string>();
             Console.Clear();
             foreach (var Account in Useraccounts)
             {
                 if (Account.FullName == item as string || Account.EmailAddress == item as string)
                 {
-                    Console.WriteLine($"Id:{Account.Id}, Name:{Account.FullName}, Email:{Account.EmailAddress}");
+                    accountsFound.Add($"Id:{Account.Id}, Name:{Account.FullName}, Email:{Account.EmailAddress}");
+                }
+            }
+
+            if (accountsFound.Count == 0)
+            {
+                Console.WriteLine("Geen account/s gevonden");
+            }
+            else
+            {
+                foreach (var account in accountsFound)
+                {
+                    Console.WriteLine(account);
                 }
             }
             Console.WriteLine("Druk op een knop om terug te gaan naar het Employee menu.");
