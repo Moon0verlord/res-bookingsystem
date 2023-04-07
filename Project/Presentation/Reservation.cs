@@ -66,6 +66,7 @@ static class Reservation
     public static void ResMenu(string email)
     {
         Console.Clear();
+        
         Console.WriteLine($"U kunt alleen een reservatie maken voor de hudige maand ({ReservationsLogic.CurMonth})\nKies een dag van de week: \n");
         var thisWeek = Reservations.PopulateDates();
         foreach (DateTime date in thisWeek)
@@ -87,6 +88,7 @@ static class Reservation
             case "j":
             case "Ja":
                 Reservations.CreateReservation(email, res_Date, chosenTable);
+                EmailLogic.SendEmailNoAccount(email, "Naam", chosenTable, res_Date);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");
                 Thread.Sleep(1500);
