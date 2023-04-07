@@ -12,57 +12,15 @@
     "isReserved": true
   },
   {
-    "table_id": 14,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-11T17:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 16,
-    "emailAddress": "@@@@@",
-    "res_date": "2023-04-14T21:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 16,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-14T17:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 12,
-    "emailAddress": "Johannes@res.nl",
-    "res_date": "2023-04-14T18:30:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 6,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-14T18:00:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 12,
-    "emailAddress": "1058740@hr.nl",
+    "table_id": 15,
+    "emailAddress": "n@b.,c",
     "res_date": "2023-04-14T16:00:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 16,
-    "emailAddress": "1058740@hr.nl",
-    "res_date": "2023-04-14T16:00:00+02:00",
-    "isReserved": true
-  },
-  {
-    "table_id": 17,
-    "emailAddress": "1058740@hr.nl",
-    "res_date": "2023-04-14T17:30:00+02:00",
     "isReserved": true
   },
   {
     "table_id": 11,
     "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-22T20:00:00+02:00",
+    "res_date": "2023-04-14T16:00:00+02:00",
     "isReserved": true
   }
 ]

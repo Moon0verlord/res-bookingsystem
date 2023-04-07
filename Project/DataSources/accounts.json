@@ -22,5 +22,37 @@
     "fullName": "Johannes",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 4,
+    "emailAddress": "n@b.c",
+    "password": "xyz",
+    "fullName": "Gozer",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 5,
+    "emailAddress": "1058740@hr.nl",
+    "password": "xyz",
+    "fullName": "Martijn",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 6,
+    "emailAddress": "n@b.,c",
+    "password": "xyz",
+    "fullName": "presoon",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 7,
+    "emailAddress": "martijnwarnas@icloud.com",
+    "password": "xyz",
+    "fullName": "MartijnW",
+    "Employee": false,
+    "Manager": false
   }
 ]

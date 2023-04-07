@@ -1,6 +1,10 @@
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+
 static class Reservation
 {
     private static MenuLogic _myMenu = new MenuLogic();
@@ -119,17 +123,63 @@ static class Reservation
         Console.Clear();
         bool CheckIfRes = false;
         List<ReservationModel> AllRes = AccountsAccess.LoadAllReservations();
+        List<string> ReservationsPerson = new();
+        List<int> ReservationPersonPositions = new();
+        //$"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}."
         foreach (ReservationModel res in AllRes)
         {
             if (Email == res.EmailAddress && res.Date > DateTime.Now)
             {
-                Console.WriteLine($"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}.");
+                ReservationsPerson.Add($"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}.");
+                ReservationPersonPositions.Add(AllRes.FindIndex(a => a == res));
                 CheckIfRes = true;
             }
         }
+
         if (CheckIfRes == false)
         {
             Console.WriteLine("Er staan nog geen reserveringen open met dit emailaddres.");
+        }
+        else
+        {
+            ReservationsPerson.Add("Ga terug");
+            while (true)
+            {
+                var reserv_input = _myMenu.RunMenu(ReservationsPerson.ToArray(), "Reserveringen");
+                switch (ReservationsPerson[reserv_input])
+                {
+                    case "Ga terug":
+                        MainMenu.Start();
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Wilt u deze reservatie verwijderen?");
+                        var Choice = Console.ReadLine();
+                        switch (Choice)
+                        {
+                            case "J":
+                            case "j":
+                            case "Ja":
+                                case "ja":
+                                Console.WriteLine("De reservatie is verwijderd");
+                                AllRes.RemoveAt(ReservationPersonPositions[reserv_input]);
+                                ReservationsPerson.RemoveAt(reserv_input);
+                                AccountsAccess.WriteAllReservations(AllRes);
+                                Thread.Sleep(5000);
+                                break;
+                            case "N":case "n":case "Nee":case "nee":
+                                Console.WriteLine("De reservatie is niet verwijderd");
+                                Thread.Sleep(2000);
+                                break;
+                                
+                        }
+
+                        break;
+
+
+                }
+
+            }
         }
     }
 }
