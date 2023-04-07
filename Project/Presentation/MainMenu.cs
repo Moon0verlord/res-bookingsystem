@@ -59,7 +59,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     //Verander menu includes price changing
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht"};
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht","Verander restaurant layout"};
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
@@ -82,6 +82,21 @@ class MainMenu : IMenuLogic
                             {
                                 Console.WriteLine("U bent al uitgelogd");
                             }
+                            break;
+                        case 1:
+                            EmployeeManagerLogic.AddEmployee();
+                            break;
+                        case 2:
+                            EmployeeManagerLogic.ChangeMenu();
+                            break;
+                        case 3:
+                            EmployeeManagerLogic.AddSpecialEvent();
+                            break;
+                        case 4:
+                            EmployeeManagerLogic.CheckReservations();
+                            break;
+                        case 5:
+                            EmployeeManagerLogic.RestaurantLayout();
                             break;
                     }
                 }
@@ -114,7 +129,7 @@ class MainMenu : IMenuLogic
                         }
                         break;
                     case 1:
-                        EmployeeManagerLogic.Start();
+                        EmployeeManagerLogic.CheckReservations();
                         break;
                     
                 }

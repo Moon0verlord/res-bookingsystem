@@ -22,30 +22,5 @@
     "fullName": "Johannes",
     "Employee": false,
     "Manager": false
-  },
-  {
-    "id": 4,
-    "emailAddress": "dirk@res.nl",
-    "password": "xyz",
-    "fullName": "dirk",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 5,
-    "emailAddress": "Karel@res.nl",
-    "password": "xyz",
-    "fullName": "Karel",
-    "Employee": false,
-    "Manager": false
-  }
-,
-  {
-    "id": 6,
-    "emailAddress": "Caroline@res.nl",
-    "password": "xyz",
-    "fullName": "Caroline",
-    "Employee": false,
-    "Manager": false
   }
 ]
