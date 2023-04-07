@@ -62,7 +62,7 @@ class ReservationsLogic
                     }
                     else
                     {
-                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                        ReservationModel resm = new ReservationModel(i, null!, new DateTime(0));
                         resm.isReserved = false;
                         tablesToAdd.Add(resm);
                     }
@@ -70,7 +70,7 @@ class ReservationsLogic
             }
             else
             {
-                ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                ReservationModel resm = new ReservationModel(i, null!, new DateTime(0));
                 resm.isReserved = false;
                 tablesToAdd.Add(resm);
             }

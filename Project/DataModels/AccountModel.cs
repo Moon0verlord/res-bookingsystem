@@ -22,7 +22,7 @@ public class AccountModel:IComparable<AccountModel>
     public bool IsManager { get; set; }
     
     [JsonIgnore]
-    public bool loggedIn { get; set; }
+    public bool LoggedIn { get; set; }
     public AccountModel(int id, string emailAddress, string password, string fullName,bool isemployee,bool ismanager)
     {
         Id = id;
@@ -33,7 +33,7 @@ public class AccountModel:IComparable<AccountModel>
         IsManager = ismanager;
     }
     // can only be placed here, is used in EmployeeManagerLogic
-    public int CompareTo(AccountModel other)
+    public int CompareTo(AccountModel? other)
     {
         if (other == null) { return 1;}
         int res = EmailAddress.CompareTo(other.EmailAddress);

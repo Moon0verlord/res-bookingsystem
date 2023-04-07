@@ -97,7 +97,7 @@ static class UserLogin
                             Console.Clear();
                             Console.WriteLine("Welkom terug " + acc.FullName + "!");
                             Console.WriteLine("Uw e-mail is " + acc.EmailAddress);
-                            acc.loggedIn = true;
+                            acc.LoggedIn = true;
                             Thread.Sleep(2000);
                             MainMenu.Start(acc);
                         }

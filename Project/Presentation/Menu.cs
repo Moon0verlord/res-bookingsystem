@@ -38,7 +38,7 @@ public static class Dishes
 
     public static void JsonCursor(string choice)
     {
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
         Console.Clear();
@@ -46,7 +46,7 @@ public static class Dishes
         Console.WriteLine("-------");
 
         Console.WriteLine("2 Gangen:");
-        foreach (var course in menu[choice]["2_Gangen"])
+        foreach (var course in menu[choice]!["2_Gangen"]!)
         {
             string appetizer = (string)course["Voorgerecht"]!;
             string entree = (string)course["Maaltijd"]!;
@@ -56,7 +56,7 @@ public static class Dishes
         }
 
         Console.WriteLine("3 Gangen:");
-        foreach (var course in menu[choice]["3_Gangen"])
+        foreach (var course in menu[choice]!["3_Gangen"]!)
         {
             string appetizer = (string)course["Voorgerecht"]!;
             string entree = (string)course["Maaltijd"]!;
@@ -68,7 +68,7 @@ public static class Dishes
         }
 
         Console.WriteLine("4 Gangen:");
-        foreach (var course in menu[choice]["4_Gangen"])
+        foreach (var course in menu[choice]!["4_Gangen"]!)
         {
             string appetizer = (string)course["Voorgerecht"]!;
             string soup = (string)course["Soep"]!;
@@ -138,19 +138,19 @@ public static class Dishes
         }
         
         // grabs dishes from json
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
         JObject dishes = JObject.Parse(json);
-        JObject dish = (JObject)dishes[type];
-        JArray DishArray = (JArray)dish[course];
+        JObject dish = (JObject)dishes[type]!;
+        JArray DishArray = (JArray)dish[course]!;
         // grabs menu from json
-        string path2 = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
+        string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
         JObject MenuOBJ = JObject.Parse(menu);
         // adds dish to menu
-        JArray menuCourse = (JArray)MenuOBJ[type][course];
+        JArray menuCourse = (JArray)MenuOBJ[type]![course]!;
         JObject dishtoadd = DisplayOptions(type, course);
-        menuCourse[0] = dishtoadd;
+        menuCourse![0] = dishtoadd;
         File.WriteAllText(path2, MenuOBJ.ToString());
         // displays added dish
         Console.ForegroundColor = ConsoleColor.Green;
@@ -164,11 +164,11 @@ public static class Dishes
     // displays and returns selection to add to menu
     public static JObject DisplayOptions(string type, string course)
     {
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
         JObject dishes = JObject.Parse(json);
-        JObject dish = (JObject)dishes[type];
-        JArray DishArray = (JArray)dish[course];
+        JObject dish = (JObject)dishes[type]!;
+        JArray dishArray = (JArray)dish[course]!;
         // displays dishes based on course
         string dish1 = "";
         string dish2 = "";
@@ -177,22 +177,22 @@ public static class Dishes
         switch (course)
         {
             case "2_Gangen":
-                 dish1 = $"Voorgerecht: {DishArray[0]["Voorgerecht"]} \nMaaltijd: {DishArray[0]["Maaltijd"]}\n";
-                 dish2 = $"Voorgerecht: {DishArray[1]["Voorgerecht"]} \nMaaltijd: {DishArray[1]["Maaltijd"]}\n";
-                 dish3 = $"Voorgerecht: {DishArray[2]["Voorgerecht"]} \nMaaltijd: {DishArray[2]["Maaltijd"]}\n";
-                 dish4 = $"Voorgerecht: {DishArray[3]["Voorgerecht"]} \nMaaltijd: {DishArray[3]["Maaltijd"]}\n";
+                 dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nMaaltijd: {dishArray[0]["Maaltijd"]}\n";
+                 dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nMaaltijd: {dishArray[1]["Maaltijd"]}\n";
+                 dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nMaaltijd: {dishArray[2]["Maaltijd"]}\n";
+                 dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nMaaltijd: {dishArray[3]["Maaltijd"]}\n";
                 break;
             case "3_Gangen":
-                dish1 = $"Voorgerecht: {DishArray[0]["Voorgerecht"]} \nMaaltijd: {DishArray[0]["Maaltijd"]} \nNagerecht: {DishArray[0]["Nagerecht"]}\n";
-                dish2 = $"Voorgerecht: {DishArray[1]["Voorgerecht"]} \nMaaltijd: {DishArray[1]["Maaltijd"]} \nNagerecht: {DishArray[1]["Nagerecht"]}\n";
-                dish3 = $"Voorgerecht: {DishArray[2]["Voorgerecht"]} \nMaaltijd: {DishArray[2]["Maaltijd"]} \nNagerecht: {DishArray[2]["Nagerecht"]}\n";
-                dish4 = $"Voorgerecht: {DishArray[3]["Voorgerecht"]} \nMaaltijd: {DishArray[3]["Maaltijd"]} \nNagerecht: {DishArray[3]["Nagerecht"]}\n";
+                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nMaaltijd: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
+                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nMaaltijd: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
+                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nMaaltijd: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
+                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nMaaltijd: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
                 break;
             case "4_Gangen":
-                dish1 = $"Voorgerecht: {DishArray[0]["Voorgerecht"]} \nSoep: {DishArray[0]["Soep"]} \nMaaltijd: {DishArray[0]["Maaltijd"]} \nNagerecht: {DishArray[0]["Nagerecht"]}\n";
-                dish2 = $"Voorgerecht: {DishArray[1]["Voorgerecht"]} \nSoep: {DishArray[1]["Soep"]} \nMaaltijd: {DishArray[1]["Maaltijd"]} \nNagerecht: {DishArray[1]["Nagerecht"]}\n";
-                dish3 = $"Voorgerecht: {DishArray[2]["Voorgerecht"]} \nSoep: {DishArray[2]["Soep"]} \nMaaltijd: {DishArray[2]["Maaltijd"]} \nNagerecht: {DishArray[2]["Nagerecht"]}\n";
-                dish4 = $"Voorgerecht: {DishArray[3]["Voorgerecht"]} \nSoep: {DishArray[3]["Soep"]} \nMaaltijd: {DishArray[3]["Maaltijd"]} \nNagerecht: {DishArray[3]["Nagerecht"]}\n";
+                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nSoep: {dishArray[0]["Soep"]} \nMaaltijd: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
+                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nSoep: {dishArray[1]["Soep"]} \nMaaltijd: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
+                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nSoep: {dishArray[2]["Soep"]} \nMaaltijd: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
+                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nSoep: {dishArray[3]["Soep"]} \nMaaltijd: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
                 break;
         }
         // returns selection
@@ -202,13 +202,13 @@ public static class Dishes
         switch (input2)
         {
             case 0:
-                return (JObject)DishArray.ElementAt(0);
+                return (JObject)dishArray!.ElementAt(0);
             case 1:
-                return (JObject)DishArray.ElementAt(1);
+                return (JObject)dishArray!.ElementAt(1);
             case 2:
-                return (JObject)DishArray.ElementAt(2);
+                return (JObject)dishArray!.ElementAt(2);
             case 3:
-                return (JObject)DishArray.ElementAt(3);
+                return (JObject)dishArray!.ElementAt(3);
             case 4:
                 MainMenu.Start();
                 break;
@@ -217,7 +217,7 @@ public static class Dishes
                 break;
         }
 
-        return null;
+        return null!;
     }
     
     

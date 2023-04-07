@@ -51,7 +51,7 @@ class MainMenu : IMenuLogic
                 }
             }
         }
-        if (Account != null && Account.loggedIn && Account.IsEmployee)
+        if (Account != null && Account.LoggedIn && Account.IsEmployee)
         {
             if (Account.IsManager)
             {
@@ -65,7 +65,7 @@ class MainMenu : IMenuLogic
                     switch (input)
                     {
                         case 0:
-                            if (Account.loggedIn)
+                            if (Account.LoggedIn)
                             {
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -110,7 +110,7 @@ class MainMenu : IMenuLogic
                 switch (input)
                 {
                     case 0:
-                        if (Account.loggedIn)
+                        if (Account.LoggedIn)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -136,7 +136,7 @@ class MainMenu : IMenuLogic
             }
         }
         //User Login
-        if (Account != null && Account.loggedIn)
+        if (Account != null && Account.LoggedIn)
         {
             while (true)
             {
@@ -146,7 +146,7 @@ class MainMenu : IMenuLogic
                 switch (input)
                 {
                     case 0:
-                        if (Account.loggedIn)
+                        if (Account.LoggedIn)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
