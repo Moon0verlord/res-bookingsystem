@@ -95,15 +95,15 @@
         /* this checks every index in the 2D array so you can never land on an occupied spot.
         Normally this only gets checked after a key press, but at the start of the program we should also check
         this right away.*/
-        while (forbiddenIndex.Contains((_rowIndex, _columnIndex)) || _columnIndex <= -1)
-        {
-            _columnIndex--;
-            if (_columnIndex <= -1) _columnIndex = _dateTimes.GetLength(1) - 1;
-        }
         while (forbiddenIndex.Contains((_rowIndex, _columnIndex)) || _rowIndex >= _dateTimes.GetLength(0))
         {
             _rowIndex++;
             if (_rowIndex >= _dateTimes.GetLength(0)) _rowIndex = 0;
+        }
+        while (forbiddenIndex.Contains((_rowIndex, _columnIndex)) || _columnIndex <= -1)
+        {
+            _columnIndex--;
+            if (_columnIndex <= -1) _columnIndex = _dateTimes.GetLength(1) - 1;
         }
         while (forbiddenIndex.Contains((_rowIndex, _columnIndex)) || _columnIndex >= _dateTimes.GetLength(1))
         {

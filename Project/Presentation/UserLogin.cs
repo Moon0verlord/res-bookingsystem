@@ -15,7 +15,7 @@ static class UserLogin
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
-                "Nog geen account?\n  >Log in met huidige gegevens<", "Log in met huidige gegevens", "Afsluiten" };
+                "Nog geen account?\n  >Maak account hier met huidige gegevens<", "Log in met huidige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
@@ -54,7 +54,7 @@ static class UserLogin
                     if (userEmail == null || userPassword == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nVul uw gegevens in op een account aan te maken.");
+                        Console.WriteLine("\nVul eerst uw gegevens in om een account aan te maken.");
                         Thread.Sleep(1500);
                         Console.ResetColor();
                     }

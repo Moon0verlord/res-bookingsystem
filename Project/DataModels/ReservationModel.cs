@@ -21,5 +21,4 @@ public class ReservationModel
         EmailAddress = emailAddress;
         Date = date;
     }
-
 }

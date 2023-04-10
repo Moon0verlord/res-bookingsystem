@@ -115,6 +115,7 @@
 
     public int RunMenu(string[] options, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
+        _currentIndex = 0;
         _options = options;
         ConsoleKey keyPressed;
         Console.Clear();
