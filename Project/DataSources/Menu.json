@@ -8,9 +8,9 @@
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Vegan Caesar Salad",
-        "Maaltijd": "Grilled Portobello Mushroom Steaks",
-        "Nagerecht": "Vegan Chocolate Mousse"
+        "Voorgerecht": "Veganistische Deviled Eggs",
+        "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
+        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars"
       }
     ],
     "4_Gangen": [
@@ -73,10 +73,6 @@
       {
         "Voorgerecht": "Mixed Green Salad",
         "Maaltijd": "Roasted Vegetable Risotto"
-      },
-      {
-        "Voorgerecht": "Tomato and Basil Bruschetta",
-        "Maaltijd": "Spinach and Feta Stuffed Portobello Mushrooms"
       }
     ],
     "3_Gangen": [
