@@ -136,20 +136,13 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-        
-        // grabs dishes from json
-        string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
-        string json = File.ReadAllText(path);
-        JObject dishes = JObject.Parse(json);
-        JObject dish = (JObject)dishes[type];
-        JArray DishArray = (JArray)dish[course];
         // grabs menu from json
         string path2 = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
         JObject MenuOBJ = JObject.Parse(menu);
         // adds dish to menu
         JArray menuCourse = (JArray)MenuOBJ[type][course];
-        JObject dishtoadd = DisplayOptions(type, course);
+        JObject dishtoadd = DishesCursor(type, course);
         menuCourse[0] = dishtoadd;
         File.WriteAllText(path2, MenuOBJ.ToString());
         // displays added dish
@@ -162,7 +155,7 @@ public static class Dishes
     }
 
     // displays and returns selection to add to menu
-    public static JObject DisplayOptions(string type, string course)
+    public static JObject DishesCursor(string type, string course)
     {
         string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
