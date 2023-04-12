@@ -15,7 +15,7 @@ static class UserLogin
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
-                "Nog geen account?\n  >Log in met huidige gegevens<", "Log in met huidige gegevens", "Afsluiten" };
+                "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
