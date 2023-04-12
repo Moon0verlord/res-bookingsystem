@@ -29,25 +29,7 @@ class ReservationsLogic
 
         return dates;
     }
-
-    public List<TimeSpan> PopulateTimes()
-    {
-        var timeList = new List<TimeSpan>();
-        for (int hours = 16; hours < 22; hours++)
-        {
-            for(int minutes = 0;minutes<=30;minutes+=30)
-            {
-                timeList.Add(new TimeSpan(hours, minutes, 0));
-                if(hours == 21 && minutes == 30)
-                {
-                    break;
-                }
-            }
-        }
-        
-        return timeList;
-    }
-
+    
     public List<ReservationModel> PopulateTables(DateTime res_Date)
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();

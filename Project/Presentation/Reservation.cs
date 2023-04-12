@@ -6,9 +6,17 @@ static class Reservation
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
-    
+    private static int amountOfPeople;
+    private static DateTime chosenDate;
+    private static (TimeSpan, TimeSpan) chosenTimeslot;
+    private static int chosenTable;
+
     public static void ResStart(AccountModel acc = null)
     {
+        amountOfPeople = 0;
+        chosenDate = default;
+        chosenTimeslot = (default, default);
+        chosenTable = 0;
         Console.Clear();
         if (acc == null)
         {
@@ -68,13 +76,13 @@ static class Reservation
     public static void ResMenu(string email)
     {
         Console.Clear();
-        int amountOfPeople = ChooseGroupSize();
+        amountOfPeople = ChooseGroupSize();
         if (amountOfPeople <= 0) ResStart();
-        var chosenDate = ChooseDate();
-        if (chosenDate == default(DateTime)) ChooseGroupSize();
-        var chosenTimeslot = ChooseTimeslot();
-        if (chosenTimeslot == (default, default)) ChooseDate();
-        int chosenTable = ChooseTable(chosenDate);
+        else ChooseDate(email);
+        // if (chosenDate == default(DateTime)) ChooseGroupSize();
+        // var chosenTimeslot = ChooseTimeslot();
+        // if (chosenTimeslot == (default, default)) ChooseDate();
+        // int chosenTable = ChooseTable(chosenDate);
         // Console.ForegroundColor = ConsoleColor.Green;
         // Console.Clear();
         // Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
@@ -90,37 +98,6 @@ static class Reservation
         //         Thread.Sleep(1500);
         //         break;
         // }
-    }
-
-    // public static DateTime ChooseTime(Dictionary<int, DateTime> dictChoice)
-    // {
-    //     Console.Clear();
-    //     string prompt = "Kies hier een tijd voor de geselecteerde datum " +
-    //                       $"({dictChoice.Select(i => i.Value).FirstOrDefault().ToString("dd-MM-yyyy")})";
-    //     var timeList = Reservations.PopulateTimes();
-    //     int selectIndex = _my1DMenu.RunMenu(timeList.Select(i => i.ToString("hh\\:mm")).ToArray(), prompt, sideways: true, displayTime: true);
-    //     DateTime res_Date = dictChoice.Select(i => i.Value).FirstOrDefault().Date + timeList[selectIndex];
-    //     return res_Date;
-    // }
-
-    public static DateTime ChooseDate()
-    {
-        Console.Clear();
-        var thisMonth = Reservations.PopulateDates();
-        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
-        for (int i = 0; i < thisMonth.GetLength(1); i++)
-        {
-            Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
-        }
-        DateTime chosenDate = _my2DMenu.RunMenu(thisMonth, "", false);
-        return chosenDate;
-    }
-
-    public static int ChooseTable(DateTime res_Date)
-    {
-        var tablesOnly = Reservations.PopulateTables(res_Date);
-        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", false);
-        return selectedTable;
     }
 
     public static int ChooseGroupSize()
@@ -176,8 +153,24 @@ static class Reservation
             }
         }
     }
-
-    public static (TimeSpan, TimeSpan) ChooseTimeslot()
+    public static void ChooseDate(string email)
+    {
+        Console.Clear();
+        var thisMonth = Reservations.PopulateDates();
+        Console.WriteLine($"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
+        for (int i = 0; i < thisMonth.GetLength(1); i++)
+        {
+            Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
+        }
+        DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", false);
+        if (userChoice == default) ResMenu(email);
+        else
+        {
+            chosenDate = userChoice;
+            ChooseTimeslot(email);
+        }
+    }
+    public static void ChooseTimeslot(string email)
     {
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
@@ -188,23 +181,30 @@ static class Reservation
             case 0:
                 ts1 = new TimeSpan(0, 16, 0, 0);
                 ts2 = new TimeSpan(0, 18, 0, 0);
-                return (ts1, ts2);
+                chosenTimeslot = (ts1, ts2);
+                ChooseTable(chosenDate);
                 break;
             case 1:
                 ts1 = new TimeSpan(0, 18, 0, 0);
                 ts2 = new TimeSpan(0, 20, 0, 0);
-                return (ts1, ts2);
+                chosenTimeslot = (ts1, ts2);
+                ChooseTable(chosenDate);
                 break;
             case 2:
                 ts1 = new TimeSpan(0, 20, 0, 0);
                 ts2 = new TimeSpan(0, 22, 0, 0);
-                return (ts1, ts2);
+                chosenTimeslot = (ts1, ts2);
+                ChooseTable(chosenDate);
                 break;
             case 3:
-                return (ts1, ts2);
+                ChooseDate(email);
                 break;
         }
-
-        return (default, default);
+    }
+    public static void ChooseTable(DateTime res_Date)
+    {
+        var tablesOnly = Reservations.PopulateTables(res_Date);
+        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", false);
+        chosenTable = selectedTable;
     }
 }
