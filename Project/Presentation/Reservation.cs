@@ -9,6 +9,8 @@ static class Reservation
 {
     private static MenuLogic _myMenu = new MenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
+    
+    // starts the reservation process
     public static void ResStart(AccountModel acc = null)
     {
         Console.Clear();
@@ -20,7 +22,7 @@ static class Reservation
             {
                 Console.Clear();
                 string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
-                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan", "Afsluiten" };
+                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan","Reservering bekijken", "Afsluiten" };
                 int selectedIndex = _myMenu.RunMenu(options, prompt);
                 switch (selectedIndex)
                 {
@@ -53,8 +55,11 @@ static class Reservation
                         }
                         break;
                     case 2:
-                        MainMenu.Start();
+                        ViewRes(email);
                         break;
+                    case 3:
+                        MainMenu.Start();
+                            break;
                 }
             }
         }
@@ -118,6 +123,7 @@ static class Reservation
         return selectedTable;
     }
 
+    // displays reservation of the user
     public static void ViewRes(string Email)
     {
         Console.Clear();
@@ -153,7 +159,9 @@ static class Reservation
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wilt u deze reservatie verwijderen?");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
+                        Console.ResetColor();
                         var Choice = Console.ReadLine();
                         switch (Choice)
                         {
