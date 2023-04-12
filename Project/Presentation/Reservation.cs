@@ -22,7 +22,7 @@ static class Reservation
             {
                 Console.Clear();
                 string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
-                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan","Reservering bekijken", "Afsluiten" };
+                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan","Reserveringen bekijken", "Afsluiten" };
                 int selectedIndex = _myMenu.RunMenu(options, prompt);
                 switch (selectedIndex)
                 {
