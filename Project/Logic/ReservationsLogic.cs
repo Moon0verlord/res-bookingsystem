@@ -64,28 +64,29 @@ class ReservationsLogic
 
                             if (!noDuplicates)
                             {
-                                ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
-                                resm.isReserved = false;
-                                tablesToAdd.Add(resm);
+                                tablesToAdd.Add(AddDefaultTable(i));
                             }
                         }
                     }
-                    else
+                    else 
                     {
-                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
-                        resm.isReserved = false;
-                        tablesToAdd.Add(resm);
+                        tablesToAdd.Add(AddDefaultTable(i));
                     }
                 }
             }
             else
             {
-                ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
-                resm.isReserved = false;
-                tablesToAdd.Add(resm);
+                tablesToAdd.Add(AddDefaultTable(i));
             }
         }
         return tablesToAdd;
+    }
+
+    public ReservationModel AddDefaultTable(int id)
+    {
+        ReservationModel resm = new ReservationModel(id, null, new DateTime(0), 0, default, default);
+        resm.isReserved = false;
+        return resm;
     }
 
 
