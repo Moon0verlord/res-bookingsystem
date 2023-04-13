@@ -254,6 +254,7 @@
     {
         try
         {
+            forbiddenIndex.Clear();
             forbiddenIndex.Add(0);
             for (int i = 0; i < tables.Count(); i++)
             {
