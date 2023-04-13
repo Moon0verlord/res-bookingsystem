@@ -79,9 +79,9 @@
     public void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
     {
         //todo: check for group size
-        sizes.Add("Tafel voor 2");
-        sizes.Add("Tafel voor 4");
-        sizes.Add("Tafel voor 6");
+        sizes.Add(" Tafel voor 2");
+        sizes.Add(" Tafel voor 4");
+        sizes.Add(" Tafel voor 6");
         if (printPrompt) Console.WriteLine(prompt);
         Console.WriteLine();
         for (int i = 0; i < tables.Count; i++)
@@ -93,12 +93,12 @@
                 if (i == _currentIndex)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"> Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"  Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
             }
             else
