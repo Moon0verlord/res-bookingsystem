@@ -1,4 +1,4 @@
-using System.ComponentModel.Design;
+ using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 static class Reservation
@@ -79,25 +79,21 @@ static class Reservation
         amountOfPeople = ChooseGroupSize();
         if (amountOfPeople <= 0) ResStart();
         else ChooseDate(email);
-        // if (chosenDate == default(DateTime)) ChooseGroupSize();
-        // var chosenTimeslot = ChooseTimeslot();
-        // if (chosenTimeslot == (default, default)) ChooseDate();
-        // int chosenTable = ChooseTable(chosenDate);
-        // Console.ForegroundColor = ConsoleColor.Green;
-        // Console.Clear();
-        // Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
-        //                   $"\nTijd: {res_Date.TimeOfDay.ToString("hh\\:mm")}\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
-        // Console.ResetColor();
-        // string answer = Console.ReadLine()!;
-        // switch (answer.ToLower())
-        // {
-        //     case "ja": case "j":
-        //         Reservations.CreateReservation(email, res_Date, chosenTable);
-        //         Console.Clear();
-        //         Console.WriteLine("\nReservatie is gemaakt.");
-        //         Thread.Sleep(1500);
-        //         break;
-        // }
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Clear();
+        Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                          $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
+        Console.ResetColor();
+        string answer = Console.ReadLine()!;
+        switch (answer.ToLower())
+        {
+            case "ja": case "j":
+                Reservations.CreateReservation(email, chosenDate, chosenTable, amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
+                Console.Clear();
+                Console.WriteLine("\nReservatie is gemaakt.");
+                Thread.Sleep(1500);
+                break;
+        }
     }
 
     public static int ChooseGroupSize()
@@ -182,29 +178,29 @@ static class Reservation
                 ts1 = new TimeSpan(0, 16, 0, 0);
                 ts2 = new TimeSpan(0, 18, 0, 0);
                 chosenTimeslot = (ts1, ts2);
-                ChooseTable(chosenDate);
+                ChooseTable(chosenDate, chosenTimeslot);
                 break;
             case 1:
                 ts1 = new TimeSpan(0, 18, 0, 0);
                 ts2 = new TimeSpan(0, 20, 0, 0);
                 chosenTimeslot = (ts1, ts2);
-                ChooseTable(chosenDate);
+                ChooseTable(chosenDate, chosenTimeslot);
                 break;
             case 2:
                 ts1 = new TimeSpan(0, 20, 0, 0);
                 ts2 = new TimeSpan(0, 22, 0, 0);
                 chosenTimeslot = (ts1, ts2);
-                ChooseTable(chosenDate);
+                ChooseTable(chosenDate, chosenTimeslot);
                 break;
             case 3:
                 ChooseDate(email);
                 break;
         }
     }
-    public static void ChooseTable(DateTime res_Date)
+    public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
-        var tablesOnly = Reservations.PopulateTables(res_Date);
-        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", false);
+        var tablesOnly = Reservations.PopulateTables(res_Date, chosenTime);
+        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", amountOfPeople, false);
         chosenTable = selectedTable;
     }
 }

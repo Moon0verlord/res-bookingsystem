@@ -4,6 +4,7 @@
     private string[] _options = null;
     private List<string> sizes = new List<string>();
     private List<int> forbiddenIndex = new List<int>();
+    private int res_GroupSize = default;
     public void DisplayOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
@@ -76,6 +77,7 @@
 
     public void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
     {
+        //todo: check for group size
         sizes.Add("Tafel voor 2");
         sizes.Add("Tafel voor 4");
         sizes.Add("Tafel voor 6");
@@ -189,9 +191,10 @@
         return new Dictionary<int, DateTime>() { { _currentIndex, options[_currentIndex] } };
     }
 
-    public int RunTableMenu(List<ReservationModel> tables, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
+    public int RunTableMenu(List<ReservationModel> tables, string prompt, int groupsize, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
         _currentIndex = 1;
+        res_GroupSize = groupsize;
         ConsoleKey keyPressed;
         Console.Clear();
         AddForbiddenIndexes(tables);

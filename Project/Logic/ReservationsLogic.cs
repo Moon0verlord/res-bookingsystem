@@ -30,7 +30,7 @@ class ReservationsLogic
         return dates;
     }
     
-    public List<ReservationModel> PopulateTables(DateTime res_Date)
+    public List<ReservationModel> PopulateTables(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
         List<ReservationModel> tablesToAdd = new List<ReservationModel>();
@@ -43,13 +43,15 @@ class ReservationsLogic
             {
                 foreach (ReservationModel table in tablesWithThisID)
                 {
-                    if (table.Date == res_Date)
+                    if (table.Date == res_Date.Date)
                     {
-                        tablesToAdd.Add(table);
+                        if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
+                            table.isReserved = true;
+                            tablesToAdd.Add(table);
                     }
                     else
                     {
-                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                        ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
                         resm.isReserved = false;
                         tablesToAdd.Add(resm);
                     }
@@ -57,7 +59,7 @@ class ReservationsLogic
             }
             else
             {
-                ReservationModel resm = new ReservationModel(i, null, new DateTime(0));
+                ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
                 resm.isReserved = false;
                 tablesToAdd.Add(resm);
             }
@@ -66,9 +68,9 @@ class ReservationsLogic
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, int chosenTable)
+    public void CreateReservation(string email, DateTime res_Date, int chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
     {
-        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date);
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime);
         AccountsAccess.AddReservation(newReservation);
     }
 }
