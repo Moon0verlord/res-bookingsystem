@@ -52,8 +52,17 @@ class ReservationsLogic
                         }
                         else
                         {
-                            var check = tablesToAdd.FirstOrDefault(x => x.Id == i);
-                            if (check != null && check == default)
+                            bool noDuplicates = true;
+                            foreach (ReservationModel check in tablesToAdd)
+                            {
+                                if (check != null)
+                                {
+                                    if (check.Id == i)
+                                        noDuplicates = false;
+                                }
+                            }
+
+                            if (!noDuplicates)
                             {
                                 ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
                                 resm.isReserved = false;
