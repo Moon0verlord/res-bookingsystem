@@ -4,6 +4,7 @@
     private string[] _options = null;
     private List<string> sizes = new List<string>();
     private List<int> forbiddenIndex = new List<int>();
+    private List<ReservationModel> tables = new List<ReservationModel>();
     private int res_GroupSize = default;
     public void DisplayOptions(string prompt, bool printPrompt)
     {
@@ -193,11 +194,13 @@
 
     public int RunTableMenu(List<ReservationModel> tables, string prompt, int groupsize, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
-        _currentIndex = 1;
-        res_GroupSize = groupsize;
+        this.tables = tables;
+        this.res_GroupSize = groupsize;
+        this._currentIndex = 1;
         ConsoleKey keyPressed;
         Console.Clear();
-        AddForbiddenIndexes(tables);
+        AddForbiddenIndexes();
+        CheckPosition();
         do
         {
             Console.SetCursorPosition(0, 0);
@@ -249,8 +252,25 @@
         else if (_currentIndex > 9) return _currentIndex - 1;
         else return _currentIndex;
     }
+    
+    public void CheckPosition()
+    {
+        /* this checks every index in the 1D array so you can never land on an occupied spot.
+        Normally this only gets checked after a key press, but at the start of the program we should also check
+        this right away.*/
+        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex <= -1)
+        {
+            _currentIndex--;
+            if (_currentIndex <= -1) _currentIndex = tables.Count - 1;
+        }
+        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex >= tables.Count)
+        {
+            _currentIndex++;
+            if (_currentIndex >= tables.Count) _currentIndex = 0;
+        }
+    }
 
-    public void AddForbiddenIndexes(List<ReservationModel> tables)
+    public void AddForbiddenIndexes()
     {
         try
         {
