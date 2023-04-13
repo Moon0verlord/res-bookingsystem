@@ -46,8 +46,20 @@ class ReservationsLogic
                     if (table.Date == res_Date.Date)
                     {
                         if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
+                        {
                             table.isReserved = true;
                             tablesToAdd.Add(table);
+                        }
+                        else
+                        {
+                            var check = tablesToAdd.FirstOrDefault(x => x.Id == i);
+                            if (check != null && check == default)
+                            {
+                                ReservationModel resm = new ReservationModel(i, null, new DateTime(0), 0, default, default);
+                                resm.isReserved = false;
+                                tablesToAdd.Add(resm);
+                            }
+                        }
                     }
                     else
                     {
