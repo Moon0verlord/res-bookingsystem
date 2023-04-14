@@ -6,6 +6,7 @@ static class Reservation
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
+    private static string userEmail;
     private static int amountOfPeople;
     private static DateTime chosenDate;
     private static (TimeSpan, TimeSpan) chosenTimeslot;
@@ -13,6 +14,7 @@ static class Reservation
 
     public static void ResStart(AccountModel acc = null)
     {
+        userEmail = null;
         amountOfPeople = 0;
         chosenDate = default;
         chosenTimeslot = (default, default);
@@ -48,7 +50,8 @@ static class Reservation
                         if (email != null)
                         {
                             loop = false;
-                            ResMenu(email);
+                            userEmail = email;
+                            ResMenu();
                         }
                         else
                         {
@@ -66,29 +69,30 @@ static class Reservation
         }
         else
         {
-            ResMenu(acc.EmailAddress);
+            userEmail = acc.EmailAddress;
+            ResMenu();
         }
         //show available hours on requested date
         //User can select an hour
         //back to menu
     }
 
-    public static void ResMenu(string email)
+    public static void ResMenu()
     {
         Console.Clear();
         amountOfPeople = ChooseGroupSize();
         if (amountOfPeople <= 0) ResStart();
-        else ChooseDate(email);
+        else ChooseDate();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
-        Console.WriteLine($"Email:{email}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+        Console.WriteLine($"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
                           $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
         Console.ResetColor();
         string answer = Console.ReadLine()!;
         switch (answer.ToLower())
         {
             case "ja": case "j":
-                Reservations.CreateReservation(email, chosenDate, chosenTable, amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
+                Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");
                 Thread.Sleep(1500);
@@ -149,7 +153,7 @@ static class Reservation
             }
         }
     }
-    public static void ChooseDate(string email)
+    public static void ChooseDate()
     {
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
@@ -159,14 +163,14 @@ static class Reservation
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
         DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", false);
-        if (userChoice == default) ResMenu(email);
+        if (userChoice == default) ResMenu();
         else
         {
             chosenDate = userChoice;
-            ChooseTimeslot(email);
+            ChooseTimeslot();
         }
     }
-    public static void ChooseTimeslot(string email)
+    public static void ChooseTimeslot()
     {
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
@@ -193,14 +197,15 @@ static class Reservation
                 ChooseTable(chosenDate, chosenTimeslot);
                 break;
             case 3:
-                ChooseDate(email);
+                ChooseDate();
                 break;
         }
     }
     public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         var tablesOnly = Reservations.PopulateTables(res_Date, chosenTime);
-        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "", amountOfPeople, false);
-        chosenTable = selectedTable;
+        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
+        if (selectedTable != 0) chosenTable = selectedTable;
+        else ChooseTimeslot();
     }
 }

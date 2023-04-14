@@ -82,7 +82,7 @@
         sizes.Add(" Tafel voor 2");
         sizes.Add(" Tafel voor 4");
         sizes.Add(" Tafel voor 6");
-        if (printPrompt) Console.WriteLine(prompt);
+        if (printPrompt) Console.Write(prompt);
         Console.WriteLine();
         for (int i = 0; i < tables.Count; i++)
         {
@@ -243,6 +243,8 @@
                             if (_currentIndex >= tables.Count) _currentIndex = 0;
                         }
                         break;
+                    case ConsoleKey.Q:
+                        return 0;
                 }
             }
         } while (keyPressed != ConsoleKey.Enter);
