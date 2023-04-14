@@ -145,6 +145,7 @@ static class Reservation
         if (CheckIfRes == false)
         {
             Console.WriteLine("Er staan nog geen reserveringen open met dit emailaddres.");
+            Thread.Sleep(2000);
         }
         else
         {
