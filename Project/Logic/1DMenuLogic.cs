@@ -88,17 +88,18 @@
         {
             if (tables[i] != null)
             {
-                if (tables[i].isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                bool groupcheck = (res_GroupSize - tables[i].TableSize == 0 || res_GroupSize - tables[i].TableSize == -1);
+                if (tables[i].isReserved || !groupcheck) Console.ForegroundColor = ConsoleColor.Red;
                 else Console.ForegroundColor = ConsoleColor.Green;
                 if (i == _currentIndex)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine($"> Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"> Tafel {tables[i].Id}: {(!groupcheck ? $"Tafel onbeschikbaar voor uw groepsgrootte ({res_GroupSize})" : tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"  Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"  Tafel {tables[i].Id}: {(!groupcheck ? $"Tafel onbeschikbaar voor uw groepsgrootte ({res_GroupSize})" : tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
             }
             else
@@ -283,6 +284,10 @@
                 if (tables[i] != null)
                 {
                     if (tables[i].isReserved)
+                    {
+                        forbiddenIndex.Add(i);
+                    }
+                    else if (!(res_GroupSize - tables[i].TableSize == 0 || res_GroupSize - tables[i].TableSize == -1))
                     {
                         forbiddenIndex.Add(i);
                     }

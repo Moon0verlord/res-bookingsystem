@@ -85,6 +85,7 @@ static class Reservation
         else ChooseDate();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
+        //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
         Console.WriteLine($"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
                           $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
         Console.ResetColor();
@@ -107,7 +108,7 @@ static class Reservation
         {
             Console.ResetColor();
             string[] options = new[]
-                { "Met hoeveel mensen komt u?" + (amountofPeople != default ? $": {amountofPeople}" : ""), "Ga terug" };
+                { "Vul hier in met hoeveel mensen u komt.", "Ga terug" };
             int selectedIndex = _my1DMenu.RunMenu(options, "Kies hier uw groepsgrootte:");
             Console.Clear();
             switch (selectedIndex)

@@ -24,6 +24,9 @@ public class ReservationModel
     [JsonIgnore]
     public bool isReserved { get; set; }
     
+    [JsonIgnore]
+    public int TableSize { get; set; }
+    
     //todo: add reservation id
     public ReservationModel(int id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime)
     {

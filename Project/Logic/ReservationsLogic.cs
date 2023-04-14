@@ -34,11 +34,19 @@ class ReservationsLogic
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
         List<ReservationModel> tablesToAdd = new List<ReservationModel>();
-
+        // these are needed to set each table's maximum allowed size of 2, 4 and 6.
+        // Starts at -1 so that the first if statement makes the index start at 0.
+        List<int> CurrentTableSizes = new List<int>() { 2, 4, 6 };
+        int tableIndex = -1;
+        
         for (int i = 1; i <= 15; i++)
         {
             IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
-            if (i == 1 || i == 9 || i == 14) tablesToAdd.Add(null);
+            if (i == 1 || i == 9 || i == 14)
+            {
+                tablesToAdd.Add(null);
+                tableIndex++;
+            }
             if (tablesWithThisID.Count() >= 1)
             {
                 foreach (ReservationModel table in tablesWithThisID)
@@ -48,6 +56,7 @@ class ReservationsLogic
                         if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
                         {
                             table.isReserved = true;
+                            table.TableSize = CurrentTableSizes[tableIndex];
                             tablesToAdd.Add(table);
                         }
                         else
@@ -64,28 +73,32 @@ class ReservationsLogic
 
                             if (!noDuplicates)
                             {
-                                tablesToAdd.Add(AddDefaultTable(i));
+                                int size = CurrentTableSizes[tableIndex];
+                                tablesToAdd.Add(AddDefaultTable(i, size));
                             }
                         }
                     }
                     else 
                     {
-                        tablesToAdd.Add(AddDefaultTable(i));
+                        int size = CurrentTableSizes[tableIndex];
+                        tablesToAdd.Add(AddDefaultTable(i, size));
                     }
                 }
             }
             else
             {
-                tablesToAdd.Add(AddDefaultTable(i));
+                int size = CurrentTableSizes[tableIndex];
+                tablesToAdd.Add(AddDefaultTable(i, size));
             }
         }
         return tablesToAdd;
     }
 
-    public ReservationModel AddDefaultTable(int id)
+    public ReservationModel AddDefaultTable(int id, int size)
     {
         ReservationModel resm = new ReservationModel(id, null, new DateTime(0), 0, default, default);
         resm.isReserved = false;
+        resm.TableSize = size;
         return resm;
     }
 
