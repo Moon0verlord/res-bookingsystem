@@ -41,7 +41,7 @@ class ReservationsLogic
         
         for (int i = 1; i <= 15; i++)
         {
-            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i));
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
             if (i == 1 || i == 9 || i == 14)
             {
                 tablesToAdd.Add(null);
@@ -74,7 +74,9 @@ class ReservationsLogic
                             if (!noDuplicates)
                             {
                                 int size = CurrentTableSizes[tableIndex];
-                                tablesToAdd.Add(AddDefaultTable(i, size));
+                                var AddTable = AddDefaultTable(i, size);
+                                tablesToAdd.Add(AddTable);
+                                
                             }
                         }
                     }
