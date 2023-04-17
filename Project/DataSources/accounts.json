@@ -54,5 +54,37 @@
     "fullName": "MartijnW",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 8,
+    "emailAddress": "N@B.c",
+    "password": "xyz",
+    "fullName": "PersoonMan",
+    "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 9,
+    "emailAddress": "John@res.nl",
+    "password": "xcyz",
+    "fullName": "John doe",
+    "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 10,
+    "emailAddress": "Johnny@res.nl",
+    "password": "xyz",
+    "fullName": "Johhny joestar",
+    "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 11,
+    "emailAddress": "Dio@res.nl",
+    "password": "xyz",
+    "fullName": "Dio Brando",
+    "Employee": true,
+    "Manager": false
   }
 ]
