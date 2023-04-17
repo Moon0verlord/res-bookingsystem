@@ -6,6 +6,7 @@ namespace Project.Presentation;
 
 public static class Dishes
 {
+    private static int _currentIndex;
     
     static private MenuLogic _myMenu = new MenuLogic();
     public static void WelcomeMenu()
@@ -36,6 +37,8 @@ public static class Dishes
         }
     }
 
+    
+    // Displays the current dishes to the user
     public static void JsonCursor(string choice)
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
@@ -85,14 +88,16 @@ public static class Dishes
         }
     }
     
+    // adds the ability to update dishes on the menu
     public static void ManageMenu()
     {
         string type = "";
         string course = "";
-        
-        string[] options = { "vegetarian", "Fish", "Meat", "Vegan", "Terug naar hoofdmenu"};
+        // select type of food
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Bekijk het menu", "Terug naar hoofdmenu"};
         string prompt = "\nWelk type gerecht zou je willen toevoegen?:";
         int input = _myMenu.RunMenu(options, prompt);
+        _currentIndex = 0;
         switch (input)
         {
             case 0:
@@ -108,6 +113,9 @@ public static class Dishes
                 type = "Veganistisch";
                 break;
             case 4:
+                WelcomeMenu();
+                break;
+            case 5:
                 MainMenu.Start();
                 break;
             default:
@@ -115,9 +123,11 @@ public static class Dishes
                 break;
         }
         
+        // select course
         string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Terug naar hoofdmenu"};
         string prompt2 = "\nWelke Maaltijd wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
+        _currentIndex = 0;
         switch (input2)
         {
             case 0:
@@ -137,12 +147,6 @@ public static class Dishes
                 break;
         }
         
-        // grabs dishes from json
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
-        string json = File.ReadAllText(path);
-        JObject dishes = JObject.Parse(json);
-        JObject dish = (JObject)dishes[type]!;
-        JArray DishArray = (JArray)dish[course]!;
         // grabs menu from json
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
@@ -161,15 +165,16 @@ public static class Dishes
         MainMenu.Start();
     }
 
-    // displays and returns selection to add to menu
+    // Displays dishes and returns user selection to add to menu
     public static JObject DisplayOptions(string type, string course)
     {
+        // Retrieves dishes from json 
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
         JObject dishes = JObject.Parse(json);
         JObject dish = (JObject)dishes[type]!;
         JArray dishArray = (JArray)dish[course]!;
-        // displays dishes based on course
+        // Displays dishes based on course
         string dish1 = "";
         string dish2 = "";
         string dish3 = "";

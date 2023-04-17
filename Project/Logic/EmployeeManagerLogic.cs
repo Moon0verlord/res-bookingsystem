@@ -122,11 +122,6 @@ public class EmployeeManagerLogic : IMenuLogic
 
     }
 
-    public static void ChangeMenu()
-    {
-        
-    }
-
     public static void RestaurantLayout()
     {
         

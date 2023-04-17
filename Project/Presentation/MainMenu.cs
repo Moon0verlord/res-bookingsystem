@@ -39,7 +39,7 @@ class MainMenu : IMenuLogic
                         break;
                     case 3:
                         Dishes.WelcomeMenu();
-                        Thread.Sleep(5000); ;
+                        Thread.Sleep(5000);
                         break;
                     case 4:
                         Reservation.ResStart(Account);
@@ -58,7 +58,7 @@ class MainMenu : IMenuLogic
                 //Manager menu
                 while (true)
                 {
-                    //Verander menu includes price changing
+                    // displays menu with various management options if the user is a manager
                     string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht","Verander restaurant layout"};
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
@@ -87,7 +87,7 @@ class MainMenu : IMenuLogic
                             EmployeeManagerLogic.AddEmployee();
                             break;
                         case 2:
-                            EmployeeManagerLogic.ChangeMenu();
+                            Dishes.ManageMenu();
                             break;
                         case 3:
                             EmployeeManagerLogic.AddSpecialEvent();
@@ -104,7 +104,8 @@ class MainMenu : IMenuLogic
             //Employee menu
             while (true)
             {
-                string[] options = { "Uitloggen", "Reserveringen"};
+                // menu for employees who are not managers
+                string[] options = { "Uitloggen", "Reserveringen","Bekijk het menu"};
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -130,6 +131,9 @@ class MainMenu : IMenuLogic
                         break;
                     case 1:
                         EmployeeManagerLogic.CheckReservations();
+                        break;
+                    case 2:
+                        Dishes.WelcomeMenu();
                         break;
                     
                 }

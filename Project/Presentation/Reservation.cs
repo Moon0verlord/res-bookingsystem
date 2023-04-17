@@ -118,16 +118,14 @@ static class Reservation
         return selectedTable;
     }
 
-    //Overview of a costumers reservations
     public static void ViewRes(string Email)
     {
         Console.Clear();
-        Console.SetCursorPosition(0, 0);
         bool CheckIfRes = false;
         List<ReservationModel> AllRes = AccountsAccess.LoadAllReservations();
         List<string> ReservationsPerson = new();
         List<int> ReservationPersonPositions = new();
-        
+        //$"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}."
         foreach (ReservationModel res in AllRes)
         {
             if (Email == res.EmailAddress && res.Date > DateTime.Now)
@@ -155,7 +153,7 @@ static class Reservation
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wilt u deze reservatie verwijderen?(Ja/Nee)");
+                        Console.WriteLine("Wilt u deze reservatie verwijderen?");
                         var Choice = Console.ReadLine();
                         switch (Choice)
                         {
@@ -168,15 +166,19 @@ static class Reservation
                                 ReservationsPerson.RemoveAt(reserv_input);
                                 AccountsAccess.WriteAllReservations(AllRes);
                                 Thread.Sleep(5000);
-                                ViewRes(Email);
                                 break;
                             case "N":case "n":case "Nee":case "nee":
                                 Console.WriteLine("De reservatie is niet verwijderd");
                                 Thread.Sleep(2000);
                                 break;
+                                
                         }
+
                         break;
+
+
                 }
+
             }
         }
     }
