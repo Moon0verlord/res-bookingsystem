@@ -70,8 +70,7 @@ class ReservationsLogic
                                         noDuplicates = false;
                                 }
                             }
-
-                            if (!noDuplicates)
+                            if (noDuplicates)
                             {
                                 int size = CurrentTableSizes[tableIndex];
                                 var AddTable = AddDefaultTable(i, size);
