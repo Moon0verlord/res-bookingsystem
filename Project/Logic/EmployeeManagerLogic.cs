@@ -8,16 +8,15 @@ public class EmployeeManagerLogic : IMenuLogic
     //Employee and manager method
     public static void CheckReservations()
     {
-        //ToDo 2D menu currently in development by rokimajo
-        // when a date is picked in the menu return all reservations on that date
-        //this is a place holder
-        int Date = Convert.ToInt32(Console.ReadLine());
-        foreach (var item in AccountsAccess.LoadAllReservations())
+        Console.Clear();
+        Console.WriteLine("Tafel id   Datum \tTijd \tEmail adres");
+        
+        foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
-            if(item.Date.Day == Date)
-            {
-                Console.WriteLine(item.Id+" "+item.Date+" "+item.EmailAddress);
-            }
+            var Time = item.Date.ToString("HH:mm");
+            var Date = item.Date.ToString("yy/MM/dd");
+            Console.WriteLine(item.Id+"\t"+Date+"\t"+Time+"\t"+item.EmailAddress);
+            
         }
         Console.WriteLine("druk toets om terug te gaan");
         Console.ReadKey(true);
