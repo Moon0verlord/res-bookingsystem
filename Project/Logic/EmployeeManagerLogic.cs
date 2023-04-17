@@ -10,14 +10,14 @@ public class EmployeeManagerLogic : IMenuLogic
     {
         Console.Clear();
         //The weird spacing is there to make it show up nicer when called
-        Console.WriteLine("Tafel id   Datum \tTijd \tEmail adres");
+        Console.WriteLine("Tafel id |  Datum    | Tijd        | Email");
         
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
-            var Time = item.Date.ToString("HH:mm");
-            var Date = item.Date.ToString("yy/MM/dd");
-            Console.WriteLine(item.Id+"\t"+Date+"\t"+Time+"\t"+item.EmailAddress);
-            
+            var Date = item.Date.ToString("dd-MM-yy");
+            string id = Convert.ToString(item.Id);
+            string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
+            Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", id, Date, time, item.EmailAddress));
         }
         Console.WriteLine("druk toets om terug te gaan");
         Console.ReadKey(true);
