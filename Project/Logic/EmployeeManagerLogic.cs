@@ -102,9 +102,20 @@ public class EmployeeManagerLogic : IMenuLogic
                                 $"{employeePassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
-                            if (answer == "j" || answer == "J")
+                            switch (answer)
                             {
-                                AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+
+                                case "j":
+                                case "J":
+                                case "ja":
+                                case "Ja":
+                                {
+                                    Console.Clear();
+                                    AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                    Console.WriteLine("Medewerker toegevoegd");
+                                    Thread.Sleep(3000);
+                                }
+                                    break;
                             }
                         }
                     }
