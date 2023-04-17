@@ -28,7 +28,7 @@ static class Reservation
             {
                 Console.Clear();
                 string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
-                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan", "Afsluiten" };
+                string[] options = { $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan","Reservering bekijken", "Afsluiten" };
                 int selectedIndex = _my1DMenu.RunMenu(options, prompt);
                 switch (selectedIndex)
                 {
@@ -62,6 +62,9 @@ static class Reservation
                         }
                         break;
                     case 2:
+                        ViewRes(email);
+                        break;
+                    case 3:
                         MainMenu.Start();
                         break;
                 }
