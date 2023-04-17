@@ -9,6 +9,7 @@ public class EmployeeManagerLogic : IMenuLogic
     public static void CheckReservations()
     {
         Console.Clear();
+        //The weird spacing is there to make it show up nicer when called
         Console.WriteLine("Tafel id   Datum \tTijd \tEmail adres");
         
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
