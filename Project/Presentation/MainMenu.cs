@@ -105,12 +105,12 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // menu for employees who are not managers
-                string[] options = { "Uitloggen", "Reserveringen","Bekijk het menu"};
+                string[] options = {  "Bekijk het menu","Reserveringen","Uitloggen"};
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
-                    case 0:
+                    case 3:
                         if (Account.LoggedIn)
                         {
                             Console.Clear();
@@ -129,10 +129,10 @@ class MainMenu : IMenuLogic
                             Console.WriteLine("U bent al uitgelogd");
                         }
                         break;
-                    case 1:
+                    case 2:
                         EmployeeManagerLogic.CheckReservations();
                         break;
-                    case 2:
+                    case 1:
                         Dishes.WelcomeMenu();
                         break;
                     
@@ -144,12 +144,33 @@ class MainMenu : IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Uitloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Reserveringen bekijken", "Afsluiten (En gelijk uitloggen)" };
+                string[] options = { "Informatie", "Tijden", "Bekijk het menu", "Reservatie met email", "Reserveringen bekijken", "Uitloggen", "Afsluiten (En gelijk uitloggen)" };
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
                     case 0:
+                        restaurantInfo.Start();
+                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
+                        Console.ReadKey(true);
+                        break;
+                    case 1:
+                        //TOdo Tijden nog hier invullen
+                        Reservation.ResStart(Account);
+                        break;
+                    case 2:
+                        Dishes.WelcomeMenu();
+                        Thread.Sleep(5000); ;
+                        break;
+                    case 3:
+                        Reservation.ResStart(Account);
+                        break;
+                    case 4:
+                        Reservation.ViewRes(Account.EmailAddress);
+                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
+                        Console.ReadKey(true);
+                        break;
+                    case 5:
                         if (Account.LoggedIn)
                         {
                             Console.Clear();
@@ -167,26 +188,6 @@ class MainMenu : IMenuLogic
                         {
                             Console.WriteLine("U bent al uitgelogd");
                         }
-                        break;
-                    case 1:
-                        restaurantInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        Console.ReadKey(true);
-                        break;
-                    case 2:
-                        Reservation.ResStart(Account);
-                        break;
-                    case 3:
-                        Dishes.WelcomeMenu();
-                        Thread.Sleep(5000); ;
-                        break;
-                    case 4:
-                        Reservation.ResStart(Account);
-                        break;
-                    case 5:
-                        Reservation.ViewRes(Account.EmailAddress);
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        Console.ReadKey(true);
                         break;
                     case 6:
                         Environment.Exit(0);
