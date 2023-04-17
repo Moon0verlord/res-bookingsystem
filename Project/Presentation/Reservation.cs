@@ -247,30 +247,41 @@ static class Reservation
                     MainMenu.Start();
                     break;
                 default:
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
-                    Console.ResetColor();
-                    var Choice = Console.ReadLine();
-                    switch (Choice)
-                    {
-                        case "J":
-                        case "j":
-                        case "Ja":
+                    
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
+                        Console.ResetColor();
+                        var Choice = Console.ReadLine();
+                        switch (Choice)
+                        {
+                            case "J":
+                            case "j":
+                            case "Ja":
                             case "ja":
-                            Console.WriteLine("De reservatie is verwijderd");
-                            AllRes.RemoveAt(ReservationPersonPositions[reserv_input]);
-                            ReservationsPerson.RemoveAt(reserv_input);
-                            AccountsAccess.WriteAllReservations(AllRes);
-                            Thread.Sleep(5000);
-                            break;
-                        case "N":case "n":case "Nee":case "nee":
-                            Console.WriteLine("De reservatie is niet verwijderd");
-                            Thread.Sleep(2000);
-                            break;
-                            
-                    }
-                    break;
+                                Console.WriteLine("De reservatie is verwijderd");
+                                AllRes.RemoveAt(ReservationPersonPositions[reserv_input]);
+                                ReservationsPerson.RemoveAt(reserv_input);
+                                AccountsAccess.WriteAllReservations(AllRes);
+                                Thread.Sleep(5000);
+                                break;
+                            case "N":
+                            case "n":
+                            case "Nee":
+                            case "nee":
+                                Console.WriteLine("De reservatie is niet verwijderd");
+                                Thread.Sleep(2000);
+                                break;
+                            default:
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Incorrecte input");
+                                Thread.Sleep(2000);
+                                Console.ResetColor();
+                                break;
+                        }
+                        break;
+                    
             }
         }
     }
