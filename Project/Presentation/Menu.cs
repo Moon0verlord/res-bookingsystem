@@ -54,7 +54,7 @@ public static class Dishes
             string appetizer = (string)course["Voorgerecht"]!;
             string entree = (string)course["Maaltijd"]!;
             Console.WriteLine($"Voorgerecht: {appetizer}");
-            Console.WriteLine($"Maaltijd: {entree}");
+            Console.WriteLine($"Hooftgerecht: {entree}");
             Console.WriteLine();
         }
 
@@ -65,7 +65,7 @@ public static class Dishes
             string entree = (string)course["Maaltijd"]!;
             string dessert = (string)course["Nagerecht"]!;
             Console.WriteLine($"Voorgerecht: {appetizer}");
-            Console.WriteLine($"Maaltijd: {entree}");
+            Console.WriteLine($"Hoofdgerecht: {entree}");
             Console.WriteLine($"Nagerecht: {dessert}");
             Console.WriteLine();
         }
@@ -79,7 +79,7 @@ public static class Dishes
             string dessert = (string)course["Nagerecht"]!;
             Console.WriteLine($"Voorgerecht: {appetizer}");
             Console.WriteLine($"Soep: {soup}");
-            Console.WriteLine($"Maaltijd: {entree}");
+            Console.WriteLine($"Hoofdgerecht: {entree}");
             Console.WriteLine($"Nagerecht: {dessert}");
             Console.WriteLine();
             Console.WriteLine("Druk op een knop om verder te gaan");
