@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Linq;
+
 static class restaurantInfo
 {
     static string Information =
@@ -22,11 +24,41 @@ Er zijn op dit moment nog geen evenementen.
 Kom terug op een later moment om te zien of er al evenementen zijn.
 ";
 
+    public static bool CheckIfEvent()
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        string json = File.ReadAllText(path);
+        JArray eventmenu = JArray.Parse(json);
+        foreach (var course in eventmenu)
+        {
+            if (json != null) return true;
+        }
+        return false;
+
+    }
+
     public static void Start()
     {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        string json = File.ReadAllText(path);
+        JArray eventmenu = JArray.Parse(json);
         Console.Clear();
         Console.WriteLine(Information);
         Console.WriteLine(Contact);
-        Console.WriteLine(Events); // later nog de echte events toevoegen
+        if (CheckIfEvent())
+        {
+            Console.WriteLine("Alle evenementen:");
+            foreach (var course in eventmenu)
+            {
+                Console.WriteLine(course["eventname"]);
+                Console.WriteLine(course["eventinfo"]);
+                Console.WriteLine(course["datum"]);
+                Console.WriteLine();
+            }
+        }
+        else
+        {
+            Console.WriteLine(Events);
+        }
     }
 }
