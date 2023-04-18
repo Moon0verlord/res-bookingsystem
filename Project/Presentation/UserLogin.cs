@@ -16,7 +16,7 @@ static class UserLogin
         {
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
-                "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
+                "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {HidePass(userPassword)}\n")}",
                 "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
@@ -135,7 +135,18 @@ static class UserLogin
         return newAccount;
     }
 
+    public static string HidePass(string pass)
+    {
+        string hiddenPass = "";
+        for (int i = 0; i < pass.Length; i++)
+        {
+            hiddenPass += "*";
+        }
 
+        return hiddenPass;
+    }
+    
+    
     public static void DiscardKeys()
     {
         while (Console.KeyAvailable)
