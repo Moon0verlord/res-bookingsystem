@@ -105,7 +105,8 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // menu for employees who are not managers
-                string[] options = {  "Bekijk het menu","Reserveringen","Uitloggen"};
+                string[] options = {  "Bekijk het menu",
+                    "Reserveringen","Uitloggen"};
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)

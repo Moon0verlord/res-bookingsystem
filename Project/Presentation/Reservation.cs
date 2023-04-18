@@ -220,7 +220,6 @@ static class Reservation
     List<ReservationModel> AllRes = AccountsAccess.LoadAllReservations();
     List<string> ReservationsPerson = new();
     List<int> ReservationPersonPositions = new();
-    //$"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}."
     foreach (ReservationModel res in AllRes)
     {
         if (Email == res.EmailAddress && res.Date > DateTime.Now)
