@@ -1,7 +1,8 @@
  using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
-static class Reservation
+
+ static class Reservation
 {
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
@@ -36,11 +37,12 @@ static class Reservation
                         Console.Clear();
                         Console.Write("\n Vul hier uw e-mail in: ");
                         email = Console.ReadLine()!;
-                        if (!email.Contains("@") || email.Length < 3)
+                        if (!EmailLogic.IsValidEmail(email))
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
+                            Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben, 3 tekens lang zijn." +
+                                              "");
                             Console.ResetColor();
                             email = null;
                             Thread.Sleep(3000);
@@ -84,24 +86,32 @@ static class Reservation
     {
         Console.Clear();
         amountOfPeople = ChooseGroupSize();
-        if (amountOfPeople <= 0) ResStart();
-        else ChooseDate();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Clear();
-        //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
-        Console.WriteLine($"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
-                          $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
-        Console.ResetColor();
-        string answer = Console.ReadLine()!;
-        switch (answer.ToLower())
+        while(true)
         {
-            case "ja": case "j":
-                Reservations.CreateReservation(userEmail, chosenDate, chosenTable,
-                    amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
-                Console.Clear();
-                Console.WriteLine("\nReservatie is gemaakt.");
-                Thread.Sleep(1500);
-                break;
+            if (amountOfPeople <= 0) ResStart();
+            else ChooseDate();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
+            //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
+            Console.WriteLine(
+                $"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
+            Console.ResetColor();
+            string answer = Console.ReadLine()!;
+            switch (answer.ToLower())
+            {
+                case "ja":
+                case "j":
+                case "Ja":
+                case "J":
+                    Reservations.CreateReservation(userEmail, chosenDate, chosenTable,
+                        amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
+                    Console.Clear();
+                    Console.WriteLine("\nReservatie is gemaakt.");
+                    Thread.Sleep(1500);
+                    break;
+
+            }
         }
     }
 
@@ -118,7 +128,7 @@ static class Reservation
             switch (selectedIndex)
             {
                 case 0:
-                    Console.Write("Typ hier met hoeveel mensen u van plan bent te komen: ");
+                    Console.Write("Type hier met hoeveel mensen u van plan bent te komen: ");
                     amountofPeople = Console.ReadLine()!;
                     bool success = int.TryParse(amountofPeople, out int number);
                     if (!success)

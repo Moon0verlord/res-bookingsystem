@@ -23,7 +23,7 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("\n vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
-                    if (!userEmail.Contains("@") || userEmail.Length < 3)
+                    if (!EmailLogic.IsValidEmail(userEmail))
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
