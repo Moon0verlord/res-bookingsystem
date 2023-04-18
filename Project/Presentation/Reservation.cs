@@ -96,7 +96,8 @@ static class Reservation
         switch (answer.ToLower())
         {
             case "ja": case "j":
-                Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
+                Reservations.CreateReservation(userEmail, chosenDate, chosenTable,
+                    amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");
                 Thread.Sleep(1500);

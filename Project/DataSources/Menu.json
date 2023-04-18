@@ -2,8 +2,8 @@
   "Vegetarisch": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Roasted Carrot and Lentil Salad",
-        "Maaltijd": "Chickpea Curry with Basmati Rice"
+        "Voorgerecht": "Courgette en Maïs Fritters",
+        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
       }
     ],
     "3_Gangen": [
@@ -54,9 +54,9 @@
     ],
     "3_Gangen": [
       {
-        "Voorgerecht": "Butternut Squash Soep",
-        "Maaltijd": "Roasted Chicken with Garlic and Herb Butter",
-        "Nagerecht": "Apple Tart"
+        "Voorgerecht": "Franse Uiensoep",
+        "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
+        "Nagerecht": "Crème Brûlée"
       }
     ],
     "4_Gangen": [
@@ -84,10 +84,10 @@
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Caprese Salad",
-        "Soep": "Butternut Squash Soep",
-        "Maaltijd": "Grilled Portobello Mushroom with Quinoa and Roasted Vegetables",
-        "Nagerecht": "Mixed Berry Sorbet"
+        "Voorgerecht": "Roasted Brussels Sprouts with Balsamic Glaze",
+        "Soep": "Curried Carrot Soep",
+        "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries",
+        "Nagerecht": "Dark Chocolate Truffles"
       }
     ]
   }

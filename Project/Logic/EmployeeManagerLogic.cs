@@ -133,11 +133,5 @@ public class EmployeeManagerLogic : IMenuLogic
     {
 
     }
-
-    public static void RestaurantLayout()
-    {
-        
-    }
-
 }
 

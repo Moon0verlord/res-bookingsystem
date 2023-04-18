@@ -106,6 +106,7 @@ class ReservationsLogic
 
     public void CreateReservation(string email, DateTime res_Date, int chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
     {
+        EmailLogic.SendEmailNoAccount(email,"Name",chosenTable,res_Date);
         ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime);
         AccountsAccess.AddReservation(newReservation);
     }
