@@ -6,6 +6,8 @@ static class UserLogin
     static private MenuLogic myMenu = new();
     private static string userEmail;
     private static string userPassword;
+    
+    // starts the login process 
     public static void Start()
     {
         userEmail = null;
@@ -99,6 +101,7 @@ static class UserLogin
                             Console.WriteLine("Uw e-mail is " + acc.EmailAddress);
                             acc.LoggedIn = true;
                             Thread.Sleep(2000);
+                            DiscardKeys();
                             MainMenu.Start(acc);
                         }
                         else
@@ -131,4 +134,14 @@ static class UserLogin
         var newAccount = AccountsAccess.AddAccount(email, password, name,IsEmployee,IsManager);
         return newAccount;
     }
+
+
+    public static void DiscardKeys()
+    {
+        while (Console.KeyAvailable)
+        {
+            Console.ReadKey(true);
+        }
+    }
+    
 }
