@@ -62,9 +62,12 @@ class _2DMenuLogic
                     {
                         string toWrite = $"> Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                         Console.BackgroundColor = ConsoleColor.DarkGray;
+                        // string formatting
                         Console.Write($"{toWrite, -18}");
                         Console.ResetColor();
+                        // this is so the seperator "|" is always on the same place, no matter how long the actual string is.
                         int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
+                        // Write whitespaces for the above length, and then write the seperator string except for the last column.
                         Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
                     }
                     else
@@ -78,7 +81,6 @@ class _2DMenuLogic
                     }
 
                     Console.ResetColor();
-                    // Console.Write("\t");
                 }
             }
             Console.WriteLine();
@@ -132,6 +134,7 @@ class _2DMenuLogic
             ConsoleKey keyPressed = default;
             AddForbiddenIndexes(Tables);
             CheckPosition(Tables, keyPressed);
+            // if noSpace is true, the entire tables array is either reserved or unavailable and the user should be kicked out.
             if (noSpace)
             {
                 Console.Clear();
@@ -175,6 +178,7 @@ class _2DMenuLogic
 
     public void AddForbiddenIndexes(DateTime[,] dates)
     {
+        // check if there's any default dats and add them to forbidden indexes, so users can't iterate trough these in the menu.
         forbiddenIndex.Clear();
         for (int x = 0; x < dates.GetLength(0); x++)
         {
@@ -190,6 +194,8 @@ class _2DMenuLogic
     
     public void AddForbiddenIndexes(ReservationModel[,] tables)
     {
+        // check if there's any reserved tables, tables that have different group sizes or tables that are null
+        // and add them to forbidden indexes, so users can't iterate trough these in the menu.
         forbiddenIndex.Clear();
         for (int i = 0; i < tables.GetLength(0); i++)
         {
@@ -228,6 +234,7 @@ class _2DMenuLogic
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
                     if (forbiddenIndex.Contains((i, j))) {}
+                    // If the first row, column combination isn't forbidden, place the cursor there and go to end.
                     else
                     {
                         _rowIndex = i;
@@ -236,6 +243,7 @@ class _2DMenuLogic
                     }
                 }
             }
+            // if the goto didn't go off, the entire array is made out of forbidden indexes and the user should be kicked out.
             noSpace = true;
             end:
             array = null;

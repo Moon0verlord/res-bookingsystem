@@ -48,6 +48,7 @@
             Console.Write("\n");
         }
 
+        // this method checks if the given ID is not reserved or unavailable due to group size, and changes foreground color accordingly.
         public void CheckIfAvailable(string id)
         {
             foreach (ReservationModel table in _tables)
@@ -65,6 +66,7 @@
             }
         }
 
+        //this writes the tutorial box that explains to the user what all the terms behind the tables mean.
         public void WriteTutorialBox()
         {
             string msg1 = " Beschikbaar: Deze tafel is nog niet gereserveerd en is gepast voor uw groepsgrootte.";
@@ -92,6 +94,7 @@
             Console.ResetColor();
         }
 
+        // write the table for four string
         private void WriteTableFour(int colPlus, int rowPlus, string tableindex)
         {
             origCol += colPlus;
@@ -115,6 +118,7 @@
             origRow -= rowPlus;
         }
 
+        // write the table for six string
         private void WriteTableSix(int colPlus, int rowPlus, string tableindex)
         {
             origCol += colPlus;
@@ -138,6 +142,7 @@
             origRow -= rowPlus;
         }
 
+        // write the table for two string
         private void WriteTableTwo(int colPlus, int rowPlus, string tableindex)
         {
             origCol += colPlus;
@@ -157,6 +162,8 @@
             origRow -= rowPlus;
         }
 
+        // this method writes at the given coordinates so you can have more control over writing locations in the console.
+        // which would otherwise not be possible using /n etc.
         protected void WriteAt(string s, int x, int y)
         {
             try
