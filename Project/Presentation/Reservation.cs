@@ -121,6 +121,7 @@ using System.Globalization;
                          chosenTimeslot.Item1, chosenTimeslot.Item2);
                      Console.Clear();
                      Console.WriteLine("\nReservatie is gemaakt.");
+                     EmailLogic.SendEmail(userEmail, "", chosenTable, chosenDate);
                      Thread.Sleep(1500);
                      MainMenu.Start(_acc);
                      break;

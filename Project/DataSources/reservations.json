@@ -22,5 +22,21 @@
     "group_size": 5,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
+  },
+  {
+    "table_id": "2S",
+    "emailAddress": "robinvliegtvandaag@gmail.com",
+    "res_date": "2023-04-19T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
+  },
+  {
+    "table_id": "4S",
+    "emailAddress": "robinvliegtvandaag@gmail.com",
+    "res_date": "2023-04-19T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
   }
 ]

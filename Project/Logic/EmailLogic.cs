@@ -7,7 +7,7 @@ class EmailLogic
     {
         return new EmailAddressAttribute().IsValid(email);
     }
-    public static void SendEmail(string email, string name, int table, DateTime Date)
+    public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
         {
