@@ -4,7 +4,7 @@
 public class ReservationModel
 {
     [JsonPropertyName("table_id")]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     [JsonPropertyName("emailAddress")]
     public string EmailAddress { get; set; }
@@ -28,7 +28,7 @@ public class ReservationModel
     public int TableSize { get; set; }
     
     //todo: add reservation id
-    public ReservationModel(int id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime)
+    public ReservationModel(string id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime)
     {
         Id = id;
         EmailAddress = emailAddress;

@@ -11,7 +11,7 @@ static class Reservation
     private static int amountOfPeople;
     private static DateTime chosenDate;
     private static (TimeSpan, TimeSpan) chosenTimeslot;
-    private static int chosenTable;
+    private static string chosenTable;
 
     public static void ResStart(AccountModel acc = null)
     {
@@ -19,7 +19,7 @@ static class Reservation
         amountOfPeople = 0;
         chosenDate = default;
         chosenTimeslot = (default, default);
-        chosenTable = 0;
+        chosenTable = "";
         Console.Clear();
         if (acc == null)
         {
@@ -213,8 +213,8 @@ static class Reservation
         _tableLogic.TableStart(tablesOnly, amountOfPeople);
         ReservationModel selectedTable2D = _my2DMenu.RunTableMenu(tablesOnly2D, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
         // int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
-        // if (selectedTable != 0) chosenTable = selectedTable;
-        // else ChooseTimeslot();
+        if (selectedTable2D != default) chosenTable = selectedTable2D.Id;
+        else ChooseTimeslot();
     }
     
     public static void ViewRes(string Email)

@@ -40,6 +40,7 @@ class ReservationsLogic
         int tableIndex = -1;
         for (int i = 1; i <= 15; i++)
         {
+            string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
             IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
             if (i == 1 || i == 9 || i == 14)
             {
@@ -64,14 +65,14 @@ class ReservationsLogic
                             {
                                 if (check != null)
                                 {
-                                    if (check.Id == i)
+                                    if (check.Id == ID)
                                         noDuplicates = false;
                                 }
                             }
                             if (noDuplicates)
                             {
                                 int size = CurrentTableSizes[tableIndex];
-                                var AddTable = AddDefaultTable(i, size);
+                                var AddTable = AddDefaultTable(ID, size);
                                 tablesToAdd.Add(AddTable);
                                 
                             }
@@ -80,14 +81,14 @@ class ReservationsLogic
                     else 
                     {
                         int size = CurrentTableSizes[tableIndex];
-                        tablesToAdd.Add(AddDefaultTable(i, size));
+                        tablesToAdd.Add(AddDefaultTable(ID, size));
                     }
                 }
             }
             else
             {
                 int size = CurrentTableSizes[tableIndex];
-                tablesToAdd.Add(AddDefaultTable(i, size));
+                tablesToAdd.Add(AddDefaultTable(ID, size));
             }
         }
         return tablesToAdd;
@@ -107,7 +108,7 @@ class ReservationsLogic
         {
             // create the ID (1-9S / 1-5M / 1-2L) even within a loop that goes to 15.
             string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
-            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(ID)&&res.Date==res_Date);
             if (i == 1 || i == 9 || i == 14)
             {
                 tableIndex++;
@@ -133,14 +134,14 @@ class ReservationsLogic
                             {
                                 if (check != null)
                                 {
-                                    if (check.Id == i)
+                                    if (check.Id == ID)
                                         noDuplicates = false;
                                 }
                             }
                             if (noDuplicates)
                             {
                                 int size = CurrentTableSizes[tableIndex];
-                                tables2D[rowCount, columnCount] = AddDefaultTable(i, size);
+                                tables2D[rowCount, columnCount] = AddDefaultTable(ID, size);
                                 
                             }
                         }
@@ -148,14 +149,14 @@ class ReservationsLogic
                     else 
                     {
                         int size = CurrentTableSizes[tableIndex];
-                        tables2D[rowCount, columnCount] = AddDefaultTable(i, size);
+                        tables2D[rowCount, columnCount] = AddDefaultTable(ID, size);
                     }
                 }
             }
             else
             {
                 int size = CurrentTableSizes[tableIndex];
-                tables2D[rowCount, columnCount] = AddDefaultTable(i, size);
+                tables2D[rowCount, columnCount] = AddDefaultTable(ID, size);
             }
 
             rowCount++;
@@ -164,7 +165,7 @@ class ReservationsLogic
         return tables2D;
     }
 
-    public ReservationModel AddDefaultTable(int id, int size)
+    public ReservationModel AddDefaultTable(string id, int size)
     {
         ReservationModel resm = new ReservationModel(id, null, new DateTime(0), 0, default, default);
         resm.isReserved = false;
@@ -173,7 +174,7 @@ class ReservationsLogic
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, int chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
+    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
     {
         ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime);
         AccountsAccess.AddReservation(newReservation);

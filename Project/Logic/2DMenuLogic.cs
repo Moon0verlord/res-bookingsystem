@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 class _2DMenuLogic 
 {
     private int _rowIndex = 0;
@@ -142,7 +144,7 @@ class _2DMenuLogic
                     CheckPosition(Tables, keyPressed);
                     break;
                 case ConsoleKey.Q:
-                    return null;
+                    return default;
             }
         } while (keyPressed != ConsoleKey.Enter);
 
@@ -196,6 +198,26 @@ class _2DMenuLogic
         Normally this only gets checked after a key press, but at the start of the program we should also check
         this right away.*/
         var array = _2DArray as Array;
+        // check position at start to make sure you dont begin on an occupied or unavailable space
+        if (keyPressed == default && array != null)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (forbiddenIndex.Contains((i, j))) { }
+                    else
+                    {
+                        _rowIndex = i;
+                        _columnIndex = j;
+                        goto end;
+                    }
+                }
+            }
+            end:
+            array = null;
+        }
+        // check positions when moving with keyboard keys to make sure you don't move onto an occupied or unavailable space
         if (array != null)
         {
             while (forbiddenIndex.Contains((_rowIndex, _columnIndex)) && keyPressed == ConsoleKey.DownArrow || _rowIndex >= array.GetLength(0))
