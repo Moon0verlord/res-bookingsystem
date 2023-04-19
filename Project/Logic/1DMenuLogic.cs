@@ -199,12 +199,11 @@
         this.res_GroupSize = groupsize;
         this._currentIndex = 1;
         ConsoleKey keyPressed;
-        Console.Clear();
         AddForbiddenIndexes();
         CheckPosition();
         do
         {
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 12);
             DisplayTableOptions(tables, prompt, true);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;

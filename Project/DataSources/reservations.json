@@ -1,184 +1,40 @@
 [
   {
-    "table_id": 1,
-    "emailAddress": "@@@@@@@",
-    "res_date": "2023-04-17T00:00:00+02:00",
-    "group_size": 2,
+    "table_id": "2M",
+    "emailAddress": "@@@@",
+    "res_date": "2023-04-19T00:00:00+02:00",
+    "group_size": 4,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
   },
   {
-    "table_id": 7,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 8,
-    "emailAddress": "n@b.c",
+    "table_id": "6S",
+    "emailAddress": "@@@",
     "res_date": "2023-04-19T00:00:00+02:00",
     "group_size": 2,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
   },
   {
-    "table_id": 9,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-20T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 15,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-30T00:00:00+02:00",
-    "group_size": 6,
-    "start_time": "20:00:00",
-    "leave_time": "22:00:00"
-  },
-  {
-    "table_id": 15,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 6,
-    "start_time": "20:00:00",
-    "leave_time": "22:00:00"
-  },
-  {
-    "table_id": 1,
+    "table_id": "1L",
     "emailAddress": "@@@",
-    "res_date": "2023-04-22T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "20:00:00",
-    "leave_time": "22:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "n@b.c",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 2,
+    "res_date": "2023-04-27T00:00:00+02:00",
+    "group_size": 5,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
   },
   {
-    "table_id": 5,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-18T00:00:00+02:00",
+    "table_id": "2S",
+    "emailAddress": "robinvliegtvandaag@gmail.com",
+    "res_date": "2023-04-19T00:00:00+02:00",
     "group_size": 2,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
   },
   {
-    "table_id": 3,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 4,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "18:00:00",
-    "leave_time": "20:00:00"
-  },
-  {
-    "table_id": 14,
-    "emailAddress": "jonasplinter@gmail.com",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 6,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 10,
-    "emailAddress": "jonasplinter@gmail.com",
-    "res_date": "2023-04-22T00:00:00+02:00",
-    "group_size": 4,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 13,
-    "emailAddress": "jonasplinter@gmail.com",
-    "res_date": "2023-04-23T00:00:00+02:00",
-    "group_size": 4,
-    "start_time": "20:00:00",
-    "leave_time": "22:00:00"
-  },
-  {
-    "table_id": 4,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-18T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 15,
-    "emailAddress": "jonasplinter@gmail.com",
-    "res_date": "2023-04-24T00:00:00+02:00",
-    "group_size": 6,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-24T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 5,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-30T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-29T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-23T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 13,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-22T00:00:00+02:00",
-    "group_size": 4,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "res_date": "2023-04-25T00:00:00+02:00",
-    "group_size": 2,
-    "start_time": "16:00:00",
-    "leave_time": "18:00:00"
-  },
-  {
-    "table_id": 1,
-    "emailAddress": "Henk@penk.com",
-    "res_date": "2023-04-28T00:00:00+02:00",
+    "table_id": "4S",
+    "emailAddress": "robinvliegtvandaag@gmail.com",
+    "res_date": "2023-04-19T00:00:00+02:00",
     "group_size": 2,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"

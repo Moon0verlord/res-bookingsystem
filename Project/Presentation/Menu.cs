@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using Newtonsoft.Json.Linq;
+
 namespace Project.Presentation;
+
 
 public static class Dishes
 {
@@ -100,7 +102,7 @@ public static class Dishes
         string course = "";
         // select type of food
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Bekijk het menu", "Terug naar hoofdmenu"};
-        string prompt = "\nWelk type gerecht zou je willen toevoegen?:";
+        string prompt = "\nWelk type gerecht zou je willen veranderen?:";
         int input = _myMenu.RunMenu(options, prompt);
         _currentIndex = 0;
         switch (input)
@@ -197,27 +199,27 @@ public static class Dishes
         switch (course)
         {
             case "2_Gangen":
-                 dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nMaaltijd: {dishArray[0]["Maaltijd"]}\n";
-                 dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nMaaltijd: {dishArray[1]["Maaltijd"]}\n";
-                 dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nMaaltijd: {dishArray[2]["Maaltijd"]}\n";
-                 dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nMaaltijd: {dishArray[3]["Maaltijd"]}\n";
+                 dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]}\n";
+                 dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nHoofdgerecht: {dishArray[1]["Maaltijd"]}\n";
+                 dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nHoofdgerecht: {dishArray[2]["Maaltijd"]}\n";
+                 dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nHoofdgerecht: {dishArray[3]["Maaltijd"]}\n";
                 break;
             case "3_Gangen":
-                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nMaaltijd: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
-                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nMaaltijd: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
-                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nMaaltijd: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
-                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nMaaltijd: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
+                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
+                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nHoofdgerecht: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
+                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nHoofdgerecht: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
+                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nHoofdgerecht: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
                 break;
             case "4_Gangen":
-                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nSoep: {dishArray[0]["Soep"]} \nMaaltijd: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
-                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nSoep: {dishArray[1]["Soep"]} \nMaaltijd: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
-                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nSoep: {dishArray[2]["Soep"]} \nMaaltijd: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
-                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nSoep: {dishArray[3]["Soep"]} \nMaaltijd: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
+                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nSoep: {dishArray[0]["Soep"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
+                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nSoep: {dishArray[1]["Soep"]} \nHoofdgerecht: {dishArray[1]["Maaltijd"]} \nNagerecht: {dishArray[1]["Nagerecht"]}\n";
+                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nSoep: {dishArray[2]["Soep"]} \nHoofdgerecht: {dishArray[2]["Maaltijd"]} \nNagerecht: {dishArray[2]["Nagerecht"]}\n";
+                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nSoep: {dishArray[3]["Soep"]} \nHoofdgerecht: {dishArray[3]["Maaltijd"]} \nNagerecht: {dishArray[3]["Nagerecht"]}\n";
                 break;
         }
         // returns selection
         string[] options = { dish1, dish2, dish3, dish4, "Terug naar hoofdmenu"};
-        string prompt2 = "\nWelke Maaltijd wil je toevoegen?:";
+        string prompt2 = "\nWelke maaltijd wil je veranderen?:";
         int input2 = _myMenu.RunMenu(options, prompt2);
         switch (input2)
         {

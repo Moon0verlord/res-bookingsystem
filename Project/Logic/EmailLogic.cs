@@ -6,9 +6,8 @@ class EmailLogic
     public static bool IsValidEmail(string email)
     {
         return new EmailAddressAttribute().IsValid(email);
-        
     }
-    public static void SendEmail(string email, string name, int table, DateTime Date)
+    public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
         {
@@ -33,9 +32,9 @@ class EmailLogic
             myMail.Subject = "Reservatie";
             myMail.SubjectEncoding = System.Text.Encoding.UTF8;
             myMail.Body =
-                $"<html><body><h1>Hallo {name}!</h1><p>U heeft een reservatie op <b>{Date:d/MMMM/yyyy}</b> om <b><b>{Date:hh:mm:ss}</b> </b>voor tafel" +
-                $" <b>{table}</b> " +
-                $"tot dan!" + ".</body></html>";
+                $"<html><body><h1>Hallo {name}!</h1><p><h2>U heeft een reservatie op <b>{Date:d/MMMM/yyyy}</b> om " +
+                $"<b><b>{Date:hh:mm:ss}</b> </b>voor tafel <b>{table}</b>. " +
+                $"<br>tot dan!</br></h2> </body></html>";
             myMail.BodyEncoding = System.Text.Encoding.UTF8;
             myMail.IsBodyHtml = true;
             //Encrypts the emails being sent for extra security

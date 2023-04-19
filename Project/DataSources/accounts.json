@@ -86,5 +86,13 @@
     "fullName": "Dio Brando",
     "Employee": true,
     "Manager": false
+  },
+  {
+    "id": 12,
+    "emailAddress": "jonathan@res.nl",
+    "password": "xyz",
+    "fullName": "Jonathan jonathan",
+    "Employee": true,
+    "Manager": false
   }
 ]

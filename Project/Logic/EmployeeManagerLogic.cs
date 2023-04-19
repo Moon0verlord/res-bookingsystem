@@ -1,7 +1,7 @@
 public class EmployeeManagerLogic : IMenuLogic
 {
-    private static MenuLogic _myMenu = new MenuLogic();
-    private static AccountsLogic _logicMenu = new AccountsLogic();
+    private static MenuLogic _myMenu = new ();
+    private static AccountsLogic _logicMenu = new ();
     static private MenuLogic myMenu = new();
     private static string employeeEmail;
     private static string employeePassword;
@@ -26,8 +26,8 @@ public class EmployeeManagerLogic : IMenuLogic
     //Manager only methods
     public static void AddEmployee()
     {
-        employeeEmail = null;
-        employeePassword = null;
+        employeeEmail = null!;
+        employeePassword = null!;
         while (true)
         {
             string[] options =
@@ -49,7 +49,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                         Console.ResetColor();
-                        employeeEmail = null;
+                        employeeEmail = null!;
                         Thread.Sleep(3000);
                     }
 
@@ -69,7 +69,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
                     Console.ResetColor();
                     Thread.Sleep(2000);
-                    employeePassword = null;
+                    employeePassword = null!;
                     break;
                 }
                 case 2:
@@ -84,7 +84,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     {
                         Console.Clear();
                         var emailExists = _logicMenu.GetByEmail(employeeEmail);
-                        if (emailExists != null)
+                        if (emailExists != null!)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nEr bestaat al een account met deze e-mail.");

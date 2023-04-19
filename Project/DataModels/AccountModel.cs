@@ -36,6 +36,7 @@ public class AccountModel:IComparable<AccountModel>
     public int CompareTo(AccountModel? other)
     {
         if (other == null) { return 1;}
+        
         int res = EmailAddress.CompareTo(other.EmailAddress);
         if (res == 0) 
         {
