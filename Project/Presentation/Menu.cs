@@ -242,6 +242,7 @@ public static class Dishes
         return null!;
     }
 
+    // Gives manager option to change price of items on menu
     public static void PriceManager()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
@@ -289,6 +290,7 @@ public static class Dishes
         UserLogin.DiscardKeys();
     }
 
+    // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()
     {
         string[] options = { "Menu veranderen", "Prijs veranderen", "Terug naar hoofdmenu" };
