@@ -2,10 +2,10 @@
 {
     protected static int origRow;
     protected static int origCol;
-    private List<ReservationModel> _tables = new List<ReservationModel>();
+    private ReservationModel[,] _tables = null;
     private int _groupSize = 0;
 
-    public void TableStart(List<ReservationModel> tables , int amountOfPeople)
+    public void TableStart(ReservationModel[,] tables , int amountOfPeople)
         {
             Console.Clear();
             _tables = tables;
@@ -18,7 +18,7 @@
             // Table for two here, tables 1 - 8S
             for (int i = 0; i < 8; i++)
             {
-                CheckIfAvailable(i);
+                CheckIfAvailable(Convert.ToString(i + 1) + "S");
                 WriteTableTwo(twoColumn, 0, Convert.ToString(i + 1) + "S");
                 twoColumn += 10;
                 Console.ResetColor();
@@ -28,7 +28,7 @@
             {
                 // i gets +8 here because every loop starts back at 0 for the table ID's.
                 // However the list still expects the 4 table sizes to be at position 8 - 13 not 0 - 4.
-                CheckIfAvailable(i + 8);
+                CheckIfAvailable(Convert.ToString(i + 1) + "M");
                 WriteTableFour(fourColumn, (i % 2 == 0 ? 4 : 3), Convert.ToString(i + 1) + "M");
                 fourColumn += 15;
                 Console.ResetColor();
@@ -38,22 +38,58 @@
             {
                 // i gets +13 here because every loop starts back at 0 for the table ID's.
                 // However the list still expects the 6 table sizes to be at position 14 - 15 not 0 - 1.
-                CheckIfAvailable(i + 13);
+                CheckIfAvailable(Convert.ToString(i + 1) + "L");
                 WriteTableSix(sixColumn + 15, 7, Convert.ToString(i + 1) + "L");
                 sixColumn += 23;
                 Console.ResetColor();
             }
+
+            WriteTutorialBox();
             Console.Write("\n");
         }
 
-        public void CheckIfAvailable(int i)
+        public void CheckIfAvailable(string id)
         {
-            if (_tables[i] != null)
+            foreach (ReservationModel table in _tables)
             {
-                bool groupcheck = (_groupSize - _tables[i].TableSize == 0 || _groupSize - _tables[i].TableSize == -1);
-                if (_tables[i].isReserved || !groupcheck) Console.ForegroundColor = ConsoleColor.Red;
-                else Console.ForegroundColor = ConsoleColor.Green;
+                if (table != null)
+                {
+                    if (table.Id == id)
+                    {
+                        bool groupcheck = (_groupSize - table.TableSize == 0 || _groupSize - table.TableSize == -1);
+                        if (table.isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                        else if (!groupcheck) Console.ForegroundColor = ConsoleColor.DarkGray;
+                        else Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                }
             }
+        }
+
+        public void WriteTutorialBox()
+        {
+            string msg1 = " Beschikbaar: Deze tafel is nog niet gereserveerd en is gepast voor uw groepsgrootte.";
+            string msg2 = $" Onbeschikbaar: Deze tafel is ongepast voor uw groepsgrootte ({_groupSize}).";
+            string msg3 = " Bezet: Deze tafel is al gereserveerd door een andere klant.";
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            WriteAt("┌", 85, 0);
+            WriteAt("│", 85, 1);
+            WriteAt("│", 85, 2);
+            WriteAt("│", 85, 3);
+            WriteAt("└", 85, 4);
+            WriteAt("──────────────────────────────────────────────────────────────────────────────────────", 86, 0);
+            WriteAt("──────────────────────────────────────────────────────────────────────────────────────", 86, 4);
+            WriteAt("┐", 171, 0);
+            WriteAt("│", 171, 1);
+            WriteAt("│", 171, 2);
+            WriteAt("│", 171, 3);
+            WriteAt("┘", 171, 4);
+            Console.ForegroundColor = ConsoleColor.Green;
+            WriteAt(msg1, 86, 1);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            WriteAt(msg2, 86, 2);
+            Console.ForegroundColor = ConsoleColor.Red;
+            WriteAt(msg3, 86, 3);
+            Console.ResetColor();
         }
 
         private void WriteTableFour(int colPlus, int rowPlus, string tableindex)

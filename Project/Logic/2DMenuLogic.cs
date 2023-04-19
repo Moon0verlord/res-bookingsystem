@@ -45,7 +45,8 @@ class _2DMenuLogic
     
     public void DisplayTableOptions(string prompt, bool printPrompt)
     {
-        if (printPrompt) Console.WriteLine(prompt);
+        // weird spacing so it looks nice on the menu.
+        if (printPrompt) Console.WriteLine(prompt + "\n" + "\n  Tafels (1-2 personen)\t     Tafels (3-4 personen)    Tafels (5-6 personen)");
         for (int i = 0; i < Tables.GetLength(0); i++)
         {
             for (int j = 0; j < Tables.GetLength(1); j++)
@@ -53,21 +54,30 @@ class _2DMenuLogic
                 if (Tables[i, j] != null)
                 {
                     bool groupcheck = (res_GroupSize - Tables[i, j].TableSize == 0 || res_GroupSize - Tables[i, j].TableSize == -1);
-                    if (Tables[i, j].isReserved || !groupcheck) Console.ForegroundColor = ConsoleColor.Red;
+                    if (Tables[i, j].isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                    else if (!groupcheck) Console.ForegroundColor = ConsoleColor.DarkGray;
                     else Console.ForegroundColor = ConsoleColor.Green;
                     if (j == _columnIndex && i == _rowIndex)
                     {
+                        string toWrite = $"> Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                         Console.BackgroundColor = ConsoleColor.DarkGray;
-                        Console.Write($"Table {Tables[i, j].Id}: {(!groupcheck ? "onbeschikbaar" : Tables[i, j].isReserved ? "Gereserveed" : "beschikbaar")}");
+                        Console.Write($"{toWrite, -18}");
+                        Console.ResetColor();
+                        int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
+                        Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
                     }
                     else
                     {
+                        string toWrite = $"  Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                         Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write($"Table {Tables[i, j].Id}: {(!groupcheck ? "onbeschikbaar" : Tables[i, j].isReserved ? "Gereserveed" : "beschikbaar")}");
+                        Console.Write($"{toWrite, -18}");
+                        Console.ResetColor();
+                        int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
+                        Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
                     }
 
                     Console.ResetColor();
-                    Console.Write("\t");
+                    // Console.Write("\t");
                 }
             }
             Console.WriteLine();
@@ -76,9 +86,10 @@ class _2DMenuLogic
     }
     public DateTime RunMenu(DateTime[,] options, string prompt, bool printPrompt = true)
     {
+        
         ConsoleKey keyPressed = default;
         _dateTimes = options;
-        AddForbiddenIndexes(_dateTimes);
+        AddForbiddenIndexes(_dateTimes); 
         CheckPosition(_dateTimes, keyPressed);
         do
         {

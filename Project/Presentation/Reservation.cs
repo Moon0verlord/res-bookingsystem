@@ -208,12 +208,10 @@ static class Reservation
     }
     public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
-        var tablesOnly = Reservations.PopulateTables(res_Date, chosenTime);
-        var tablesOnly2D = Reservations.PopulateTables2D(res_Date, chosenTime);
+        var tablesOnly = Reservations.PopulateTables2D(res_Date, chosenTime);
         _tableLogic.TableStart(tablesOnly, amountOfPeople);
-        ReservationModel selectedTable2D = _my2DMenu.RunTableMenu(tablesOnly2D, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
-        // int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
-        if (selectedTable2D != default) chosenTable = selectedTable2D.Id;
+        ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly, "  Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
+        if (selectedTable != default) chosenTable = selectedTable.Id;
         else ChooseTimeslot();
     }
     
