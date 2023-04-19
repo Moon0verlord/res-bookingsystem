@@ -87,7 +87,12 @@ static class Reservation
     {
         Console.Clear();
         amountOfPeople = ChooseGroupSize();
-        if (amountOfPeople <= 0) ResStart();
+        if (amountOfPeople <= 0)
+        {
+            if (_acc == null)
+                ResStart();
+            else MainMenu.Start();
+        }
         else ChooseDate();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
