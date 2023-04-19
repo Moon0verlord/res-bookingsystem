@@ -143,7 +143,7 @@ class MainMenu : IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Informatie", "Tijden", "Bekijk het menu", "Reservatie met email", "Reserveringen bekijken", "Uitloggen", "Afsluiten (En gelijk uitloggen)" };
+                string[] options = { "Informatie", "Tijden", "Bekijk het menu", "Reserveren", "Reserveringen bekijken", "Uitloggen", "Afsluiten (En gelijk uitloggen)" };
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
