@@ -87,7 +87,7 @@ class MainMenu : IMenuLogic
                             EmployeeManagerLogic.AddEmployee();
                             break;
                         case 2:
-                            Dishes.ManageMenu();
+                            Dishes.ManagerOptions();
                             break;
                         case 3:
                             EmployeeManagerLogic.AddSpecialEvent();

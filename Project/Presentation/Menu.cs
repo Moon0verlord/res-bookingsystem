@@ -1,13 +1,11 @@
-﻿
+﻿using System.Text;
 using Newtonsoft.Json.Linq;
-
 namespace Project.Presentation;
-
 
 public static class Dishes
 {
     private static int _currentIndex;
-    
+
     static private MenuLogic _myMenu = new MenuLogic();
     public static void WelcomeMenu()
     {
@@ -41,10 +39,14 @@ public static class Dishes
     // Displays the current dishes to the user
     public static void JsonCursor(string choice)
     {
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
         Console.Clear();
+        string price2 = (string)menu["Vegetarisch"]["2_Gangen"][0]["Prijs"];
+        string price3 = (string)menu["Vegetarisch"]["3_Gangen"][0]["Prijs"];
+        string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
         Console.WriteLine("gerechten:");
         Console.WriteLine("-------");
 
@@ -53,6 +55,7 @@ public static class Dishes
         {
             string appetizer = (string)course["Voorgerecht"]!;
             string entree = (string)course["Maaltijd"]!;
+            Console.WriteLine($"prijs: {price2}");
             Console.WriteLine($"Voorgerecht: {appetizer}");
             Console.WriteLine($"Hooftgerecht: {entree}");
             Console.WriteLine();
@@ -64,6 +67,7 @@ public static class Dishes
             string appetizer = (string)course["Voorgerecht"]!;
             string entree = (string)course["Maaltijd"]!;
             string dessert = (string)course["Nagerecht"]!;
+            Console.WriteLine($"prijs: {price3}");
             Console.WriteLine($"Voorgerecht: {appetizer}");
             Console.WriteLine($"Hoofdgerecht: {entree}");
             Console.WriteLine($"Nagerecht: {dessert}");
@@ -77,6 +81,7 @@ public static class Dishes
             string soup = (string)course["Soep"]!;
             string entree = (string)course["Maaltijd"]!;
             string dessert = (string)course["Nagerecht"]!;
+            Console.WriteLine($"prijs: {price4}");
             Console.WriteLine($"Voorgerecht: {appetizer}");
             Console.WriteLine($"Soep: {soup}");
             Console.WriteLine($"Hoofdgerecht: {entree}");
@@ -125,7 +130,7 @@ public static class Dishes
         
         // select course
         string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Terug naar hoofdmenu"};
-        string prompt2 = "\nWelke Maaltijd wil je toevoegen?:";
+        string prompt2 = "\nWelke gang wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
         _currentIndex = 0;
         switch (input2)
@@ -151,9 +156,19 @@ public static class Dishes
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
         JObject MenuOBJ = JObject.Parse(menu);
-        // adds dish to menu
+        // Gets dish from menu
         JArray menuCourse = (JArray)MenuOBJ[type]![course]!;
         JObject dishtoadd = DisplayOptions(type, course);
+
+        // update values in dishtoadd object
+        dishtoadd["Voorgerecht"] = (string)dishtoadd["Voorgerecht"] == "none" ? (string)menuCourse![0]["Voorgerecht"] : (string)dishtoadd["Voorgerecht"];
+        dishtoadd["Soep"] = (string)dishtoadd["Soep"] == "none" ? (string)menuCourse![0]["Soep"] : (string)dishtoadd["Soep"];
+        dishtoadd["Maaltijd"] = (string)dishtoadd["Maaltijd"] == "none" ? (string)menuCourse![0]["Maaltijd"] : (string)dishtoadd["Maaltijd"];
+        dishtoadd["Nagerecht"] = (string)dishtoadd["Nagerecht"] == "none" ? (string)menuCourse![0]["Nagerecht"] : (string)dishtoadd["Nagerecht"];
+
+        // keep the existing price
+        dishtoadd["Prijs"] = (string)menuCourse![0]["Prijs"];
+        // add dish to menu
         menuCourse![0] = dishtoadd;
         File.WriteAllText(path2, MenuOBJ.ToString());
         // displays added dish
@@ -224,8 +239,71 @@ public static class Dishes
 
         return null!;
     }
-    
-    
-    
+
+    public static void PriceManager()
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
+        string json = File.ReadAllText(path);
+        JObject menu = JObject.Parse(json);
+        string price2 = (string)menu["Vegetarisch"]["2_Gangen"][0]["Prijs"];
+        string price3 = (string)menu["Vegetarisch"]["3_Gangen"][0]["Prijs"];
+        string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        
+        string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
+        string prompt = "\nWelke prijs zou je willen veranderen:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                Console.WriteLine("Voer een nieuwe prijs in:");
+                string newprice2 = Console.ReadLine();
+                menu["Vegetarisch"]["2_Gangen"][0]["Prijs"] = $"€ {newprice2}";
+                break;
+            case 1:
+                Console.WriteLine("Voer een nieuwe prijs in:");
+                string newprice3 = Console.ReadLine();
+                menu["Vegetarisch"]["3_Gangen"][0]["Prijs"] = $"€ {newprice3}";
+                break;
+            case 2:
+                Console.WriteLine("Voer een nieuwe prijs in:");
+                string newprice4 = Console.ReadLine();
+                menu["Vegetarisch"]["4_Gangen"][0]["Prijs"] = $"€ {newprice4}";
+                break;
+            case 3:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+        // save the updated JSON to the file
+        string updatedJson = menu.ToString();
+        File.WriteAllText(path, updatedJson);
+        Console.WriteLine("\nPrijzen bijgewerkt!\n");
+        Thread.Sleep(2000);
+    }
+
+    public static void ManagerOptions()
+    {
+        string[] options = { "Menu veranderen", "Prijs veranderen", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een type gerechten:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                ManageMenu();
+                break;
+            case 1:
+                PriceManager();
+                break;
+            case 2:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+    }
     
 }
