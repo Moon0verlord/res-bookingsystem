@@ -94,22 +94,34 @@ static class Reservation
             else MainMenu.Start();
         }
         else ChooseDate();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Clear();
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
-        Console.WriteLine($"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
-                          $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
-        Console.ResetColor();
-        string answer = Console.ReadLine()!;
-        switch (answer.ToLower())
+        while (true)
         {
-            case "ja": case "j":
-                Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople, chosenTimeslot.Item1, chosenTimeslot.Item2);
-                Console.Clear();
-                Console.WriteLine("\nReservatie is gemaakt.");
-                Thread.Sleep(1500);
-                MainMenu.Start(_acc);
-                break;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
+            Console.WriteLine(
+                $"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
+            Console.ResetColor();
+            string answer = Console.ReadLine()!;
+            switch (answer.ToLower())
+            {
+                case "ja":
+                case "j":
+                    Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople,
+                        chosenTimeslot.Item1, chosenTimeslot.Item2);
+                    Console.Clear();
+                    Console.WriteLine("\nReservatie is gemaakt.");
+                    Thread.Sleep(1500);
+                    MainMenu.Start(_acc);
+                    break;
+                case "nee":
+                case "n":
+                    MainMenu.Start(_acc);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

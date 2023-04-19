@@ -227,7 +227,7 @@ class _2DMenuLogic
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if (forbiddenIndex.Contains((i, j))) { }
+                    if (forbiddenIndex.Contains((i, j))) {}
                     else
                     {
                         _rowIndex = i;
@@ -235,8 +235,8 @@ class _2DMenuLogic
                         goto end;
                     }
                 }
-                noSpace = true;
             }
+            noSpace = true;
             end:
             array = null;
         }
