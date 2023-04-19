@@ -1,7 +1,8 @@
 using System.ComponentModel;
 
-class _2DMenuLogic 
+class _2DMenuLogic
 {
+    private bool noSpace = false;
     private int _rowIndex = 0;
     private int _columnIndex = 0;
     private int res_GroupSize = 0;
@@ -125,11 +126,21 @@ class _2DMenuLogic
     
         public ReservationModel RunTableMenu(ReservationModel[,] tables, string prompt, int groupsize, bool printPrompt = true)
         {
+            noSpace = false;
             Tables = tables;
             res_GroupSize = groupsize;
             ConsoleKey keyPressed = default;
             AddForbiddenIndexes(Tables);
             CheckPosition(Tables, keyPressed);
+            if (noSpace)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Er is geen ruimte meer op deze tijd voor {res_GroupSize} personen.");
+                Thread.Sleep(2500);
+                Console.ResetColor();
+                return default;
+            }
         do
         {
             Console.SetCursorPosition(0, 12);
@@ -224,6 +235,7 @@ class _2DMenuLogic
                         goto end;
                     }
                 }
+                noSpace = true;
             }
             end:
             array = null;
