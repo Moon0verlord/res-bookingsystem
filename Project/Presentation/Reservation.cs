@@ -3,6 +3,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 static class Reservation
 {
+    private static AccountModel _acc = null;
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
@@ -15,6 +16,7 @@ static class Reservation
 
     public static void ResStart(AccountModel acc = null)
     {
+        _acc = acc;
         userEmail = null;
         amountOfPeople = 0;
         chosenDate = default;
@@ -101,6 +103,7 @@ static class Reservation
                 Console.Clear();
                 Console.WriteLine("\nReservatie is gemaakt.");
                 Thread.Sleep(1500);
+                MainMenu.Start(_acc);
                 break;
         }
     }
