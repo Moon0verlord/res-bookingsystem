@@ -47,7 +47,7 @@ class _2DMenuLogic
     public void DisplayTableOptions(string prompt, bool printPrompt)
     {
         // weird spacing so it looks nice on the menu.
-        if (printPrompt) Console.WriteLine(prompt + "\n" + "\n  Tafels (1-2 personen)\t     Tafels (3-4 personen)    Tafels (5-6 personen)");
+        if (printPrompt) Console.WriteLine(prompt + "\n" + "\n  Tafels (1-2 personen)\t      Tafels (3-4 personen)\t  Tafels (5-6 personen)");
         for (int i = 0; i < Tables.GetLength(0); i++)
         {
             for (int j = 0; j < Tables.GetLength(1); j++)
