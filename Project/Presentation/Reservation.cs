@@ -6,6 +6,7 @@ static class Reservation
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
+    private static ReservationTableLogic _tableLogic = new ReservationTableLogic();
     private static string userEmail;
     private static int amountOfPeople;
     private static DateTime chosenDate;
@@ -208,9 +209,12 @@ static class Reservation
     public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         var tablesOnly = Reservations.PopulateTables(res_Date, chosenTime);
-        int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
-        if (selectedTable != 0) chosenTable = selectedTable;
-        else ChooseTimeslot();
+        var tablesOnly2D = Reservations.PopulateTables2D(res_Date, chosenTime);
+        _tableLogic.TableStart(tablesOnly, amountOfPeople);
+        ReservationModel selectedTable2D = _my2DMenu.RunTableMenu(tablesOnly2D, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
+        // int selectedTable = _my1DMenu.RunTableMenu(tablesOnly, "Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
+        // if (selectedTable != 0) chosenTable = selectedTable;
+        // else ChooseTimeslot();
     }
     
     public static void ViewRes(string Email)
