@@ -12,11 +12,11 @@ class MainMenu : IMenuLogic
     //You could edit this to show different menus depending on the user's role
     public static void Start(AccountModel? acc = null)
     {
-        if (Account == null)
+        if (Account == null!)
         {
-            Account = acc;
+            Account = acc!;
         }
-        if (Account == null)
+        if (Account == null!)
         {
             while (true)
             {
@@ -51,7 +51,7 @@ class MainMenu : IMenuLogic
                 }
             }
         }
-        if (Account != null && Account.LoggedIn && Account.IsEmployee)
+        if (Account != null! && Account.LoggedIn && Account.IsEmployee)
         {
             if (Account.IsManager)
             {
@@ -74,7 +74,7 @@ class MainMenu : IMenuLogic
                                 string userAnswer = Console.ReadLine()!;
                                 if (userAnswer == "j" || userAnswer == "J")
                                 {
-                                    Account = null;
+                                    Account = null!;
                                     Start();
                                 }
                             }
@@ -109,7 +109,7 @@ class MainMenu : IMenuLogic
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
-                    case 3:
+                    case 2:
                         if (Account.LoggedIn)
                         {
                             Console.Clear();
@@ -119,7 +119,7 @@ class MainMenu : IMenuLogic
                             string userAnswer = Console.ReadLine()!;
                             if (userAnswer == "j" || userAnswer == "J")
                             {
-                                Account = null;
+                                Account = null!;
                                 Start();
                             }
                         }
@@ -128,10 +128,10 @@ class MainMenu : IMenuLogic
                             Console.WriteLine("U bent al uitgelogd");
                         }
                         break;
-                    case 2:
+                    case 1:
                         EmployeeManagerLogic.CheckReservations();
                         break;
-                    case 1:
+                    case 0:
                         Dishes.WelcomeMenu();
                         break;
                     
@@ -179,7 +179,7 @@ class MainMenu : IMenuLogic
                             string userAnswer = Console.ReadLine()!;
                             if (userAnswer == "j" || userAnswer == "J")
                             {
-                                Account = null;
+                                Account = null!;
                                 Start();
                             }
                         }

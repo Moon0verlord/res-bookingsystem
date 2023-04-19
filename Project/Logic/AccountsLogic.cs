@@ -48,7 +48,7 @@ class AccountsLogic:IMenuLogic
         => _accounts.Find(i => i.EmailAddress == email)!;
     public AccountModel CheckLogin(string email, string password)
     {
-        if (email == null || password == null)
+        if (email == null! || password == null!)
         {
             return null;
         }

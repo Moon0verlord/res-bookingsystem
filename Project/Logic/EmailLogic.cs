@@ -6,7 +6,6 @@ class EmailLogic
     public static bool IsValidEmail(string email)
     {
         return new EmailAddressAttribute().IsValid(email);
-        
     }
     public static void SendEmail(string email, string name, int table, DateTime Date)
     {

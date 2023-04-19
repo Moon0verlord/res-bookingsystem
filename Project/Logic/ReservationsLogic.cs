@@ -1,4 +1,3 @@
-using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 class ReservationsLogic
 {
@@ -30,33 +29,33 @@ class ReservationsLogic
         return dates;
     }
     
-    public List<ReservationModel> PopulateTables(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
+    public List<ReservationModel> PopulateTables(DateTime resDate, (TimeSpan, TimeSpan) chosenTime)
     {
         List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
         List<ReservationModel> tablesToAdd = new List<ReservationModel>();
         // these are needed to set each table's maximum allowed size of 2, 4 and 6.
         // Starts at -1 so that the first if statement makes the index start at 0.
-        List<int> CurrentTableSizes = new List<int>() { 2, 4, 6 };
+        List<int> currentTableSizes = new List<int>() { 2, 4, 6 };
         int tableIndex = -1;
         
         for (int i = 1; i <= 15; i++)
         {
-            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
+            IEnumerable<ReservationModel> tablesWithThisId = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==resDate);
             if (i == 1 || i == 9 || i == 14)
             {
                 tablesToAdd.Add(null);
                 tableIndex++;
             }
-            if (tablesWithThisID.Count() >= 1)
+            if (tablesWithThisId.Count() >= 1)
             {
-                foreach (ReservationModel table in tablesWithThisID)
+                foreach (ReservationModel table in tablesWithThisId)
                 {
-                    if (table.Date == res_Date.Date)
+                    if (table.Date == resDate.Date)
                     {
                         if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
                         {
                             table.isReserved = true;
-                            table.TableSize = CurrentTableSizes[tableIndex];
+                            table.TableSize = currentTableSizes[tableIndex];
                             tablesToAdd.Add(table);
                         }
                         else
@@ -64,7 +63,7 @@ class ReservationsLogic
                             bool noDuplicates = true;
                             foreach (ReservationModel check in tablesToAdd)
                             {
-                                if (check != null)
+                                if (check != null!)
                                 {
                                     if (check.Id == i)
                                         noDuplicates = false;
@@ -72,23 +71,23 @@ class ReservationsLogic
                             }
                             if (noDuplicates)
                             {
-                                int size = CurrentTableSizes[tableIndex];
-                                var AddTable = AddDefaultTable(i, size);
-                                tablesToAdd.Add(AddTable);
+                                int size = currentTableSizes[tableIndex];
+                                var addTable = AddDefaultTable(i, size);
+                                tablesToAdd.Add(addTable);
                                 
                             }
                         }
                     }
                     else 
                     {
-                        int size = CurrentTableSizes[tableIndex];
+                        int size = currentTableSizes[tableIndex];
                         tablesToAdd.Add(AddDefaultTable(i, size));
                     }
                 }
             }
             else
             {
-                int size = CurrentTableSizes[tableIndex];
+                int size = currentTableSizes[tableIndex];
                 tablesToAdd.Add(AddDefaultTable(i, size));
             }
         }
@@ -97,26 +96,26 @@ class ReservationsLogic
 
     public ReservationModel AddDefaultTable(int id, int size)
     {
-        ReservationModel resm = new ReservationModel(id, null, new DateTime(0), 0, default, default);
+        ReservationModel resm = new ReservationModel(id, null!, new DateTime(0), 0, default, default);
         resm.isReserved = false;
         resm.TableSize = size;
         return resm;
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, int chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
+    public void CreateReservation(string email, DateTime resDate, int chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
     {
         var Person = AccountsAccess.LoadAll().Find(account=>account.EmailAddress == email);
         if (Person != null)
         {
-            EmailLogic.SendEmail(email, Person.FullName, chosenTable, res_Date);
+            EmailLogic.SendEmail(email, Person.FullName, chosenTable, resDate);
         }
         else
         {
-            EmailLogic.SendEmail(email, "", chosenTable, res_Date);
+            EmailLogic.SendEmail(email, "", chosenTable, resDate);
         }
 
-        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime);
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, resDate, groupsize, entertime, leavetime);
         AccountsAccess.AddReservation(newReservation);
     }
 }
