@@ -4,6 +4,8 @@
     private string[] _options = null;
     private List<string> sizes = new List<string>();
     private List<int> forbiddenIndex = new List<int>();
+    private List<ReservationModel> tables = new List<ReservationModel>();
+    private int res_GroupSize = default;
     public void DisplayOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
@@ -76,26 +78,28 @@
 
     public void DisplayTableOptions(List<ReservationModel> tables, string prompt, bool printPrompt)
     {
-        sizes.Add("Tafel voor 2");
-        sizes.Add("Tafel voor 4");
-        sizes.Add("Tafel voor 6");
-        if (printPrompt) Console.WriteLine(prompt);
+        //todo: check for group size
+        sizes.Add(" Tafel voor 2");
+        sizes.Add(" Tafel voor 4");
+        sizes.Add(" Tafel voor 6");
+        if (printPrompt) Console.Write(prompt);
         Console.WriteLine();
         for (int i = 0; i < tables.Count; i++)
         {
             if (tables[i] != null)
             {
-                if (tables[i].isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                bool groupcheck = (res_GroupSize - tables[i].TableSize == 0 || res_GroupSize - tables[i].TableSize == -1);
+                if (tables[i].isReserved || !groupcheck) Console.ForegroundColor = ConsoleColor.Red;
                 else Console.ForegroundColor = ConsoleColor.Green;
                 if (i == _currentIndex)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"> Tafel {tables[i].Id}: {(!groupcheck ? $"Tafel onbeschikbaar voor uw groepsgrootte ({res_GroupSize})" : tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"Tafel {tables[i].Id}: {(tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
+                    Console.WriteLine($"  Tafel {tables[i].Id}: {(!groupcheck ? $"Tafel onbeschikbaar voor uw groepsgrootte ({res_GroupSize})" : tables[i].isReserved ? "Bezet" : "Beschikbaar")}");
                 }
             }
             else
@@ -115,6 +119,7 @@
 
     public int RunMenu(string[] options, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
+        _currentIndex = 0;
         _options = options;
         ConsoleKey keyPressed;
         Console.Clear();
@@ -188,12 +193,15 @@
         return new Dictionary<int, DateTime>() { { _currentIndex, options[_currentIndex] } };
     }
 
-    public int RunTableMenu(List<ReservationModel> tables, string prompt, bool printPrompt = true, bool sideways = false, bool displayTime = false)
+    public int RunTableMenu(List<ReservationModel> tables, string prompt, int groupsize, bool printPrompt = true, bool sideways = false, bool displayTime = false)
     {
-        _currentIndex = 1;
+        this.tables = tables;
+        this.res_GroupSize = groupsize;
+        this._currentIndex = 1;
         ConsoleKey keyPressed;
         Console.Clear();
-        AddForbiddenIndexes(tables);
+        AddForbiddenIndexes();
+        CheckPosition();
         do
         {
             Console.SetCursorPosition(0, 0);
@@ -236,6 +244,8 @@
                             if (_currentIndex >= tables.Count) _currentIndex = 0;
                         }
                         break;
+                    case ConsoleKey.Q:
+                        return 0;
                 }
             }
         } while (keyPressed != ConsoleKey.Enter);
@@ -245,17 +255,39 @@
         else if (_currentIndex > 9) return _currentIndex - 1;
         else return _currentIndex;
     }
+    
+    public void CheckPosition()
+    {
+        /* this checks every index in the 1D array so you can never land on an occupied spot.
+        Normally this only gets checked after a key press, but at the start of the program we should also check
+        this right away.*/
+        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex <= -1)
+        {
+            _currentIndex--;
+            if (_currentIndex <= -1) _currentIndex = tables.Count - 1;
+        }
+        while (forbiddenIndex.Contains(_currentIndex) || _currentIndex >= tables.Count)
+        {
+            _currentIndex++;
+            if (_currentIndex >= tables.Count) _currentIndex = 0;
+        }
+    }
 
-    public void AddForbiddenIndexes(List<ReservationModel> tables)
+    public void AddForbiddenIndexes()
     {
         try
         {
+            forbiddenIndex.Clear();
             forbiddenIndex.Add(0);
             for (int i = 0; i < tables.Count(); i++)
             {
                 if (tables[i] != null)
                 {
                     if (tables[i].isReserved)
+                    {
+                        forbiddenIndex.Add(i);
+                    }
+                    else if (!(res_GroupSize - tables[i].TableSize == 0 || res_GroupSize - tables[i].TableSize == -1))
                     {
                         forbiddenIndex.Add(i);
                     }

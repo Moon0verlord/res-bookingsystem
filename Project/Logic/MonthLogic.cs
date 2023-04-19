@@ -34,7 +34,7 @@ class MonthLogic : MonthTimeModels
 
                     if (dayArray[input] == "Ga terug")
                     {
-                        Reservation.ResMenu(null);
+                        Reservation.ResMenu();
                     }
                     else
                     {

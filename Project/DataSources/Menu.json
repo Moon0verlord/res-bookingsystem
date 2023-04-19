@@ -1,0 +1,94 @@
+{
+  "Vegetarisch": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "Courgette en Maïs Fritters",
+        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "Veganistische Deviled Eggs",
+        "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
+        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "Tomato and Basil Bruschetta",
+        "Soep": "Roasted Butternut Squash Soep",
+        "Maaltijd": "Vegan Lasagna",
+        "Nagerecht": "Raw Vegan Cheesecake"
+      }
+    ]
+  },
+  "Vis": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "Lobster Bisque",
+        "Maaltijd": "Pan-Seared Salmon with Lemon Butter Sauce"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "Shrimp Cocktail",
+        "Maaltijd": "Cedar Plank Salmon with Herb Butter",
+        "Nagerecht": "Key Lime Pie"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "Tuna Tartare with Avocado and Mango",
+        "Soep": "Lobster Bisque",
+        "Maaltijd": "Pan-Seared Scallops with Truffle Risotto",
+        "Nagerecht": "Chocolate Torte"
+      }
+    ]
+  },
+  "Vlees": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "Caesar Salad",
+        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "Franse Uiensoep",
+        "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
+        "Nagerecht": "Crème Brûlée"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "Beef Carpaccio with Arugula and Parmesan",
+        "Soep": "Tomato Bisque",
+        "Maaltijd": "Braised Short Ribs with Creamy Polenta",
+        "Nagerecht": "Crème Brûlée"
+      }
+    ]
+  },
+  "Veganistisch": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "Mixed Green Salad",
+        "Maaltijd": "Roasted Vegetable Risotto"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "Roasted Beet Salad",
+        "Maaltijd": "Eggplant Parmesan with Tomato Sauce",
+        "Nagerecht": "Vegan Chocolate Mousse"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "Roasted Brussels Sprouts with Balsamic Glaze",
+        "Soep": "Curried Carrot Soep",
+        "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries",
+        "Nagerecht": "Dark Chocolate Truffles"
+      }
+    ]
+  }
+}
