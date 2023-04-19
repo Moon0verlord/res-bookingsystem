@@ -219,7 +219,12 @@ static class Reservation
         var tablesOnly = Reservations.PopulateTables2D(res_Date, chosenTime);
         // another setwindowsize here to make sure the user didn't make the window too small when choosing other options
         // Picking a setwindowsize under 171 will make the console crash with a bounding error.
-        Console.SetWindowSize(180, 35);
+        try
+        {
+            Console.SetWindowSize(180, 35);
+        }
+        catch{}
+
         _tableLogic.TableStart(tablesOnly, amountOfPeople);
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly, "  Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
         if (selectedTable != default) chosenTable = selectedTable.Id;
