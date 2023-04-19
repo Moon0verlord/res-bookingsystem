@@ -6,6 +6,8 @@ static class UserLogin
     static private MenuLogic myMenu = new();
     private static string userEmail;
     private static string userPassword;
+    
+    // starts the login process 
     public static void Start()
     {
         userEmail = null;
@@ -14,7 +16,7 @@ static class UserLogin
         {
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
-                "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {userPassword}\n")}",
+                "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {HidePass(userPassword)}\n")}",
                 "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "Afsluiten" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
@@ -23,7 +25,7 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("\n vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
-                    if (!userEmail.Contains("@") || userEmail.Length < 3)
+                    if (!EmailLogic.IsValidEmail(userEmail))
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -99,6 +101,7 @@ static class UserLogin
                             Console.WriteLine("Uw e-mail is " + acc.EmailAddress);
                             acc.LoggedIn = true;
                             Thread.Sleep(2000);
+                            DiscardKeys();
                             MainMenu.Start(acc);
                         }
                         else
@@ -131,4 +134,25 @@ static class UserLogin
         var newAccount = AccountsAccess.AddAccount(email, password, name,IsEmployee,IsManager);
         return newAccount;
     }
+
+    public static string HidePass(string pass)
+    {
+        string hiddenPass = "";
+        for (int i = 0; i < pass.Length; i++)
+        {
+            hiddenPass += "*";
+        }
+
+        return hiddenPass;
+    }
+    
+    
+    public static void DiscardKeys()
+    {
+        while (Console.KeyAvailable)
+        {
+            Console.ReadKey(true);
+        }
+    }
+    
 }
