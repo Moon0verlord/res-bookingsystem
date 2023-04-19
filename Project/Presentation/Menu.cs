@@ -280,8 +280,11 @@ public static class Dishes
         // save the updated JSON to the file
         string updatedJson = menu.ToString();
         File.WriteAllText(path, updatedJson);
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nPrijzen bijgewerkt!\n");
+        Console.ResetColor();
         Thread.Sleep(2000);
+        UserLogin.DiscardKeys();
     }
 
     public static void ManagerOptions()
