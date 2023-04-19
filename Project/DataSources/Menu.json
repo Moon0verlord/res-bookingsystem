@@ -3,14 +3,16 @@
     "2_Gangen": [
       {
         "Voorgerecht": "Courgette en Maïs Fritters",
-        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
+        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries",
+        "Prijs": "€ 25,00"
       }
     ],
     "3_Gangen": [
       {
         "Voorgerecht": "Veganistische Deviled Eggs",
         "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
-        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars"
+        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars",
+        "Prijs": "€ 35,00"
       }
     ],
     "4_Gangen": [
@@ -18,22 +20,27 @@
         "Voorgerecht": "Tomato and Basil Bruschetta",
         "Soep": "Roasted Butternut Squash Soep",
         "Maaltijd": "Vegan Lasagna",
-        "Nagerecht": "Raw Vegan Cheesecake"
+        "Nagerecht": "Raw Vegan Cheesecake",
+        "Prijs": "€ 100,00"
       }
     ]
   },
   "Vis": {
     "2_Gangen": [
       {
-        "Voorgerecht": "Lobster Bisque",
-        "Maaltijd": "Pan-Seared Salmon with Lemon Butter Sauce"
+        "Voorgerecht": "Gerookte zalm op crostini",
+        "Maaltijd": "Gegrilde tonijnsteak met gember-sojasaus",
+        "Soep": null,
+        "Nagerecht": null,
+        "Prijs": "€ 25,00"
       }
     ],
     "3_Gangen": [
       {
         "Voorgerecht": "Shrimp Cocktail",
         "Maaltijd": "Cedar Plank Salmon with Herb Butter",
-        "Nagerecht": "Key Lime Pie"
+        "Nagerecht": "Key Lime Pie",
+        "Prijs": "€ 35,00"
       }
     ],
     "4_Gangen": [
@@ -41,7 +48,8 @@
         "Voorgerecht": "Tuna Tartare with Avocado and Mango",
         "Soep": "Lobster Bisque",
         "Maaltijd": "Pan-Seared Scallops with Truffle Risotto",
-        "Nagerecht": "Chocolate Torte"
+        "Nagerecht": "Chocolate Torte",
+        "Prijs": "€ 45,00"
       }
     ]
   },
@@ -49,22 +57,25 @@
     "2_Gangen": [
       {
         "Voorgerecht": "Caesar Salad",
-        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce"
+        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce",
+        "Prijs": "€ 25,00"
       }
     ],
     "3_Gangen": [
       {
         "Voorgerecht": "Franse Uiensoep",
         "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
-        "Nagerecht": "Crème Brûlée"
+        "Nagerecht": "Crème Brûlée",
+        "Prijs": "€ 35,00"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Beef Carpaccio with Arugula and Parmesan",
-        "Soep": "Tomato Bisque",
-        "Maaltijd": "Braised Short Ribs with Creamy Polenta",
-        "Nagerecht": "Crème Brûlée"
+        "Voorgerecht": "Op de Huid Gebakken Coquilles met Citroen Knoflookboter",
+        "Soep": "Room van Champignonsoep",
+        "Maaltijd": "Geroosterde Lamscarré met Rozemarijn en Knoflook",
+        "Nagerecht": "Chocolademousse",
+        "Prijs": "€ 45,00"
       }
     ]
   },
@@ -72,22 +83,25 @@
     "2_Gangen": [
       {
         "Voorgerecht": "Mixed Green Salad",
-        "Maaltijd": "Roasted Vegetable Risotto"
+        "Maaltijd": "Roasted Vegetable Risotto",
+        "Prijs": "€ 25,00"
       }
     ],
     "3_Gangen": [
       {
         "Voorgerecht": "Roasted Beet Salad",
         "Maaltijd": "Eggplant Parmesan with Tomato Sauce",
-        "Nagerecht": "Vegan Chocolate Mousse"
+        "Nagerecht": "Vegan Chocolate Mousse",
+        "Prijs": "€ 35,00"
       }
     ],
     "4_Gangen": [
       {
-        "Voorgerecht": "Roasted Brussels Sprouts with Balsamic Glaze",
-        "Soep": "Curried Carrot Soep",
-        "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries",
-        "Nagerecht": "Dark Chocolate Truffles"
+        "Voorgerecht": "Geroosterde Venkel en Sinaasappel Salade",
+        "Soep": "Romige Tomaat en Basilicum Soep",
+        "Maaltijd": "Gegrilde Tofu en Groente Kebabs",
+        "Nagerecht": "Raspberry Sorbet",
+        "Prijs": null
       }
     ]
   }
