@@ -32,31 +32,60 @@
         Console.ResetColor();
     }
     
-    public static void WriteBoxUserLogin(int origrow, int origcol)
+    public static void WriteBoxUserEmail(int origrow, int origcol)
     {
         origRow = origrow;
         origCol = origcol;
-        string msg1 = " Requirements E-mail:";
-        string msg1_1 = "- Een '@' teken.";
-        string msg1_2 = "- Langer dan 3 karakters.";
         string msg2 = $"Requirements wachtwoord:\n- 8-15 karakters lang\n- Minimaal 1 hoofdletter\n- Minimaal 1 cijfer";
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", 1, 3);
         WriteAt("│", 1, 4);
         WriteAt("│", 1, 5);
         WriteAt("│", 1, 6);
-        WriteAt("└", 1, 7);
-        WriteAt("──────────────────────────", 2, 3);
-        WriteAt("──────────────────────────", 2, 7);
-        WriteAt("┐", 27, 3);
-        WriteAt("│", 27, 4);
-        WriteAt("│", 27, 5);
-        WriteAt("│", 27, 6);
-        WriteAt("┘", 27, 7);
+        WriteAt("│", 1, 7);
+        WriteAt("└", 1, 8);
+        WriteAt("───────────────────────────────", 2, 3);
+        WriteAt("───────────────────────────────", 2, 8);
+        WriteAt("┐", 32, 3);
+        WriteAt("│", 32, 4);
+        WriteAt("│", 32, 5);
+        WriteAt("│", 32, 6);
+        WriteAt("│", 32, 7);
+        WriteAt("┘", 32, 8);
         Console.ForegroundColor = ConsoleColor.Green;
-        WriteAt(msg1, 2, 4);
-        WriteAt(msg1_1, 2, 5);
-        WriteAt(msg1_2, 2, 6);
+        WriteAt(" Requirements E-mail:", 2, 4);
+        WriteAt("- Een '@' teken", 2, 5);
+        WriteAt("- Langer dan 3 karakters.", 2, 6);
+        WriteAt("- Begint en eindigt met letter", 2, 7);
+        Console.ResetColor();
+    }
+    
+    public static void WriteBoxUserPassword(int origrow, int origcol)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        int x = 1;
+        int y = 5;
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        WriteAt("┌", x, y);
+        WriteAt("│", x, y + 1);
+        WriteAt("│", x, y + 2);
+        WriteAt("│", x, y + 3);
+        WriteAt("│", x, y + 4);
+        WriteAt("└", x, y + 5);
+        WriteAt("───────────────────────────────", x + 1, y);
+        WriteAt("───────────────────────────────", x + 1, y + 5);
+        WriteAt("┐", 32, y);
+        WriteAt("│", 32, y + 1);
+        WriteAt("│", 32, y + 2);
+        WriteAt("│", 32, y + 3);
+        WriteAt("│", 32, y + 4);
+        WriteAt("┘", 32, y + 5);
+        Console.ForegroundColor = ConsoleColor.Green;
+        WriteAt(" Requirements wachtwoord:", x + 1, y + 1);
+        WriteAt("- 8 - 15 karakters",  x + 1, y + 2);
+        WriteAt("- Minimaal 1 hoofdletter", x + 1, y + 3);
+        WriteAt("- Minimaal 1 cijfer", x + 1,  y + 4);
         Console.ResetColor();
     }
     

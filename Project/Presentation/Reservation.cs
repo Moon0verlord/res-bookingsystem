@@ -117,8 +117,9 @@ using System.Globalization;
              {
                  case "ja":
                  case "j":
+                     string Res_ID = Reservations.CreateID();
                      Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople,
-                         chosenTimeslot.Item1, chosenTimeslot.Item2);
+                         chosenTimeslot.Item1, chosenTimeslot.Item2, Res_ID);
                      Console.Clear();
                      Console.WriteLine("\nReservatie is gemaakt.");
                      Thread.Sleep(1500);
@@ -273,7 +274,7 @@ using System.Globalization;
              if (Email == res.EmailAddress && res.Date >= DateTime.Now.Date)
              {
                  ReservationsPerson.Add(
-                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date}.");
+                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.Date}.");
                  ReservationPersonPositions.Add(AllRes.FindIndex(a => a == res));
                  CheckIfRes = true;
              }

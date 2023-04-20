@@ -7,8 +7,7 @@
         {
             Console.SetWindowSize(180, 35);
         }
-        catch{}
-
+        catch {}
         Console.Clear();
         MainMenu.Start();
     }

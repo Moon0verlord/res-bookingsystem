@@ -1,5 +1,7 @@
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using System.Text.RegularExpressions;
+
 class ReservationsLogic
 {
     public static readonly string CurMonth = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
@@ -167,16 +169,45 @@ class ReservationsLogic
 
     public ReservationModel AddDefaultTable(string id, int size)
     {
-        ReservationModel resm = new ReservationModel(id, null, new DateTime(0), 0, default, default);
+        ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null);
         resm.isReserved = false;
         resm.TableSize = size;
         return resm;
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime)
+    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id)
     {
-        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime);
+        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
         AccountsAccess.AddReservation(newReservation);
+    }
+
+    public string CreateID()
+    {
+        Random rand = new();
+        int int_ID = rand.Next(100000, 999999);
+        if (IDExists(int_ID))
+        {
+            return CreateID();
+        }
+        return $"RES-{int_ID}";
+    }
+
+    private bool IDExists(int id_num)
+    {
+        var all_res =  AccountsAccess.LoadAllReservations();
+        foreach (ReservationModel res in all_res)
+        {
+            if (res.Res_ID != null)
+            {
+                var number = Regex.Match(res.Res_ID, @"[0-9]+");
+                if (id_num == Convert.ToInt32(number.Value))
+                {
+                    return true;
+                }   
+            }
+        }
+
+        return false;
     }
 }

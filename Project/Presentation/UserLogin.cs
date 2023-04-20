@@ -24,7 +24,7 @@ static class UserLogin
                 case 0:
                     Console.CursorVisible = true;
                     Console.Clear();
-                    InfoBoxes.WriteBoxUserLogin(Console.CursorTop, Console.CursorLeft);
+                    InfoBoxes.WriteBoxUserEmail(Console.CursorTop, Console.CursorLeft);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
@@ -42,6 +42,8 @@ static class UserLogin
                 case 1:
                     Console.CursorVisible = true;
                     Console.Clear();
+                    InfoBoxes.WriteBoxUserPassword(Console.CursorTop, Console.CursorLeft);
+                    Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
