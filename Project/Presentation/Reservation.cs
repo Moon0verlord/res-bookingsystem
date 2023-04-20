@@ -123,6 +123,7 @@ using System.Globalization;
                      Console.Clear();
                      Console.WriteLine("\nReservatie is gemaakt.");
                      Thread.Sleep(1500);
+                     UserLogin.DiscardKeys();
                      MainMenu.Start(_acc);
                      break;
                  case "nee":
