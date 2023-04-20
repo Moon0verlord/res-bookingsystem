@@ -275,7 +275,7 @@ using System.Globalization;
              if (Email == res.EmailAddress && res.Date >= DateTime.Now.Date)
              {
                  ReservationsPerson.Add(
-                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.Date}.");
+                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.ToString("dd-MM-yyyy")}. Tijdslot: {res.StartTime} - {res.LeaveTime}");
                  ReservationPersonPositions.Add(AllRes.FindIndex(a => a == res));
                  CheckIfRes = true;
              }
