@@ -1,14 +1,17 @@
 [
     {
-        "eventid": 1,
         "eventname": "event 1",
         "eventinfo": "dit is event 1",
-        "datum": "08-28-2023"
+        "eventdate": "08-28-2023"
     },
     {
-        "eventid": 2,
         "eventname": "event 2",
         "eventinfo": "dit is event 2",
-        "datum": "12-13-2023"
+        "eventdate": "12-13-2023"
+    },
+    {
+        "eventname": "3",
+        "eventinfo": "3",
+        "eventdate": "3"
     }
 ]
