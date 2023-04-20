@@ -34,6 +34,7 @@ static class UserLogin
                         Console.ResetColor();
                         userEmail = null;
                         Thread.Sleep(3000);
+                        DiscardKeys();
                     }
                     break;
                 case 1:
@@ -41,7 +42,6 @@ static class UserLogin
                     Console.Clear();
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
-                    Console.Clear();
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
                     var verifyUserPassword = WritePassword()!;
                     if (userPassword == verifyUserPassword)
@@ -51,6 +51,7 @@ static class UserLogin
                         Console.WriteLine("\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
                         Console.ResetColor();
                         Thread.Sleep(2000);
+                        DiscardKeys();
                         userPassword = null;
                         break;
                     }
@@ -71,10 +72,21 @@ static class UserLogin
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nEr bestaat al een account met deze e-mail.");
                             Thread.Sleep(2000);
+                            DiscardKeys();
                             Console.ResetColor();
                         }
                         else
                         {
+                            if (!PasswordCheck(userPassword))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\nUw wachtwoord moet minimaal bestaan uit 8-15 karakters, en moet een hoofdletter en een cijfer bevatten.");
+                                Console.ResetColor();
+                                Thread.Sleep(2000);
+                                DiscardKeys();
+                                userPassword = null;
+                                break;
+                            }
                             Console.CursorVisible = true;
                             Console.Write("Vul hier uw volledige naam in: ");
                             var fullName = Console.ReadLine()!;
@@ -82,7 +94,7 @@ static class UserLogin
                             Console.Clear();
                             Console.WriteLine(
                                 $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: " +
-                                $"{userPassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
+                                $"{HidePass(userPassword)}\nWeet u zeker dat u een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
                             if (answer == "j" || answer == "J")
@@ -114,6 +126,7 @@ static class UserLogin
                             Console.WriteLine($"E-mail: {userEmail}\nWachtwoord: {userPassword}");
                             Console.WriteLine("Geen account gevonden met deze e-mail en wachtwoord.\nAls u nog geen account heeft kunt u er een aanmaken in het login menu.");
                             Thread.Sleep(3500);
+                            DiscardKeys();
                             Console.ResetColor();
                         }
                     }
@@ -122,6 +135,7 @@ static class UserLogin
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nVul eerst uw gegevens in.");
                         Thread.Sleep(1500);
+                        DiscardKeys();
                         Console.ResetColor();
                     }
                     break;
@@ -169,6 +183,14 @@ static class UserLogin
             }
         } while (currKey != ConsoleKey.Enter);
         return password;
+    }
+
+    public static bool PasswordCheck(string password)
+    {
+        if (password.Length < 8 || password.Length > 15) return false;
+        if (password.ToLower() == password) return false;
+        if (!password.Any(char.IsDigit)) return false;
+        return true;
     }
     
     public static void DiscardKeys()
