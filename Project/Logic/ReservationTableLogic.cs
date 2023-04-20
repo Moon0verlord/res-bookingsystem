@@ -43,8 +43,10 @@
                 sixColumn += 23;
                 Console.ResetColor();
             }
-
-            WriteTutorialBox();
+            // give infoboxes the correct coordinates and write the tutorial box
+            InfoBoxes.origCol = origCol;
+            InfoBoxes.origRow = origRow;
+            InfoBoxes.WriteBoxReservations(_groupSize);
             Console.Write("\n");
         }
 
@@ -64,34 +66,6 @@
                     }
                 }
             }
-        }
-
-        //this writes the tutorial box that explains to the user what all the terms behind the tables mean.
-        public void WriteTutorialBox()
-        {
-            string msg1 = " Beschikbaar: Deze tafel is nog niet gereserveerd en is gepast voor uw groepsgrootte.";
-            string msg2 = $" Onbeschikbaar: Deze tafel is ongepast voor uw groepsgrootte ({_groupSize}).";
-            string msg3 = " Bezet: Deze tafel is al gereserveerd door een andere klant.";
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            WriteAt("┌", 85, 0);
-            WriteAt("│", 85, 1);
-            WriteAt("│", 85, 2);
-            WriteAt("│", 85, 3);
-            WriteAt("└", 85, 4);
-            WriteAt("──────────────────────────────────────────────────────────────────────────────────────", 86, 0);
-            WriteAt("──────────────────────────────────────────────────────────────────────────────────────", 86, 4);
-            WriteAt("┐", 171, 0);
-            WriteAt("│", 171, 1);
-            WriteAt("│", 171, 2);
-            WriteAt("│", 171, 3);
-            WriteAt("┘", 171, 4);
-            Console.ForegroundColor = ConsoleColor.Green;
-            WriteAt(msg1, 86, 1);
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            WriteAt(msg2, 86, 2);
-            Console.ForegroundColor = ConsoleColor.Red;
-            WriteAt(msg3, 86, 3);
-            Console.ResetColor();
         }
 
         // write the table for four string
