@@ -315,6 +315,7 @@ using System.Globalization;
                                  ReservationsPerson.RemoveAt(reserv_input);
                                  AccountsAccess.WriteAllReservations(AllRes);
                                  Thread.Sleep(5000);
+                                 UserLogin.DiscardKeys();
                                  break;
                              case "N":
                              case "n":
@@ -322,6 +323,7 @@ using System.Globalization;
                              case "nee":
                                  Console.WriteLine("De reservatie is niet verwijderd");
                                  Thread.Sleep(2000);
+                                 UserLogin.DiscardKeys();
                                  break;
                              default:
                                  Console.Clear();
