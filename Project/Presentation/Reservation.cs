@@ -35,7 +35,7 @@ using System.Globalization;
                  string[] options =
                  {
                      $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
-                     "Reservering bekijken", "Afsluiten"
+                     "Reservering bekijken", "Ga terug"
                  };
                  int selectedIndex = _my1DMenu.RunMenu(options, prompt);
                  switch (selectedIndex)
