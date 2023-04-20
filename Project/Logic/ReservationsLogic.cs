@@ -178,8 +178,20 @@ class ReservationsLogic
 
     public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id)
     {
-        ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
-        AccountsAccess.AddReservation(newReservation);
+        AccountModel User = AccountsAccess.LoadAll().Find(account => email == account.EmailAddress)!;
+        if(User!=null)
+        {
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            EmailLogic.SendEmail(email," "+User.FullName,chosenTable,res_Date);
+            AccountsAccess.AddReservation(newReservation);
+        }
+        else
+        {
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            EmailLogic.SendEmail(email,"",chosenTable,res_Date);
+            AccountsAccess.AddReservation(newReservation);
+        }
+        
     }
 
     public string CreateID()
