@@ -11,6 +11,7 @@ public static class Dishes
     static private MenuLogic _myMenu = new MenuLogic();
     public static void WelcomeMenu()
     {
+        Console.CursorVisible = false;
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
@@ -41,6 +42,7 @@ public static class Dishes
     // Displays the current dishes to the user
     public static void JsonCursor(string choice)
     {
+        Console.CursorVisible = false;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
@@ -98,6 +100,7 @@ public static class Dishes
     // adds the ability to update dishes on the menu
     public static void ManageMenu()
     {
+        Console.CursorVisible = false;
         string type = "";
         string course = "";
         // select type of food
@@ -185,6 +188,7 @@ public static class Dishes
     // Displays dishes and returns user selection to add to menu
     public static JObject DisplayOptions(string type, string course)
     {
+        Console.CursorVisible = false;
         // Retrieves dishes from json 
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
@@ -293,6 +297,7 @@ public static class Dishes
     // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()
     {
+        Console.CursorVisible = false;
         string[] options = { "Menu veranderen", "Prijs veranderen", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
