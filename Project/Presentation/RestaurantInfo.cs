@@ -7,7 +7,9 @@ static class restaurantInfo
 Hier in Rotterdam vind je het prachtige /restaurant name/.
 Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. Ook is
 het mogelijk om er een wijnarrangement bij te boeken. Naast 
-het reserveren van een tafel is er ook beschikking tot een bar.";
+het reserveren van een tafel is er ook beschikking tot een bar.
+Verder wanneer u klaar bent kunt u ook een filmpje pakken bij het dichtbijgelegen bioscoop:
+/Bioscoop/ Wijnhaven 107, 3011 WN in Rotterdam";
     static string Contact =
 @"
 Contact Informatie:
