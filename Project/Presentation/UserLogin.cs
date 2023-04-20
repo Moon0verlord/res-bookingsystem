@@ -22,6 +22,7 @@ static class UserLogin
             switch (selectedIndex)
             {
                 case 0:
+                    Console.CursorVisible = true;
                     Console.Clear();
                     Console.Write("\n vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
@@ -36,12 +37,13 @@ static class UserLogin
                     }
                     break;
                 case 1:
+                    Console.CursorVisible = true;
                     Console.Clear();
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = Console.ReadLine()!;
+                    userPassword = WritePassword()!;
                     Console.Clear();
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = Console.ReadLine()!;
+                    var verifyUserPassword = WritePassword()!;
                     if (userPassword == verifyUserPassword)
                         break;
                     {
@@ -73,6 +75,7 @@ static class UserLogin
                         }
                         else
                         {
+                            Console.CursorVisible = true;
                             Console.Write("Vul hier uw volledige naam in: ");
                             var fullName = Console.ReadLine()!;
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -145,7 +148,28 @@ static class UserLogin
 
         return hiddenPass;
     }
-    
+
+    public static string WritePassword()
+    {
+        string password = "";
+        ConsoleKey currKey = default;
+        do
+        {
+            var keyInfo = Console.ReadKey(true);
+             currKey = keyInfo.Key;
+            if (currKey == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password = password[0..^1];
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(keyInfo.KeyChar))
+            {
+                password += keyInfo.KeyChar;
+                Console.Write("*");
+            }
+        } while (currKey != ConsoleKey.Enter);
+        return password;
+    }
     
     public static void DiscardKeys()
     {

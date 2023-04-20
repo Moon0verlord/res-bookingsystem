@@ -12,6 +12,7 @@ class MainMenu : IMenuLogic
     //You could edit this to show different menus depending on the user's role
     public static void Start(AccountModel? acc = null)
     {
+        Console.CursorVisible = false;
         if (Account == null!)
         {
             Account = acc!;
