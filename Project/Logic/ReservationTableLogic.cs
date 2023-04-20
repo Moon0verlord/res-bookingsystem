@@ -44,9 +44,7 @@
                 Console.ResetColor();
             }
             // give infoboxes the correct coordinates and write the tutorial box
-            InfoBoxes.origCol = origCol;
-            InfoBoxes.origRow = origRow;
-            InfoBoxes.WriteBoxReservations(_groupSize);
+            InfoBoxes.WriteBoxReservations(_groupSize, origRow, origCol);
             Console.Write("\n");
         }
 

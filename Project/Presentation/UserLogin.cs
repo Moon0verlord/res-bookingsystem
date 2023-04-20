@@ -24,7 +24,9 @@ static class UserLogin
                 case 0:
                     Console.CursorVisible = true;
                     Console.Clear();
-                    Console.Write("\n vul hier uw e-mail in: ");
+                    InfoBoxes.WriteBoxUserLogin(Console.CursorTop, Console.CursorLeft);
+                    Console.SetCursorPosition(1, 1);
+                    Console.Write("\n Vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
                     if (!EmailLogic.IsValidEmail(userEmail))
                     {
