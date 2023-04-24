@@ -33,14 +33,15 @@ public class EmployeeManagerLogic : IMenuLogic
             string[] options =
             {
                 $"Vul hier de e-mail in" + (employeeEmail == null ? "" : $": {employeeEmail}"),
-                "Vul hier het wachtwoord in" + $"{(employeePassword == null ? "\n" : $": {employeePassword}\n")}",
+                "Vul hier het wachtwoord in" + $"{(employeePassword == null ? "\n" : $": {HidePass(employeePassword)}\n")}",
                 "Maak account", "Afsluiten"
             };
-            var selectedIndex = myMenu.RunMenu(options, "Medwerker toevoegen");
+            var selectedIndex = myMenu.RunMenu(options, "Medewerker toevoegen");
             switch (selectedIndex)
             {
                 case 0:
                     Console.Clear();
+                    Console.CursorVisible = true;
                     Console.Write("\n vul hier de e-mail in: ");
                     employeeEmail = Console.ReadLine()!;
                     if (!employeeEmail.Contains("@") || employeeEmail.Length < 3)
@@ -56,11 +57,12 @@ public class EmployeeManagerLogic : IMenuLogic
                     break;
                 case 1:
                     Console.Clear();
+                    Console.CursorVisible = true;
                     Console.Write("\n Vul hier het wachtwoord in: ");
-                    employeePassword = Console.ReadLine()!;
+                    employeePassword = WritePassword()!;
                     Console.Clear();
                     Console.Write("\n Vul het wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = Console.ReadLine()!;
+                    var verifyUserPassword = WritePassword()!;
                     if (employeePassword == verifyUserPassword)
                         break;
                 {
@@ -93,13 +95,14 @@ public class EmployeeManagerLogic : IMenuLogic
                         }
                         else
                         {
+                            Console.CursorVisible = true;
                             Console.Write("Vul hier de medewerkers volledige naam in: ");
                             var fullName = Console.ReadLine()!;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(
                                 $"\nVolledige naam: {fullName}\nE-mail: {employeeEmail}\nWachtwoord: " +
-                                $"{employeePassword}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
+                                $"{HidePass(employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
                             switch (answer)
@@ -111,7 +114,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 case "Ja":
                                 {
                                     Console.Clear();
-                                    AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                    var employeeacc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
                                     Console.WriteLine("Medewerker toegevoegd");
                                     Thread.Sleep(3000);
                                 }
@@ -132,6 +135,39 @@ public class EmployeeManagerLogic : IMenuLogic
     public static void AddSpecialEvent()
     {
 
+    }
+    
+    public static string HidePass(string pass)
+    {
+        string hiddenPass = "";
+        for (int i = 0; i < pass.Length; i++)
+        {
+            hiddenPass += "*";
+        }
+
+        return hiddenPass;
+    }
+
+    public static string WritePassword()
+    {
+        string password = "";
+        ConsoleKey currKey = default;
+        do
+        {
+            var keyInfo = Console.ReadKey(true);
+            currKey = keyInfo.Key;
+            if (currKey == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password = password[0..^1];
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(keyInfo.KeyChar))
+            {
+                password += keyInfo.KeyChar;
+                Console.Write("*");
+            }
+        } while (currKey != ConsoleKey.Enter);
+        return password;
     }
 }
 

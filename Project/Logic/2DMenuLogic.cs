@@ -94,6 +94,7 @@ class _2DMenuLogic
         _dateTimes = options;
         AddForbiddenIndexes(_dateTimes); 
         CheckPosition(_dateTimes, keyPressed);
+        Console.CursorVisible = false;
         do
         {
             Console.SetCursorPosition(0, 0);
@@ -134,6 +135,7 @@ class _2DMenuLogic
             ConsoleKey keyPressed = default;
             AddForbiddenIndexes(Tables);
             CheckPosition(Tables, keyPressed);
+            Console.CursorVisible = false;
             // if noSpace is true, the entire tables array is either reserved or unavailable and the user should be kicked out.
             if (noSpace)
             {

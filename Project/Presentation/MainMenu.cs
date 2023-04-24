@@ -12,7 +12,6 @@ class MainMenu : IMenuLogic
     //You could edit this to show different menus depending on the user's role
     public static void Start(AccountModel? acc = null)
     {
-        Console.CursorVisible = false;
         if (Account == null!)
         {
             Account = acc!;
@@ -70,6 +69,7 @@ class MainMenu : IMenuLogic
                         case 0:
                             if (Account.LoggedIn)
                             {
+                                Console.CursorVisible = true;
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Weet u het zeker? (j/n): ");
@@ -115,6 +115,7 @@ class MainMenu : IMenuLogic
                     case 2:
                         if (Account.LoggedIn)
                         {
+                            Console.CursorVisible = true;
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("Weet u het zeker? (j/n): ");
@@ -175,6 +176,7 @@ class MainMenu : IMenuLogic
                     case 5:
                         if (Account.LoggedIn)
                         {
+                            Console.CursorVisible = true;
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("Weet u het zeker? (j/n): ");

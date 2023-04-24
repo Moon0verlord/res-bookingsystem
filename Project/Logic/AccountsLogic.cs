@@ -38,6 +38,9 @@ class AccountsLogic:IMenuLogic
         AccountsAccess.WriteAll(_accounts);
 
     }
+    
+    public void RefreshList()
+    => _accounts = AccountsAccess.LoadAll();
 
     public AccountModel GetById(int id)
     {
@@ -46,6 +49,8 @@ class AccountsLogic:IMenuLogic
 
     public AccountModel GetByEmail(string email)
         => _accounts.Find(i => i.EmailAddress == email)!;
+    
+    
     public AccountModel CheckLogin(string email, string password)
     {
         if (email == null! || password == null!)
