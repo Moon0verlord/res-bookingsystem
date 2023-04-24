@@ -7,6 +7,15 @@ class MainMenu : IMenuLogic
     private static MenuLogic _myMenu = new MenuLogic();
     static public AccountModel Account { get; set; }
 
+    private static string ascii = @"  
+██╗  ██╗ ██████╗  ██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+██║  ██║██╔═══██╗██╔═══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║██║   ██║
+███████║██║   ██║██║   ██║█████╗  ██║  ██║██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██╔══██║██║   ██║██║   ██║██╔══╝  ██║  ██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║  ██║╚██████╔╝╚██████╔╝██║     ██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ";
+        
+
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
@@ -22,7 +31,7 @@ class MainMenu : IMenuLogic
             {
                 // main menu functionality for non-logged in users.
                 string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
-                string prompt = "\nHoofdmenu:";
+                string prompt = $"{ascii}\n-------------------------------------------------------------------------------";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
