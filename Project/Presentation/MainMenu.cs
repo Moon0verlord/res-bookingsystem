@@ -56,6 +56,9 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 5:
+                        SpecialEvent.Eventmenu();
+                        break;
+                    case 6:
                         Environment.Exit(0);
                         break;
 
