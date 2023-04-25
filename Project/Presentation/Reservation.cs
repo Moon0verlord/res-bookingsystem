@@ -45,7 +45,7 @@ using System.Globalization;
                          Console.CursorVisible = true;
                          Console.Write("\n Vul hier uw e-mail in: ");
                          email = Console.ReadLine()!;
-                         if (!email.Contains("@") || email.Length < 3)
+                         if (!EmailLogic.IsValidEmail(email))
                          {
                              Console.Clear();
                              Console.ForegroundColor = ConsoleColor.Red;

@@ -7,5 +7,14 @@
     "group_size": 2,
     "start_time": "16:00:00",
     "leave_time": "18:00:00"
+  },
+  {
+    "table_id": "5M",
+    "res_id": "RES-275219",
+    "emailAddress": "squeeth@protonmail.com",
+    "res_date": "2023-04-25T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
   }
 ]
