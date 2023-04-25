@@ -54,6 +54,7 @@ using System.Globalization;
                              Console.ResetColor();
                              email = null;
                              Thread.Sleep(3000);
+                             UserLogin.DiscardKeys();
                          }
 
                          break;
@@ -335,6 +336,7 @@ using System.Globalization;
                                  Console.WriteLine("Incorrecte input");
                                  Thread.Sleep(2000);
                                  Console.ResetColor();
+                                 UserLogin.DiscardKeys();
                                  break;
                          }
 
