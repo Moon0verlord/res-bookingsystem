@@ -46,17 +46,25 @@ static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
-                    Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword()!;
-                    if (userPassword == verifyUserPassword)
-                        break;
+                    if(AccountsAccess.LoadAll().Find(user=> userPassword == user.Password)==null)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
-                        Console.ResetColor();
-                        Thread.Sleep(2000);
-                        DiscardKeys();
-                        userPassword = null;
+                        Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
+                        var verifyUserPassword = WritePassword()!;
+                        if (userPassword == verifyUserPassword)
+                            break;
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
+                            Console.ResetColor();
+                            Thread.Sleep(2000);
+                            DiscardKeys();
+                            userPassword = null;
+                            break;
+                        }
+                    }
+                    else
+                    {
                         break;
                     }
                 case 2:
