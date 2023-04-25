@@ -45,7 +45,7 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 5:
-                        restaurantInfo.Eventmenu();
+                        SpecialEvent.Eventmenu();
                         break;
                     case 6:
                         Environment.Exit(0);
