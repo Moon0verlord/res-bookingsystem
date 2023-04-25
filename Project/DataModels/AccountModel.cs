@@ -27,7 +27,7 @@ public class AccountModel:IComparable<AccountModel>
     {
         Id = id;
         EmailAddress = emailAddress;
-        Password = password;
+        Password = BCrypt.Net.BCrypt.HashPassword(password, 12);
         FullName = fullName;
         IsEmployee = isemployee;
         IsManager = ismanager;
