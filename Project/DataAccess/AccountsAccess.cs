@@ -35,7 +35,7 @@ static class AccountsAccess
     public static AccountModel AddAccount(string email, string password, string name,bool IsEmployee,bool IsManager)
     {
         var allAccounts = LoadAll();
-        AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, password, name,IsEmployee,IsManager);
+        AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name,IsEmployee,IsManager);
         allAccounts.Add(newAccount);
         WriteAll(allAccounts);
         return allAccounts[^1];

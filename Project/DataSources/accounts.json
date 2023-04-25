@@ -2,129 +2,17 @@
   {
     "id": 1,
     "emailAddress": "manager@res.nl",
-    "password": "$2a$12$lozHMT5P/o9vXjH0iFpK6eWFo7pOIWpchu06CrQmaKKslIXyiEbcy",
-    "fullName": "Manager",
+    "password": "$2a$12$3yjTouloeaZy.UgZl7rSueoBEofj1eVDUF6eMWeVYgQGdhtm2ZaFm",
+    "fullName": "manager",
     "Employee": true,
     "Manager": true
   },
   {
-    "id": 2,
+    "id": 12,
     "emailAddress": "Employee@res.nl",
-    "password": "$2a$12$LbKLMFagSp27uDDocOizmuoR3X64ldffD6fGUsxkmj.ApnucBBppS",
+    "password": "$2a$12$9HayKpa5fnQimbkc3uDvbOoziijgAJKQzRtwRyLGlgHi/iz0404ni",
     "fullName": "employee",
     "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 3,
-    "emailAddress": "Johannes@res.nl",
-    "password": "$2a$12$24rCBeZsGDbNVlZBr6.rVeSM4iSGgLR974NR4HGxtypAT8x36GPfa",
-    "fullName": "Johannes",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 4,
-    "emailAddress": "n@b.c",
-    "password": "$2a$12$/2nh.9WhaWYWWquVS.Q.W.3PeKMCcx18z5jFwLkNXiRT0LN80DMP.",
-    "fullName": "Gozer",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 5,
-    "emailAddress": "1058740@hr.nl",
-    "password": "$2a$12$evDqU23UOwqcJ1OUkPGyeuq/wW3oofzE5cg5IPi09HJbGdpP9Gd0a",
-    "fullName": "Martijn",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 6,
-    "emailAddress": "n@b.,c",
-    "password": "$2a$12$MaZ8bDwvA7jPQoV.o7pPzOzlyet9XP8BrmyGAjEzqvELYrhxoyT9O",
-    "fullName": "presoon",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 7,
-    "emailAddress": "martijnwarnas@icloud.com",
-    "password": "$2a$12$einCBn.Mhk714lPP4L2GuuaI0wgcYmyWoSLGDQZUvFd2YTyKLv0lu",
-    "fullName": "MartijnW",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 8,
-    "emailAddress": "N@B.c",
-    "password": "$2a$12$7XSzwaXZS3IjSWxN98dJdeCIK6cuhh8jlHZ2WX6EDHUUG/wzHdCgG",
-    "fullName": "PersoonMan",
-    "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 9,
-    "emailAddress": "John@res.nl",
-    "password": "$2a$12$k4e9OoWNSJewMw/i3oRo4O/eTqWVddCj4HD27V041BSuVHBvCOSxS",
-    "fullName": "John doe",
-    "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 10,
-    "emailAddress": "Johnny@res.nl",
-    "password": "$2a$12$KDnylWyvo8myMI/hc1KM5.0UtzrhZX08eO/ddsEDs.YC1nZCgLbWG",
-    "fullName": "Johhny joestar",
-    "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 11,
-    "emailAddress": "Dio@res.nl",
-    "password": "$2a$12$Hp4wdk5lOGTLoFB909XlquvF9y0knrmG7/IrLeGOT3qoJiDJBFT2e",
-    "fullName": "Dio Brando",
-    "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 12,
-    "emailAddress": "jonathan@res.nl",
-    "password": "$2a$12$KSm9XT/DvknGNHk6RfwdX.vvHosj9SSd11rUFOJMjf.5Tr2Ww5g9O",
-    "fullName": "Jonathan jonathan",
-    "Employee": true,
-    "Manager": false
-  },
-  {
-    "id": 13,
-    "emailAddress": "j@n.l",
-    "password": "$2a$12$Oae0dNmIKvq1P0iA0UDI7.I.EfpdFxRfbxN4XbIHM5cVHGaZtP2Qi",
-    "fullName": "Jaaasss",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 14,
-    "emailAddress": "j@o",
-    "password": "$2a$12$Z.z4LnyGjkoiR2G7cuuKjeizoEpP3r6WtbXmeiS.RlZGAcdQJqTo.",
-    "fullName": "Jojo",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 15,
-    "emailAddress": "j@j",
-    "password": "$2a$12$tRVMqk5a7XeZ1s34YuiclOW5B/x0xhQhn3FWQV4l7rGPA5LyOl2/2",
-    "fullName": "Jojo",
-    "Employee": false,
-    "Manager": false
-  },
-  {
-    "id": 16,
-    "emailAddress": "j@a",
-    "password": "$2a$12$9HayKpa5fnQimbkc3uDvbOoziijgAJKQzRtwRyLGlgHi/iz0404ni",
-    "fullName": "jona",
-    "Employee": false,
     "Manager": false
   }
 ]
