@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 static class restaurantInfo
 {
@@ -43,8 +44,10 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
     public static void Start()
     {
-        List<EventModel> AllEvents = SpecialEvent.LoadAll();
-        JArray eventmenu = JArray.Parse(AllEvents.ToString());
+        List<EventModel> AllEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(@"DataSources/Events.json"));
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        string json = File.ReadAllText(path);
+        JArray eventmenu = JArray.Parse(json);
         Console.Clear();
         Console.WriteLine(Information);
         Console.WriteLine(Contact);

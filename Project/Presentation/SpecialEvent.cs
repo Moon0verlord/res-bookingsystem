@@ -37,7 +37,7 @@ public class SpecialEvent
                 case 3:
                     if (eventname != null && eventinfo != null && eventdate != null)
                     {
-                        var allAccounts = LoadAll();
+                        var allAccounts = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
                         EventModel newAccount = new EventModel(eventname, eventinfo, eventdate);
                         allAccounts.Add(newAccount);
                         WriteAll(allAccounts);
@@ -80,24 +80,6 @@ public class SpecialEvent
                 MainMenu.Start();
                 break;
         }
-    }
-
-    public static List<EventModel> LoadAll()
-    {
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        string json = File.ReadAllText(path);
-        JArray eventmenu = JArray.Parse(json);
-        List<EventModel> events = new List<EventModel>();
-        foreach (var course in eventmenu)
-        {
-            events.Add(new()
-            {
-                EventName = course["eventname"].ToString(),
-                EventInfo = course["eventinfo"].ToString(),
-                EventDate = course["datum"].ToString()
-            });
-        }
-        return events;
     }
 
     public static void WriteAll(List<EventModel> accounts)
