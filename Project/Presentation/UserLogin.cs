@@ -104,6 +104,12 @@ static class UserLogin
                             if (answer == "j" || answer == "J")
                             {
                                 AccountsAccess.AddAccount(userEmail, userPassword, fullName, false, false);
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Account succesvol aangemaakt.");
+                                Thread.Sleep(2500);
+                                DiscardKeys();
+                                Console.ResetColor();
                             }
                         }
                     }
