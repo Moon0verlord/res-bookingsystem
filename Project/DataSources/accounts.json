@@ -9,7 +9,7 @@
   },
   {
     "id": 12,
-    "emailAddress": "Employee@res.nl",
+    "emailAddress": "employee@res.nl",
     "password": "$2a$12$9HayKpa5fnQimbkc3uDvbOoziijgAJKQzRtwRyLGlgHi/iz0404ni",
     "fullName": "employee",
     "Employee": true,

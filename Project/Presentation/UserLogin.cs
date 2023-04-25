@@ -46,24 +46,32 @@ static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
-                    Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword()!;
-                    if (userPassword == verifyUserPassword)
-                        break;
+                    if(AccountsAccess.LoadAll().Find(user=> userPassword == user.Password)==null)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
-                        Console.ResetColor();
-                        Thread.Sleep(2000);
-                        DiscardKeys();
-                        userPassword = null;
+                        Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
+                        var verifyUserPassword = WritePassword()!;
+                        if (userPassword == verifyUserPassword)
+                            break;
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
+                            Console.ResetColor();
+                            Thread.Sleep(2000);
+                            DiscardKeys();
+                            userPassword = null;
+                            break;
+                        }
+                    }
+                    else
+                    {
                         break;
                     }
                 case 2:
                     if (userEmail == null || userPassword == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nVul uw gegevens in op een account aan te maken.");
+                        Console.WriteLine("\nVul uw gegevens in om een account aan te maken.");
                         Thread.Sleep(1500);
                         Console.ResetColor();
                     }
@@ -103,8 +111,13 @@ static class UserLogin
                             var answer = Console.ReadLine()!;
                             if (answer == "j" || answer == "J")
                             {
-                                var newAccount = CreateAccount(userEmail, userPassword, fullName,false,false);
-                                accountsLogic.UpdateList(newAccount);
+                                AccountsAccess.AddAccount(userEmail, userPassword, fullName, false, false);
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Account succesvol aangemaakt.");
+                                Thread.Sleep(2500);
+                                DiscardKeys();
+                                Console.ResetColor();
                             }
                         }
                     }
@@ -112,6 +125,7 @@ static class UserLogin
                 case 3:
                     if (userEmail != null && userPassword != null)
                     {
+                        accountsLogic.RefreshList();
                         AccountModel acc = accountsLogic.CheckLogin(userEmail, userPassword);
                         if (acc != null)
                         {
@@ -127,7 +141,7 @@ static class UserLogin
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"E-mail: {userEmail}\nWachtwoord: {userPassword}");
+                            Console.WriteLine($"E-mail: {userEmail}\nWachtwoord: {HidePass(userPassword)}");
                             Console.WriteLine("Geen account gevonden met deze e-mail en wachtwoord.\nAls u nog geen account heeft kunt u er een aanmaken in het login menu.");
                             Thread.Sleep(3500);
                             DiscardKeys();

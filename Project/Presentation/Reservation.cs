@@ -42,9 +42,10 @@ using System.Globalization;
                  {
                      case 0:
                          Console.Clear();
+                         Console.CursorVisible = true;
                          Console.Write("\n Vul hier uw e-mail in: ");
                          email = Console.ReadLine()!;
-                         if (!email.Contains("@") || email.Length < 3)
+                         if (!EmailLogic.IsValidEmail(email))
                          {
                              Console.Clear();
                              Console.ForegroundColor = ConsoleColor.Red;
@@ -53,6 +54,7 @@ using System.Globalization;
                              Console.ResetColor();
                              email = null;
                              Thread.Sleep(3000);
+                             UserLogin.DiscardKeys();
                          }
 
                          break;
@@ -66,7 +68,7 @@ using System.Globalization;
                          else
                          {
                              Console.ForegroundColor = ConsoleColor.Red;
-                             Console.Write("\n vul hier uw e-mail in: ");
+                             Console.Write("\nVul eerst uw e-mail in.");
                              Thread.Sleep(1800);
                              Console.ResetColor();
                          }
@@ -108,6 +110,7 @@ using System.Globalization;
          {
              Console.ForegroundColor = ConsoleColor.Green;
              Console.Clear();
+             Console.CursorVisible = true;
              Console.WriteLine(
                  $"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
                  $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
@@ -149,6 +152,7 @@ using System.Globalization;
              switch (selectedIndex)
              {
                  case 0:
+                     Console.CursorVisible = true;
                      Console.Write("Typ hier met hoeveel mensen u van plan bent te komen: ");
                      amountofPeople = Console.ReadLine()!;
                      bool success = int.TryParse(amountofPeople, out int number);
@@ -301,6 +305,7 @@ using System.Globalization;
 
                          Console.Clear();
                          Console.ForegroundColor = ConsoleColor.Red;
+                         Console.CursorVisible = true;
                          Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
                          Console.ResetColor();
                          var Choice = Console.ReadLine();
@@ -331,6 +336,7 @@ using System.Globalization;
                                  Console.WriteLine("Incorrecte input");
                                  Thread.Sleep(2000);
                                  Console.ResetColor();
+                                 UserLogin.DiscardKeys();
                                  break;
                          }
 

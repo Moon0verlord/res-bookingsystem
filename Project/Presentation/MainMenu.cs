@@ -7,12 +7,20 @@ class MainMenu : IMenuLogic
     private static MenuLogic _myMenu = new MenuLogic();
     static public AccountModel Account { get; set; }
 
+    private static string ascii = @"  
+██╗  ██╗ ██████╗  ██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+██║  ██║██╔═══██╗██╔═══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║██║   ██║
+███████║██║   ██║██║   ██║█████╗  ██║  ██║██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██╔══██║██║   ██║██║   ██║██╔══╝  ██║  ██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║  ██║╚██████╔╝╚██████╔╝██║     ██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ";
+        
+
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
     public static void Start(AccountModel? acc = null)
     {
-        Console.CursorVisible = false;
         if (Account == null!)
         {
             Account = acc!;
@@ -23,7 +31,7 @@ class MainMenu : IMenuLogic
             {
                 // main menu functionality for non-logged in users.
                 string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
-                string prompt = "\nHoofdmenu:";
+                string prompt = $"{ascii}\n-------------------------------------------------------------------------------";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -70,6 +78,7 @@ class MainMenu : IMenuLogic
                         case 0:
                             if (Account.LoggedIn)
                             {
+                                Console.CursorVisible = true;
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Weet u het zeker? (j/n): ");
@@ -115,6 +124,7 @@ class MainMenu : IMenuLogic
                     case 2:
                         if (Account.LoggedIn)
                         {
+                            Console.CursorVisible = true;
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("Weet u het zeker? (j/n): ");
@@ -175,6 +185,7 @@ class MainMenu : IMenuLogic
                     case 5:
                         if (Account.LoggedIn)
                         {
+                            Console.CursorVisible = true;
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("Weet u het zeker? (j/n): ");

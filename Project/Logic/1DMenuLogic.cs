@@ -123,6 +123,7 @@
         _options = options;
         ConsoleKey keyPressed;
         Console.Clear();
+        Console.CursorVisible = false;
         do
         {
             Console.SetCursorPosition(0, 0);
@@ -170,6 +171,7 @@
         _currentIndex = 0;
         _options = options.Select(i => i.Day.ToString()).ToArray();
         ConsoleKey keyPressed;
+        Console.CursorVisible = false;
         do
         {
             Console.SetCursorPosition(0, 0);
@@ -201,6 +203,7 @@
         ConsoleKey keyPressed;
         AddForbiddenIndexes();
         CheckPosition();
+        Console.CursorVisible = false;
         do
         {
             Console.SetCursorPosition(0, 12);

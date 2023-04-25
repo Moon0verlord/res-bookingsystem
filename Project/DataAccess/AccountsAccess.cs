@@ -4,6 +4,7 @@ static class AccountsAccess
 {
     static string acc_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
     static string res_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
+    private static AccountsLogic _accountsLogic = new AccountsLogic(); 
 
 
     public static List<AccountModel> LoadAll()
@@ -38,6 +39,7 @@ static class AccountsAccess
         AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name,IsEmployee,IsManager);
         allAccounts.Add(newAccount);
         WriteAll(allAccounts);
+        _accountsLogic.UpdateList(allAccounts[^1]);
         return allAccounts[^1];
     }
 
