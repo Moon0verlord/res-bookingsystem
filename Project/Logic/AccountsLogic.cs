@@ -53,12 +53,16 @@ class AccountsLogic:IMenuLogic
     
     public AccountModel CheckLogin(string email, string password)
     {
-        if (email == null! || password == null!)
+        AccountModel? acc = GetByEmail(email);
+        if (acc != null)
         {
-            return null;
+            if (BCrypt.Net.BCrypt.Verify(password, acc.Password))
+            {
+                CurrentAccount = acc;
+                return acc;
+            }
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
-        return CurrentAccount!;
+        return null!;
     }
 }
 

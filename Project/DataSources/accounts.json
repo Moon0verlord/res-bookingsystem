@@ -2,17 +2,17 @@
   {
     "id": 1,
     "emailAddress": "manager@res.nl",
-    "password": "xyz",
-    "fullName": "Manager",
+    "password": "$2a$12$3yjTouloeaZy.UgZl7rSueoBEofj1eVDUF6eMWeVYgQGdhtm2ZaFm",
+    "fullName": "manager",
     "Employee": true,
     "Manager": true
   },
   {
-    "id": 2,
-    "emailAddress": "m@w",
-    "password": "A12345678",
-    "fullName": "Martijn W",
-    "Employee": false,
+    "id": 12,
+    "emailAddress": "employee@res.nl",
+    "password": "$2a$12$9HayKpa5fnQimbkc3uDvbOoziijgAJKQzRtwRyLGlgHi/iz0404ni",
+    "fullName": "employee",
+    "Employee": true,
     "Manager": false
   }
 ]
