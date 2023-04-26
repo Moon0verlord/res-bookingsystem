@@ -30,8 +30,8 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
-                string prompt = $"{ascii}\n-------------------------------------------------------------------------------";
+                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "bekijken evenementen", "Afsluiten" };
+                string prompt = "\nHoofdmenu:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -56,6 +56,9 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 5:
+                        SpecialEvent.Eventmenu();
+                        break;
+                    case 6:
                         Environment.Exit(0);
                         break;
 
@@ -147,7 +150,7 @@ class MainMenu : IMenuLogic
                     case 0:
                         Dishes.WelcomeMenu();
                         break;
-                    
+
                 }
             }
         }

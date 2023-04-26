@@ -1,0 +1,12 @@
+[
+  {
+    "eventname": "event 1",
+    "eventinfo": "dit is event 1",
+    "eventdate": "08-28-2023"
+  },
+  {
+    "eventname": "event 2",
+    "eventinfo": "dit is event 2",
+    "eventdate": "12-13-2023"
+  }
+]
