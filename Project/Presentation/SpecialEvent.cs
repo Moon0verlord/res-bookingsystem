@@ -5,7 +5,7 @@ public class SpecialEvent
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
-    public static string ResEvent()
+    public static  string ResEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string eventname = null;
@@ -18,7 +18,7 @@ public class SpecialEvent
                 "Vul hier de extra informatie over het event in." + (eventinfo == null ? "" : $": {eventinfo}"),
                 "Vul hier de datum in van het event." + (eventdate == null ? "" : $": {eventdate}"),
                 "Het evenement definitief maken", "Ga terug" };
-            int selectedIndex = _myMenu.RunMenu(options, "Kies hier uw groepsgrootte:");
+            int selectedIndex = _myMenu.RunMenu(options, "Vul de volgende gegevens in:");
             Console.Clear();
             switch (selectedIndex)
             {
@@ -31,9 +31,9 @@ public class SpecialEvent
                     eventinfo = Console.ReadLine()!;
                     break;
                 case 2:
-                    Console.Write("wat wordt de datum van het event: (gebruik deze format 00/00/0000)");
-                    eventdate = Console.ReadLine()!;
-                    if (eventdate.Contains("-") && eventdate.Length == 10)
+                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd/MM/YYYY)");
+                    eventdate = Console.ReadLine();
+                    if (eventdate.Contains("/") && eventdate.Length == 10)
                     {
                         break;
                     }
