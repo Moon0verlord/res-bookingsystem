@@ -16,7 +16,7 @@ public class SpecialEvent
             string[] options = new[]
                 { "Vul hier in wat de event naam is." + (eventname == null ? "" : $": {eventname}"),
                 "Vul hier de extra informatie over het event in." + (eventinfo == null ? "" : $": {eventinfo}"),
-                "Vul hier de datum in van het event." + (eventdate == null ? "" : $": {eventname}"),
+                "Vul hier de datum in van het event." + (eventdate == null ? "" : $": {eventdate}"),
                 "Het evenement definitief maken", "Ga terug" };
             int selectedIndex = _myMenu.RunMenu(options, "Kies hier uw groepsgrootte:");
             Console.Clear();
@@ -31,9 +31,20 @@ public class SpecialEvent
                     eventinfo = Console.ReadLine()!;
                     break;
                 case 2:
-                    Console.Write("wat wordt de datum van het event: ");
+                    Console.Write("wat wordt de datum van het event: (gebruik deze format 00/00/0000)");
                     eventdate = Console.ReadLine()!;
-                    break;
+                    if (eventdate.Contains("-") && eventdate.Length == 10)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("U heeft niet de juiste format gebruikt.");
+                        Thread.Sleep(3000);
+                        ResEvent();
+                        break;
+                    }
+
                 case 3:
                     if (eventname != null && eventinfo != null && eventdate != null)
                     {
