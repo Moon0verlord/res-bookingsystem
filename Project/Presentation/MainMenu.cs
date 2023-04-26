@@ -150,7 +150,7 @@ class MainMenu : IMenuLogic
                     case 0:
                         Dishes.WelcomeMenu();
                         break;
-                    
+
                 }
             }
         }
