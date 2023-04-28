@@ -8,6 +8,8 @@ static class UserLogin
     private static string userPassword;
     
     // starts the login process 
+    
+    // Manager login: Zxcvbnm1
     public static void Start()
     {
         userEmail = null;
@@ -46,7 +48,7 @@ static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
-                    if(AccountsAccess.LoadAll().Find(user=> userPassword == user.Password)==null)
+                    if(AccountsAccess.LoadAll().Find(user=> userEmail == user.EmailAddress)==null)
                     {
                         Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
                         var verifyUserPassword = WritePassword()!;

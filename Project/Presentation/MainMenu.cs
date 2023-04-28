@@ -105,7 +105,7 @@ class MainMenu : IMenuLogic
                             Dishes.ManagerOptions();
                             break;
                         case 3:
-                            EmployeeManagerLogic.AddSpecialEvent();
+                            SpecialEvent.ResEvent();
                             break;
                         case 4:
                             EmployeeManagerLogic.CheckReservations();
