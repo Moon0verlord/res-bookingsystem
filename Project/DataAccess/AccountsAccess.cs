@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-static class AccountsAccess
+public static class AccountsAccess
 {
     static string acc_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
     static string res_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
