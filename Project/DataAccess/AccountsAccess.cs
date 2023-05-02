@@ -51,5 +51,43 @@ public static class AccountsAccess
         WriteAllReservations(allReservations);
     }
 
+    public static void ClearJsonFiles(int choice)
+    {
+        //1 Clears Accounts
+        //2 Clear Reservations
+        var accounts = LoadAll();
+        var reservations = LoadAllReservations();
+        switch (choice)
+        {
+            case 1 :
+                if (accounts.Count > 3)
+                {
+                    var ClearAccounts = accounts.GetRange(1, 3);
+                    WriteAll(ClearAccounts);
+                }
+                break;
+            case 2:
+                if (reservations.Count > 1)
+                {
+                    var ClearReservations = reservations.GetRange(0, 0);
+                    WriteAllReservations(ClearReservations);
+                }
+
+                break;
+            case 3:
+                Console.WriteLine("--Accounts--");
+                foreach (var item in accounts)
+                {
+                    Console.WriteLine(item.FullName);
+                }
+                Console.WriteLine("--Reservations--");
+                foreach (var reservation in reservations)
+                {
+                    Console.WriteLine(reservation.Id);
+                }
+                break;
+        }
+    }
+
 
 }

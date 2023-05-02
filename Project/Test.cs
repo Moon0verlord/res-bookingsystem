@@ -6,12 +6,6 @@ namespace reservationTest
     [TestClass]
     public class ReservationTesting
     {
-        private TestContext testContextInstance;
-            public TestContext TestContext
-            {
-                get { return testContextInstance; }
-                set { testContextInstance = value; }
-            }
 
         [TestMethod]
         [DataRow(1, "Test1", "8D0123", "Test", false,false)]
