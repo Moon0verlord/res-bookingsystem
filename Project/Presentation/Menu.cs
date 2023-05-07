@@ -358,7 +358,7 @@ public static class Dishes
         string json = File.ReadAllText(path);
         JObject Wines = JObject.Parse(json);
         Console.Clear();
-        Console.WriteLine("Wijn menu:");
+        Console.WriteLine($"{choice} Wijn menu:");
         Console.WriteLine("-------");
         var selection = Wines["Winemenu"][choice]
             .Select(item => new
