@@ -1,0 +1,64 @@
+{
+  "Winemenu": {
+    "red": [
+      {
+        "name": "Cabernet Sauvignon",
+        "description": "A bold, full-bodied wine with flavors of blackcurrant and cedar.",
+        "region": "Napa Valley, California",
+        "price": "€50.00"
+      },
+      {
+        "name": "Pinot Noir",
+        "description": "A delicate, medium-bodied wine with flavors of red cherry and earthy undertones.",
+        "region": "Willamette Valley, Oregon",
+        "price": "€45.00"
+      },
+      {
+        "name": "Malbec",
+        "description": "A rich, full-bodied wine with flavors of blackberry and plum.",
+        "region": "Mendoza, Argentina",
+        "price": "€40.00"
+      }
+    ],
+    "white": [
+      {
+        "name": "Chardonnay",
+        "description": "A rich, buttery wine with notes of vanilla and tropical fruit.",
+        "region": "Burgundy, France",
+        "price": "€40.00"
+      },
+      {
+        "name": "Sauvignon Blanc",
+        "description": "A crisp, refreshing wine with flavors of citrus and green apple.",
+        "region": "Marlborough, New Zealand",
+        "price": "€35.00"
+      },
+      {
+        "name": "Riesling",
+        "description": "A light, aromatic wine with flavors of peach and apricot.",
+        "region": "Mosel, Germany",
+        "price": "€30.00"
+      }
+    ],
+    "sparkling": [
+      {
+        "name": "Champagne",
+        "description": "A classic, elegant sparkling wine with a fine mousse and flavors of apple and brioche.",
+        "region": "Champagne, France",
+        "price": "€75.00"
+      },
+      {
+        "name": "Prosecco",
+        "description": "A light and fruity sparkling wine with aromas of peach and pear.",
+        "region": "Veneto, Italy",
+        "price": "€30.00"
+      },
+      {
+        "name": "Cava",
+        "description": "A dry, crisp sparkling wine with flavors of green apple and citrus.",
+        "region": "Penedès, Spain",
+        "price": "€25.00"
+      }
+    ]
+  }
+}
