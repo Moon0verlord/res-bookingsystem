@@ -87,7 +87,7 @@ class _2DMenuLogic
         }
         Console.ResetColor();
     }
-    public DateTime RunMenu(DateTime[,] options, string prompt, bool printPrompt = true)
+    public DateTime RunMenu(DateTime[,] options, string prompt, int stepCounter, bool printPrompt = true)
     {
         
         ConsoleKey keyPressed = default;
@@ -98,6 +98,7 @@ class _2DMenuLogic
         do
         {
             Console.SetCursorPosition(0, 0);
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
             DisplayDateOptions(prompt, printPrompt);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;

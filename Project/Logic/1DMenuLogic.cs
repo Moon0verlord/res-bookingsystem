@@ -166,33 +166,53 @@
         return _currentIndex;
     }
 
-    public Dictionary<int, DateTime> RunMenu(List<DateTime> options, string prompt, bool printPrompt = true)
+    public int RunResMenu(string[] options, string prompt, int stepCounter, bool printPrompt = true, bool sideways = false)
     {
         _currentIndex = 0;
-        _options = options.Select(i => i.Day.ToString()).ToArray();
+        _options = options;
         ConsoleKey keyPressed;
+        Console.Clear();
         Console.CursorVisible = false;
         do
         {
-            Console.SetCursorPosition(0, 0);
-            DisplayDateOptions(prompt, printPrompt);
+            Console.SetCursorPosition(0, 0); 
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
+            DisplayOptions(prompt, printPrompt);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;
-            switch (keyPressed)
+            if (sideways)
             {
-                case ConsoleKey.LeftArrow:
-                    _currentIndex--;
-                    if (_currentIndex <= -1) _currentIndex = options.Count - 1;
-                    break;
-                case ConsoleKey.RightArrow:
-                    _currentIndex++;
-                    if (_currentIndex == options.Count) _currentIndex = 0;
-                    break;
+                switch (keyPressed)
+                {
+                    case ConsoleKey.LeftArrow:
+                        _currentIndex--;
+                        if (_currentIndex <= -1) _currentIndex = _options.Length - 1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        _currentIndex++;
+                        if (_currentIndex == _options.Length) _currentIndex = 0;
+                        break;
+                }
             }
+            else
+            {
+                switch (keyPressed)
+                {
+                    case ConsoleKey.UpArrow:
+                        _currentIndex--;
+                        if (_currentIndex <= -1) _currentIndex = _options.Length - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        _currentIndex++;
+                        if (_currentIndex == _options.Length) _currentIndex = 0;
+                        break;
+                }
+            }
+
 
         } while (keyPressed != ConsoleKey.Enter);
 
-        return new Dictionary<int, DateTime>() { { _currentIndex, options[_currentIndex] } };
+        return _currentIndex;
     }
 
     public int RunTableMenu(List<ReservationModel> tables, string prompt, int groupsize, bool printPrompt = true, bool sideways = false, bool displayTime = false)
