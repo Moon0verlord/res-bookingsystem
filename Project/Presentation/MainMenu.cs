@@ -49,7 +49,7 @@ class MainMenu : IMenuLogic
                         Console.ReadKey(true);
                         break;
                     case 3:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserOptions();
                         Thread.Sleep(5000);
                         break;
                     case 4:
