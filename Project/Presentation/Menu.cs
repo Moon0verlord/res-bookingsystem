@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
@@ -330,8 +331,7 @@ public static class Dishes
     // Displays wines based on user selection
     public static void WineDisplay()
     {
-        NumberFormatInfo euroFormat = new NumberFormatInfo();
-        euroFormat.CurrencySymbol = "\u20AC";
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
         string choice = "";
         Console.CursorVisible = false;
         string[] options = { "Rode Wijn", "Witte Wijn", "Bubbles" };
@@ -364,7 +364,7 @@ public static class Dishes
             .Select(item => new
             {
                 name = (string)item["name"],
-                price = decimal.Parse(((string)item["price"]).Replace("€", "")),
+                price = (string)item["price"],
                 region = (string)item["region"],
                 description = (string)item["description"]
             });
@@ -373,8 +373,9 @@ public static class Dishes
             Console.WriteLine($"{wine.name}");
             Console.WriteLine($"{wine.region}");
             Console.WriteLine($"{wine.description}");
-            Console.WriteLine($"Prijs per fles {wine.price.ToString("C", euroFormat)}");
-            Console.WriteLine($"Prijs per glas {(wine.price / 4).ToString("C", euroFormat)}");
+            Console.WriteLine($"Prijs per fles: {wine.price}");
+            Match match = Regex.Match(wine.price, @"^€(\d+),\d+");
+            Console.WriteLine($"Price per glass is: €{Convert.ToInt32(match.Groups[1].Value) / 4},00");
             Console.WriteLine("-------");
         }
         Console.WriteLine("Druk op een knop om verder te gaan");
