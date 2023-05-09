@@ -14,7 +14,7 @@ class MainMenu : IMenuLogic
 ██╔══██║██║   ██║██║   ██║██╔══╝  ██║  ██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
 ██║  ██║╚██████╔╝╚██████╔╝██║     ██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
 ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ";
-        
+
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
@@ -73,7 +73,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     // displays menu with various management options if the user is a manager
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht"};
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen", "Reservatie overzicht", "grote groep toevoegen" };
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
@@ -110,7 +110,10 @@ class MainMenu : IMenuLogic
                         case 4:
                             EmployeeManagerLogic.CheckReservations();
                             break;
-                        
+                        case 5:
+                            Reservation.GroupCode();
+                            break;
+
                     }
                 }
             }
