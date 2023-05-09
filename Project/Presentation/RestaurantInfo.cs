@@ -44,10 +44,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
     public static void Start()
     {
-        List<EventModel> AllEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(@"DataSources/Events.json"));
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        string json = File.ReadAllText(path);
-        JArray eventmenu = JArray.Parse(json);
+        ReadAllEvents();
         Console.Clear();
         Console.WriteLine(Information);
         Console.WriteLine(Contact);

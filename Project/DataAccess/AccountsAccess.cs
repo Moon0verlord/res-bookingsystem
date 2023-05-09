@@ -4,7 +4,7 @@ static class AccountsAccess
 {
     static string acc_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
     static string res_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
-    private static AccountsLogic _accountsLogic = new AccountsLogic(); 
+    private static AccountsLogic _accountsLogic = new AccountsLogic();
 
 
     public static List<AccountModel> LoadAll()
@@ -12,13 +12,13 @@ static class AccountsAccess
         string json = File.ReadAllText(acc_path);
         return JsonSerializer.Deserialize<List<AccountModel>>(json)!;
     }
-    
+
     public static List<ReservationModel> LoadAllReservations()
     {
         string json = File.ReadAllText(res_path);
         return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
     }
-    
+
     public static void WriteAll(List<AccountModel> accounts)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
@@ -33,10 +33,10 @@ static class AccountsAccess
         File.WriteAllText(res_path, json);
     }
 
-    public static AccountModel AddAccount(string email, string password, string name,bool IsEmployee,bool IsManager)
+    public static AccountModel AddAccount(string email, string password, string name, bool IsEmployee, bool IsManager)
     {
         var allAccounts = LoadAll();
-        AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name,IsEmployee,IsManager);
+        AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name, IsEmployee, IsManager);
         allAccounts.Add(newAccount);
         WriteAll(allAccounts);
         _accountsLogic.UpdateList(allAccounts[^1]);
@@ -49,6 +49,12 @@ static class AccountsAccess
         var allReservations = LoadAllReservations();
         allReservations.Add(resm);
         WriteAllReservations(allReservations);
+    }
+
+    public static List<EventModel> ReadAllEvents()
+    {
+        return JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(@"DataSources/Events.json"));
+
     }
 
 

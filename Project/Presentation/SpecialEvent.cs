@@ -5,7 +5,7 @@ public class SpecialEvent
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
-    public static  string ResEvent()
+    public static string ResEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string eventname = null;
@@ -48,10 +48,10 @@ public class SpecialEvent
                 case 3:
                     if (eventname != null && eventinfo != null && eventdate != null)
                     {
-                        var allAccounts = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
-                        EventModel newAccount = new EventModel(eventname, eventinfo, eventdate);
-                        allAccounts.Add(newAccount);
-                        WriteAll(allAccounts);
+                        var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
+                        EventModel newEvent = new EventModel(eventname, eventinfo, eventdate);
+                        allEvents.Add(newEvent);
+                        WriteAll(allEvents);
                         Console.Clear();
                         Console.WriteLine("Het evenement is aangemaakt.");
                         Thread.Sleep(3000);
