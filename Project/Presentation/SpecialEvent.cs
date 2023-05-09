@@ -74,15 +74,11 @@ public class SpecialEvent
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer event namens restaurant", "Organiseer event namens klant", "Terug naar hoofdmenu" };
+        string[] options = { "Organiseer event namens restaurant", "Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
             case 0:
-                Console.Clear();
-                ResEvent();
-                break;
-            case 1:
                 Console.Clear();
                 ResEvent();
                 break;
