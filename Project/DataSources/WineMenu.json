@@ -5,19 +5,19 @@
         "name": "Cabernet Sauvignon",
         "description": "Een gedurfde, volle wijn met aroma's van zwarte bessen en ceder.",
         "region": "Napa Valley, California",
-        "price": "€50.00"
+        "price": "€50,00"
       },
       {
         "name": "Pinot Noir",
         "description": "Een delicate, medium-bodied wijn met aroma's van rode kersen en aardse ondertonen.",
         "region": "Willamette Valley, Oregon",
-        "price": "€45.00"
+        "price": "€45,00"
       },
       {
         "name": "Malbec",
         "description": "Een rijke, volle wijn met aroma's van bramen en pruimen.",
         "region": "Mendoza, Argentina",
-        "price": "€40.00"
+        "price": "€40,00"
       }
     ],
     "white": [
@@ -25,19 +25,19 @@
         "name": "Chardonnay",
         "description": "Een rijke, boterachtige wijn met tonen van vanille en tropisch fruit.",
         "region": "Burgundy, France",
-        "price": "€40.00"
+        "price": "€40,00"
       },
       {
         "name": "Sauvignon Blanc",
         "description": "Een frisse, verfrissende wijn met aroma's van citrus en groene appel.",
         "region": "Marlborough, New Zealand",
-        "price": "€35.00"
+        "price": "€35,00"
       },
       {
         "name": "Riesling",
         "description": "Een lichte, aromatische wijn met smaken van perzik en abrikoos.",
         "region": "Mosel, Germany",
-        "price": "€30.00"
+        "price": "€30,00"
       }
     ],
     "sparkling": [
@@ -45,19 +45,19 @@
         "name": "Champagne",
         "description": "Een klassieke, elegante mousserende wijn met een fijne mousse en smaken van appel en brioche.",
         "region": "Champagne, France",
-        "price": "€75.00"
+        "price": "€75,00"
       },
       {
         "name": "Prosecco",
         "description": "Een lichte en fruitige mousserende wijn met aroma's van perzik en peer.",
         "region": "Veneto, Italy",
-        "price": "€30.00"
+        "price": "€30,00"
       },
       {
         "name": "Cava",
         "description": "Een droge, knisperende mousserende wijn met aroma's van groene appel en citrus.",
         "region": "Penedès, Spain",
-        "price": "€25.00"
+        "price": "€25,00"
       }
     ]
   }
