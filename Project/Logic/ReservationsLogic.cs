@@ -2,7 +2,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-class ReservationsLogic
+public class ReservationsLogic
 {
     public static readonly string CurMonth = DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("nl"));
     
