@@ -10,7 +10,7 @@ public class UnitTest1
         set { testContextInstance = value; }
     }
     [TestMethod]
-    public void TestMethod1()
+    public void AccountTest()
     {
         AccountModel model = new AccountModel(1, "@.@", "xyz", "Mark", false, false);
         Assert.IsTrue(model.Id==1);

@@ -2,10 +2,7 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/Storage/@EntryValue">ThisComputer</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d3bf7603_002D8d7f_002D44f0_002Db37a_002D1472e4cc84e5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestAccount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;MSTest::8DDAF4F6-E893-088A-220E-03B7810451D3::net6.0::TestProject1.UnitTest1.TestAccount&lt;/TestId&gt;
-    &lt;TestId&gt;MSTest::8DDAF4F6-E893-088A-220E-03B7810451D3::net6.0::TestProject1.UnitTest1.TestMethod1&lt;/TestId&gt;
-    &lt;TestId&gt;MSTest::8DDAF4F6-E893-088A-220E-03B7810451D3::net6.0::TestProject1.UnitTest1.Test&lt;/TestId&gt;
-    &lt;TestId&gt;MSTest::8DDAF4F6-E893-088A-220E-03B7810451D3::net6.0::TestProject1.UnitTest1.TestReservations&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::8DDAF4F6-E893-088A-220E-03B7810451D3::net6.0::TestProject1.UnitTest1&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
