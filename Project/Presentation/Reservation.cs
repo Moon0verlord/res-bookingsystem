@@ -92,9 +92,6 @@ static class Reservation
             userEmail = acc.EmailAddress;
             ResMenu();
         }
-        //show available hours on requested date
-        //User can select an hour
-        //back to menu
     }
 
     public static void ResMenu()
