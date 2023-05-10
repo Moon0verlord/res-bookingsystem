@@ -14,7 +14,7 @@ class MainMenu : IMenuLogic
 ██╔══██║██║   ██║██║   ██║██╔══╝  ██║  ██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
 ██║  ██║╚██████╔╝╚██████╔╝██║     ██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
 ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ";
-        
+
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
@@ -30,7 +30,7 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "bekijken evenementen", "Afsluiten" };
+                string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
                 string prompt = "\nHoofdmenu:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -56,9 +56,6 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 5:
-                        SpecialEvent.Eventmenu();
-                        break;
-                    case 6:
                         Environment.Exit(0);
                         break;
 
@@ -73,7 +70,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     // displays menu with various management options if the user is a manager
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen","Reservatie overzicht"};
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen", "Reservatie overzicht" };
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
@@ -105,12 +102,12 @@ class MainMenu : IMenuLogic
                             Dishes.ManagerOptions();
                             break;
                         case 3:
-                            EmployeeManagerLogic.AddSpecialEvent();
+                            SpecialEvent.Eventmenu();
                             break;
                         case 4:
                             EmployeeManagerLogic.CheckReservations();
                             break;
-                        
+
                     }
                 }
             }

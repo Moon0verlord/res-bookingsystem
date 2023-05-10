@@ -31,9 +31,9 @@ public class SpecialEvent
                     eventinfo = Console.ReadLine()!;
                     break;
                 case 2:
-                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd/MM/YYYY)");
+                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
                     eventdate = Console.ReadLine();
-                    if (eventdate.Contains("/") && eventdate.Length == 10)
+                    if (eventdate.Contains("-") && eventdate.Length == 10)
                     {
                         break;
                     }
@@ -51,7 +51,7 @@ public class SpecialEvent
                         var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
                         EventModel newEvent = new EventModel(eventname, eventinfo, eventdate);
                         allEvents.Add(newEvent);
-                        WriteAll(allEvents);
+                        AccountsAccess.WriteAllEventsJson(allEvents);
                         Console.Clear();
                         Console.WriteLine("Het evenement is aangemaakt.");
                         Thread.Sleep(3000);
@@ -74,7 +74,7 @@ public class SpecialEvent
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer event namens restaurant", "Organiseer event namens klant", "Terug naar hoofdmenu" };
+        string[] options = { "Organiseer een evenement", "Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
@@ -84,20 +84,8 @@ public class SpecialEvent
                 break;
             case 1:
                 Console.Clear();
-                ResEvent();
-                break;
-            case 2:
-                Console.Clear();
                 MainMenu.Start();
                 break;
         }
-    }
-
-    public static void WriteAll(List<EventModel> accounts)
-    {
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(accounts, options);
-        File.WriteAllText(path, json);
     }
 }

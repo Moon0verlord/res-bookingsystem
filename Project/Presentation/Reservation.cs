@@ -1,6 +1,7 @@
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using Newtonsoft.Json.Linq;
 
 static class Reservation
 {
@@ -211,29 +212,54 @@ static class Reservation
         else
         {
             chosenDate = userChoice;
-            ChooseTimeslot();
+            ChooseTimeslot(chosenDate);
         }
     }
 
-    public static void ChooseTimeslot()
+    public static void ChooseTimeslot(DateTime ChosenDate)
     {
-        List<string> dates = new List<string>();
-        todayeventcheck = false;
+        bool todayeventcheck = false;
+        JArray All_Events = AccountsAccess.ReadAllEvents();
 
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
         string[] options = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
-        int selectedIndex = _my1DMenu.RunMenu(options, "Kies uw gewenste tijdslot:");
-        foreach (string date in dates)
+        foreach (var event_item in All_Events)
         {
-            if (date == DateTime.Now.Date.ToString("dd-MM-yyyy"))
+            string date = Convert.ToString(event_item["eventdate"]);
+            if (date == ChosenDate.ToString("dd-MM-yyyy"))
             {
                 todayeventcheck = true;
             }
         }
 
-        if (todayeventcheck == false)
+        if (todayeventcheck == true)
         {
+            string[] optionsEvent = new[] { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
+            int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "Vandaag is er een event kies uw tijdslot:");
+            switch (selectedIndexEvent)
+            {
+                case 0:
+                    ts1 = new TimeSpan(0, 16, 0, 0);
+                    ts2 = new TimeSpan(0, 19, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 1:
+                    ts1 = new TimeSpan(0, 19, 0, 0);
+                    ts2 = new TimeSpan(0, 22, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 2:
+                    ChooseDate();
+                    break;
+            }
+        }
+        else
+        {
+            string[] optionsmenu = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
+            int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "Kies uw gewenste tijdslot:");
             switch (selectedIndex)
             {
                 case 0:
@@ -259,10 +285,6 @@ static class Reservation
                     break;
             }
         }
-        else
-        {
-            Console.WriteLine("Vandaag is er een event.");
-        }
     }
 
     public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
@@ -282,7 +304,7 @@ static class Reservation
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly,
             "  Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
         if (selectedTable != default) chosenTable = selectedTable.Id;
-        else ChooseTimeslot();
+        else ChooseTimeslot(res_Date);
     }
 
     public static void ViewRes(string Email)
