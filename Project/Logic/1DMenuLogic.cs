@@ -7,7 +7,7 @@
     private List<ReservationModel> tables = new List<ReservationModel>();
     private int res_GroupSize = default;
 
-    public void DisplayOptions(string prompt, bool printPrompt)
+    private void DisplayOptions(string prompt, bool printPrompt)
     {
         if (printPrompt) Console.WriteLine(prompt);
         for (int i = 0; i < _options.Length; i++)
@@ -97,10 +97,7 @@
                         break;
                 }
             }
-
-
         } while (keyPressed != ConsoleKey.Enter);
-
         return _currentIndex;
     }
 
