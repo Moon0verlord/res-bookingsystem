@@ -59,8 +59,10 @@ class EmailLogic
             //Authentification info
             Smtp.UseDefaultCredentials = false;
             NetworkCredential basicAuthenticationInfo = new
-                NetworkCredential("testrestaurant12356789@gmail.com", "levkehrnvtpnqkpm");
+                NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
+            
+            
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
             MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
