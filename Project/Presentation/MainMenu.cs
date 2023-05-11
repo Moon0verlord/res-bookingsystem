@@ -151,7 +151,7 @@ class MainMenu : IMenuLogic
                         EmployeeManagerLogic.CheckReservations();
                         break;
                     case 0:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserSelection();
                         break;
 
                 }
@@ -177,7 +177,7 @@ class MainMenu : IMenuLogic
                         Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
                         break;
                     case 2:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserSelection();
                         Thread.Sleep(5000); ;
                         break;
                     case 3:

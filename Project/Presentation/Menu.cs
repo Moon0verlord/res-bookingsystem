@@ -11,7 +11,8 @@ public static class Dishes
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
-    public static void WelcomeMenu()
+// Takes user selection and opens the menu
+    public static void UserSelection()
     {
         Console.CursorVisible = false;
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch","Terug naar hoofdmenu" };
@@ -55,7 +56,7 @@ public static class Dishes
         string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
         Console.WriteLine("gerechten:");
         Console.WriteLine("-------");
-        
+    // using linq make objects of the json property and display them    
     Console.WriteLine("2 Gangen:");
     var courses2 = menu[choice]["2_Gangen"]
         .Select(item => new
@@ -138,7 +139,7 @@ public static class Dishes
                 type = "Veganistisch";
                 break;
             case 4:
-                WelcomeMenu();
+                UserSelection();
                 break;
             case 5:
                 MainMenu.Start();
@@ -318,7 +319,7 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-        // save the updated JSON to the file
+        // write the updated JSON to the file
         string updatedJson = menu.ToString();
         File.WriteAllText(path, updatedJson);
         Console.ForegroundColor = ConsoleColor.Green;
@@ -358,7 +359,7 @@ public static class Dishes
         string json = File.ReadAllText(path);
         JObject Wines = JObject.Parse(json);
         Console.Clear();
-        Console.WriteLine($"{choice} Wijn menu:");
+        Console.WriteLine($"{choice} Wijn arrangement:");
         Console.WriteLine("-------");
         var selection = Wines["Winemenu"][choice]
             .Select(item => new
@@ -383,17 +384,17 @@ public static class Dishes
         MainMenu.Start();
     }
     
-    // User options to choose between food menu and wines
+    // User options to choose between food menu or wine arrangement
     public static void UserOptions()
     {
         Console.CursorVisible = false;
-        string[] options = { "Menu zien", "Wijn Selectie", "Terug naar hoofdmenu" };
+        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
             case 0:
-                WelcomeMenu();
+                UserSelection();
                 break;
             case 1:
                 WineDisplay();
