@@ -93,4 +93,43 @@ class EmailLogic
             throw new ApplicationException(ex.Message);
         }
     }
+
+    /*public static void SendVerificationMail(string email, string name, string vrfyCode){
+       try
+        {
+            //Which of the servers hostnames is gonna be used to send emails
+            var Smtp = new SmtpClient("smtp.gmail.com", 587);
+            //Authentification info
+            Smtp.UseDefaultCredentials = false;
+            NetworkCredential basicAuthenticationInfo = new
+                NetworkCredential("testrestaurant12356789@gmail.com", "levkehrnvtpnqkpm");
+            Smtp.Credentials = basicAuthenticationInfo;
+
+            //Who the email is from, who its going to, the mail message and what the reply email is 
+            MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
+            MailAddress to = new MailAddress(email, $"{email}");
+            
+            MailMessage myMail = new MailMessage(from, to);
+            MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
+            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
+                $"<html><body><div><h1>Hallo{name}!</h1></div><div><p><h3>U heeft aangegeven dat u uw huidige wachtwoord bent vergeten en daarom hebben wij een verificatie code voor u aangemaakt. " +
+                $"<br>Deze code is: <b>{vrfyCode}</b></br><br>Gebruik deze code in ons programma om uw wachtwoord te resetten.</br></h3></div></body></html>", null, "text/html");
+            myMail.AlternateViews.Add(htmlView);
+            //ReplytoList is what it says on the tin, the reply to option in mail can contain multiple emails
+            myMail.ReplyToList.Add(replyTo);
+            //What is the subject, the encoding, the message in the body and its encoding etc
+            myMail.Subject = "Reset van wachtwoord";
+            myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+            myMail.BodyEncoding = System.Text.Encoding.UTF8;
+            myMail.IsBodyHtml = true;
+            //Encrypts the emails being sent for extra security
+            Smtp.EnableSsl = true;
+            Smtp.Send(myMail);
+        }
+
+        catch (SmtpException ex)
+        {
+            throw new ApplicationException(ex.Message);
+        } 
+    }*/
 }

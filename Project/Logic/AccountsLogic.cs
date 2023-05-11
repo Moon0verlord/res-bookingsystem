@@ -63,6 +63,48 @@ class AccountsLogic:IMenuLogic
         }
         return null!;
     }
+
+    /*public void ForgotPassword(string email)
+    {
+        AccountModel? acc = GetByEmail(email);
+        Random r = new Random();
+        int randNum = r.Next(1000000);
+        string sixDigitNumber = randNum.ToString("D6");
+        if (acc != null)
+        {
+            EmailLogic.SendVerificationMail(email, acc.FullName, sixDigitNumber);
+        }
+        else
+        {
+            Console.WriteLine("Email is niet gevonden");
+        }
+    }
+
+    public void ResetPassword(string email, string verificationCode){
+        Console.WriteLine("Voer de verificatie code in");
+        string code = Console.ReadLine();
+        if (code == verificationCode)
+        {
+            Console.WriteLine("Voer uw nieuwe wachtwoord in");
+            string password = Console.ReadLine();
+            Console.WriteLine("herhaal uw nieuwe wachtwoord");
+            string confirmPassword = Console.ReadLine();
+            if (password == confirmPassword)
+            {
+                AccountModel acc = GetByEmail(email);
+                acc.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                UpdateList(acc);
+            }
+            else
+            {
+                Console.WriteLine("Wachtwoorden komen niet overeen");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Verificatie code is niet correct");
+        }
+    }*/
 }
 
 

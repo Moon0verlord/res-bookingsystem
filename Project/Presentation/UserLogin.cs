@@ -19,7 +19,7 @@ static class UserLogin
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {HidePass(userPassword)}\n")}",
-                "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "Ga terug" };
+                "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "reset uw wachtwoord", "Ga terug" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
@@ -159,7 +159,27 @@ static class UserLogin
                         Console.ResetColor();
                     }
                     break;
-                case 4:
+                /*case 4:
+                    if (userEmail != null){
+                        Console.Clear();
+                        AccountModel acc = accountsLogic.GetByEmail(userEmail);
+                        if (acc != null){
+                            accountsLogic.ForgotPassword(userEmail);
+                        }
+                        Console.WriteLine("Er is een e-mail verstuurd naar " + userEmail + " met uw Verificatiecode.");
+                        Console.Write("Vul hier uw Verificatiecode in: ");
+                        string verificationCode = Console.ReadLine()!;
+                        accountsLogic.ResetPassword(verificationCode, userEmail);
+                    }
+                    else{
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nVul eerst uw e-mailadres in.");
+                        Thread.Sleep(1500);
+                        DiscardKeys();
+                        Console.ResetColor();
+                    }
+                    break;*/
+                case 5:
                     MainMenu.Start();
                     break;
             }
