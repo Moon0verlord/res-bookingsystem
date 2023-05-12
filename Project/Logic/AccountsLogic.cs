@@ -64,34 +64,57 @@ class AccountsLogic:IMenuLogic
         return null!;
     }
 
-    /*public void ForgotPassword(string email)
+    public void ForgotPassword(string email)
     {
+        // get the account by email
         AccountModel? acc = GetByEmail(email);
+
+        // create a 6 digit random number
         Random r = new Random();
         int randNum = r.Next(1000000);
         string sixDigitNumber = randNum.ToString("D6");
-        if (acc != null)
-        {
-            EmailLogic.SendVerificationMail(email, acc.FullName, sixDigitNumber);
-        }
-        else
-        {
-            Console.WriteLine("Email is niet gevonden");
-        }
-    }
 
-    public void ResetPassword(string email, string verificationCode){
-        Console.WriteLine("Voer de verificatie code in");
-        string code = Console.ReadLine();
-        if (code == verificationCode)
+        // send the email
+        EmailLogic.SendVerificationMail(email, acc.FullName, sixDigitNumber);
+        Console.WriteLine("Er is een e-mail verstuurd naar " + email + " met uw Verificatiecode.");
+        string code;
+
+        // check if the code is correct
+        do
         {
-            Console.WriteLine("Voer uw nieuwe wachtwoord in");
-            string password = Console.ReadLine();
-            Console.WriteLine("herhaal uw nieuwe wachtwoord");
-            string confirmPassword = Console.ReadLine();
+            Console.WriteLine("Voer de verificatie code in: ");
+            code = Console.ReadLine();
+            if (code == sixDigitNumber)
+            {
+                Console.WriteLine("Verificatie gelukt!");
+            }
+            else
+            {
+                Console.WriteLine("Incorrecte code");
+            }
+        } 
+        while (code != sixDigitNumber);
+        string password = "";
+        string confirmPassword = "";
+
+        // check if the passwords are equal
+        do{
+            // check if the password is valid
+            do{
+                Console.WriteLine("Voer uw nieuwe wachtwoord in: ");
+                password = Console.ReadLine();
+                Console.WriteLine("herhaal uw nieuwe wachtwoord: ");
+                confirmPassword = Console.ReadLine();
+                if (UserLogin.PasswordCheck(password) == false)
+                {
+                    Console.WriteLine("Wachtwoord moet minimaal 8 karakters bevatten, een hoofdletter, een kleine letter, een cijfer en een speciaal teken");
+                }
+            }
+            while (UserLogin.PasswordCheck(password) == false);
+
             if (password == confirmPassword)
             {
-                AccountModel acc = GetByEmail(email);
+                // hash the password and update the account
                 acc.Password = BCrypt.Net.BCrypt.HashPassword(password);
                 UpdateList(acc);
             }
@@ -99,12 +122,9 @@ class AccountsLogic:IMenuLogic
             {
                 Console.WriteLine("Wachtwoorden komen niet overeen");
             }
-        }
-        else
-        {
-            Console.WriteLine("Verificatie code is niet correct");
-        }
-    }*/
+        } 
+        while (password != confirmPassword);
+    }
 }
 
 

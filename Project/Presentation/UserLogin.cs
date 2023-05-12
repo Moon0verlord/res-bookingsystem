@@ -159,17 +159,13 @@ static class UserLogin
                         Console.ResetColor();
                     }
                     break;
-                /*case 4:
+                case 4:
                     if (userEmail != null){
                         Console.Clear();
                         AccountModel acc = accountsLogic.GetByEmail(userEmail);
                         if (acc != null){
                             accountsLogic.ForgotPassword(userEmail);
                         }
-                        Console.WriteLine("Er is een e-mail verstuurd naar " + userEmail + " met uw Verificatiecode.");
-                        Console.Write("Vul hier uw Verificatiecode in: ");
-                        string verificationCode = Console.ReadLine()!;
-                        accountsLogic.ResetPassword(verificationCode, userEmail);
                     }
                     else{
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -178,7 +174,7 @@ static class UserLogin
                         DiscardKeys();
                         Console.ResetColor();
                     }
-                    break;*/
+                    break;
                 case 5:
                     MainMenu.Start();
                     break;

@@ -57,9 +57,9 @@ class EmailLogic
             //Which of the servers hostnames is gonna be used to send emails
             var Smtp = new SmtpClient("smtp.gmail.com", 587);
             //Authentification info
-            Smtp.UseDefaultCredentials = false;
+            Smtp.UseDefaultCredentials = false;     
             NetworkCredential basicAuthenticationInfo = new
-                NetworkCredential("testrestaurant12356789@gmail.com", "levkehrnvtpnqkpm");
+                NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
@@ -94,7 +94,7 @@ class EmailLogic
         }
     }
 
-    /*public static void SendVerificationMail(string email, string name, string vrfyCode){
+    public static void SendVerificationMail(string email, string name, string vrfyCode){
        try
         {
             //Which of the servers hostnames is gonna be used to send emails
@@ -102,7 +102,7 @@ class EmailLogic
             //Authentification info
             Smtp.UseDefaultCredentials = false;
             NetworkCredential basicAuthenticationInfo = new
-                NetworkCredential("testrestaurant12356789@gmail.com", "levkehrnvtpnqkpm");
+                NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
@@ -112,7 +112,7 @@ class EmailLogic
             MailMessage myMail = new MailMessage(from, to);
             MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
-                $"<html><body><div><h1>Hallo{name}!</h1></div><div><p><h3>U heeft aangegeven dat u uw huidige wachtwoord bent vergeten en daarom hebben wij een verificatie code voor u aangemaakt. " +
+                $"<html><body><div><h1>Hallo {name}!</h1></div><div><p><h3>U heeft aangegeven dat u uw huidige wachtwoord bent vergeten en daarom hebben wij een verificatie code voor u aangemaakt. " +
                 $"<br>Deze code is: <b>{vrfyCode}</b></br><br>Gebruik deze code in ons programma om uw wachtwoord te resetten.</br></h3></div></body></html>", null, "text/html");
             myMail.AlternateViews.Add(htmlView);
             //ReplytoList is what it says on the tin, the reply to option in mail can contain multiple emails
@@ -131,5 +131,5 @@ class EmailLogic
         {
             throw new ApplicationException(ex.Message);
         } 
-    }*/
+    }
 }
