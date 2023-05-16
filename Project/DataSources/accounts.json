@@ -14,5 +14,21 @@
     "fullName": "employee",
     "Employee": true,
     "Manager": false
+  },
+  {
+    "id": 13,
+    "emailAddress": "j@j.com",
+    "password": "$2a$12$WgDbA83wVuZpohnDgQqoxeGsw93StR6v.4DliUrxBNB5VIdcHpyRq",
+    "fullName": "jojo",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 14,
+    "emailAddress": "jonasplinter@gmail.com",
+    "password": "$2a$12$jAOE/fFGDkvFUrW65KeOQuU2ELPN73YUQmfPrgz8Gc..TRP7/A9CG",
+    "fullName": "jona",
+    "Employee": false,
+    "Manager": false
   }
 ]
