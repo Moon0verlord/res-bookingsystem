@@ -23,8 +23,16 @@ public class SpecialEvent
             switch (selectedIndex)
             {
                 case 0:
-                    Console.Write("Wat is de naam van het event: ");
+                    Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
                     eventname = Console.ReadLine()!;
+                    int name_Length = eventname.Length;
+                    if (name_Length > 30)
+                    {
+                        Console.WriteLine("De naam van het event is langer dan 30 tekens.");
+                        Thread.Sleep(3000);
+                        ResEvent();
+                        break;
+                    }
                     break;
                 case 1:
                     Console.Write("wat wordt de extra informatie van het event: ");
@@ -35,6 +43,17 @@ public class SpecialEvent
                     eventdate = Console.ReadLine();
                     if (eventdate.Contains("-") && eventdate.Length == 10)
                     {
+                        JArray allEvents = AccountsAccess.ReadAllEvents();
+                        foreach (var event_item in allEvents)
+                        {
+                            if (eventdate == event_item["eventdate"].ToString())
+                            {
+                                Console.WriteLine("Er is al een evenement op deze datum.");
+                                Thread.Sleep(3000);
+                                ResEvent();
+                                break;
+                            }
+                        }
                         break;
                     }
                     else
