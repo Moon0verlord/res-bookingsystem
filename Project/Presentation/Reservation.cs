@@ -15,6 +15,7 @@ static class Reservation
     private static DateTime chosenDate;
     private static (TimeSpan, TimeSpan) chosenTimeslot;
     private static string chosenTable;
+    private static int stepCounter;
 
     public static void ResStart(AccountModel acc = null)
     {
@@ -24,6 +25,7 @@ static class Reservation
         chosenDate = default;
         chosenTimeslot = (default, default);
         chosenTable = "";
+        stepCounter = 1;
         Console.Clear();
         if (acc == null)
         {
@@ -32,13 +34,13 @@ static class Reservation
             while (loop)
             {
                 Console.Clear();
-                string prompt = "Vul hier uw e-mail in om een reservatie te maken.";
+                string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
                 string[] options =
                 {
                      $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
                      "Reservering bekijken", "Ga terug"
                  };
-                int selectedIndex = _my1DMenu.RunMenu(options, prompt);
+                int selectedIndex = _my1DMenu.RunResMenu(options, prompt, stepCounter);
                 switch (selectedIndex)
                 {
                     case 0:
@@ -64,6 +66,7 @@ static class Reservation
                         {
                             loop = false;
                             userEmail = email;
+                            stepCounter++;
                             ResMenu();
                         }
                         else
@@ -86,12 +89,10 @@ static class Reservation
         }
         else
         {
+            stepCounter++;
             userEmail = acc.EmailAddress;
             ResMenu();
         }
-        //show available hours on requested date
-        //User can select an hour
-        //back to menu
     }
 
     public static void ResMenu()
@@ -100,20 +101,27 @@ static class Reservation
         amountOfPeople = ChooseGroupSize();
         if (amountOfPeople <= 0)
         {
+            stepCounter--;
             if (_acc == null)
                 ResStart();
             else MainMenu.Start();
         }
-        else ChooseDate();
+        else
+        {
+            stepCounter++;
+            ChooseDate();
+        }
 
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
         while (true)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            stepCounter++;
             Console.Clear();
             Console.CursorVisible = true;
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(
-                $"Email:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"\n\n\nEmail:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
                 $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
             Console.ResetColor();
             string answer = Console.ReadLine()!;
@@ -148,7 +156,7 @@ static class Reservation
             Console.ResetColor();
             string[] options = new[]
                 { "Vul hier in met hoeveel mensen u komt.", "Ga terug" };
-            int selectedIndex = _my1DMenu.RunMenu(options, "Kies hier uw groepsgrootte:");
+            int selectedIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies hier uw groepsgrootte:", stepCounter);
             Console.Clear();
             switch (selectedIndex)
             {
@@ -201,16 +209,21 @@ static class Reservation
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
         Console.WriteLine(
-            $"U kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
+            $"\n\n\nU kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
         for (int i = 0; i < thisMonth.GetLength(1); i++)
         {
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
 
-        DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", false);
-        if (userChoice == default) ResMenu();
+        DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", stepCounter, false);
+        if (userChoice == default)
+        {
+            stepCounter--;
+            ResMenu();
+        }
         else
         {
+            stepCounter++;
             chosenDate = userChoice;
             ChooseTimeslot(chosenDate);
         }
@@ -236,22 +249,25 @@ static class Reservation
         if (todayeventcheck == true)
         {
             string[] optionsEvent = new[] { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
-            int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "Vandaag is er een event kies uw tijdslot:");
+            int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "\n\n\nVandaag is er een event kies uw tijdslot:");
             switch (selectedIndexEvent)
             {
                 case 0:
                     ts1 = new TimeSpan(0, 16, 0, 0);
                     ts2 = new TimeSpan(0, 19, 0, 0);
                     chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 1:
                     ts1 = new TimeSpan(0, 19, 0, 0);
                     ts2 = new TimeSpan(0, 22, 0, 0);
                     chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 2:
+                    stepCounter--;
                     ChooseDate();
                     break;
             }
@@ -259,28 +275,32 @@ static class Reservation
         else
         {
             string[] optionsmenu = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
-            int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "Kies uw gewenste tijdslot:");
+            int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:");
             switch (selectedIndex)
             {
                 case 0:
                     ts1 = new TimeSpan(0, 16, 0, 0);
                     ts2 = new TimeSpan(0, 18, 0, 0);
                     chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 1:
                     ts1 = new TimeSpan(0, 18, 0, 0);
                     ts2 = new TimeSpan(0, 20, 0, 0);
                     chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 2:
                     ts1 = new TimeSpan(0, 20, 0, 0);
                     ts2 = new TimeSpan(0, 22, 0, 0);
                     chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 3:
+                    stepCounter--;
                     ChooseDate();
                     break;
             }
@@ -300,11 +320,15 @@ static class Reservation
         {
         }
 
-        _tableLogic.TableStart(tablesOnly, amountOfPeople);
+        _tableLogic.TableStart(tablesOnly, amountOfPeople, stepCounter);
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly,
             "  Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
         if (selectedTable != default) chosenTable = selectedTable.Id;
-        else ChooseTimeslot(res_Date);
+        else
+        {
+            stepCounter--;
+            ChooseTimeslot(res_Date);
+        }
     }
 
     public static void ViewRes(string Email)
@@ -342,7 +366,7 @@ static class Reservation
                         MainMenu.Start();
                         break;
                     default:
-
+                        break;
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.CursorVisible = true;
@@ -379,8 +403,6 @@ static class Reservation
                                 UserLogin.DiscardKeys();
                                 break;
                         }
-
-                        break;
                 }
             }
         }

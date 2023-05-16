@@ -92,6 +92,28 @@
         WriteAt("- Minimaal 1 cijfer", x + 1,  y + 4);
         Console.ResetColor();
     }
+
+    public static void WriteBoxStepCounter(int origrow, int origcol, int stepcount)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        int x = 4;
+        int y = 0;
+        string boxBorder = "───────────────";
+        Console.ForegroundColor = ConsoleColor.Green;
+        WriteAt("┌", x, y);
+        WriteAt("│", x, y + 1);
+        WriteAt("└", x, y + 2);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        WriteAt("│", x + boxBorder.Length + 1, y + 1);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 2);
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.BackgroundColor = ConsoleColor.DarkGreen;
+        WriteAt($"  Stap {stepcount} / 6   ", x + 1, y + 1);
+        Console.ResetColor();
+    }
     
     private static void WriteAt(string s, int x, int y)
     {

@@ -8,6 +8,8 @@ static class UserLogin
     private static string userPassword;
     
     // starts the login process 
+    
+    // Manager login: Zxcvbnm1
     public static void Start()
     {
         userEmail = null;
@@ -17,7 +19,7 @@ static class UserLogin
             var prompt = "Welkom in het log in menu. \n";
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "" : $": {userEmail}"),
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {HidePass(userPassword)}\n")}",
-                "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "Ga terug" };
+                "Nog geen account?\n  >Maak een nieuw account aan<", "Log in met huidige gegevens", "reset uw wachtwoord", "Ga terug" };
             var selectedIndex = myMenu.RunMenu(options, prompt);
             switch (selectedIndex)
             {
@@ -46,7 +48,7 @@ static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword()!;
-                    if(AccountsAccess.LoadAll().Find(user=> userPassword == user.Password)==null)
+                    if(AccountsAccess.LoadAll().Find(user=> userEmail == user.EmailAddress)==null)
                     {
                         Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
                         var verifyUserPassword = WritePassword()!;
@@ -158,6 +160,22 @@ static class UserLogin
                     }
                     break;
                 case 4:
+                    if (userEmail != null){
+                        Console.Clear();
+                        AccountModel acc = accountsLogic.GetByEmail(userEmail);
+                        if (acc != null){
+                            accountsLogic.ForgotPassword(userEmail);
+                        }
+                    }
+                    else{
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nVul eerst uw e-mailadres in.");
+                        Thread.Sleep(1500);
+                        DiscardKeys();
+                        Console.ResetColor();
+                    }
+                    break;
+                case 5:
                     MainMenu.Start();
                     break;
             }

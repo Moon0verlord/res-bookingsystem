@@ -31,7 +31,7 @@ class MainMenu : IMenuLogic
             {
                 // main menu functionality for non-logged in users.
                 string[] options = { "Inloggen", "Informatie", "Tijden", "Bekijk het menu", "Maak een reservatie met e-mail", "Afsluiten" };
-                string prompt = "\nHoofdmenu:";
+                string prompt = $"{ascii}";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -49,7 +49,7 @@ class MainMenu : IMenuLogic
                         Console.ReadKey(true);
                         break;
                     case 3:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserOptions();
                         Thread.Sleep(5000);
                         break;
                     case 4:
@@ -107,7 +107,6 @@ class MainMenu : IMenuLogic
                         case 4:
                             EmployeeManagerLogic.CheckReservations();
                             break;
-
                     }
                 }
             }
@@ -145,7 +144,7 @@ class MainMenu : IMenuLogic
                         EmployeeManagerLogic.CheckReservations();
                         break;
                     case 0:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserSelection();
                         break;
 
                 }
@@ -171,7 +170,7 @@ class MainMenu : IMenuLogic
                         Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
                         break;
                     case 2:
-                        Dishes.WelcomeMenu();
+                        Dishes.UserSelection();
                         Thread.Sleep(5000); ;
                         break;
                     case 3:

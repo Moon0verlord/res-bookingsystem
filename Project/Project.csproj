@@ -1,29 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    
-    <RootNamespace>Project</RootNamespace>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
+    <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\net6.0\Dishes.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bin\Debug\net6.0\Menu.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="bin\Debug\net6.0" />
+    <None Include="bin\Debug\net6.0\DataSources\360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg" />
+    <None Include="bin\Debug\net6.0\DataSources\accounts.json" />
+    <None Include="bin\Debug\net6.0\DataSources\Dishes.json" />
+    <None Include="bin\Debug\net6.0\DataSources\Events.json" />
+    <None Include="bin\Debug\net6.0\DataSources\Menu.json" />
+    <None Include="bin\Debug\net6.0\DataSources\reservations.json" />
   </ItemGroup>
 
 </Project>

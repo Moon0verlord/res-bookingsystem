@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
@@ -9,7 +11,8 @@ public static class Dishes
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
-    public static void WelcomeMenu()
+    // Takes user selection and opens the menu
+    public static void UserSelection()
     {
         Console.CursorVisible = false;
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
@@ -123,7 +126,7 @@ public static class Dishes
         string type = "";
         string course = "";
         // select type of food
-        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Bekijk het menu", "Terug naar hoofdmenu" };
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
         string prompt = "\nWelk type gerecht zou je willen veranderen?:";
         int input = _myMenu.RunMenu(options, prompt);
         _currentIndex = 0;
@@ -146,9 +149,6 @@ public static class Dishes
                 break;
             case 5:
                 type = "pasen";
-                break;
-            case 6:
-                WelcomeMenu();
                 break;
             case 7:
                 MainMenu.Start();
@@ -328,7 +328,7 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-        // save the updated JSON to the file
+        // write the updated JSON to the file
         string updatedJson = menu.ToString();
         File.WriteAllText(path, updatedJson);
         Console.ForegroundColor = ConsoleColor.Green;
@@ -337,6 +337,86 @@ public static class Dishes
         Thread.Sleep(2000);
         UserLogin.DiscardKeys();
     }
+
+    // Displays wines based on user selection
+    public static void WineDisplay()
+    {
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        string choice = "";
+        Console.CursorVisible = false;
+        string[] options = { "Rode Wijn", "Witte Wijn", "Bubbles" };
+        string prompt = "\nKies een type gerechten:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                choice = "red";
+                break;
+            case 1:
+                choice = "white";
+                break;
+            case 2:
+                choice = "sparkling";
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+        Console.CursorVisible = false;
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/WineMenu.json"));
+        string json = File.ReadAllText(path);
+        JObject Wines = JObject.Parse(json);
+        Console.Clear();
+        Console.WriteLine($"{choice} Wijn arrangement:");
+        Console.WriteLine("-------");
+        var selection = Wines["Winemenu"][choice]
+            .Select(item => new
+            {
+                name = (string)item["name"],
+                price = (string)item["price"],
+                region = (string)item["region"],
+                description = (string)item["description"]
+            });
+        foreach (var wine in selection)
+        {
+            Console.WriteLine($"{wine.name}");
+            Console.WriteLine($"{wine.region}");
+            Console.WriteLine($"{wine.description}");
+            Console.WriteLine($"Prijs per fles: {wine.price}");
+            Match match = Regex.Match(wine.price, @"^€(\d+),\d+");
+            Console.WriteLine($"Price per glass is: €{Convert.ToInt32(match.Groups[1].Value) / 4},00");
+            Console.WriteLine("-------");
+        }
+        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ReadKey();
+        MainMenu.Start();
+    }
+
+    // User options to choose between food menu or wine arrangement
+    public static void UserOptions()
+    {
+        Console.CursorVisible = false;
+        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een type gerechten:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                UserSelection();
+                break;
+            case 1:
+                WineDisplay();
+                break;
+            case 2:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+    }
+
 
     // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()

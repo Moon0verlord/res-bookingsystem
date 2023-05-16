@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
 
-static class AccountsAccess
+public static class AccountsAccess
 {
     static string acc_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
     static string res_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
@@ -50,6 +50,51 @@ static class AccountsAccess
         var allReservations = LoadAllReservations();
         allReservations.Add(resm);
         WriteAllReservations(allReservations);
+    }
+    public static void EventWriteAll(List<EventModel> accounts)
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string json = JsonSerializer.Serialize(accounts, options);
+        File.WriteAllText(path, json);
+    }
+
+    public static void ClearJsonFiles(int choice)
+    {
+        //1 Clears Accounts
+        //2 Clear Reservations
+        var accounts = LoadAll();
+        var reservations = LoadAllReservations();
+        switch (choice)
+        {
+            case 1:
+                if (accounts.Count > 3)
+                {
+                    var ClearAccounts = accounts.GetRange(1, 3);
+                    WriteAll(ClearAccounts);
+                }
+                break;
+            case 2:
+                if (reservations.Count > 1)
+                {
+                    var ClearReservations = reservations.GetRange(0, 0);
+                    WriteAllReservations(ClearReservations);
+                }
+
+                break;
+            case 3:
+                Console.WriteLine("--Accounts--");
+                foreach (var item in accounts)
+                {
+                    Console.WriteLine(item.FullName);
+                }
+                Console.WriteLine("--Reservations--");
+                foreach (var reservation in reservations)
+                {
+                    Console.WriteLine(reservation.Id);
+                }
+                break;
+        }
     }
 
     public static JArray ReadAllEvents()

@@ -5,7 +5,7 @@
     private ReservationModel[,] _tables = null;
     private int _groupSize = 0;
 
-    public void TableStart(ReservationModel[,] tables , int amountOfPeople)
+    public void TableStart(ReservationModel[,] tables , int amountOfPeople, int stepCounter)
         {
             Console.Clear();
             _tables = tables;
@@ -45,6 +45,7 @@
             }
             // give infoboxes the correct coordinates and write the tutorial box
             InfoBoxes.WriteBoxReservations(_groupSize, origRow, origCol);
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop + 2, Console.CursorLeft + 2, stepCounter);
             Console.Write("\n");
         }
 

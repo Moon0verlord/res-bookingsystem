@@ -55,30 +55,29 @@ class _2DMenuLogic
                 if (Tables[i, j] != null)
                 {
                     bool groupcheck = (res_GroupSize - Tables[i, j].TableSize == 0 || res_GroupSize - Tables[i, j].TableSize == -1);
+                    string toWrite = $"Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
+                    // assign foreground colors based on availability
                     if (Tables[i, j].isReserved) Console.ForegroundColor = ConsoleColor.Red;
                     else if (!groupcheck) Console.ForegroundColor = ConsoleColor.DarkGray;
                     else Console.ForegroundColor = ConsoleColor.Green;
+                    // assign background colors and prefix based on what's currently chosen
                     if (j == _columnIndex && i == _rowIndex)
                     {
-                        string toWrite = $"> Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                         Console.BackgroundColor = ConsoleColor.DarkGray;
-                        // string formatting
-                        Console.Write($"{toWrite, -18}");
-                        Console.ResetColor();
-                        // this is so the seperator "|" is always on the same place, no matter how long the actual string is.
-                        int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
-                        // Write whitespaces for the above length, and then write the seperator string except for the last column.
-                        Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
+                        toWrite = String.Concat("> ", toWrite);
                     }
                     else
                     {
-                        string toWrite = $"  Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                         Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write($"{toWrite, -18}");
-                        Console.ResetColor();
-                        int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
-                        Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
+                        toWrite = String.Concat("  ", toWrite);
                     }
+                    // string formatting
+                    Console.Write($"{toWrite, -18}");
+                    Console.ResetColor();
+                    // this is so the seperator "|" is always on the same place, no matter how long the actual string is.
+                    int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
+                    // Write whitespaces for the above length, and then write the seperator string except for the last column.
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
 
                     Console.ResetColor();
                 }
@@ -87,7 +86,7 @@ class _2DMenuLogic
         }
         Console.ResetColor();
     }
-    public DateTime RunMenu(DateTime[,] options, string prompt, bool printPrompt = true)
+    public DateTime RunMenu(DateTime[,] options, string prompt, int stepCounter, bool printPrompt = true)
     {
         
         ConsoleKey keyPressed = default;
@@ -98,6 +97,7 @@ class _2DMenuLogic
         do
         {
             Console.SetCursorPosition(0, 0);
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
             DisplayDateOptions(prompt, printPrompt);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;
