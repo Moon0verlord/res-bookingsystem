@@ -78,7 +78,7 @@ class AccountsLogic:IMenuLogic
         EmailLogic.SendVerificationMail(email, acc.FullName, sixDigitNumber);
         Console.WriteLine("Er is een e-mail verstuurd naar " + email + " met uw Verificatiecode.");
         string code;
-
+        Console.CursorVisible = true;
         // check if the code is correct
         do
         {
@@ -117,6 +117,11 @@ class AccountsLogic:IMenuLogic
                 // hash the password and update the account
                 acc.Password = BCrypt.Net.BCrypt.HashPassword(password);
                 UpdateList(acc);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Wachtwoord is veranderd");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                UserLogin.DiscardKeys();
             }
             else
             {
