@@ -55,7 +55,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
             {
                 Console.WriteLine(event_item["eventname"]);
                 Console.WriteLine(event_item["eventinfo"]);
-                Console.WriteLine(event_item["datum"]);
+                Console.WriteLine(event_item["eventdate"]);
                 Console.WriteLine();
             }
         }
