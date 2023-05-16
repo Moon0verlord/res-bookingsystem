@@ -1,6 +1,7 @@
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using Newtonsoft.Json.Linq;
 
 static class Reservation
 {
@@ -224,43 +225,85 @@ static class Reservation
         {
             stepCounter++;
             chosenDate = userChoice;
-            ChooseTimeslot();
+            ChooseTimeslot(chosenDate);
         }
     }
 
-    public static void ChooseTimeslot()
+    public static void ChooseTimeslot(DateTime ChosenDate)
     {
+        bool todayeventcheck = false;
+        JArray All_Events = AccountsAccess.ReadAllEvents();
+
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
         string[] options = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
-        int selectedIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies uw gewenste tijdslot:", stepCounter);
-        switch (selectedIndex)
+        foreach (var event_item in All_Events)
         {
-            case 0:
-                ts1 = new TimeSpan(0, 16, 0, 0);
-                ts2 = new TimeSpan(0, 18, 0, 0);
-                chosenTimeslot = (ts1, ts2);
-                stepCounter++;
-                ChooseTable(chosenDate, chosenTimeslot);
-                break;
-            case 1:
-                ts1 = new TimeSpan(0, 18, 0, 0);
-                ts2 = new TimeSpan(0, 20, 0, 0);
-                chosenTimeslot = (ts1, ts2);
-                stepCounter++;
-                ChooseTable(chosenDate, chosenTimeslot);
-                break;
-            case 2:
-                ts1 = new TimeSpan(0, 20, 0, 0);
-                ts2 = new TimeSpan(0, 22, 0, 0);
-                chosenTimeslot = (ts1, ts2);
-                stepCounter++;
-                ChooseTable(chosenDate, chosenTimeslot);
-                break;
-            case 3:
-                stepCounter--;
-                ChooseDate();
-                break;
+            string date = Convert.ToString(event_item["eventdate"]);
+            if (date == ChosenDate.ToString("dd-MM-yyyy"))
+            {
+                todayeventcheck = true;
+            }
+        }
+
+        if (todayeventcheck == true)
+        {
+            string[] optionsEvent = new[] { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
+            int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "\n\n\nVandaag is er een event kies uw tijdslot:");
+            switch (selectedIndexEvent)
+            {
+                case 0:
+                    ts1 = new TimeSpan(0, 16, 0, 0);
+                    ts2 = new TimeSpan(0, 19, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 1:
+                    ts1 = new TimeSpan(0, 19, 0, 0);
+                    ts2 = new TimeSpan(0, 22, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 2:
+                    stepCounter--;
+                    ChooseDate();
+                    break;
+            }
+        }
+        else
+        {
+            string[] optionsmenu = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
+            int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:");
+            switch (selectedIndex)
+            {
+                case 0:
+                    ts1 = new TimeSpan(0, 16, 0, 0);
+                    ts2 = new TimeSpan(0, 18, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 1:
+                    ts1 = new TimeSpan(0, 18, 0, 0);
+                    ts2 = new TimeSpan(0, 20, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 2:
+                    ts1 = new TimeSpan(0, 20, 0, 0);
+                    ts2 = new TimeSpan(0, 22, 0, 0);
+                    chosenTimeslot = (ts1, ts2);
+                    stepCounter++;
+                    ChooseTable(chosenDate, chosenTimeslot);
+                    break;
+                case 3:
+                    stepCounter--;
+                    ChooseDate();
+                    break;
+            }
         }
     }
 
@@ -284,13 +327,8 @@ static class Reservation
         else
         {
             stepCounter--;
-            ChooseTimeslot();
+            ChooseTimeslot(res_Date);
         }
-    }
-
-    public static void GroupCode()
-    {
-        //TODO: GroupCode
     }
 
     public static void ViewRes(string Email)
@@ -321,14 +359,14 @@ static class Reservation
             ReservationsPerson.Add("Ga terug");
             while (true)
             {
-                var reserv_input = _my1DMenu.RunResMenu(ReservationsPerson.ToArray(), "Reserveringen", stepCounter);
+                var reserv_input = _my1DMenu.RunMenu(ReservationsPerson.ToArray(), "Reserveringen");
                 switch (ReservationsPerson[reserv_input])
                 {
                     case "Ga terug":
                         MainMenu.Start();
                         break;
                     default:
-
+                        break;
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.CursorVisible = true;
@@ -365,8 +403,6 @@ static class Reservation
                                 UserLogin.DiscardKeys();
                                 break;
                         }
-
-                        break;
                 }
             }
         }

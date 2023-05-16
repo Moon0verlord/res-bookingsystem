@@ -23,18 +23,37 @@ public class SpecialEvent
             switch (selectedIndex)
             {
                 case 0:
-                    Console.Write("Wat is de naam van het event: ");
+                    Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
                     eventname = Console.ReadLine()!;
+                    int name_Length = eventname.Length;
+                    if (name_Length > 30)
+                    {
+                        Console.WriteLine("De naam van het event is langer dan 30 tekens.");
+                        Thread.Sleep(3000);
+                        ResEvent();
+                        break;
+                    }
                     break;
                 case 1:
                     Console.Write("wat wordt de extra informatie van het event: ");
                     eventinfo = Console.ReadLine()!;
                     break;
                 case 2:
-                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd/MM/YYYY)");
+                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
                     eventdate = Console.ReadLine();
-                    if (eventdate.Contains("/") && eventdate.Length == 10)
+                    if (eventdate.Contains("-") && eventdate.Length == 10)
                     {
+                        JArray allEvents = AccountsAccess.ReadAllEvents();
+                        foreach (var event_item in allEvents)
+                        {
+                            if (eventdate == event_item["eventdate"].ToString())
+                            {
+                                Console.WriteLine("Er is al een evenement op deze datum.");
+                                Thread.Sleep(3000);
+                                ResEvent();
+                                break;
+                            }
+                        }
                         break;
                     }
                     else
@@ -48,10 +67,10 @@ public class SpecialEvent
                 case 3:
                     if (eventname != null && eventinfo != null && eventdate != null)
                     {
-                        var allAccounts = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
-                        EventModel newAccount = new EventModel(eventname, eventinfo, eventdate);
-                        allAccounts.Add(newAccount);
-                        AccountsAccess.EventWriteAll(allAccounts);
+                        var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
+                        EventModel newEvent = new EventModel(eventname, eventinfo, eventdate);
+                        allEvents.Add(newEvent);
+                        AccountsAccess.WriteAllEventsJson(allEvents);
                         Console.Clear();
                         Console.WriteLine("Het evenement is aangemaakt.");
                         Thread.Sleep(3000);
@@ -74,7 +93,7 @@ public class SpecialEvent
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer event namens restaurant", "Terug naar hoofdmenu" };
+        string[] options = { "Organiseer een evenement", "Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
@@ -82,7 +101,7 @@ public class SpecialEvent
                 Console.Clear();
                 ResEvent();
                 break;
-            case 2:
+            case 1:
                 Console.Clear();
                 MainMenu.Start();
                 break;

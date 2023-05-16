@@ -104,5 +104,57 @@
         "Prijs": null
       }
     ]
+  },
+  "kerst": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "avocado zalmtartaar",
+        "Maaltijd": "varkensrollade met kruidge mandarijn-venkelsalade",
+        "Prijs": "€ 25,00"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "carpaccio van groente",
+        "Maaltijd": "gevulde varkenshaas",
+        "Nagerecht": "frozen yoghurt schotsen met fruit",
+        "Prijs": "€ 35,00"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "salade met gerookte eendenborst en frambozen",
+        "Soep": "romige preisoep met kerstboom soepstengels",
+        "Maaltijd": "biefstukrollade met krokante roseval aardappelen",
+        "Nagerecht": "witte soesjestoren met kokossneeuw",
+        "Prijs": "€ 45,00"
+      }
+    ]
+  },
+  "pasen": {
+    "2_Gangen": [
+      {
+        "Voorgerecht": "mozzarella met vijgen en hazelnoot",
+        "Maaltijd": "salade met warme geiten kaas",
+        "Prijs": "€ 25,00"
+      }
+    ],
+    "3_Gangen": [
+      {
+        "Voorgerecht": "paaseitjes met eierragout",
+        "Maaltijd": "truffelpolenta met champignons",
+        "Nagerecht": "passievruchtenmousse met gebrande meringue",
+        "Prijs": "€ 35,00"
+      }
+    ],
+    "4_Gangen": [
+      {
+        "Voorgerecht": "tartelettes met minigroente",
+        "Soep": "courgette soep met gerookte zalm",
+        "Maaltijd": "vlaams pasteitje",
+        "Nagerecht": "frambozen wittechocoladetaartje",
+        "Prijs": "€ 45,00"
+      }
+    ]
   }
 }

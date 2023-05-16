@@ -1,12 +1,32 @@
 [
   {
-    "eventname": "event 1",
-    "eventinfo": "dit is event 1",
-    "eventdate": "08-28-2023"
+    "eventname": "kerst",
+    "eventinfo": "er zal een kerst diner plaatsvinden.",
+    "eventdate": "25-12-2023"
   },
   {
-    "eventname": "event 2",
-    "eventinfo": "dit is event 2",
-    "eventdate": "12-13-2023"
+    "eventname": "pasen",
+    "eventinfo": "er zal een paas diner plaatsvinden.",
+    "eventdate": "31-03-2023"
+  },
+  {
+    "eventname": "test1",
+    "eventinfo": "test1",
+    "eventdate": "10-05-2023"
+  },
+  {
+    "eventname": "test",
+    "eventinfo": "test",
+    "eventdate": "11-05-2023"
+  },
+  {
+    "eventname": "testdatum",
+    "eventinfo": "testdatum",
+    "eventdate": "12-05-2023"
+  },
+  {
+    "eventname": "test3",
+    "eventinfo": "een test",
+    "eventdate": "18-05-2023"
   }
 ]

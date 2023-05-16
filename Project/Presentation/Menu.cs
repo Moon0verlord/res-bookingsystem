@@ -11,11 +11,11 @@ public static class Dishes
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
-// Takes user selection and opens the menu
+    // Takes user selection and opens the menu
     public static void UserSelection()
     {
         Console.CursorVisible = false;
-        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch","Terug naar hoofdmenu" };
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -33,6 +33,12 @@ public static class Dishes
                 JsonCursor("Veganistisch");
                 break;
             case 4:
+                JsonCursor("kerst");
+                break;
+            case 5:
+                JsonCursor("pasen");
+                break;
+            case 6:
                 MainMenu.Start();
                 break;
             default:
@@ -41,7 +47,7 @@ public static class Dishes
         }
     }
 
-    
+
     // Displays the current dishes to the user
     public static void JsonCursor(string choice)
     {
@@ -56,63 +62,63 @@ public static class Dishes
         string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
         Console.WriteLine("gerechten:");
         Console.WriteLine("-------");
-    // using linq make objects of the json property and display them    
-    Console.WriteLine("2 Gangen:");
-    var courses2 = menu[choice]["2_Gangen"]
-        .Select(item => new
+
+        Console.WriteLine("2 Gangen:");
+        var courses2 = menu[choice]["2_Gangen"]
+            .Select(item => new
+            {
+                Appetizer = (string)item["Voorgerecht"],
+                Entree = (string)item["Maaltijd"]
+            });
+        foreach (var course in courses2)
         {
-            Appetizer = (string)item["Voorgerecht"],
-            Entree = (string)item["Maaltijd"]
-        });
-    foreach (var course in courses2)
-    {
-        Console.WriteLine($"prijs: {price2}");
-        Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-        Console.WriteLine($"Hooftgerecht: {course.Entree}");
-        Console.WriteLine();
+            Console.WriteLine($"prijs: {price2}");
+            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
+            Console.WriteLine($"Hooftgerecht: {course.Entree}");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("3 Gangen:");
+        var courses3 = menu[choice]["3_Gangen"]
+            .Select(item => new
+            {
+                Appetizer = (string)item["Voorgerecht"],
+                Entree = (string)item["Maaltijd"],
+                Dessert = (string)item["Nagerecht"]
+            });
+        foreach (var course in courses3)
+        {
+            Console.WriteLine($"prijs: {price3}");
+            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
+            Console.WriteLine($"Hoofdgerecht: {course.Entree}");
+            Console.WriteLine($"Nagerecht: {course.Dessert}");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("4 Gangen:");
+        var courses4 = menu[choice]["4_Gangen"]
+            .Select(item => new
+            {
+                Appetizer = (string)item["Voorgerecht"],
+                Soup = (string)item["Soep"],
+                Entree = (string)item["Maaltijd"],
+                Dessert = (string)item["Nagerecht"]
+            });
+        foreach (var course in courses4)
+        {
+            Console.WriteLine($"prijs: {price4}");
+            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
+            Console.WriteLine($"Soep: {course.Soup}");
+            Console.WriteLine($"Hoofdgerecht: {course.Entree}");
+            Console.WriteLine($"Nagerecht: {course.Dessert}");
+            Console.WriteLine();
+            Console.WriteLine("Druk op een knop om verder te gaan");
+            Console.ReadKey();
+            MainMenu.Start();
+        }
     }
 
-    Console.WriteLine("3 Gangen:");
-    var courses3 = menu[choice]["3_Gangen"]
-        .Select(item => new
-        {
-            Appetizer = (string)item["Voorgerecht"],
-            Entree = (string)item["Maaltijd"],
-            Dessert = (string)item["Nagerecht"]
-        });
-    foreach (var course in courses3)
-    {
-        Console.WriteLine($"prijs: {price3}");
-        Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-        Console.WriteLine($"Hoofdgerecht: {course.Entree}");
-        Console.WriteLine($"Nagerecht: {course.Dessert}");
-        Console.WriteLine();
-    }
 
-    Console.WriteLine("4 Gangen:");
-    var courses4 = menu[choice]["4_Gangen"]
-        .Select(item => new
-        {
-            Appetizer = (string)item["Voorgerecht"],
-            Soup = (string)item["Soep"],
-            Entree = (string)item["Maaltijd"],
-            Dessert = (string)item["Nagerecht"]
-        });
-    foreach (var course in courses4)
-    {
-        Console.WriteLine($"prijs: {price4}");
-        Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-        Console.WriteLine($"Soep: {course.Soup}");
-        Console.WriteLine($"Hoofdgerecht: {course.Entree}");
-        Console.WriteLine($"Nagerecht: {course.Dessert}");
-        Console.WriteLine();
-        Console.WriteLine("Druk op een knop om verder te gaan");
-        Console.ReadKey();
-        MainMenu.Start();
-    }
-}
-
-    
     // adds the ability to update dishes on the menu
     public static void ManageMenu()
     {
@@ -120,7 +126,7 @@ public static class Dishes
         string type = "";
         string course = "";
         // select type of food
-        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Bekijk het menu", "Terug naar hoofdmenu"};
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
         string prompt = "\nWelk type gerecht zou je willen veranderen?:";
         int input = _myMenu.RunMenu(options, prompt);
         _currentIndex = 0;
@@ -139,18 +145,21 @@ public static class Dishes
                 type = "Veganistisch";
                 break;
             case 4:
-                UserSelection();
+                type = "kerst";
                 break;
             case 5:
+                type = "pasen";
+                break;
+            case 7:
                 MainMenu.Start();
                 break;
             default:
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-        
+
         // select course
-        string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Terug naar hoofdmenu"};
+        string[] options2 = { "2 Gangen", "3 Gangen", "4 Gangen", "Terug naar hoofdmenu" };
         string prompt2 = "\nWelke gang wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
         _currentIndex = 0;
@@ -172,7 +181,7 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-        
+
         // grabs menu from json
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
@@ -199,20 +208,20 @@ public static class Dishes
         {
             Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
             Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
-        } 
+        }
         else if (course == "3_Gangen")
         {
             Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
             Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
             Console.WriteLine($"Nagercht: {dishtoadd?["Nagerecht"]}");
-        } 
+        }
         else if (course == "4_Gangen")
         {
             Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
             Console.WriteLine($"Soep: {dishtoadd?["Soep"]}");
             Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
             Console.WriteLine($"Nagercht: {dishtoadd?["Nagerecht"]}");
-        } 
+        }
         Console.WriteLine("is toegevoegd aan het menu");
         Console.ResetColor();
         Console.WriteLine("Druk op een willekeurige toets om verder te gaan.....");
@@ -238,10 +247,10 @@ public static class Dishes
         switch (course)
         {
             case "2_Gangen":
-                 dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]}\n";
-                 dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nHoofdgerecht: {dishArray[1]["Maaltijd"]}\n";
-                 dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nHoofdgerecht: {dishArray[2]["Maaltijd"]}\n";
-                 dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nHoofdgerecht: {dishArray[3]["Maaltijd"]}\n";
+                dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]}\n";
+                dish2 = $"Voorgerecht: {dishArray[1]["Voorgerecht"]} \nHoofdgerecht: {dishArray[1]["Maaltijd"]}\n";
+                dish3 = $"Voorgerecht: {dishArray[2]["Voorgerecht"]} \nHoofdgerecht: {dishArray[2]["Maaltijd"]}\n";
+                dish4 = $"Voorgerecht: {dishArray[3]["Voorgerecht"]} \nHoofdgerecht: {dishArray[3]["Maaltijd"]}\n";
                 break;
             case "3_Gangen":
                 dish1 = $"Voorgerecht: {dishArray![0]["Voorgerecht"]} \nHoofdgerecht: {dishArray[0]["Maaltijd"]} \nNagerecht: {dishArray[0]["Nagerecht"]}\n";
@@ -257,7 +266,7 @@ public static class Dishes
                 break;
         }
         // returns selection
-        string[] options = { dish1, dish2, dish3, dish4, "Terug naar hoofdmenu"};
+        string[] options = { dish1, dish2, dish3, dish4, "Terug naar hoofdmenu" };
         string prompt2 = "\nWelke maaltijd wil je veranderen?:";
         int input2 = _myMenu.RunMenu(options, prompt2);
         switch (input2)
@@ -291,7 +300,7 @@ public static class Dishes
         string price3 = (string)menu["Vegetarisch"]["3_Gangen"][0]["Prijs"];
         string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
         Console.OutputEncoding = System.Text.Encoding.Unicode;
-        
+
         string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
         string prompt = "\nWelke prijs zou je willen veranderen:";
         int input = _myMenu.RunMenu(options, prompt);
@@ -383,7 +392,7 @@ public static class Dishes
         Console.ReadKey();
         MainMenu.Start();
     }
-    
+
     // User options to choose between food menu or wine arrangement
     public static void UserOptions()
     {
@@ -407,8 +416,8 @@ public static class Dishes
                 break;
         }
     }
-    
-    
+
+
     // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()
     {
@@ -432,5 +441,5 @@ public static class Dishes
                 break;
         }
     }
-    
+
 }

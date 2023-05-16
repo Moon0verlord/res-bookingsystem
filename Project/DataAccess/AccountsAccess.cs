@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
 
 public static class AccountsAccess
 {
@@ -96,5 +97,20 @@ public static class AccountsAccess
         }
     }
 
+    public static JArray ReadAllEvents()
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        string json = File.ReadAllText(path);
+        JArray eventmenu = JArray.Parse(json);
+        return eventmenu;
 
+    }
+
+    public static void WriteAllEventsJson(List<EventModel> accounts)
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string json = JsonSerializer.Serialize(accounts, options);
+        File.WriteAllText(path, json);
+    }
 }

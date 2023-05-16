@@ -44,21 +44,18 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
     public static void Start()
     {
-        List<EventModel> AllEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(@"DataSources/Events.json"));
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        string json = File.ReadAllText(path);
-        JArray eventmenu = JArray.Parse(json);
+        JArray eventmenu = AccountsAccess.ReadAllEvents();
         Console.Clear();
         Console.WriteLine(Information);
         Console.WriteLine(Contact);
         if (CheckIfEvent())
         {
             Console.WriteLine("Alle evenementen:");
-            foreach (var course in eventmenu)
+            foreach (var event_item in eventmenu)
             {
-                Console.WriteLine(course["eventname"]);
-                Console.WriteLine(course["eventinfo"]);
-                Console.WriteLine(course["datum"]);
+                Console.WriteLine(event_item["eventname"]);
+                Console.WriteLine(event_item["eventinfo"]);
+                Console.WriteLine(event_item["eventdate"]);
                 Console.WriteLine();
             }
         }
