@@ -43,7 +43,7 @@ public class ReservationsLogic
         for (int i = 1; i <= 15; i++)
         {
             string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
-            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(ID)&&res.Date==res_Date);
             if (i == 1 || i == 9 || i == 14)
             {
                 tableIndex++;
@@ -123,7 +123,9 @@ public class ReservationsLogic
                 {
                     if (table.Date == res_Date.Date)
                     {
-                        if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
+                        if ((chosenTime.Item1 == table.StartTime && chosenTime.Item2 == table.LeaveTime) ||
+                            IsWithinTime(chosenTime.Item1, table.StartTime, table.LeaveTime) || 
+                            IsWithinTime(chosenTime.Item2, table.StartTime, table.LeaveTime))
                         {
                             table.isReserved = true;
                             table.TableSize = CurrentTableSizes[tableIndex];
@@ -166,6 +168,9 @@ public class ReservationsLogic
 
         return tables2D;
     }
+
+    private bool IsWithinTime(TimeSpan actual, TimeSpan startTime, TimeSpan leaveTime)
+        => actual > startTime && actual < leaveTime;
 
     public ReservationModel AddDefaultTable(string id, int size)
     {
