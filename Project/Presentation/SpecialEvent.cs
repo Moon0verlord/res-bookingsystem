@@ -1,5 +1,7 @@
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
+using Project.Presentation;
+
 public class SpecialEvent
 {
     private static int _currentIndex;
@@ -90,10 +92,33 @@ public class SpecialEvent
         }
     }
 
+
+    public static void EventsFood()
+    {
+         string prompt = "Welkom in het eten menu voor special events. \n";
+        string[] options = { "Paas gerechten", "Kerst gerechten", "Terug naar hoofdmenu" };
+        var selectedIndex = _myMenu.RunMenu(options, prompt);
+        switch (selectedIndex)
+        {
+            case 0:
+                Console.Clear();
+                Dishes.JsonCursor("kerst");
+                break;
+            case 1:
+                Console.Clear();
+                Dishes.JsonCursor("pasen");
+                break;
+            case 2:
+                Console.Clear();
+                MainMenu.Start();
+                break;
+        }
+    }
+
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer een evenement", "Terug naar hoofdmenu" };
+        string[] options = { "Organiseer een evenement", "Menu","View Events","Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
@@ -103,8 +128,61 @@ public class SpecialEvent
                 break;
             case 1:
                 Console.Clear();
+                EventsFood();
+                break;
+            case 2:
+                Console.Clear();
+                Start();
+                break;
+            case 3:
+                Console.Clear();
                 MainMenu.Start();
                 break;
         }
     }
+    
+    static string Events =
+        @"Speciale Evenementen:
+Er zijn op dit moment nog geen evenementen.
+Kom terug op een later moment om te zien of er al evenementen zijn.
+";
+
+    public static bool CheckIfEvent()
+    {
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
+        string json = File.ReadAllText(path);
+        JArray eventmenu = JArray.Parse(json);
+        foreach (var course in eventmenu)
+        {
+            if (json != null) return true;
+        }
+        return false;
+    }
+
+    public static void Start()
+    {
+        JArray eventmenu = AccountsAccess.ReadAllEvents();
+        Console.Clear();
+
+        if (CheckIfEvent())
+        {
+            Console.WriteLine("Alle evenementen:");
+            foreach (var event_item in eventmenu)
+            {
+                Console.WriteLine(event_item["eventname"]);
+                Console.WriteLine(event_item["eventinfo"]);
+                Console.WriteLine(event_item["eventdate"]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Druk op een knop om verder te gaan");
+            Console.ReadKey();
+            MainMenu.Start();
+        }
+        else
+        {
+            Console.WriteLine(Events);
+        }
+    }
+    
+    
 }
