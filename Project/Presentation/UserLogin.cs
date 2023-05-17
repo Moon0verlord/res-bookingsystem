@@ -9,7 +9,7 @@ static class UserLogin
     // Manager login: Zxcvbnm1
     public static void Start()
     {
-        string[] options = new[] { "Inloggen met account", "Account aanmaken", "Wachtwoord vergeten?", "Ga terug"};
+        string[] options = new[] { "Inloggen met account", "Account aanmaken\n", "Wachtwoord vergeten?", "Ga terug"};
         int chosenOption = myMenu.RunMenu(options, "Welkom bij de account portal.");
         switch (chosenOption)
         {
