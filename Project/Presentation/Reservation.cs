@@ -312,7 +312,7 @@ static class Reservation
             string[] entertime;
             string[] leavetime;
             string[] optionsmenu = new[] {timeslot_1, timeslot_2, timeslot_3, "Ga terug" };
-            int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:");
+            int selectedIndex = _my1DMenu.RunResMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:", stepCounter);
             switch (selectedIndex)
             {
                 case 0:

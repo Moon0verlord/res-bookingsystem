@@ -16,6 +16,7 @@
             int fourColumn = 0;
             int sixColumn = 0;
             // Table for two here, tables 1 - 8S
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft + 80, stepCounter);
             for (int i = 0; i < 8; i++)
             {
                 CheckIfAvailable(Convert.ToString(i + 1) + "S");
@@ -45,7 +46,6 @@
             }
             // give infoboxes the correct coordinates and write the tutorial box
             InfoBoxes.WriteBoxReservations(_groupSize, origRow, origCol);
-            InfoBoxes.WriteBoxStepCounter(Console.CursorTop + 2, Console.CursorLeft + 2, stepCounter);
             Console.Write("\n");
         }
 
