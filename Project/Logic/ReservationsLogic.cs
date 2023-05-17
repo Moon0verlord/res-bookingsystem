@@ -43,7 +43,7 @@ public class ReservationsLogic
         for (int i = 1; i <= 15; i++)
         {
             string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
-            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(ID)&&res.Date==res_Date);
             if (i == 1 || i == 9 || i == 14)
             {
                 tableIndex++;

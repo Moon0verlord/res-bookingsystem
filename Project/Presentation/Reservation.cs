@@ -15,16 +15,19 @@ static class Reservation
     private static DateTime chosenDate;
     private static (TimeSpan, TimeSpan) chosenTimeslot;
     private static string chosenTable;
+    private static int chosenCourse;
     private static int stepCounter;
 
     public static void ResStart(AccountModel acc = null)
     {
+        // resetting all static fields for a fresh reservation start
         _acc = acc;
         userEmail = null;
         amountOfPeople = 0;
         chosenDate = default;
         chosenTimeslot = (default, default);
         chosenTable = "";
+        chosenCourse = 0;
         stepCounter = 1;
         Console.Clear();
         if (acc == null)
@@ -109,7 +112,7 @@ static class Reservation
         else
         {
             stepCounter++;
-            ChooseDate();
+            ChooseCourse();
         }
 
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
@@ -145,6 +148,34 @@ static class Reservation
                 default:
                     break;
             }
+        }
+    }
+
+    public static void ChooseCourse()
+    {
+        string[] options = new[] { "2 Gangen", "3 Gangen", "4 Gangen", "Ga terug" };
+        int chosenCourse = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", stepCounter);
+        switch (chosenCourse)
+        {
+            case 0:
+                chosenCourse = 2;
+                stepCounter++;
+                ChooseDate();
+                break;
+            case 1:
+                chosenCourse = 3;
+                stepCounter++;
+                ChooseDate();
+                break;
+            case 2:
+                chosenCourse = 4;
+                stepCounter++;
+                ChooseDate();
+                break;
+            case 3:
+                stepCounter--;
+                ResMenu();
+                break;
         }
     }
 
@@ -233,10 +264,8 @@ static class Reservation
     {
         bool todayeventcheck = false;
         JArray All_Events = AccountsAccess.ReadAllEvents();
-
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
-        string[] options = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
         foreach (var event_item in All_Events)
         {
             string date = Convert.ToString(event_item["eventdate"]);
@@ -246,7 +275,7 @@ static class Reservation
             }
         }
 
-        if (todayeventcheck == true)
+        if (todayeventcheck)
         {
             string[] optionsEvent = new[] { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
             int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "\n\n\nVandaag is er een event kies uw tijdslot:");
