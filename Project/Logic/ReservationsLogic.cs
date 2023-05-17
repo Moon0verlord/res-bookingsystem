@@ -123,7 +123,9 @@ public class ReservationsLogic
                 {
                     if (table.Date == res_Date.Date)
                     {
-                        if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
+                        if ((chosenTime.Item1 == table.StartTime && chosenTime.Item2 == table.LeaveTime) ||
+                            IsWithinTime(chosenTime.Item1, table.StartTime, table.LeaveTime) || 
+                            IsWithinTime(chosenTime.Item2, table.StartTime, table.LeaveTime))
                         {
                             table.isReserved = true;
                             table.TableSize = CurrentTableSizes[tableIndex];
@@ -166,6 +168,9 @@ public class ReservationsLogic
 
         return tables2D;
     }
+
+    private bool IsWithinTime(TimeSpan actual, TimeSpan startTime, TimeSpan leaveTime)
+        => actual > startTime && actual < leaveTime;
 
     public ReservationModel AddDefaultTable(string id, int size)
     {
