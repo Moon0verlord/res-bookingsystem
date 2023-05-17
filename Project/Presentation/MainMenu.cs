@@ -71,7 +71,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     // displays menu with various management options if the user is a manager
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen", "Reservatie overzicht" };
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verander menu", "Evenementen", "Reservatie overzicht", "Reservering aanpassen" };
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
@@ -107,6 +107,9 @@ class MainMenu : IMenuLogic
                             break;
                         case 4:
                             EmployeeManagerLogic.CheckReservations();
+                            break;
+                        case 5:
+                            EmployeeManagerLogic.ChangeReservation();
                             break;
                     }
                 }

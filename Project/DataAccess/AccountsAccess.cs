@@ -44,6 +44,14 @@ public static class AccountsAccess
         return allAccounts[^1];
     }
 
+    public static void ChangeReservationJson(ReservationModel resm)
+    {
+        var allReservations = LoadAllReservations();
+        var index = allReservations.FindIndex(s => s.Id == resm.Id);
+        allReservations[index] = resm;
+        WriteAllReservations(allReservations);
+    }
+
     public static void AddReservation(ReservationModel resm)
     {
         resm.isReserved = true;
