@@ -1,5 +1,7 @@
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
+using Project.Presentation;
+
 public class SpecialEvent
 {
     private static int _currentIndex;
@@ -90,10 +92,33 @@ public class SpecialEvent
         }
     }
 
+
+    public static void EventsFood()
+    {
+         string prompt = "Welkom in het eten menu voor special events. \n";
+        string[] options = { "Paas gerechten", "Kerst gerechten", "Terug naar hoofdmenu" };
+        var selectedIndex = _myMenu.RunMenu(options, prompt);
+        switch (selectedIndex)
+        {
+            case 0:
+                Console.Clear();
+                Dishes.JsonCursor("kerst");
+                break;
+            case 1:
+                Console.Clear();
+                Dishes.JsonCursor("pasen");
+                break;
+            case 2:
+                Console.Clear();
+                MainMenu.Start();
+                break;
+        }
+    }
+
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer een evenement", "Terug naar hoofdmenu" };
+        string[] options = { "Organiseer een evenement", "Eten","Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
@@ -103,8 +128,16 @@ public class SpecialEvent
                 break;
             case 1:
                 Console.Clear();
+                EventsFood();
+                break;
+            case 2:
+                Console.Clear();
                 MainMenu.Start();
                 break;
         }
     }
+    
+    
+    
+    
 }

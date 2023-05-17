@@ -11,11 +11,12 @@ public static class Dishes
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
+    
     // Takes user selection and opens the menu
     public static void UserSelection()
     {
         Console.CursorVisible = false;
-        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -33,12 +34,6 @@ public static class Dishes
                 JsonCursor("Veganistisch");
                 break;
             case 4:
-                JsonCursor("kerst");
-                break;
-            case 5:
-                JsonCursor("pasen");
-                break;
-            case 6:
                 MainMenu.Start();
                 break;
             default:
@@ -56,67 +51,75 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        Console.Clear();
         string price2 = (string)menu["Vegetarisch"]["2_Gangen"][0]["Prijs"];
         string price3 = (string)menu["Vegetarisch"]["3_Gangen"][0]["Prijs"];
         string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
-        Console.WriteLine("gerechten:");
+        Console.Clear();
+    
+        Console.WriteLine("Prijzen:");
         Console.WriteLine("-------");
+        Console.WriteLine($"2 gangen: {price2}");
+        Console.WriteLine($"3 gangen: {price3}");
+        Console.WriteLine($"4 gangen: {price4}");
+        
+        Console.WriteLine();
+        Console.WriteLine("gerechten:");
 
-        Console.WriteLine("2 Gangen:");
-        var courses2 = menu[choice]["2_Gangen"]
-            .Select(item => new
-            {
-                Appetizer = (string)item["Voorgerecht"],
-                Entree = (string)item["Maaltijd"]
-            });
-        foreach (var course in courses2)
+        Console.WriteLine();
+        Console.WriteLine("Voorgerechten:");
+        Console.WriteLine("-------");
+        var appetizers2 = menu[choice]["2_Gangen"]
+            .Select(item => (string)item["Voorgerecht"])
+            .Concat(menu[choice]["3_Gangen"]
+                .Select(item => (string)item["Voorgerecht"]))
+            .Concat(menu[choice]["4_Gangen"]
+                .Select(item => (string)item["Voorgerecht"]));
+            
+        foreach (var appetizer in appetizers2)
         {
-            Console.WriteLine($"prijs: {price2}");
-            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-            Console.WriteLine($"Hooftgerecht: {course.Entree}");
-            Console.WriteLine();
+            Console.WriteLine($"{appetizer}");
         }
-
-        Console.WriteLine("3 Gangen:");
-        var courses3 = menu[choice]["3_Gangen"]
-            .Select(item => new
-            {
-                Appetizer = (string)item["Voorgerecht"],
-                Entree = (string)item["Maaltijd"],
-                Dessert = (string)item["Nagerecht"]
-            });
-        foreach (var course in courses3)
+        Console.WriteLine();
+        Console.WriteLine("Soepen:");
+        Console.WriteLine("-------");
+        var soups = menu[choice]["4_Gangen"]
+            .Select(item => (string)item["Soep"]);
+        foreach (var soup in soups)
         {
-            Console.WriteLine($"prijs: {price3}");
-            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-            Console.WriteLine($"Hoofdgerecht: {course.Entree}");
-            Console.WriteLine($"Nagerecht: {course.Dessert}");
-            Console.WriteLine();
+            Console.WriteLine($"{soup}");
         }
-
-        Console.WriteLine("4 Gangen:");
-        var courses4 = menu[choice]["4_Gangen"]
-            .Select(item => new
-            {
-                Appetizer = (string)item["Voorgerecht"],
-                Soup = (string)item["Soep"],
-                Entree = (string)item["Maaltijd"],
-                Dessert = (string)item["Nagerecht"]
-            });
-        foreach (var course in courses4)
+        
+        Console.WriteLine();
+        Console.WriteLine("Hoofdgerechten:");
+        Console.WriteLine("-------");
+        var entrees = menu[choice]["2_Gangen"]
+            .Select(item => (string)item["Maaltijd"])
+            .Concat(menu[choice]["3_Gangen"]
+                .Select(item => (string)item["Maaltijd"]))
+            .Concat(menu[choice]["4_Gangen"]
+                .Select(item => (string)item["Maaltijd"]));
+        foreach (var entree in entrees)
         {
-            Console.WriteLine($"prijs: {price4}");
-            Console.WriteLine($"Voorgerecht: {course.Appetizer}");
-            Console.WriteLine($"Soep: {course.Soup}");
-            Console.WriteLine($"Hoofdgerecht: {course.Entree}");
-            Console.WriteLine($"Nagerecht: {course.Dessert}");
-            Console.WriteLine();
-            Console.WriteLine("Druk op een knop om verder te gaan");
-            Console.ReadKey();
-            MainMenu.Start();
+            Console.WriteLine($"{entree}");
         }
+        
+        Console.WriteLine();
+        Console.WriteLine("Nagerechten:");
+        Console.WriteLine("-------");
+        var desserts = menu[choice]["3_Gangen"]
+            .Select(item => (string)item["Nagerecht"])
+            .Concat(menu[choice]["4_Gangen"]
+                .Select(item => (string)item["Nagerecht"]));
+        foreach (var dessert in desserts)
+        {
+            Console.WriteLine($"{dessert}");
+        }
+        Console.WriteLine();
+        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ReadKey();
+        MainMenu.Start();
     }
+
 
 
     // adds the ability to update dishes on the menu
@@ -441,5 +444,7 @@ public static class Dishes
                 break;
         }
     }
+    
+    
 
 }
