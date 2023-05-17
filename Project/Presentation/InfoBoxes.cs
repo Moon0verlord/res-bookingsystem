@@ -111,7 +111,7 @@
         WriteAt("┘", x + boxBorder.Length + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Black;
         Console.BackgroundColor = ConsoleColor.DarkGreen;
-        WriteAt($"  Stap {stepcount} / 6   ", x + 1, y + 1);
+        WriteAt($"  Stap {stepcount} / 7   ", x + 1, y + 1);
         Console.ResetColor();
     }
     

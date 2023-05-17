@@ -154,8 +154,8 @@ static class Reservation
     public static void ChooseCourse()
     {
         string[] options = new[] { "2 Gangen", "3 Gangen", "4 Gangen", "Ga terug" };
-        int chosenCourse = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", stepCounter);
-        switch (chosenCourse)
+        int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", stepCounter);
+        switch (chosenIndex)
         {
             case 0:
                 chosenCourse = 2;
@@ -250,7 +250,7 @@ static class Reservation
         if (userChoice == default)
         {
             stepCounter--;
-            ResMenu();
+            ChooseCourse();
         }
         else
         {
@@ -303,27 +303,41 @@ static class Reservation
         }
         else
         {
-            string[] optionsmenu = new[] { "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00", "Ga terug" };
+            string timeslot_1 = (chosenCourse == 2 ? "16:00 - 18:00" :
+                chosenCourse == 3 ? "16:00 - 18:15" : "16:00 - 18:30");
+            string timeslot_2 = (chosenCourse == 2 ? "18:00 - 20:00" :
+                chosenCourse == 3 ? "18:15 - 20:30" : "18:30 - 21:00");
+            string timeslot_3 = (chosenCourse == 2 ? "20:00 - 22:00" :
+                chosenCourse == 3 ? "20:30 - 22:45" : "21:00 - 23:30");
+            string[] entertime;
+            string[] leavetime;
+            string[] optionsmenu = new[] {timeslot_1, timeslot_2, timeslot_3, "Ga terug" };
             int selectedIndex = _my1DMenu.RunMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:");
             switch (selectedIndex)
             {
                 case 0:
-                    ts1 = new TimeSpan(0, 16, 0, 0);
-                    ts2 = new TimeSpan(0, 18, 0, 0);
+                    entertime = timeslot_1.Split("-")[0].Split(":");
+                    leavetime = timeslot_1.Split("-")[1].Split(":");
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 1:
-                    ts1 = new TimeSpan(0, 18, 0, 0);
-                    ts2 = new TimeSpan(0, 20, 0, 0);
+                    entertime = timeslot_2.Split("-")[0].Split(":");
+                    leavetime = timeslot_2.Split("-")[1].Split(":");
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
                     break;
                 case 2:
-                    ts1 = new TimeSpan(0, 20, 0, 0);
-                    ts2 = new TimeSpan(0, 22, 0, 0);
+                    entertime = timeslot_3.Split("-")[0].Split(":");
+                    leavetime = timeslot_3.Split("-")[1].Split(":");
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
