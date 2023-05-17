@@ -132,10 +132,62 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
-    public static void AddSpecialEvent()
-    {
-
-    }
+    public static void ChangeReservation(){
+        Console.Clear();
+        Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
+        foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
+        {
+            var Date = item.Date.ToString("dd-MM-yy");
+            string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
+            Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.Res_ID, Date, time, item.EmailAddress));
+        }
+        Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen");
+        string id = Console.ReadLine();
+        ReservationModel reservation = ReservationsLogic.GetReservationById(id);
+        while (true)
+        {   
+            string[] options =
+            {
+                $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
+                "Vul hier de nieuwe starttijd in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime}"),
+                "Vul hier de nieuwe eindtijd in" + (reservation.LeaveTime == null ? "" : $": {reservation.LeaveTime}"),
+                "Vul hier de nieuwe email in" + (reservation.EmailAddress == null ? "" : $": {reservation.EmailAddress}"),
+                "Terug en opslaan"
+            };
+            var selectedIndex = myMenu.RunMenu(options, "Vul hier de gegevens in");
+            switch (selectedIndex)
+            {
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine("Vul hier de nieuwe datum in (dd-mm-jjjj)");
+                    DateTime date = Convert.ToDateTime(Console.ReadLine());
+                    reservation.Date = date;
+                    break;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Vul hier de nieuwe starttijd in (hh:mm)");
+                    TimeSpan startTime = TimeSpan.Parse(Console.ReadLine());
+                    reservation.StartTime = startTime;
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Vul hier de nieuwe eindtijd in (hh:mm)");
+                    TimeSpan leaveTime = TimeSpan.Parse(Console.ReadLine());
+                    reservation.LeaveTime = leaveTime;
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("Vul hier de nieuwe email in");
+                    string email = Console.ReadLine();
+                    reservation.EmailAddress = email;
+                    break;
+                case 4:
+                    AccountsAccess.ChangeReservationJson(reservation);
+                    MainMenu.Start();
+                    break;
+                }
+            }
+        }
     
     public static string HidePass(string pass)
     {

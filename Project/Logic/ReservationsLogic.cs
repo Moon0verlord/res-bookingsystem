@@ -222,4 +222,21 @@ public class ReservationsLogic
 
         return false;
     }
+
+    public static ReservationModel GetReservationById(string res_id)
+    {
+        var all_res = AccountsAccess.LoadAllReservations();
+        foreach (ReservationModel res in all_res)
+        {
+            if (res.Res_ID != null)
+            {
+                if (res_id == res.Res_ID)
+                {
+                    return res;
+                }
+            }
+        }
+
+        return null;
+    }
 }
