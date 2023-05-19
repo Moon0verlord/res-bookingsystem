@@ -5,12 +5,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
 
-
+//TODO add comments to new additons to functions
+//TODO Change amount of items in dishes json per category
 public static class Dishes
 {
     private static int _currentIndex;
 
-    private static MenuLogic _myMenu = new MenuLogic();
+    static private MenuLogic _myMenu = new MenuLogic();
     
     // Takes user selection and opens the menu
     public static void UserSelection()
@@ -185,49 +186,44 @@ public static class Dishes
         string menu = File.ReadAllText(path2);
         JObject MenuOBJ = JObject.Parse(menu);
         int dishtochange = 0;
-        // Retrieve dish to change
+        // Retrieve dish from the menu
         JArray menuCourse = (JArray)MenuOBJ[type]![category]!;
 
-        string[] options3 = menuCourse.Select((dish, index) => $"{dish} ({index + 1})").ToArray();
-        options3 = options3.Append("Terug naar hoofdmenu").ToArray();
+        string[] options3 = { menuCourse[0].ToString(), menuCourse[1].ToString(), menuCourse[2].ToString(), "Terug naar hoofdmenu" };
         string prompt3 = "\nWelke wil je vervangen?:";
         int input3 = _myMenu.RunMenu(options3, prompt3);
         _currentIndex = 0;
-        if (input3 >= 1 && input3 <= menuCourse.Count)
+        switch (input3)
         {
-            dishtochange = input3 - 1;
-        }
-        else if (input3 == menuCourse.Count + 1)
-        {
-            MainMenu.Start();
-        }
-        else
-        { 
-            Console.WriteLine("Keuze ongeldig probeer opnieuw");
+            case 0:
+                dishtochange = 0;
+                break;
+            case 1:
+                dishtochange = 1;
+                break;
+            case 2:
+                dishtochange = 2;
+                break;
+            case 4:
+                MainMenu.Start();
+                break;
+            
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
         }
         JObject dishtoadd = DisplayDishes(type, category);
+        
 
-
-        // checks if dish is the same as the one that is already on the menu 
-        // if it is not the same it will update the dish
+        // Update values in dishtoadd object using LINQ
         JArray SelectionArray = (JArray)MenuOBJ[type]![category]!;
         string updatedValue = dishtoadd[category]?.ToString();
-        if (dishtoadd.GetValue(category).ToString() ==  SelectionArray[dishtochange].ToString())
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Het gekozen gerecht is hetzelfde als het huidige gerecht");
-            Thread.Sleep(2000);
-            Console.ResetColor();
-            UserLogin.DiscardKeys();
-            ManageMenu();
-        }
         SelectionArray[dishtochange] = updatedValue;
 
-        // writes the updated menu to the json file
+        // Add dish to menu
         File.WriteAllText(path2, MenuOBJ.ToString());
 
-        // Displays the added dish to the user
+        // Display the added dish
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Het type menu: {type} in {category} is aangepast.");
         if (category == "Voorgerecht")
@@ -262,7 +258,6 @@ public static class Dishes
         JObject dishes = JObject.Parse(json);
         JArray dishArray = (JArray)dishes[type]![category]!;
 
-        // Display dishes in category for user to choose from
         string[] options = new string[dishArray.Count + 1];
         for (int i = 0; i < dishArray.Count; i++)
         {
@@ -271,7 +266,6 @@ public static class Dishes
         }
         options[dishArray.Count] = "Terug naar hoofdmenu";
 
-        // Get user selection
         string prompt = $"\nWelke maaltijd wil je veranderen in de categorie '{category}'?:";
         int input = _myMenu.RunMenu(options, prompt);
 
@@ -370,17 +364,17 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/WineMenu.json"));
         string json = File.ReadAllText(path);
-        JObject wines = JObject.Parse(json);
+        JObject Wines = JObject.Parse(json);
         Console.Clear();
         Console.WriteLine($"{choice} Wijn arrangement:");
         Console.WriteLine("-------");
-        var selection = wines["Winemenu"]![choice]!
+        var selection = Wines["Winemenu"][choice]
             .Select(item => new
             {
-                name = (string)item["name"]!,
-                price = (string)item["price"]!,
-                region = (string)item["region"]!,
-                description = (string)item["description"]!
+                name = (string)item["name"],
+                price = (string)item["price"],
+                region = (string)item["region"],
+                description = (string)item["description"]
             });
         foreach (var wine in selection)
         {
@@ -445,6 +439,7 @@ public static class Dishes
                 break;
         }
     }
+    
     
 
 }
