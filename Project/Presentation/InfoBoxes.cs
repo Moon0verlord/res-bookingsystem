@@ -138,14 +138,14 @@ static class InfoBoxes
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
         string Information =
             @"
-  Hier in Rotterdam vind u het prachtige /restaurant name/.
-  Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
-  Ook is het mogelijk om er een wijnarrangement bij te boeken. 
-  Naast het reserveren van een tafel is er ook nog beschikking tot een bar.
-  Verder wanneer u klaar bent kunt u ook een filmpje pakken bij het dichtbijgelegen bioscoop
-  die zich op hetzelfde adres bevind als ons restaurant.
+            Hier in Rotterdam vind u het prachtige /restaurant name/.
+            Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
+            Ook is het mogelijk om er een wijnarrangement bij te boeken. 
+            Naast het reserveren van een tafel is er ook nog beschikking tot een bar.
+            Verder wanneer u klaar bent kunt u ook een filmpje pakken bij het dichtbijgelegen bioscoop
+            die zich op hetzelfde adres bevind als ons restaurant.
             ";
-        int x = 0;
+        int x = 10;
         int y = 0;
         WriteAt("Beschrijving", x + 38, y + 1);
         Console.ResetColor();
@@ -292,7 +292,7 @@ static class InfoBoxes
    om terug te gaan naar het hoofdmenu.
             ";
         int x = 0;
-        int y = 18;
+        int y = 20;
         WriteAt("Terug naar het hoofdmenu", x + 10, y + 1);
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Red;
