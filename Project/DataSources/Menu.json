@@ -1,11 +1,11 @@
 {
-  "Prijzen": {
-    "Prijzen": [
-      "€ 90,00",
-      "€ 50,00",
-      "€ 80,00"
-    ]
-  },
+    "Prijzen": {
+        "Prijzen": [
+          "€ 25,00",
+          "€ 50,00",
+          "€ 80,00"
+        ]
+    },
   "Vegetarisch": {
     "Voorgerecht": [
       "Courgette en Maïs Fritters",
@@ -36,9 +36,7 @@
       "Cedar Plank Salmon with Herb Butter",
       "Pan-Seared Scallops with Truffle Risotto"
     ],
-    "Soep": [
-      "Lobster Bisque"
-    ],
+    "Soep": [ "Lobster Bisque"],
     "Nagerecht": [
       "Chocolate Torte",
       "Key Lime Pie"
@@ -46,7 +44,7 @@
   },
   "Vlees": {
     "Voorgerecht": [
-      "Garnalen Scampi",
+      "Caesar Salad",
       "Franse Uiensoep",
       "Op de Huid Gebakken Coquilles met Citroen Knoflookboter"
     ],
@@ -74,9 +72,7 @@
       "Eggplant Parmesan with Tomato Sauce",
       "Gegrilde Tofu en Groente Kebabs"
     ],
-    "Soep": [
-      "Romige Tomaat en Basilicum Soep"
-    ],
+    "Soep": [ "Romige Tomaat en Basilicum Soep"],
     "Nagerecht": [
       "Vegan Chocolate Mousse",
       "Raspberry Sorbet"
