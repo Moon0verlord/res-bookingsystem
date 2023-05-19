@@ -51,9 +51,9 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        string price2 = (string)menu["Vegetarisch"]["2_Gangen"][0]["Prijs"];
-        string price3 = (string)menu["Vegetarisch"]["3_Gangen"][0]["Prijs"];
-        string price4 = (string)menu["Vegetarisch"]["4_Gangen"][0]["Prijs"];
+        string price2 = (string)menu["Prijzen"]["Prijzen"][0];
+        string price3 = (string)menu["Prijzen"]["Prijzen"][1];
+        string price4 = (string)menu["Prijzen"]["Prijzen"][2];
         Console.Clear();
     
         Console.WriteLine("Prijzen:");
@@ -68,13 +68,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Voorgerechten:");
         Console.WriteLine("-------");
-        var appetizers2 = menu[choice]["2_Gangen"]
-            .Select(item => (string)item["Voorgerecht"])
-            .Concat(menu[choice]["3_Gangen"]
-                .Select(item => (string)item["Voorgerecht"]))
-            .Concat(menu[choice]["4_Gangen"]
-                .Select(item => (string)item["Voorgerecht"]));
-            
+        var appetizers2 = menu[choice]["Voorgerecht"]
+            .Select(item => (string)item);
         foreach (var appetizer in appetizers2)
         {
             Console.WriteLine($"{appetizer}");
@@ -82,8 +77,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Soepen:");
         Console.WriteLine("-------");
-        var soups = menu[choice]["4_Gangen"]
-            .Select(item => (string)item["Soep"]);
+        var soups = menu[choice]["Soep"]
+            .Select(item => (string)item);
         foreach (var soup in soups)
         {
             Console.WriteLine($"{soup}");
@@ -92,12 +87,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Hoofdgerechten:");
         Console.WriteLine("-------");
-        var entrees = menu[choice]["2_Gangen"]
-            .Select(item => (string)item["Maaltijd"])
-            .Concat(menu[choice]["3_Gangen"]
-                .Select(item => (string)item["Maaltijd"]))
-            .Concat(menu[choice]["4_Gangen"]
-                .Select(item => (string)item["Maaltijd"]));
+        var entrees = menu[choice]["Maaltijd"]
+            .Select(item => (string)item);
         foreach (var entree in entrees)
         {
             Console.WriteLine($"{entree}");
@@ -106,10 +97,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Nagerechten:");
         Console.WriteLine("-------");
-        var desserts = menu[choice]["3_Gangen"]
-            .Select(item => (string)item["Nagerecht"])
-            .Concat(menu[choice]["4_Gangen"]
-                .Select(item => (string)item["Nagerecht"]));
+        var desserts = menu[choice]["Nagerecht"]
+            .Select(item => (string)item);
         foreach (var dessert in desserts)
         {
             Console.WriteLine($"{dessert}");
