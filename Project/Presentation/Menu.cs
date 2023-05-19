@@ -188,28 +188,22 @@ public static class Dishes
         // Retrieve dish from the menu
         JArray menuCourse = (JArray)MenuOBJ[type]![category]!;
 
-        string[] options3 = { menuCourse[0].ToString(), menuCourse[1].ToString(), menuCourse[2].ToString(), "Terug naar hoofdmenu" };
+        string[] options3 = menuCourse.Select((dish, index) => $"{dish} ({index + 1})").ToArray();
+        options3 = options3.Append("Terug naar hoofdmenu").ToArray();
         string prompt3 = "\nWelke wil je vervangen?:";
         int input3 = _myMenu.RunMenu(options3, prompt3);
         _currentIndex = 0;
-        switch (input3)
+        if (input3 >= 1 && input3 <= menuCourse.Count)
         {
-            case 0:
-                dishtochange = 0;
-                break;
-            case 1:
-                dishtochange = 1;
-                break;
-            case 2:
-                dishtochange = 2;
-                break;
-            case 4:
-                MainMenu.Start();
-                break;
-            
-            default:
-                Console.WriteLine("Keuze ongeldig probeer opnieuw");
-                break;
+            dishtochange = input3 - 1;
+        }
+        else if (input3 == menuCourse.Count + 1)
+        {
+            MainMenu.Start();
+        }
+        else
+        { 
+            Console.WriteLine("Keuze ongeldig probeer opnieuw");
         }
         JObject dishtoadd = DisplayDishes(type, category);
         
@@ -438,7 +432,6 @@ public static class Dishes
                 break;
         }
     }
-    
     
 
 }
