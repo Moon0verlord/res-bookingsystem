@@ -207,11 +207,21 @@ public static class Dishes
             Console.WriteLine("Keuze ongeldig probeer opnieuw");
         }
         JObject dishtoadd = DisplayDishes(type, category);
-        
+
 
         // Update values in dishtoadd object using LINQ
         JArray SelectionArray = (JArray)MenuOBJ[type]![category]!;
         string updatedValue = dishtoadd[category]?.ToString();
+        if (dishtoadd.GetValue(category).ToString() ==  SelectionArray[dishtochange].ToString())
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Het gekozen gerecht is hetzelfde als het huidige gerecht");
+            Thread.Sleep(2000);
+            Console.ResetColor();
+            UserLogin.DiscardKeys();
+            ManageMenu();
+        }
         SelectionArray[dishtochange] = updatedValue;
 
         // Add dish to menu
