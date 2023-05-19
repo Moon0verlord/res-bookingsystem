@@ -5,7 +5,7 @@
         // set windowsize here to make sure there's no bounding errors later in the program.
         try
         {
-            Console.SetWindowSize(180, 35);
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
         catch {}
         Console.Clear();
