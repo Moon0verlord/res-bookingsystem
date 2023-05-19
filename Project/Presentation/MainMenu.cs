@@ -40,8 +40,6 @@ class MainMenu : IMenuLogic
                         break;
                     case 1:
                         restaurantInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu");
-                        Console.ReadKey(true);
                         break;
                     case 2:
                         TimeInfo.Start();

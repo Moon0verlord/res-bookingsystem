@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
@@ -44,24 +45,8 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
     public static void Start()
     {
-        JArray eventmenu = AccountsAccess.ReadAllEvents();
         Console.Clear();
-        Console.WriteLine(Information);
-        Console.WriteLine(Contact);
-        if (CheckIfEvent())
-        {
-            Console.WriteLine("Alle evenementen:");
-            foreach (var event_item in eventmenu)
-            {
-                Console.WriteLine(event_item["eventname"]);
-                Console.WriteLine(event_item["eventinfo"]);
-                Console.WriteLine(event_item["eventdate"]);
-                Console.WriteLine();
-            }
-        }
-        else
-        {
-            Console.WriteLine(Events);
-        }
+        InfoBoxes.WriteInformation(Console.CursorTop, Console.CursorLeft);
+        Console.ReadKey(true);
     }
 }

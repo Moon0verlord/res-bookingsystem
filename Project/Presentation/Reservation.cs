@@ -120,13 +120,13 @@ static class Reservation
         {
             stepCounter++;
             Console.Clear();
-            Console.CursorVisible = true;
             InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(
                 $"\n\n\nEmail:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
                 $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
             Console.ResetColor();
+            Console.CursorVisible = true;
             string answer = Console.ReadLine()!;
             switch (answer.ToLower())
             {

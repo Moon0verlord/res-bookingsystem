@@ -18,15 +18,5 @@
     "eventname": "test",
     "eventinfo": "test",
     "eventdate": "11-05-2023"
-  },
-  {
-    "eventname": "testdatum",
-    "eventinfo": "testdatum",
-    "eventdate": "12-05-2023"
-  },
-  {
-    "eventname": "test3",
-    "eventinfo": "een test",
-    "eventdate": "18-05-2023"
   }
 ]
