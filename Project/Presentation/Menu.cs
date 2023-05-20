@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
 
-//TODO add comments to new additons to functions
 //TODO Change amount of items in dishes json per category
 public static class Dishes
 {
@@ -186,7 +185,7 @@ public static class Dishes
         string menu = File.ReadAllText(path2);
         JObject MenuOBJ = JObject.Parse(menu);
         int dishtochange = 0;
-        // Retrieve dish from the menu
+        // Retrieve dish to change
         JArray menuCourse = (JArray)MenuOBJ[type]![category]!;
 
         string[] options3 = menuCourse.Select((dish, index) => $"{dish} ({index + 1})").ToArray();
@@ -209,7 +208,8 @@ public static class Dishes
         JObject dishtoadd = DisplayDishes(type, category);
 
 
-        // Update values in dishtoadd object using LINQ
+        // checks if dish is the same as the one that is already on the menu 
+        // if it is not the same it will update the dish
         JArray SelectionArray = (JArray)MenuOBJ[type]![category]!;
         string updatedValue = dishtoadd[category]?.ToString();
         if (dishtoadd.GetValue(category).ToString() ==  SelectionArray[dishtochange].ToString())
@@ -224,10 +224,10 @@ public static class Dishes
         }
         SelectionArray[dishtochange] = updatedValue;
 
-        // Add dish to menu
+        // writes the updated menu to the json file
         File.WriteAllText(path2, MenuOBJ.ToString());
 
-        // Display the added dish
+        // Displays the added dish to the user
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Het type menu: {type} in {category} is aangepast.");
         if (category == "Voorgerecht")
@@ -262,6 +262,7 @@ public static class Dishes
         JObject dishes = JObject.Parse(json);
         JArray dishArray = (JArray)dishes[type]![category]!;
 
+        // Display dishes in category for user to choose from
         string[] options = new string[dishArray.Count + 1];
         for (int i = 0; i < dishArray.Count; i++)
         {
@@ -270,6 +271,7 @@ public static class Dishes
         }
         options[dishArray.Count] = "Terug naar hoofdmenu";
 
+        // Get user selection
         string prompt = $"\nWelke maaltijd wil je veranderen in de categorie '{category}'?:";
         int input = _myMenu.RunMenu(options, prompt);
 
