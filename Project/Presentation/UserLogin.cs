@@ -55,9 +55,10 @@ static class UserLogin
                 case 1:
                     Console.CursorVisible = true;
                     Console.Clear();
+                    InfoBoxes.WritePasswordToggle(Console.CursorTop, Console.CursorLeft, false);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword()!;
+                    userPassword = WritePassword(false)!;
                     break;
                 case 2:
                     if (userEmail == null || userPassword == null)
@@ -138,10 +139,13 @@ static class UserLogin
                 case 1:
                     Console.CursorVisible = true;
                     Console.Clear();
+                    InfoBoxes.WritePasswordToggle(Console.CursorTop, Console.CursorLeft, true);
+                    // cursor reset to write next box correctly
+                    Console.SetCursorPosition(0, 0);
                     InfoBoxes.WriteBoxUserPassword(Console.CursorTop, Console.CursorLeft);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword()!;
+                    userPassword = WritePassword(true)!;
                     if (!PasswordCheck(userPassword))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -153,7 +157,7 @@ static class UserLogin
                         break;
                     }
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword()!;
+                    var verifyUserPassword = WritePassword(true)!;
                     if (userPassword != verifyUserPassword) 
                     {
                       Console.ForegroundColor = ConsoleColor.Red;
@@ -274,8 +278,9 @@ static class UserLogin
         return hiddenPass;
     }
 
-    public static string WritePassword()
+    public static string WritePassword(bool register)
     {
+        string currentMode = "stars";
         string password = "";
         ConsoleKey currKey = default;
         do
@@ -287,12 +292,33 @@ static class UserLogin
                 password = password[0..^1];
                 Console.Write("\b \b");
             }
+            else if (currKey == ConsoleKey.F1)
+            {
+                Console.Write(String.Concat(Enumerable.Repeat("\b \b", password.Length)));
+                if (currentMode == "stars")
+                {
+                    Console.Write(password);
+                    currentMode = "words";
+                }
+                else if (currentMode == "words")
+                {
+                    Console.Write(String.Concat(Enumerable.Repeat("*", password.Length)));
+                    currentMode = "stars";
+                }
+            }
             else if (!char.IsControl(keyInfo.KeyChar))
             {
                 password += keyInfo.KeyChar;
-                Console.Write("*");
+                if (currentMode == "stars")
+                    Console.Write("*");
+                else if (currentMode == "words")
+                    Console.Write(keyInfo.KeyChar);
             }
         } while (currKey != ConsoleKey.Enter);
+        // make sure the password is set to stars when the user presses enter
+        // otherwise password will be visible when confirming.
+        Console.Write(String.Concat(Enumerable.Repeat("\b \b", password.Length)));
+        Console.Write(String.Concat(Enumerable.Repeat("*", password.Length)));
         return password;
     }
 

@@ -72,9 +72,9 @@ static class InfoBoxes
     {
         origRow = origrow;
         origCol = origcol;
-        int x = 1;
+        int x = 0;
         int y = 5;
-        string boxBorder = "───────────────────────────────";
+        string boxBorder = "──────────────────────────";
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
         WriteAt("│", x, y + 1);
@@ -84,12 +84,12 @@ static class InfoBoxes
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 5);
-        WriteAt("┐", boxBorder.Length + 2, y);
-        WriteAt("│", boxBorder.Length + 2, y + 1);
-        WriteAt("│", boxBorder.Length + 2, y + 2);
-        WriteAt("│", boxBorder.Length + 2, y + 3);
-        WriteAt("│", boxBorder.Length + 2, y + 4);
-        WriteAt("┘", boxBorder.Length + 2, y + 5);
+        WriteAt("┐", boxBorder.Length + 1, y);
+        WriteAt("│", boxBorder.Length + 1, y + 1);
+        WriteAt("│", boxBorder.Length + 1, y + 2);
+        WriteAt("│", boxBorder.Length + 1, y + 3);
+        WriteAt("│", boxBorder.Length + 1, y + 4);
+        WriteAt("┘", boxBorder.Length + 1, y + 5);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt(" Requirements wachtwoord:", x + 1, y + 1);
         WriteAt("- 8 - 15 karakters",  x + 1, y + 2);
@@ -319,6 +319,41 @@ static class InfoBoxes
         origCol = origcol;
         int x = 0;
         int y = 0;
+    }
+
+    public static void WritePasswordToggle(int origrow, int origcol, bool register)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        string boxBorder = "───────────────────────────────────────────────────────";
+        string Information =
+            @"
+    Druk op de 'F1' toets linksboven op uw toetsenbord
+          om te toggelen tussen '*' en letters.
+            ";
+        int x = 0;
+        int y = 3;
+        if (register)
+            y += 8;
+        WriteAt("Wachtwoord Toggle", x + 17, y + 1);
+        WriteAt(Information, x + 1, y + 2);
+        Console.ForegroundColor = ConsoleColor.Green;
+        WriteAt("┌", x, y);
+        WriteAt("│", x, y + 1);
+        WriteAt("│", x, y + 2);
+        WriteAt("│", x, y + 3);
+        WriteAt("│", x, y + 4);
+        WriteAt("└", x, y + 5);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt(boxBorder, x + 1, y + 5);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        WriteAt("│", x + boxBorder.Length + 1, y + 1);
+        WriteAt("│", x + boxBorder.Length + 1, y + 2);
+        WriteAt("│", x + boxBorder.Length + 1, y + 3);
+        WriteAt("│", x + boxBorder.Length + 1, y + 4);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 5);
+        Console.ResetColor();
     }
 
     
