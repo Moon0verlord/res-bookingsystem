@@ -40,9 +40,9 @@ static class Reservation
                 string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
                 string[] options =
                 {
-                     $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
-                     "Reservering bekijken", "Ga terug"
-                 };
+                    $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
+                    "Reservering bekijken", "Ga terug"
+                };
                 int selectedIndex = _my1DMenu.RunResMenu(options, prompt, stepCounter);
                 switch (selectedIndex)
                 {
@@ -311,15 +311,17 @@ static class Reservation
                 chosenCourse == 3 ? "20:30 - 22:45" : "21:00 - 23:30");
             string[] entertime;
             string[] leavetime;
-            string[] optionsmenu = new[] {timeslot_1, timeslot_2, timeslot_3, "Ga terug" };
+            string[] optionsmenu = new[] { timeslot_1, timeslot_2, timeslot_3, "Ga terug" };
             int selectedIndex = _my1DMenu.RunResMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:", stepCounter);
             switch (selectedIndex)
             {
                 case 0:
                     entertime = timeslot_1.Split("-")[0].Split(":");
                     leavetime = timeslot_1.Split("-")[1].Split(":");
-                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
-                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
+                        0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
+                        0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
@@ -327,8 +329,10 @@ static class Reservation
                 case 1:
                     entertime = timeslot_2.Split("-")[0].Split(":");
                     leavetime = timeslot_2.Split("-")[1].Split(":");
-                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
-                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
+                        0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
+                        0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
@@ -336,8 +340,10 @@ static class Reservation
                 case 2:
                     entertime = timeslot_3.Split("-")[0].Split(":");
                     leavetime = timeslot_3.Split("-")[1].Split(":");
-                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()), 0);
-                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()), 0);
+                    ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
+                        0);
+                    ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
+                        0);
                     chosenTimeslot = (ts1, ts2);
                     stepCounter++;
                     ChooseTable(chosenDate, chosenTimeslot);
@@ -409,12 +415,11 @@ static class Reservation
                         MainMenu.Start();
                         break;
                     default:
-                        break;
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.CursorVisible = true;
                         Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
                         Console.ResetColor();
+                        Console.CursorVisible = true;
                         var Choice = Console.ReadLine();
                         switch (Choice)
                         {
@@ -446,6 +451,8 @@ static class Reservation
                                 UserLogin.DiscardKeys();
                                 break;
                         }
+
+                        break;
                 }
             }
         }
