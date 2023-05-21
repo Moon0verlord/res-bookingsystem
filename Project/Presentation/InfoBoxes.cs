@@ -335,7 +335,7 @@ static class InfoBoxes
         int y = 3;
         if (register)
             y += 8;
-        WriteAt("Wachtwoord Toggle", x + 17, y + 1);
+        WriteAt("Wachtwoord Toggle", x + 19, y + 1);
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt("┌", x, y);
