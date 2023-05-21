@@ -58,7 +58,7 @@ static class UserLogin
                     InfoBoxes.WritePasswordToggle(Console.CursorTop, Console.CursorLeft, false);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword(false)!;
+                    userPassword = WritePassword()!;
                     break;
                 case 2:
                     if (userEmail == null || userPassword == null)
@@ -145,7 +145,7 @@ static class UserLogin
                     InfoBoxes.WriteBoxUserPassword(Console.CursorTop, Console.CursorLeft);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword(true)!;
+                    userPassword = WritePassword()!;
                     if (!PasswordCheck(userPassword))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -157,7 +157,7 @@ static class UserLogin
                         break;
                     }
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword(true)!;
+                    var verifyUserPassword = WritePassword()!;
                     if (userPassword != verifyUserPassword) 
                     {
                       Console.ForegroundColor = ConsoleColor.Red;
@@ -278,7 +278,7 @@ static class UserLogin
         return hiddenPass;
     }
 
-    public static string WritePassword(bool register)
+    public static string WritePassword()
     {
         string currentMode = "stars";
         string password = "";
