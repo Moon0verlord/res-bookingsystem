@@ -15,7 +15,7 @@ Voor de beste functionaliteit raden wij aan om de applicatie in fullscreen te ru
 
 De applicatie werkt met een menusysteem die u met het toetsenbord kan gebruiken. Gebruik de pijlknoppen om te bewegen in het menu en de enter knop om een selectie te maken.
 
-![ezgif com-video-to-gif (1)](https://github.com/Moon0verlord/res-bookingsystem/assets/103335427/5db069c3-64a5-40b4-b24c-5e75316c5c28)
+![mainmenu_functionality](https://github.com/Moon0verlord/res-bookingsystem/assets/103335427/dcd982c6-ecdc-4414-b298-32e4f056f7e7)
 
 >*Voorbeeld functionaliteit van het menu*
 
