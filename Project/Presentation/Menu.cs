@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
@@ -51,9 +49,9 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        string price2 = (string)menu["Prijzen"]["Prijzen"][0];
-        string price3 = (string)menu["Prijzen"]["Prijzen"][1];
-        string price4 = (string)menu["Prijzen"]["Prijzen"][2];
+        string price2 = (string)menu["Prijzen"]!["Prijzen"]![0]!;
+        string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
+        string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
         Console.Clear();
     
         Console.WriteLine("Prijzen:");
@@ -68,8 +66,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Voorgerechten:");
         Console.WriteLine("-------");
-        var appetizers2 = menu[choice]["Voorgerecht"]
-            .Select(item => (string)item);
+        var appetizers2 = menu[choice]!["Voorgerecht"]!
+            .Select(item => (string)item!);
         foreach (var appetizer in appetizers2)
         {
             Console.WriteLine($"{appetizer}");
@@ -77,8 +75,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Soepen:");
         Console.WriteLine("-------");
-        var soups = menu[choice]["Soep"]
-            .Select(item => (string)item);
+        var soups = menu[choice]!["Soep"]!
+            .Select(item => (string)item!);
         foreach (var soup in soups)
         {
             Console.WriteLine($"{soup}");
@@ -87,8 +85,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Hoofdgerechten:");
         Console.WriteLine("-------");
-        var entrees = menu[choice]["Maaltijd"]
-            .Select(item => (string)item);
+        var entrees = menu[choice]!["Maaltijd"]!
+            .Select(item => (string)item!);
         foreach (var entree in entrees)
         {
             Console.WriteLine($"{entree}");
@@ -97,8 +95,8 @@ public static class Dishes
         Console.WriteLine();
         Console.WriteLine("Nagerechten:");
         Console.WriteLine("-------");
-        var desserts = menu[choice]["Nagerecht"]
-            .Select(item => (string)item);
+        var desserts = menu[choice]!["Nagerecht"]!
+            .Select(item => (string)item!);
         foreach (var dessert in desserts)
         {
             Console.WriteLine($"{dessert}");
@@ -211,8 +209,8 @@ public static class Dishes
         // checks if dish is the same as the one that is already on the menu 
         // if it is not the same it will update the dish
         JArray SelectionArray = (JArray)MenuOBJ[type]![category]!;
-        string updatedValue = dishtoadd[category]?.ToString();
-        if (dishtoadd.GetValue(category).ToString() ==  SelectionArray[dishtochange].ToString())
+        string updatedValue = dishtoadd[category]?.ToString()!;
+        if (dishtoadd.GetValue(category)!.ToString() ==  SelectionArray[dishtochange].ToString())
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -232,19 +230,19 @@ public static class Dishes
         Console.WriteLine($"Het type menu: {type} in {category} is aangepast.");
         if (category == "Voorgerecht")
         {
-            Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
+            Console.WriteLine($"Voorgerecht: {dishtoadd["Voorgerecht"]}");
         }
         else if (category == "Soep")
         {
-            Console.WriteLine($"Soep: {dishtoadd?["Soep"]}");
+            Console.WriteLine($"Soep: {dishtoadd["Soep"]}");
         }
         else if (category == "Maaltijd")
         {
-            Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
+            Console.WriteLine($"Maaltijd: {dishtoadd["Maaltijd"]}");
         }
         else if (category == "Nagerecht")
         {
-            Console.WriteLine($"Nagerecht: {dishtoadd?["Nagerecht"]}");
+            Console.WriteLine($"Nagerecht: {dishtoadd["Nagerecht"]}");
         }
         Console.WriteLine("is toegevoegd aan het menu");
         Console.ResetColor();
@@ -300,9 +298,9 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        string price2 = (string)menu["Prijzen"]["Prijzen"][0];
-        string price3 = (string)menu["Prijzen"]["Prijzen"][1];
-        string price4 = (string)menu["Prijzen"]["Prijzen"][2];
+        string? price2 = (string)menu["Prijzen"]!["Prijzen"][0]!;
+        string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
+        string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
         string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
@@ -312,18 +310,18 @@ public static class Dishes
         {
             case 0:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice2 = Console.ReadLine();
-                menu["Prijzen"]["Prijzen"][0] = $"€ {newprice2}";
+                string newprice2 = Console.ReadLine()!;
+                menu["Prijzen"]!["Prijzen"]![0] = $"€ {newprice2}";
                 break;
             case 1:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice3 = Console.ReadLine();
-                menu["Prijzen"]["Prijzen"][1] = $"€ {newprice3}";
+                string newprice3 = Console.ReadLine()!;
+                menu["Prijzen"]!["Prijzen"]![1] = $"€ {newprice3}";
                 break;
             case 2:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice4 = Console.ReadLine();
-                    menu["Prijzen"]["Prijzen"][2] = $"€ {newprice4}";
+                string newprice4 = Console.ReadLine()!;
+                    menu["Prijzen"]!["Prijzen"]![2] = $"€ {newprice4}";
                 break;
             case 3:
                 MainMenu.Start();
@@ -374,13 +372,13 @@ public static class Dishes
         Console.Clear();
         Console.WriteLine($"{choice} Wijn arrangement:");
         Console.WriteLine("-------");
-        var selection = Wines["Winemenu"][choice]
+        var selection = Wines["Winemenu"]![choice]!
             .Select(item => new
             {
-                name = (string)item["name"],
-                price = (string)item["price"],
-                region = (string)item["region"],
-                description = (string)item["description"]
+                name = (string)item["name"]!,
+                price = (string)item["price"]!,
+                region = (string)item["region"]!,
+                description = (string)item["description"]!
             });
         foreach (var wine in selection)
         {
