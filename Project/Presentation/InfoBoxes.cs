@@ -152,27 +152,21 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
-        WriteAt("│", x, y + 5);
-        WriteAt("│", x, y + 6);
-        WriteAt("│", x, y + 7);
-        WriteAt("│", x, y + 8);
+        for (var i = 1; i <= 8; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
         WriteAt("└", x, y + 9);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 9);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
-        WriteAt("│", x + boxBorder.Length + 1, y + 5);
-        WriteAt("│", x + boxBorder.Length + 1, y + 6);
-        WriteAt("│", x + boxBorder.Length + 1, y + 7);
-        WriteAt("│", x + boxBorder.Length + 1, y + 8);
+        for (var i = 1; i <= 8; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
         WriteAt("┘", x + boxBorder.Length + 1, y + 9);
         Console.ResetColor();
     }
@@ -244,39 +238,21 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
-        WriteAt("│", x, y + 5);
-        WriteAt("│", x, y + 6);
-        WriteAt("│", x, y + 7);
-        WriteAt("│", x, y + 8);
-        WriteAt("│", x, y + 9);
-        WriteAt("│", x, y + 10);
-        WriteAt("│", x, y + 11);
-        WriteAt("│", x, y + 12);
-        WriteAt("│", x, y + 13);
-        WriteAt("│", x, y + 14);
+        for (var i = 1; i <= 14; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
         WriteAt("└", x, y + 15);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 15);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
-        WriteAt("│", x + boxBorder.Length + 1, y + 5);
-        WriteAt("│", x + boxBorder.Length + 1, y + 6);
-        WriteAt("│", x + boxBorder.Length + 1, y + 7);
-        WriteAt("│", x + boxBorder.Length + 1, y + 8);
-        WriteAt("│", x + boxBorder.Length + 1, y + 9);
-        WriteAt("│", x + boxBorder.Length + 1, y + 10);
-        WriteAt("│", x + boxBorder.Length + 1, y + 11);
-        WriteAt("│", x + boxBorder.Length + 1, y + 12);
-        WriteAt("│", x + boxBorder.Length + 1, y + 13);
-        WriteAt("│", x + boxBorder.Length + 1, y + 14);
+        for (var i = 1; i <= 14; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
         WriteAt("┘", x + boxBorder.Length + 1, y + 15);
         Console.ResetColor();
     }
@@ -297,20 +273,24 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Red;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
+        for (var i = 1; i <= 4; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 5);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
+        for (var i = 1; i <= 5; i++)
+        {
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            
+        }
+
         WriteAt("┘", x + boxBorder.Length + 1, y + 5);
+        
         Console.ResetColor();
     }
     private static void WriteEvents(int origrow, int origcol)
