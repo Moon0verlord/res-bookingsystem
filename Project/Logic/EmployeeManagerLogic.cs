@@ -149,7 +149,7 @@ public class EmployeeManagerLogic : IMenuLogic
             string[] options =
             {
                 $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
-                "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime}"),
+                "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime} - {reservation.LeaveTime}"),
                 "Vul hier de nieuwe email in" + (reservation.EmailAddress == null ? "" : $": {reservation.EmailAddress}"),
                 "Terug en opslaan"
             };
@@ -164,34 +164,34 @@ public class EmployeeManagerLogic : IMenuLogic
                     break;
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Vul hier het nieuwe tijdsslot in (hh:mm)");
+                    Console.WriteLine("Vul hier het nieuwe tijdsslot in");
                     while (true){
-                        string[] options =
+                        string[] time =
                         {
                             "16:00-18:00",
                             "18:00-20:00",
                             "22:00-00:00",
                             "Terug"
                         };
-                    }
-                    var selectedIndex = myMenu.RunMenu(options, "selecteer een tijdsslot");
-                    switch (selectedIndex)
-                    {
-                        case 0:
-                            reservation.StartTime = new TimeSpan(16, 0, 0);
-                            reservation.LeaveTime = new TimeSpan(18, 0, 0);
-                            break;
-                        case 1:
-                            reservation.StartTime = new TimeSpan(18, 0, 0);
-                            reservation.LeaveTime = new TimeSpan(20, 0, 0);
-                            break;
-                        case 2:
-                            reservation.StartTime = new TimeSpan(22, 0, 0);
-                            reservation.LeaveTime = new TimeSpan(00, 0, 0);
-                            break;
-                        case 3:
-                            ChangeReservation();
-                            break;
+                        var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                        switch (sltdIndex)
+                        {
+                            case 0:
+                                reservation.StartTime = new TimeSpan(16, 0, 0);
+                                reservation.LeaveTime = new TimeSpan(18, 0, 0);
+                                break;
+                            case 1:
+                                reservation.StartTime = new TimeSpan(18, 0, 0);
+                                reservation.LeaveTime = new TimeSpan(20, 0, 0);
+                                break;
+                            case 2:
+                                reservation.StartTime = new TimeSpan(22, 0, 0);
+                                reservation.LeaveTime = new TimeSpan(00, 0, 0);
+                                break;
+                            case 3:
+                                break;
+                        }
+                        break;
                     }
                     break;
                 case 2:
