@@ -298,7 +298,7 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string json = File.ReadAllText(path);
         JObject menu = JObject.Parse(json);
-        string? price2 = (string)menu["Prijzen"]!["Prijzen"][0]!;
+        string? price2 = (string)menu["Prijzen"]!["Prijzen"]![0]!;
         string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
         string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -424,7 +424,7 @@ public static class Dishes
     public static void ManagerOptions()
     {
         Console.CursorVisible = false;
-        string[] options = { "Menu veranderen", "Prijs veranderen", "Terug naar hoofdmenu" };
+        string[] options = { "Menu veranderen", "Prijs veranderen","Add Dish", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -436,6 +436,9 @@ public static class Dishes
                 PriceManager();
                 break;
             case 2:
+                AddToDishes();
+                break;
+            case 3:
                 MainMenu.Start();
                 break;
             default:
@@ -443,6 +446,90 @@ public static class Dishes
                 break;
         }
     }
-    
+
+    public static void AddToDishes()
+    {
+        Console.CursorVisible = false;
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
+        string json = File.ReadAllText(path);
+        JObject DishesOBJ = JObject.Parse(json);
+        
+        string type = "";
+        string category = "";
+        string name = "";
+        
+        string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
+        string prompt = "\nWelk type gerecht zou je willen veranderen?:";
+        int input = _myMenu.RunMenu(options, prompt);
+        _currentIndex = 0;
+        switch (input)
+        {
+            case 0:
+                type = "Vegetarisch";
+                break;
+            case 1:
+                type = "Vis";
+                break;
+            case 2:
+                type = "Vlees";
+                break;
+            case 3:
+                type = "Veganistisch";
+                break;
+            case 4:
+                type = "kerst";
+                break;
+            case 5:
+                type = "pasen";
+                break;
+            case 7:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+
+        // select course
+        string[] options2 = { "Voorgerecht", "Maaltijd", "Soep ","Nagerecht", "Terug naar hoofdmenu" };
+        string prompt2 = "\nWat wil je toevoegen?:";
+        int input2 = _myMenu.RunMenu(options2, prompt2);
+        _currentIndex = 0;
+        switch (input2)
+        {
+            case 0:
+                category = "Voorgerecht";
+                break;
+            case 1:
+                category = "Maaltijd";
+                break;
+            case 2:
+                category = "Soep";
+                break;
+            case 3:
+                category = "Nagerecht";
+                break;
+            case 4:
+                MainMenu.Start();
+                break;
+            
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+        Console.WriteLine("Wat is de naam van het gerecht?");
+        name = Console.ReadLine();
+        JArray SelectionArray = (JArray)DishesOBJ[type]![category]!;
+        SelectionArray.Add(name);
+        string output = Newtonsoft.Json.JsonConvert.SerializeObject(DishesOBJ, Newtonsoft.Json.Formatting.Indented);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"\n{name} is Toegevoegd aan de Dishes\n");
+        Console.ResetColor();
+        File.WriteAllText(path, output);
+        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ReadKey();
+        MainMenu.Start();
+    }
 
 }
