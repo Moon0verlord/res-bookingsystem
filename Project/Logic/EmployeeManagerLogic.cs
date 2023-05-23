@@ -1,7 +1,7 @@
 public class EmployeeManagerLogic : IMenuLogic
 {
-    private static MenuLogic _myMenu = new ();
-    private static AccountsLogic _logicMenu = new ();
+    private static MenuLogic _myMenu = new();
+    private static AccountsLogic _logicMenu = new();
     static private MenuLogic myMenu = new();
     private static string employeeEmail;
     private static string employeePassword;
@@ -11,7 +11,7 @@ public class EmployeeManagerLogic : IMenuLogic
         Console.Clear();
         //The weird spacing is there to make it show up nicer when called
         Console.WriteLine("Tafel id |  Datum    | Tijd        | Email");
-        
+
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
             var Date = item.Date.ToString("dd-MM-yy");
@@ -65,15 +65,15 @@ public class EmployeeManagerLogic : IMenuLogic
                     var verifyUserPassword = WritePassword()!;
                     if (employeePassword == verifyUserPassword)
                         break;
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(
-                        "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
-                    Console.ResetColor();
-                    Thread.Sleep(2000);
-                    employeePassword = null!;
-                    break;
-                }
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
+                        Console.ResetColor();
+                        Thread.Sleep(2000);
+                        employeePassword = null!;
+                        break;
+                    }
                 case 2:
                     if (employeeEmail == null || employeePassword == null)
                     {
@@ -112,12 +112,12 @@ public class EmployeeManagerLogic : IMenuLogic
                                 case "J":
                                 case "ja":
                                 case "Ja":
-                                {
-                                    Console.Clear();
-                                    var employeeacc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
-                                    Console.WriteLine("Medewerker toegevoegd");
-                                    Thread.Sleep(3000);
-                                }
+                                    {
+                                        Console.Clear();
+                                        var employeeacc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                        Console.WriteLine("Medewerker toegevoegd");
+                                        Thread.Sleep(3000);
+                                    }
                                     break;
                             }
                         }
@@ -127,12 +127,13 @@ public class EmployeeManagerLogic : IMenuLogic
                 case 3:
                     MainMenu.Start();
                     break;
-                
+
             }
         }
     }
 
-    public static void ChangeReservation(){
+    public static void ChangeReservation()
+    {
         Console.Clear();
         Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
@@ -145,7 +146,7 @@ public class EmployeeManagerLogic : IMenuLogic
         string id = Console.ReadLine();
         ReservationModel reservation = ReservationsLogic.GetReservationById(id);
         while (true)
-        {   
+        {
             string[] options =
             {
                 $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
@@ -165,7 +166,8 @@ public class EmployeeManagerLogic : IMenuLogic
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Vul hier het nieuwe tijdsslot in");
-                    while (true){
+                    while (true)
+                    {
                         string[] time =
                         {
                             "16:00-18:00",
@@ -209,10 +211,10 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
                     break;
                 case 3:
-                    var User = AccountsAccess.GetAccountByEmail(reservation.EmailAddress);
+                    var User = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
                     foreach (var item in AccountsAccess.LoadAllReservations())
                     {
-                        if (item.date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime)
+                        if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime)
                         {
                             Console.WriteLine("Er is al een reservering op deze datum en tijd");
                             EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
@@ -225,10 +227,10 @@ public class EmployeeManagerLogic : IMenuLogic
                     EmailLogic.SendEmail(reservation.EmailAddress, User.FullName, reservation.Id, reservation.Date);
                     MainMenu.Start();
                     break;
-                }
             }
         }
-    
+    }
+
     public static string HidePass(string pass)
     {
         string hiddenPass = "";
