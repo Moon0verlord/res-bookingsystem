@@ -394,59 +394,8 @@ public static class Dishes
         Console.ReadKey();
         MainMenu.Start();
     }
-
-    // User options to choose between food menu or wine arrangement
-    public static void UserOptions()
-    {
-        Console.CursorVisible = false;
-        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
-        string prompt = "\nKies een type gerechten:";
-        int input = _myMenu.RunMenu(options, prompt);
-        switch (input)
-        {
-            case 0:
-                UserSelection();
-                break;
-            case 1:
-                WineDisplay();
-                break;
-            case 2:
-                MainMenu.Start();
-                break;
-            default:
-                Console.WriteLine("Keuze ongeldig probeer opnieuw");
-                break;
-        }
-    }
-
-
-    // Manager options to choose between changing menu or changing prices
-    public static void ManagerOptions()
-    {
-        Console.CursorVisible = false;
-        string[] options = { "Menu veranderen", "Prijs veranderen","Add Dish", "Terug naar hoofdmenu" };
-        string prompt = "\nKies een type gerechten:";
-        int input = _myMenu.RunMenu(options, prompt);
-        switch (input)
-        {
-            case 0:
-                ManageMenu();
-                break;
-            case 1:
-                PriceManager();
-                break;
-            case 2:
-                AddToDishes();
-                break;
-            case 3:
-                MainMenu.Start();
-                break;
-            default:
-                Console.WriteLine("Keuze ongeldig probeer opnieuw");
-                break;
-        }
-    }
-
+    
+    // Gives manager option to add dish to dishes.json
     public static void AddToDishes()
     {
         Console.CursorVisible = false;
@@ -530,6 +479,58 @@ public static class Dishes
         Console.WriteLine("Druk op een knop om verder te gaan");
         Console.ReadKey();
         MainMenu.Start();
+    }
+    
+    // User options to choose between food menu or wine arrangement
+    public static void UserOptions()
+    {
+        Console.CursorVisible = false;
+        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een type gerechten:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                UserSelection();
+                break;
+            case 1:
+                WineDisplay();
+                break;
+            case 2:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
+    }
+
+
+    // Manager options to choose between changing menu or changing prices
+    public static void ManagerOptions()
+    {
+        Console.CursorVisible = false;
+        string[] options = { "Menu veranderen", "Prijs veranderen","Gerecht toevoegen", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een type gerechten:";
+        int input = _myMenu.RunMenu(options, prompt);
+        switch (input)
+        {
+            case 0:
+                ManageMenu();
+                break;
+            case 1:
+                PriceManager();
+                break;
+            case 2:
+                AddToDishes();
+                break;
+            case 3:
+                MainMenu.Start();
+                break;
+            default:
+                Console.WriteLine("Keuze ongeldig probeer opnieuw");
+                break;
+        }
     }
 
 }
