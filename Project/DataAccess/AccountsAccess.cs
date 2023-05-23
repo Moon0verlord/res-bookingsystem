@@ -59,6 +59,14 @@ public static class AccountsAccess
         allReservations.Add(resm);
         WriteAllReservations(allReservations);
     }
+
+    public static void RemoveReservation(ReservationModel resm)
+    {
+        var allReservations = LoadAllReservations();
+        allReservations.Remove(resm);
+        WriteAllReservations(allReservations);
+    }	
+    
     public static void EventWriteAll(List<EventModel> accounts)
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));

@@ -209,7 +209,20 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
                     break;
                 case 3:
+                    var User = AccountsAccess.GetAccountByEmail(reservation.EmailAddress);
+                    foreach (var item in AccountsAccess.LoadAllReservations())
+                    {
+                        if (item.date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime)
+                        {
+                            Console.WriteLine("Er is al een reservering op deze datum en tijd");
+                            EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                            AccountsAccess.RemoveReservation(item);
+                            Thread.Sleep(2000);
+                            MainMenu.Start();
+                        }
+                    }
                     AccountsAccess.ChangeReservationJson(reservation);
+                    EmailLogic.SendEmail(reservation.EmailAddress, User.FullName, reservation.Id, reservation.Date);
                     MainMenu.Start();
                     break;
                 }
