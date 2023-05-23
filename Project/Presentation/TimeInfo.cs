@@ -19,6 +19,6 @@ wij hopen u snel te zien in ons restaurant!
     public static void Start()
     {
         Console.Clear();
-        Console.WriteLine(OpeningsHours);
+        InfoBoxes.WriteTimeInfo(Console.CursorTop, Console.CursorLeft);
     }
 }

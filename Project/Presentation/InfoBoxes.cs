@@ -185,7 +185,47 @@ static class InfoBoxes
         WriteAt("┘", x + boxBorder.Length + 1, y + 7);
         Console.ResetColor();
     }
-    
+    public static void WriteTimeInfo(int origrow, int origcol)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        string boxBorder = "───────────────────────────────────────────────────────────────────────────────";
+        // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
+        // so i have to use manual whitespaces to format it correctly
+        // i hate it too
+        string Information = @"
+                                                         Ons restaurant is geopend van 16:00 tot 22:00.
+                                                Tijdens deze uren hebben wij 3 tijdssloten waarin u kunt reserveren.
+                                                                      De tijdssloten zijn:
+                                                                      16:00 tot 18:00
+                                                                      18:00 tot 20:00
+                                                                      20:00 tot 22:00
+
+                                        wanneer er een evenement plaatst vindt in ons restaurant zijn de openingstijden anders.
+                                                                  De openingstijden zijn dan:
+                                                                      16:00 tot 19:00
+                                                                      19:00 tot 22:00
+
+                                                        wij hopen u snel te zien in ons restaurant!
+            ";
+        int x = 46;
+        int y = 10;
+        WriteAt("Tijden", x + 37, y + 1);
+        WriteAt(Information, x + 1, y + 2);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        WriteAt("┌", x, y);
+        for (var i = 1; i <= 17; i++) 
+            WriteAt("│", x, y + i);
+        WriteAt("└", x, y + 18);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt(boxBorder, x + 1, y + 15);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        for (var i = 1; i <= 17; i++)
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 18);
+        Console.ResetColor();
+    }
     private static void WriteHours(int origrow, int origcol)
     {
         origRow = origrow;
