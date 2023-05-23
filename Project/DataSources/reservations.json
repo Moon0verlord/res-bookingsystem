@@ -7,5 +7,50 @@
     "group_size": 2,
     "start_time": "18:15:00",
     "leave_time": "20:30:00"
+  },
+  {
+    "table_id": "1M",
+    "res_id": "RES-577196",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-28T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00"
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-453708",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-906681",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-23T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-276638",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-23T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "16:00:00",
+    "leave_time": "18:15:00"
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-414431",
+    "emailAddress": "j@j.com",
+    "res_date": "2023-05-23T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00"
   }
 ]
