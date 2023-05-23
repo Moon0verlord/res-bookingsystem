@@ -149,8 +149,7 @@ public class EmployeeManagerLogic : IMenuLogic
             string[] options =
             {
                 $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
-                "Vul hier de nieuwe starttijd in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime}"),
-                "Vul hier de nieuwe eindtijd in" + (reservation.LeaveTime == null ? "" : $": {reservation.LeaveTime}"),
+                "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime}"),
                 "Vul hier de nieuwe email in" + (reservation.EmailAddress == null ? "" : $": {reservation.EmailAddress}"),
                 "Terug en opslaan"
             };
@@ -165,23 +164,51 @@ public class EmployeeManagerLogic : IMenuLogic
                     break;
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Vul hier de nieuwe starttijd in (hh:mm)");
-                    TimeSpan startTime = TimeSpan.Parse(Console.ReadLine());
-                    reservation.StartTime = startTime;
+                    Console.WriteLine("Vul hier het nieuwe tijdsslot in (hh:mm)");
+                    while (true){
+                        string[] options =
+                        {
+                            "16:00-18:00",
+                            "18:00-20:00",
+                            "22:00-00:00",
+                            "Terug"
+                        };
+                    }
+                    var selectedIndex = myMenu.RunMenu(options, "selecteer een tijdsslot");
+                    switch (selectedIndex)
+                    {
+                        case 0:
+                            reservation.StartTime = new TimeSpan(16, 0, 0);
+                            reservation.LeaveTime = new TimeSpan(18, 0, 0);
+                            break;
+                        case 1:
+                            reservation.StartTime = new TimeSpan(18, 0, 0);
+                            reservation.LeaveTime = new TimeSpan(20, 0, 0);
+                            break;
+                        case 2:
+                            reservation.StartTime = new TimeSpan(22, 0, 0);
+                            reservation.LeaveTime = new TimeSpan(00, 0, 0);
+                            break;
+                        case 3:
+                            ChangeReservation();
+                            break;
+                    }
                     break;
                 case 2:
                     Console.Clear();
-                    Console.WriteLine("Vul hier de nieuwe eindtijd in (hh:mm)");
-                    TimeSpan leaveTime = TimeSpan.Parse(Console.ReadLine());
-                    reservation.LeaveTime = leaveTime;
-                    break;
-                case 3:
-                    Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe email in");
                     string email = Console.ReadLine();
-                    reservation.EmailAddress = email;
+                    if (EmailLogic.IsValidEmail(email))
+                    {
+                        reservation.EmailAddress = email;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Dit is geen geldig email adres");
+                        Thread.Sleep(2000);
+                    }
                     break;
-                case 4:
+                case 3:
                     AccountsAccess.ChangeReservationJson(reservation);
                     MainMenu.Start();
                     break;
