@@ -154,7 +154,7 @@ static class InfoBoxes
         WriteAt("┌", x, y);
         for (var i = 1; i <= 8; i++)
         {
-            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            WriteAt("│", x, y + i);
             
         }
         WriteAt("└", x, y + 9);
@@ -240,7 +240,7 @@ static class InfoBoxes
         WriteAt("┌", x, y);
         for (var i = 1; i <= 14; i++)
         {
-            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            WriteAt("│", x, y + i);
             
         }
         WriteAt("└", x, y + 15);
@@ -275,7 +275,7 @@ static class InfoBoxes
         WriteAt("┌", x, y);
         for (var i = 1; i <= 4; i++)
         {
-            WriteAt("│", x + boxBorder.Length + 1, y + i);
+            WriteAt("│", x, y + i);
             
         }
         WriteAt("└", x, y + 5);
