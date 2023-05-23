@@ -10,7 +10,7 @@ public static class Dishes
 {
     private static int _currentIndex;
 
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _myMenu = new MenuLogic();
     
     // Takes user selection and opens the menu
     public static void UserSelection()
@@ -188,42 +188,42 @@ public static class Dishes
         // grabs menu from json
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
-        JObject MenuOBJ = JObject.Parse(menu);
+        JObject menuObj = JObject.Parse(menu);
         // Gets dish from menu
-        JArray menuCourse = (JArray)MenuOBJ[type]![course]!;
-        JObject dishtoadd = DisplayOptions(type, course);
+        JArray menuCourse = (JArray)menuObj[type]![course]!;
+        JObject dishToad = DisplayOptions(type, course);
 
         // update values in dishtoadd object
-        dishtoadd["Voorgerecht"] = (string)dishtoadd["Voorgerecht"] == "none" ? (string)menuCourse![0]["Voorgerecht"] : (string)dishtoadd["Voorgerecht"];
-        dishtoadd["Soep"] = (string)dishtoadd["Soep"] == "none" ? (string)menuCourse![0]["Soep"] : (string)dishtoadd["Soep"];
-        dishtoadd["Maaltijd"] = (string)dishtoadd["Maaltijd"] == "none" ? (string)menuCourse![0]["Maaltijd"] : (string)dishtoadd["Maaltijd"];
-        dishtoadd["Nagerecht"] = (string)dishtoadd["Nagerecht"] == "none" ? (string)menuCourse![0]["Nagerecht"] : (string)dishtoadd["Nagerecht"];
+        dishToad["Voorgerecht"] = (string)dishToad["Voorgerecht"]! == "none" ? (string)menuCourse![0]["Voorgerecht"]! : (string)dishToad["Voorgerecht"]!;
+        dishToad["Soep"] = (string)dishToad["Soep"]! == "none" ? (string)menuCourse![0]["Soep"]! : (string)dishToad["Soep"]!;
+        dishToad["Maaltijd"] = (string)dishToad["Maaltijd"]! == "none" ? (string)menuCourse![0]["Maaltijd"]! : (string)dishToad["Maaltijd"]!;
+        dishToad["Nagerecht"] = (string)dishToad["Nagerecht"]! == "none" ? (string)menuCourse![0]["Nagerecht"]! : (string)dishToad["Nagerecht"]!;
 
         // keep the existing price
-        dishtoadd["Prijs"] = (string)menuCourse![0]["Prijs"];
+        dishToad["Prijs"] = (string)menuCourse![0]["Prijs"]!;
         // add dish to menu
-        menuCourse![0] = dishtoadd;
-        File.WriteAllText(path2, MenuOBJ.ToString());
+        menuCourse![0] = dishToad;
+        File.WriteAllText(path2, menuObj.ToString());
         // displays added dish
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Het type menu: {type} in {course} is aangepast.");
         if (course == "2_Gangen")
         {
-            Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
-            Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
+            Console.WriteLine($"Voorgerecht: {dishToad?["Voorgerecht"]}");
+            Console.WriteLine($"Maaltijd: {dishToad?["Maaltijd"]}");
         }
         else if (course == "3_Gangen")
         {
-            Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
-            Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
-            Console.WriteLine($"Nagercht: {dishtoadd?["Nagerecht"]}");
+            Console.WriteLine($"Voorgerecht: {dishToad?["Voorgerecht"]}");
+            Console.WriteLine($"Maaltijd: {dishToad?["Maaltijd"]}");
+            Console.WriteLine($"Nagercht: {dishToad?["Nagerecht"]}");
         }
         else if (course == "4_Gangen")
         {
-            Console.WriteLine($"Voorgerecht: {dishtoadd?["Voorgerecht"]}");
-            Console.WriteLine($"Soep: {dishtoadd?["Soep"]}");
-            Console.WriteLine($"Maaltijd: {dishtoadd?["Maaltijd"]}");
-            Console.WriteLine($"Nagercht: {dishtoadd?["Nagerecht"]}");
+            Console.WriteLine($"Voorgerecht: {dishToad?["Voorgerecht"]}");
+            Console.WriteLine($"Soep: {dishToad?["Soep"]}");
+            Console.WriteLine($"Maaltijd: {dishToad?["Maaltijd"]}");
+            Console.WriteLine($"Nagercht: {dishToad?["Nagerecht"]}");
         }
         Console.WriteLine("is toegevoegd aan het menu");
         Console.ResetColor();
@@ -311,17 +311,17 @@ public static class Dishes
         {
             case 0:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice2 = Console.ReadLine();
+                string newprice2 = Console.ReadLine()!;
                 menu["Vegetarisch"]["2_Gangen"][0]["Prijs"] = $"€ {newprice2}";
                 break;
             case 1:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice3 = Console.ReadLine();
+                string newprice3 = Console.ReadLine()!;
                 menu["Vegetarisch"]["3_Gangen"][0]["Prijs"] = $"€ {newprice3}";
                 break;
             case 2:
                 Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice4 = Console.ReadLine();
+                string newprice4 = Console.ReadLine()!;
                 menu["Vegetarisch"]["4_Gangen"][0]["Prijs"] = $"€ {newprice4}";
                 break;
             case 3:
@@ -369,17 +369,17 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/WineMenu.json"));
         string json = File.ReadAllText(path);
-        JObject Wines = JObject.Parse(json);
+        JObject wines = JObject.Parse(json);
         Console.Clear();
         Console.WriteLine($"{choice} Wijn arrangement:");
         Console.WriteLine("-------");
-        var selection = Wines["Winemenu"][choice]
+        var selection = wines["Winemenu"]![choice]!
             .Select(item => new
             {
-                name = (string)item["name"],
-                price = (string)item["price"],
-                region = (string)item["region"],
-                description = (string)item["description"]
+                name = (string)item["name"]!,
+                price = (string)item["price"]!,
+                region = (string)item["region"]!,
+                description = (string)item["description"]!
             });
         foreach (var wine in selection)
         {

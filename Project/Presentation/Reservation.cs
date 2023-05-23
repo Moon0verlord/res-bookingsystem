@@ -10,29 +10,29 @@ static class Reservation
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
     private static ReservationTableLogic _tableLogic = new ReservationTableLogic();
-    private static string userEmail;
-    private static int amountOfPeople;
-    private static DateTime chosenDate;
-    private static (TimeSpan, TimeSpan) chosenTimeslot;
-    private static string chosenTable;
-    private static int chosenCourse;
-    private static int stepCounter;
+    private static string _userEmail;
+    private static int _amountOfPeople;
+    private static DateTime _chosenDate;
+    private static (TimeSpan, TimeSpan) _chosenTimeslot;
+    private static string _chosenTable;
+    private static int _chosenCourse;
+    private static int _stepCounter;
 
     public static void ResStart(AccountModel acc = null)
     {
         // resetting all static fields for a fresh reservation start
         _acc = acc;
-        userEmail = null;
-        amountOfPeople = 0;
-        chosenDate = default;
-        chosenTimeslot = (default, default);
-        chosenTable = "";
-        chosenCourse = 0;
-        stepCounter = 1;
+        _userEmail = null;
+        _amountOfPeople = 0;
+        _chosenDate = default;
+        _chosenTimeslot = (default, default);
+        _chosenTable = "";
+        _chosenCourse = 0;
+        _stepCounter = 1;
         Console.Clear();
-        if (acc == null)
+        if (acc == null!)
         {
-            string email = null;
+            string email = null!;
             bool loop = true;
             while (loop)
             {
@@ -43,7 +43,7 @@ static class Reservation
                     $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
                     "Reservering bekijken", "Ga terug"
                 };
-                int selectedIndex = _my1DMenu.RunResMenu(options, prompt, stepCounter);
+                int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
                 switch (selectedIndex)
                 {
                     case 0:
@@ -68,8 +68,8 @@ static class Reservation
                         if (email != null)
                         {
                             loop = false;
-                            userEmail = email;
-                            stepCounter++;
+                            _userEmail = email;
+                            _stepCounter++;
                             ResMenu();
                         }
                         else
@@ -82,7 +82,7 @@ static class Reservation
 
                         break;
                     case 2:
-                        ViewRes(email);
+                        ViewRes(email!);
                         break;
                     case 3:
                         MainMenu.Start();
@@ -92,8 +92,8 @@ static class Reservation
         }
         else
         {
-            stepCounter++;
-            userEmail = acc.EmailAddress;
+            _stepCounter++;
+            _userEmail = acc.EmailAddress;
             ResMenu();
         }
     }
@@ -101,30 +101,30 @@ static class Reservation
     public static void ResMenu()
     {
         Console.Clear();
-        amountOfPeople = ChooseGroupSize();
-        if (amountOfPeople <= 0)
+        _amountOfPeople = ChooseGroupSize();
+        if (_amountOfPeople <= 0)
         {
-            stepCounter--;
-            if (_acc == null)
+            _stepCounter--;
+            if (_acc == null!)
                 ResStart();
             else MainMenu.Start();
         }
         else
         {
-            stepCounter++;
+            _stepCounter++;
             ChooseCourse();
         }
 
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
         while (true)
         {
-            stepCounter++;
+            _stepCounter++;
             Console.Clear();
-            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, _stepCounter);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(
-                $"\n\n\nEmail:{userEmail}\nReservatie tafel nummer: {chosenTable}\nDatum: {chosenDate.Date.ToString("dd-MM-yyyy")}" +
-                $"\nTijd: ({chosenTimeslot.Item1} - {chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
+                $"\n\n\nEmail:{_userEmail}\nReservatie tafel nummer: {_chosenTable}\nDatum: {_chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"\nTijd: ({_chosenTimeslot.Item1} - {_chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
             Console.ResetColor();
             Console.CursorVisible = true;
             string answer = Console.ReadLine()!;
@@ -133,8 +133,8 @@ static class Reservation
                 case "ja":
                 case "j":
                     string Res_ID = Reservations.CreateID();
-                    Reservations.CreateReservation(userEmail, chosenDate, chosenTable, amountOfPeople,
-                        chosenTimeslot.Item1, chosenTimeslot.Item2, Res_ID);
+                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
+                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID);
                     Console.Clear();
                     Console.WriteLine("\nReservatie is gemaakt.");
                     Thread.Sleep(1500);
@@ -154,26 +154,26 @@ static class Reservation
     public static void ChooseCourse()
     {
         string[] options = new[] { "2 Gangen", "3 Gangen", "4 Gangen", "Ga terug" };
-        int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", stepCounter);
+        int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", _stepCounter);
         switch (chosenIndex)
         {
             case 0:
-                chosenCourse = 2;
-                stepCounter++;
+                _chosenCourse = 2;
+                _stepCounter++;
                 ChooseDate();
                 break;
             case 1:
-                chosenCourse = 3;
-                stepCounter++;
+                _chosenCourse = 3;
+                _stepCounter++;
                 ChooseDate();
                 break;
             case 2:
-                chosenCourse = 4;
-                stepCounter++;
+                _chosenCourse = 4;
+                _stepCounter++;
                 ChooseDate();
                 break;
             case 3:
-                stepCounter--;
+                _stepCounter--;
                 ResMenu();
                 break;
         }
@@ -181,13 +181,13 @@ static class Reservation
 
     public static int ChooseGroupSize()
     {
-        string amountofPeople = default;
+        string amountofPeople;
         while (true)
         {
             Console.ResetColor();
             string[] options = new[]
                 { "Vul hier in met hoeveel mensen u komt.", "Ga terug" };
-            int selectedIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies hier uw groepsgrootte:", stepCounter);
+            int selectedIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies hier uw groepsgrootte:", _stepCounter);
             Console.Clear();
             switch (selectedIndex)
             {
@@ -246,30 +246,30 @@ static class Reservation
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
 
-        DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", stepCounter, false);
+        DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", _stepCounter, false);
         if (userChoice == default)
         {
-            stepCounter--;
+            _stepCounter--;
             ChooseCourse();
         }
         else
         {
-            stepCounter++;
-            chosenDate = userChoice;
-            ChooseTimeslot(chosenDate);
+            _stepCounter++;
+            _chosenDate = userChoice;
+            ChooseTimeslot(_chosenDate);
         }
     }
 
-    public static void ChooseTimeslot(DateTime ChosenDate)
+    public static void ChooseTimeslot(DateTime chosenDate)
     {
         bool todayeventcheck = false;
-        JArray All_Events = AccountsAccess.ReadAllEvents();
+        JArray allEvents = AccountsAccess.ReadAllEvents();
         TimeSpan ts1 = default;
         TimeSpan ts2 = default;
-        foreach (var event_item in All_Events)
+        foreach (var eventItem in allEvents)
         {
-            string date = Convert.ToString(event_item["eventdate"]);
-            if (date == ChosenDate.ToString("dd-MM-yyyy"))
+            string date = Convert.ToString(eventItem["eventdate"])!;
+            if (date == chosenDate.ToString("dd-MM-yyyy"))
             {
                 todayeventcheck = true;
             }
@@ -284,72 +284,72 @@ static class Reservation
                 case 0:
                     ts1 = new TimeSpan(0, 16, 0, 0);
                     ts2 = new TimeSpan(0, 19, 0, 0);
-                    chosenTimeslot = (ts1, ts2);
-                    stepCounter++;
-                    ChooseTable(chosenDate, chosenTimeslot);
+                    _chosenTimeslot = (ts1, ts2);
+                    _stepCounter++;
+                    ChooseTable(_chosenDate, _chosenTimeslot);
                     break;
                 case 1:
                     ts1 = new TimeSpan(0, 19, 0, 0);
                     ts2 = new TimeSpan(0, 22, 0, 0);
-                    chosenTimeslot = (ts1, ts2);
-                    stepCounter++;
-                    ChooseTable(chosenDate, chosenTimeslot);
+                    _chosenTimeslot = (ts1, ts2);
+                    _stepCounter++;
+                    ChooseTable(_chosenDate, _chosenTimeslot);
                     break;
                 case 2:
-                    stepCounter--;
+                    _stepCounter--;
                     ChooseDate();
                     break;
             }
         }
         else
         {
-            string timeslot_1 = (chosenCourse == 2 ? "16:00 - 18:00" :
-                chosenCourse == 3 ? "16:00 - 18:15" : "16:00 - 18:30");
-            string timeslot_2 = (chosenCourse == 2 ? "18:00 - 20:00" :
-                chosenCourse == 3 ? "18:15 - 20:30" : "18:30 - 21:00");
-            string timeslot_3 = (chosenCourse == 2 ? "20:00 - 22:00" :
-                chosenCourse == 3 ? "20:30 - 22:45" : "21:00 - 23:30");
+            string timeslot1 = (_chosenCourse == 2 ? "16:00 - 18:00" :
+                _chosenCourse == 3 ? "16:00 - 18:15" : "16:00 - 18:30");
+            string timeslot2 = (_chosenCourse == 2 ? "18:00 - 20:00" :
+                _chosenCourse == 3 ? "18:15 - 20:30" : "18:30 - 21:00");
+            string timeslot3 = (_chosenCourse == 2 ? "20:00 - 22:00" :
+                _chosenCourse == 3 ? "20:30 - 22:45" : "21:00 - 23:30");
             string[] entertime;
             string[] leavetime;
-            string[] optionsmenu = new[] { timeslot_1, timeslot_2, timeslot_3, "Ga terug" };
-            int selectedIndex = _my1DMenu.RunResMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:", stepCounter);
+            string[] optionsmenu = new[] { timeslot1, timeslot2, timeslot3, "Ga terug" };
+            int selectedIndex = _my1DMenu.RunResMenu(optionsmenu, "\n\n\nKies uw gewenste tijdslot:", _stepCounter);
             switch (selectedIndex)
             {
                 case 0:
-                    entertime = timeslot_1.Split("-")[0].Split(":");
-                    leavetime = timeslot_1.Split("-")[1].Split(":");
+                    entertime = timeslot1.Split("-")[0].Split(":");
+                    leavetime = timeslot1.Split("-")[1].Split(":");
                     ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
                         0);
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
-                    chosenTimeslot = (ts1, ts2);
-                    stepCounter++;
-                    ChooseTable(chosenDate, chosenTimeslot);
+                    _chosenTimeslot = (ts1, ts2);
+                    _stepCounter++;
+                    ChooseTable(_chosenDate, _chosenTimeslot);
                     break;
                 case 1:
-                    entertime = timeslot_2.Split("-")[0].Split(":");
-                    leavetime = timeslot_2.Split("-")[1].Split(":");
+                    entertime = timeslot2.Split("-")[0].Split(":");
+                    leavetime = timeslot2.Split("-")[1].Split(":");
                     ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
                         0);
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
-                    chosenTimeslot = (ts1, ts2);
-                    stepCounter++;
-                    ChooseTable(chosenDate, chosenTimeslot);
+                    _chosenTimeslot = (ts1, ts2);
+                    _stepCounter++;
+                    ChooseTable(_chosenDate, _chosenTimeslot);
                     break;
                 case 2:
-                    entertime = timeslot_3.Split("-")[0].Split(":");
-                    leavetime = timeslot_3.Split("-")[1].Split(":");
+                    entertime = timeslot3.Split("-")[0].Split(":");
+                    leavetime = timeslot3.Split("-")[1].Split(":");
                     ts1 = new TimeSpan(0, Convert.ToInt32(entertime[0].Trim()), Convert.ToInt32(entertime[1].Trim()),
                         0);
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
-                    chosenTimeslot = (ts1, ts2);
-                    stepCounter++;
-                    ChooseTable(chosenDate, chosenTimeslot);
+                    _chosenTimeslot = (ts1, ts2);
+                    _stepCounter++;
+                    ChooseTable(_chosenDate, _chosenTimeslot);
                     break;
                 case 3:
-                    stepCounter--;
+                    _stepCounter--;
                     ChooseDate();
                     break;
             }
@@ -369,47 +369,47 @@ static class Reservation
         {
         }
 
-        _tableLogic.TableStart(tablesOnly, amountOfPeople, stepCounter);
+        _tableLogic.TableStart(tablesOnly, _amountOfPeople, _stepCounter);
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly,
-            "  Kies uw tafel (of druk op 'q' om terug te gaan):", amountOfPeople);
-        if (selectedTable != default) chosenTable = selectedTable.Id;
+            "  Kies uw tafel (of druk op 'q' om terug te gaan):", _amountOfPeople);
+        if (selectedTable != default!) _chosenTable = selectedTable.Id;
         else
         {
-            stepCounter--;
+            _stepCounter--;
             ChooseTimeslot(res_Date);
         }
     }
 
-    public static void ViewRes(string Email)
+    public static void ViewRes(string email)
     {
         Console.Clear();
-        bool CheckIfRes = false;
-        List<ReservationModel> AllRes = AccountsAccess.LoadAllReservations();
-        List<string> ReservationsPerson = new();
-        List<int> ReservationPersonPositions = new();
-        foreach (ReservationModel res in AllRes)
+        bool checkIfRes = false;
+        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
+        List<string> reservationsPerson = new();
+        List<int> reservationPersonPositions = new();
+        foreach (ReservationModel res in allRes)
         {
-            if (Email == res.EmailAddress && res.Date >= DateTime.Now.Date)
+            if (email == res.EmailAddress && res.Date >= DateTime.Now.Date)
             {
-                ReservationsPerson.Add(
+                reservationsPerson.Add(
                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.ToString("dd-MM-yyyy")}. Tijdslot: {res.StartTime} - {res.LeaveTime}");
-                ReservationPersonPositions.Add(AllRes.FindIndex(a => a == res));
-                CheckIfRes = true;
+                reservationPersonPositions.Add(allRes.FindIndex(a => a == res));
+                checkIfRes = true;
             }
         }
 
-        if (CheckIfRes == false)
+        if (checkIfRes == false)
         {
             Console.WriteLine("Er staan nog geen reserveringen open met dit email adres.");
             Thread.Sleep(2000);
         }
         else
         {
-            ReservationsPerson.Add("Ga terug");
+            reservationsPerson.Add("Ga terug");
             while (true)
             {
-                var reserv_input = _my1DMenu.RunMenu(ReservationsPerson.ToArray(), "Reserveringen");
-                switch (ReservationsPerson[reserv_input])
+                var reservInput = _my1DMenu.RunMenu(reservationsPerson.ToArray(), "Reserveringen");
+                switch (reservationsPerson[reservInput])
                 {
                     case "Ga terug":
                         MainMenu.Start();
@@ -420,17 +420,17 @@ static class Reservation
                         Console.WriteLine("Wilt u uw reservering annuleren? (j/n)");
                         Console.ResetColor();
                         Console.CursorVisible = true;
-                        var Choice = Console.ReadLine();
-                        switch (Choice)
+                        var choice = Console.ReadLine();
+                        switch (choice)
                         {
                             case "J":
                             case "j":
                             case "Ja":
                             case "ja":
                                 Console.WriteLine("De reservatie is verwijderd");
-                                AllRes.RemoveAt(ReservationPersonPositions[reserv_input]);
-                                ReservationsPerson.RemoveAt(reserv_input);
-                                AccountsAccess.WriteAllReservations(AllRes);
+                                allRes.RemoveAt(reservationPersonPositions[reservInput]);
+                                reservationsPerson.RemoveAt(reservInput);
+                                AccountsAccess.WriteAllReservations(allRes);
                                 Thread.Sleep(5000);
                                 UserLogin.DiscardKeys();
                                 break;

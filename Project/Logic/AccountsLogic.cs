@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-
-
-//This class is not static so later on we can use inheritance and interfaces
+﻿//This class is not static so later on we can use inheritance and interfaces
 class AccountsLogic:IMenuLogic
 {
     private List<AccountModel> _accounts;
@@ -12,7 +6,7 @@ class AccountsLogic:IMenuLogic
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
-    static public AccountModel? CurrentAccount { get; private set; }
+    public static AccountModel? CurrentAccount { get; private set; }
 
     public AccountsLogic()
     {
@@ -53,7 +47,7 @@ class AccountsLogic:IMenuLogic
     public AccountModel CheckLogin(string email, string password)
     {
         AccountModel? acc = GetByEmail(email);
-        if (acc != null)
+        if (acc != null!)
         {
             if (BCrypt.Net.BCrypt.Verify(password, acc.Password))
             {
@@ -83,7 +77,7 @@ class AccountsLogic:IMenuLogic
         do
         {
             Console.WriteLine("Voer de verificatie code in: ");
-            code = Console.ReadLine();
+            code = Console.ReadLine()!;
             if (code == sixDigitNumber)
             {
                 Console.WriteLine("Verificatie gelukt!");
@@ -102,9 +96,9 @@ class AccountsLogic:IMenuLogic
             // check if the password is valid
             do{
                 Console.WriteLine("Voer uw nieuwe wachtwoord in: ");
-                password = Console.ReadLine();
+                password = Console.ReadLine()!;
                 Console.WriteLine("herhaal uw nieuwe wachtwoord: ");
-                confirmPassword = Console.ReadLine();
+                confirmPassword = Console.ReadLine()!;
                 if (UserLogin.PasswordCheck(password) == false)
                 {
                     Console.WriteLine("Wachtwoord moet minimaal 8 karakters bevatten, een hoofdletter, een kleine letter, een cijfer en een speciaal teken");
