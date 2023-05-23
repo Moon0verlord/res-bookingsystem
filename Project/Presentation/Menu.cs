@@ -462,7 +462,6 @@ public static class Dishes
             case 4:
                 MainMenu.Start();
                 break;
-            
             default:
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
@@ -485,7 +484,7 @@ public static class Dishes
     public static void UserOptions()
     {
         Console.CursorVisible = false;
-        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
+        string[] options = { "Menu zien", "Wijn Arrangement", "Terug naar hoofdmenu" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -504,8 +503,7 @@ public static class Dishes
                 break;
         }
     }
-
-
+    
     // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()
     {
