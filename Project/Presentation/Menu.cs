@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
 
-//TODO Change amount of items in dishes json per category
 public static class Dishes
 {
     private static int _currentIndex;
