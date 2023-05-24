@@ -214,7 +214,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     var User = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
                     foreach (var item in AccountsAccess.LoadAllReservations())
                     {
-                        if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime)
+                        if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id)
                         {
                             Console.WriteLine("Er is al een reservering op deze datum en tijd");
                             EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
@@ -225,6 +225,8 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
                     AccountsAccess.ChangeReservationJson(reservation);
                     EmailLogic.SendEmail(reservation.EmailAddress, User.FullName, reservation.Id, reservation.Date);
+                    Console.WriteLine("Reservering aangepast");
+                    Thread.Sleep(2000);
                     MainMenu.Start();
                     break;
             }

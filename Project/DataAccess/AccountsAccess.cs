@@ -63,10 +63,11 @@ public static class AccountsAccess
     public static void RemoveReservation(ReservationModel resm)
     {
         var allReservations = LoadAllReservations();
-        allReservations.Remove(resm);
+        var index = allReservations.FindIndex(s => s.Id == resm.Id);
+        allReservations.RemoveAt(index);
         WriteAllReservations(allReservations);
-    }	
-    
+    }
+
     public static void EventWriteAll(List<EventModel> accounts)
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
