@@ -31,7 +31,7 @@ public class ReservationModel
     [JsonIgnore]
     public int TableSize { get; set; }
     
-    //todo: add reservation id
+    
     public ReservationModel(string id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime, string res_id)
     {
         Id = id;
