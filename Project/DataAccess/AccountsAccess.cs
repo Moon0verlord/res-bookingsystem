@@ -3,20 +3,20 @@ using Newtonsoft.Json.Linq;
 
 public static class AccountsAccess
 {
-    static string acc_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
-    static string res_path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
+    static string _accPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
+    static string _resPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
     private static AccountsLogic _accountsLogic = new AccountsLogic();
 
 
     public static List<AccountModel> LoadAll()
     {
-        string json = File.ReadAllText(acc_path);
+        string json = File.ReadAllText(_accPath);
         return JsonSerializer.Deserialize<List<AccountModel>>(json)!;
     }
 
     public static List<ReservationModel> LoadAllReservations()
     {
-        string json = File.ReadAllText(res_path);
+        string json = File.ReadAllText(_resPath);
         return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
     }
 
@@ -24,14 +24,14 @@ public static class AccountsAccess
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(accounts, options);
-        File.WriteAllText(acc_path, json);
+        File.WriteAllText(_accPath, json);
     }
 
     public static void WriteAllReservations(List<ReservationModel> reservations)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(reservations, options);
-        File.WriteAllText(res_path, json);
+        File.WriteAllText(_resPath, json);
     }
 
     public static AccountModel AddAccount(string email, string password, string name, bool IsEmployee, bool IsManager)
@@ -70,15 +70,15 @@ public static class AccountsAccess
             case 1:
                 if (accounts.Count > 3)
                 {
-                    var ClearAccounts = accounts.GetRange(1, 3);
-                    WriteAll(ClearAccounts);
+                    var clearAccounts = accounts.GetRange(1, 3);
+                    WriteAll(clearAccounts);
                 }
                 break;
             case 2:
                 if (reservations.Count > 1)
                 {
-                    var ClearReservations = reservations.GetRange(0, 0);
-                    WriteAllReservations(ClearReservations);
+                    var clearReservations = reservations.GetRange(0, 0);
+                    WriteAllReservations(clearReservations);
                 }
 
                 break;

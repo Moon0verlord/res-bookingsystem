@@ -3,7 +3,7 @@
     protected static int origRow;
     protected static int origCol;
     private ReservationModel[,] _tables = null;
-    private int _groupSize = 0;
+    private int _groupSize;
 
     public void TableStart(ReservationModel[,] tables , int amountOfPeople, int stepCounter)
         {
@@ -54,7 +54,7 @@
         {
             foreach (ReservationModel table in _tables)
             {
-                if (table != null)
+                if (table != null!)
                 {
                     if (table.Id == id)
                     {

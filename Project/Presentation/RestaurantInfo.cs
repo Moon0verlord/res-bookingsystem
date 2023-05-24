@@ -6,7 +6,7 @@ static class restaurantInfo
 {
     private static int _currentIndex;
 
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _myMenu = new MenuLogic();
     static string Information =
 @"
 De Witte Haven

@@ -2,15 +2,15 @@ using System.Drawing;
 
 static class UserLogin
 {
-    static private AccountsLogic accountsLogic = new();
-    static private MenuLogic myMenu = new();
+    private static AccountsLogic _accountsLogic = new();
+    private static MenuLogic _myMenu = new();
 
     // starts the login process 
     // Manager login: Zxcvbnm1
     public static void Start()
     {
-        string[] options = new[] { "Inloggen met account", "Account aanmaken\n", "Wachtwoord vergeten?", "Ga terug"};
-        int chosenOption = myMenu.RunMenu(options, "Welkom bij de account portal.");
+        string[] options = { "Inloggen met account", "Account aanmaken\n", "Wachtwoord vergeten?", "Ga terug"};
+        int chosenOption = _myMenu.RunMenu(options, "Welkom bij de account portal.");
         switch (chosenOption)
         {
             case 0:
@@ -32,8 +32,8 @@ static class UserLogin
 
     public static void StartLogin()
     {
-        string userEmail = null;
-        string userPassword = null;
+        string userEmail = null!;
+        string userPassword = null!;
         while (true)
         {
             string[] options =
@@ -42,7 +42,7 @@ static class UserLogin
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "\n" : $": {HidePass(userPassword)}\n")}",
                 "Inloggen met ingevulde gegevens", "Ga terug"
             };
-            int chosenOption = myMenu.RunMenu(options, "");
+            int chosenOption = _myMenu.RunMenu(options, "");
             switch (chosenOption)
             {
                 case 0:
@@ -70,11 +70,11 @@ static class UserLogin
                     }
                     else
                     {
-                        if (userEmail != null && userPassword != null)
+                        if (userEmail != null! && userPassword != null!)
                         {
-                            accountsLogic.RefreshList();
-                            AccountModel acc = accountsLogic.CheckLogin(userEmail, userPassword);
-                            if (acc != null)
+                            _accountsLogic.RefreshList();
+                            AccountModel acc = _accountsLogic.CheckLogin(userEmail, userPassword);
+                            if (acc != null!)
                             {
                                 Console.Clear();
                                 Console.WriteLine("Welkom terug " + acc.FullName + "!");
@@ -104,9 +104,9 @@ static class UserLogin
 
     public static void StartAccCreation()
     {
-        string userEmail = null;
-        string userPassword = null;
-        string fullName = null;
+        string userEmail = null!;
+        string userPassword = null!;
+        string fullName = null!;
         while (true)
         {
             string[] options =
@@ -115,7 +115,7 @@ static class UserLogin
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "" : $": {HidePass(userPassword)}")}",
                 "Vul hier uw volledige naam in" + (fullName == null ? "\n" : $": {fullName}\n"), "Account aanmaken met ingevulde gegevens", "Ga terug" 
             };
-             int chosenOption = myMenu.RunMenu(options, "");
+             int chosenOption = _myMenu.RunMenu(options, "");
             switch (chosenOption)
             {
                 case 0:
@@ -131,7 +131,7 @@ static class UserLogin
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                         Console.ResetColor();
-                        userEmail = null;
+                        userEmail = null!;
                         Thread.Sleep(3000);
                         DiscardKeys();
                     }
@@ -153,7 +153,7 @@ static class UserLogin
                         Console.ResetColor();
                         Thread.Sleep(2000);
                         DiscardKeys();
-                        userPassword = null;
+                        userPassword = null!;
                         break;
                     }
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
@@ -166,7 +166,7 @@ static class UserLogin
                       Console.ResetColor();
                       Thread.Sleep(2000);
                       DiscardKeys();
-                      userPassword = null;
+                      userPassword = null!;
                     }
                     break;
                 case 2:
@@ -186,8 +186,8 @@ static class UserLogin
                     }
                     else
                     {
-                        var emailExists = accountsLogic.GetByEmail(userEmail);
-                        if (emailExists != null)
+                        var emailExists = _accountsLogic.GetByEmail(userEmail);
+                        if (emailExists != null!)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(
@@ -224,11 +224,11 @@ static class UserLogin
 
     public static void PasswordReset()
     {
-        string userEmail = null;
+        string userEmail = null!;
         while (true)
         {
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "\n" : $": {userEmail}\n"), "Reset wachtwoord voor ingevulde email", "Ga terug" };
-            int chosenOption = myMenu.RunMenu(options, "Vul hier uw wachtwoord in om uw wachtwoord te resetten:");
+            int chosenOption = _myMenu.RunMenu(options, "Vul hier uw wachtwoord in om uw wachtwoord te resetten:");
             switch (chosenOption)
             {
                 case 0:
@@ -242,9 +242,9 @@ static class UserLogin
                     if (userEmail != null)
                     {
                         Console.Clear();
-                        AccountModel acc = accountsLogic.GetByEmail(userEmail);
-                        if (acc != null) 
-                            accountsLogic.ForgotPassword(userEmail);
+                        AccountModel acc = _accountsLogic.GetByEmail(userEmail);
+                        if (acc != null!) 
+                            _accountsLogic.ForgotPassword(userEmail);
                     }
                     else
                     {
