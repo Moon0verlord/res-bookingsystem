@@ -44,6 +44,14 @@ public static class AccountsAccess
         return allAccounts[^1];
     }
 
+    public static void RemoveAccount(string email)
+    {
+        var allAccounts = LoadAll();
+        var index = allAccounts.FindIndex(s => s.EmailAddress == email);
+        allAccounts.RemoveAt(index);
+        WriteAll(allAccounts);
+    }
+
     public static void ChangeReservationJson(ReservationModel resm)
     {
         var allReservations = LoadAllReservations();
