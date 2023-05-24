@@ -132,6 +132,20 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
+    public static void RemoveEmployee(){
+        Console.Clear();
+        Console.WriteLine("Email");
+        foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
+        {
+            Console.WriteLine(item.EmailAddress);
+        }
+        Console.WriteLine("Vul hier de email in van de medewerker die je wilt verwijderen");
+        string email = Console.ReadLine();
+        AccountsAccess.RemoveAccount(email);
+        Console.WriteLine("Medewerker verwijderd");
+        Thread.Sleep(3000);
+    }
+
     public static void ChangeReservation()
     {
         Console.Clear();
@@ -143,7 +157,7 @@ public class EmployeeManagerLogic : IMenuLogic
             Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.Res_ID, Date, time, item.EmailAddress));
         }
         Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen");
-        string id = Console.ReadLine();
+        string id = Console.ReadLine().ToUpper();
         ReservationModel reservation = ReservationsLogic.GetReservationById(id);
         while (true)
         {
@@ -152,7 +166,8 @@ public class EmployeeManagerLogic : IMenuLogic
                 $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
                 "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime} - {reservation.LeaveTime}"),
                 "Vul hier de nieuwe email in" + (reservation.EmailAddress == null ? "" : $": {reservation.EmailAddress}"),
-                "Terug en opslaan"
+                "Terug en opslaan",
+                "Terug zonder opslaan"
             };
             var selectedIndex = myMenu.RunMenu(options, "Vul hier de gegevens in");
             switch (selectedIndex)
@@ -227,6 +242,9 @@ public class EmployeeManagerLogic : IMenuLogic
                     EmailLogic.SendEmail(reservation.EmailAddress, User.FullName, reservation.Id, reservation.Date);
                     Console.WriteLine("Reservering aangepast");
                     Thread.Sleep(2000);
+                    MainMenu.Start();
+                    break;
+                case 4:
                     MainMenu.Start();
                     break;
             }
