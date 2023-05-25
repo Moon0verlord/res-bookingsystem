@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="BookingTest\BookingTest.csproj" />
+    <ProjectReference Include="..\Project\Project.csproj" />
   </ItemGroup>
 
 </Project>
