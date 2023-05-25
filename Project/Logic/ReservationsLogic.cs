@@ -169,25 +169,25 @@ public class ReservationsLogic
 
     public ReservationModel AddDefaultTable(string id, int size)
     {
-        ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null);
+        ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null, default);
         resm.isReserved = false;
         resm.TableSize = size;
         return resm;
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id)
+    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id, int course)
     {
         AccountModel User = AccountsAccess.LoadAll().Find(account => email == account.EmailAddress)!;
         if(User!=null)
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
             EmailLogic.SendEmail(email," "+User.FullName,chosenTable,res_Date);
             AccountsAccess.AddReservation(newReservation);
         }
         else
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
             EmailLogic.SendEmail(email,"",chosenTable,res_Date);
             AccountsAccess.AddReservation(newReservation);
         }
