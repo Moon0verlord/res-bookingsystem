@@ -3,6 +3,7 @@ namespace TestProject1;
 [TestClass]
 public class UnitTest1
 {
+    //Allows writeline
     private TestContext testContextInstance;
     public TestContext TestContext
     {
