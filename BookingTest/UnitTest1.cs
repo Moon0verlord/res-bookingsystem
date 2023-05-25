@@ -42,4 +42,15 @@ public class UnitTest1
         AccountsAccess.ClearJsonFiles(2);
         
     }
+
+    // test if you get dates back when calling populate dates()
+    // and that the correct result is a 2D datetime array
+    [TestMethod] 
+    public void TestPopulateDates()
+    {
+        ReservationsLogic logic = new ReservationsLogic();
+        var result = logic.PopulateDates();
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.GetType() == typeof(DateTime[,]));
+    }
 }
