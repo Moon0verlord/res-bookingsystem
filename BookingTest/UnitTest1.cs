@@ -53,4 +53,21 @@ public class UnitTest1
         Assert.IsNotNull(result);
         Assert.IsTrue(result.GetType() == typeof(DateTime[,]));
     }
+
+    // made by Jona
+    [TestMethod]
+    public void TestIsValidEmail()
+    {
+        string email = " ";
+        Assert.IsFalse(EmailLogic.IsValidEmail(email));
+        email = "test";
+        Assert.IsFalse(EmailLogic.IsValidEmail(email));
+        email = "test@";
+        Assert.IsFalse(EmailLogic.IsValidEmail(email));
+        email = "test@test";
+        Assert.IsFalse(EmailLogic.IsValidEmail(email));
+        email = "test@test.";
+        Assert.IsFalse(EmailLogic.IsValidEmail(email));
+    }
+
 }
