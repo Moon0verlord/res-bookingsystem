@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
@@ -17,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="BookingTest\BookingTest.csproj" />
+    <ProjectReference Include="..\Project\Project.csproj" />
   </ItemGroup>
 
 </Project>
