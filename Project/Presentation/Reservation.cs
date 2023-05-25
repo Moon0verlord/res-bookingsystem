@@ -303,12 +303,12 @@ static class Reservation
         }
         else
         {
-            string timeslot1 = (_chosenCourse == 2 ? "16:00 - 18:00" :
-                _chosenCourse == 3 ? "16:00 - 18:15" : "16:00 - 18:30");
-            string timeslot2 = (_chosenCourse == 2 ? "18:00 - 20:00" :
-                _chosenCourse == 3 ? "18:15 - 20:30" : "18:30 - 21:00");
-            string timeslot3 = (_chosenCourse == 2 ? "20:00 - 22:00" :
-                _chosenCourse == 3 ? "20:30 - 22:45" : "21:00 - 23:30");
+            string timeslot1 = (_chosenCourse == 2 ? "16:00 - 17:30" :
+                _chosenCourse == 3 ? "16:00 - 18:00" : "16:00 - 18:30");
+            string timeslot2 = (_chosenCourse == 2 ? "17:30 - 19:00" :
+                _chosenCourse == 3 ? "18:00 - 20:00" : "18:30 - 21:00");
+            string timeslot3 = (_chosenCourse == 2 ? "19:00 - 20:30" :
+                _chosenCourse == 3 ? "20:00 - 22:00" : "21:00 - 23:30");
             string[] entertime;
             string[] leavetime;
             string[] optionsmenu = new[] { timeslot1, timeslot2, timeslot3, "Ga terug" };
