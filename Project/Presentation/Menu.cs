@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Project.Presentation;
 
-//TODO Change amount of items in dishes json per category
 public static class Dishes
 {
     private static int _currentIndex;
@@ -304,7 +303,7 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
 
         string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
-        string prompt = "\nWelke prijs zou je willen veranderen:";
+        string prompt = "\nWelke prijs will je veranderen:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
@@ -370,7 +369,7 @@ public static class Dishes
         string json = File.ReadAllText(path);
         JObject Wines = JObject.Parse(json);
         Console.Clear();
-        Console.WriteLine($"{choice} Wijn arrangement:");
+        Console.WriteLine($"{choice} Wijn Arrangement:");
         Console.WriteLine("-------");
         var selection = Wines["Winemenu"]![choice]!
             .Select(item => new
@@ -462,7 +461,6 @@ public static class Dishes
             case 4:
                 MainMenu.Start();
                 break;
-            
             default:
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
@@ -485,8 +483,8 @@ public static class Dishes
     public static void UserOptions()
     {
         Console.CursorVisible = false;
-        string[] options = { "Menu zien", "Wijn arrangement", "Terug naar hoofdmenu" };
-        string prompt = "\nKies een type gerechten:";
+        string[] options = { "Menu zien", "Wijn Arrangement", "Terug naar hoofdmenu" };
+        string prompt = "\nKies een optie:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
@@ -504,14 +502,13 @@ public static class Dishes
                 break;
         }
     }
-
-
+    
     // Manager options to choose between changing menu or changing prices
     public static void ManagerOptions()
     {
         Console.CursorVisible = false;
         string[] options = { "Menu veranderen", "Prijs veranderen","Gerecht toevoegen", "Terug naar hoofdmenu" };
-        string prompt = "\nKies een type gerechten:";
+        string prompt = "\nKies een optie:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {

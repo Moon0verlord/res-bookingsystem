@@ -9,7 +9,7 @@ public class Program
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
-        catch {}
+        catch { }
         Console.Clear();
         MainMenu.Start();
     }

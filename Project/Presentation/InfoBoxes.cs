@@ -17,16 +17,14 @@ static class InfoBoxes
         int y = 23;
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
+        for (int i = 1; i <= 3; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 4);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 4);
         WriteAt("┐", x + boxBorder.Length, y);
-        WriteAt("│", x + boxBorder.Length, y + 1);
-        WriteAt("│", x + boxBorder.Length, y + 2);
-        WriteAt("│", x + boxBorder.Length, y + 3);
+        for (int i = 1; i <= 3; i++)
+            WriteAt("│", x + boxBorder.Length, y + i);
         WriteAt("┘", x + boxBorder.Length, y + 4);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt(msg1, x + 1, y + 1);
@@ -47,18 +45,14 @@ static class InfoBoxes
         string msg2 = $"Requirements wachtwoord:\n- 8-15 karakters lang\n- Minimaal 1 hoofdletter\n- Minimaal 1 cijfer";
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 5);
         WriteAt("┐", boxBorder.Length + 2, y);
-        WriteAt("│", boxBorder.Length + 2, y + 1);
-        WriteAt("│", boxBorder.Length + 2, y + 2);
-        WriteAt("│", boxBorder.Length + 2, y + 3);
-        WriteAt("│", boxBorder.Length + 2, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", boxBorder.Length + 2, y + i);
         WriteAt("┘", boxBorder.Length + 2, y + 5);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt(" Requirements E-mail:", x + 1, y + 1);
@@ -77,18 +71,14 @@ static class InfoBoxes
         string boxBorder = "──────────────────────────";
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 5);
         WriteAt("┐", boxBorder.Length + 1, y);
-        WriteAt("│", boxBorder.Length + 1, y + 1);
-        WriteAt("│", boxBorder.Length + 1, y + 2);
-        WriteAt("│", boxBorder.Length + 1, y + 3);
-        WriteAt("│", boxBorder.Length + 1, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", boxBorder.Length + 1, y + i);
         WriteAt("┘", boxBorder.Length + 1, y + 5);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt(" Requirements wachtwoord:", x + 1, y + 1);
@@ -152,27 +142,15 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
-        WriteAt("│", x, y + 5);
-        WriteAt("│", x, y + 6);
-        WriteAt("│", x, y + 7);
-        WriteAt("│", x, y + 8);
+        for (var i = 1; i <= 8; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 9);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 9);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
-        WriteAt("│", x + boxBorder.Length + 1, y + 5);
-        WriteAt("│", x + boxBorder.Length + 1, y + 6);
-        WriteAt("│", x + boxBorder.Length + 1, y + 7);
-        WriteAt("│", x + boxBorder.Length + 1, y + 8);
+        for (var i = 1; i <= 8; i++) 
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
         WriteAt("┘", x + boxBorder.Length + 1, y + 9);
         Console.ResetColor();
     }
@@ -195,27 +173,59 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
-        WriteAt("│", x, y + 5);
-        WriteAt("│", x, y + 6);
+        for (int i = 1; i <= 7; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 7);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 7);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
-        WriteAt("│", x + boxBorder.Length + 1, y + 5);
-        WriteAt("│", x + boxBorder.Length + 1, y + 6);
+        for (int i = 1; i <= 7; i++)
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
         WriteAt("┘", x + boxBorder.Length + 1, y + 7);
         Console.ResetColor();
     }
-    
+    public static void WriteTimeInfo(int origrow, int origcol)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        string boxBorder = "───────────────────────────────────────────────────────────────────────────────";
+        // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
+        // so i have to use manual whitespaces to format it correctly
+        // i hate it too
+        string Information = @"
+                                                         Ons restaurant is geopend van 16:00 tot 22:00.
+                                                Tijdens deze uren hebben wij 3 tijdssloten waarin u kunt reserveren.
+                                                                      De tijdssloten zijn:
+                                                                      16:00 tot 18:00
+                                                                      18:00 tot 20:00
+                                                                      20:00 tot 22:00
+
+                                        wanneer er een evenement plaatst vindt in ons restaurant zijn de openingstijden anders.
+                                                                  De openingstijden zijn dan:
+                                                                      16:00 tot 19:00
+                                                                      19:00 tot 22:00
+
+                                                        wij hopen u snel te zien in ons restaurant!
+            ";
+        int x = 46;
+        int y = 10;
+        WriteAt("Tijden", x + 37, y + 1);
+        WriteAt(Information, x + 1, y + 2);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        WriteAt("┌", x, y);
+        for (var i = 1; i <= 17; i++) 
+            WriteAt("│", x, y + i);
+        WriteAt("└", x, y + 18);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt(boxBorder, x + 1, y + 15);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        for (var i = 1; i <= 17; i++)
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 18);
+        Console.ResetColor();
+    }
     private static void WriteHours(int origrow, int origcol)
     {
         origRow = origrow;
@@ -244,39 +254,15 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
-        WriteAt("│", x, y + 5);
-        WriteAt("│", x, y + 6);
-        WriteAt("│", x, y + 7);
-        WriteAt("│", x, y + 8);
-        WriteAt("│", x, y + 9);
-        WriteAt("│", x, y + 10);
-        WriteAt("│", x, y + 11);
-        WriteAt("│", x, y + 12);
-        WriteAt("│", x, y + 13);
-        WriteAt("│", x, y + 14);
+        for (var i = 1; i <= 14; i++) 
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 15);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 15);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
-        WriteAt("│", x + boxBorder.Length + 1, y + 5);
-        WriteAt("│", x + boxBorder.Length + 1, y + 6);
-        WriteAt("│", x + boxBorder.Length + 1, y + 7);
-        WriteAt("│", x + boxBorder.Length + 1, y + 8);
-        WriteAt("│", x + boxBorder.Length + 1, y + 9);
-        WriteAt("│", x + boxBorder.Length + 1, y + 10);
-        WriteAt("│", x + boxBorder.Length + 1, y + 11);
-        WriteAt("│", x + boxBorder.Length + 1, y + 12);
-        WriteAt("│", x + boxBorder.Length + 1, y + 13);
-        WriteAt("│", x + boxBorder.Length + 1, y + 14);
+        for (var i = 1; i <= 14; i++)
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
         WriteAt("┘", x + boxBorder.Length + 1, y + 15);
         Console.ResetColor();
     }
@@ -297,19 +283,15 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Red;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
+        for (var i = 1; i <= 4; i++) 
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 5);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
+        for (var i = 1; i <= 5; i++) 
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
         WriteAt("┘", x + boxBorder.Length + 1, y + 5);
         Console.ResetColor();
     }
@@ -339,19 +321,15 @@ static class InfoBoxes
         WriteAt(Information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt("┌", x, y);
-        WriteAt("│", x, y + 1);
-        WriteAt("│", x, y + 2);
-        WriteAt("│", x, y + 3);
-        WriteAt("│", x, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", x, y + i);
         WriteAt("└", x, y + 5);
         WriteAt(boxBorder, x + 1, y);
         WriteAt(boxBorder, x + 1, y + 2);
         WriteAt(boxBorder, x + 1, y + 5);
         WriteAt("┐", x + boxBorder.Length + 1, y);
-        WriteAt("│", x + boxBorder.Length + 1, y + 1);
-        WriteAt("│", x + boxBorder.Length + 1, y + 2);
-        WriteAt("│", x + boxBorder.Length + 1, y + 3);
-        WriteAt("│", x + boxBorder.Length + 1, y + 4);
+        for (int i = 1; i <= 4; i++)
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
         WriteAt("┘", x + boxBorder.Length + 1, y + 5);
         Console.ResetColor();
     }

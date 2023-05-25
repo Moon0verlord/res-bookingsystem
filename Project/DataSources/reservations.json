@@ -1,20 +1,11 @@
 [
   {
-    "table_id": "2S",
-    "res_id": "RES-129704",
-    "emailAddress": "m@w",
-    "res_date": "2023-04-26T00:00:00",
+    "table_id": "3S",
+    "res_id": "RES-743202",
+    "emailAddress": "n@b.cl",
+    "res_date": "2023-05-17T00:00:00+02:00",
     "group_size": 2,
-    "start_time": "18:00:00",
-    "leave_time": "20:00:00"
-  },
-  {
-    "table_id": "5M",
-    "res_id": "RES-275219",
-    "emailAddress": "squeeth@protonmail.com",
-    "res_date": "2023-04-27T00:00:00",
-    "group_size": 4,
-    "start_time": "18:00:00",
-    "leave_time": "20:00:00"
+    "start_time": "18:15:00",
+    "leave_time": "20:30:00"
   }
 ]

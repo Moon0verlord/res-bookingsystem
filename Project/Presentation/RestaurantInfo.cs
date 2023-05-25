@@ -9,9 +9,9 @@ static class restaurantInfo
     static private MenuLogic _myMenu = new MenuLogic();
     static string Information =
 @"
-/Restaurant name/
+De Witte Haven
 
-Hier in Rotterdam vind je het prachtige /restaurant name/.
+Hier in Rotterdam vind je het prachtige De Witte Haven.
 Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. Ook is
 het mogelijk om er een wijnarrangement bij te boeken. Naast 
 het reserveren van een tafel is er ook beschikking tot een bar.
