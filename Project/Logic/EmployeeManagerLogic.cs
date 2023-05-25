@@ -139,25 +139,71 @@ public class EmployeeManagerLogic : IMenuLogic
         {
             Console.WriteLine(item.EmailAddress);
         }
-        Console.WriteLine("Vul hier de email in van de medewerker die je wilt verwijderen");
-        string email = Console.ReadLine();
-        AccountsAccess.RemoveAccount(email);
-        Console.WriteLine("Medewerker verwijderd");
-        Thread.Sleep(3000);
+        Console.WriteLine("Vul hier de email in van de medewerker die je wilt verwijderen (druk op enter om terug te gaan)");
+        while (true)
+        {
+            string email = Console.ReadLine();
+            if (AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
+            {
+                Console.WriteLine("Weet je zeker dat je deze medewerker wilt verwijderen? (j/n)");
+                string answer = Console.ReadLine().ToLower();
+                if (answer == "j")
+                {
+                    AccountsAccess.RemoveAccount(email);
+                    Console.WriteLine("Medewerker verwijderd");
+                    Thread.Sleep(3000);
+                    break;
+                }
+                else if (answer == "n")
+                {
+                    Console.WriteLine("Medewerker niet verwijderd");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige invoer");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Deze medewerker bestaat niet");
+            }
+            if (email == "")
+            {
+                break;
+            }
+        }
     }
 
     public static void ChangeReservation()
     {
-        Console.Clear();
-        Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
-        foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
+        string id;
+        while (true)
         {
-            var Date = item.Date.ToString("dd-MM-yy");
-            string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
-            Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.Res_ID, Date, time, item.EmailAddress));
+            Console.Clear();
+            Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
+            foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
+            {
+                var Date = item.Date.ToString("dd-MM-yy");
+                string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
+                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.Res_ID, Date, time, item.EmailAddress));
+            }
+            Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen (druk op enter om terug te gaan)");
+            id = Console.ReadLine().ToUpper();
+            string[] res_ids = (from res in AccountsAccess.LoadAllReservations() select res.Res_ID).ToArray();
+            if (id == "")
+            {
+                break;
+            }
+            if (!res_ids.Contains(id))
+            {
+                Console.WriteLine("Dit ID bestaat niet, vul het opnieuw in.");
+                Thread.Sleep(500);
+                Console.Clear();
+                continue;
+            }
+            break;
         }
-        Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen");
-        string id = Console.ReadLine().ToUpper();
         ReservationModel reservation = ReservationsLogic.GetReservationById(id);
         while (true)
         {
@@ -232,7 +278,10 @@ public class EmployeeManagerLogic : IMenuLogic
                         if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id)
                         {
                             Console.WriteLine("Er is al een reservering op deze datum en tijd");
-                            EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                            if (User != null)
+                                EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                            else
+                                EmailLogic.SendCancellationMail(item.EmailAddress, "Gebruiker");
                             AccountsAccess.RemoveReservation(item);
                             Thread.Sleep(2000);
                             MainMenu.Start();
