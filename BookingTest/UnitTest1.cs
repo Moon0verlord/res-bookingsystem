@@ -86,6 +86,8 @@ public class UnitTest1
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
         email = "test@test.";
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
+        email = "test@gmail.com";
+        Assert.IsTrue(EmailLogic.IsValidEmail(email));
     }
     
     
