@@ -1,3 +1,6 @@
+using System.Text.RegularExpressions;
+using Project.Presentation;
+
 namespace TestProject1;
 
 [TestClass]
@@ -5,6 +8,7 @@ public class UnitTest1
 {
     //Allows writeline
     private TestContext testContextInstance;
+
     public TestContext TestContext
     {
         get { return testContextInstance; }
@@ -36,13 +40,26 @@ public class UnitTest1
     {
         //Tried to add a datarow to this method, the datetime and timespan functions woudltn cooperate so i had to do this
         ReservationsLogic reservations = new ReservationsLogic();
-        AccountsAccess.AddReservation(new ReservationModel("1S","Test@gmail.com",new DateTime(2003,12,2),4,new TimeSpan(12),new TimeSpan(13),"ABCDEFG"));
+        AccountsAccess.AddReservation(new ReservationModel("1S","Test@gmail.com",new DateTime(2003,12,2),4,new TimeSpan(12),new TimeSpan(13),"RES-180439", 2));
         var Reservation = AccountsAccess.LoadAllReservations().Find(account => account.EmailAddress == "Test@gmail.com");
         Assert.IsTrue(Reservation != null );
         AccountsAccess.ClearJsonFiles(2);
         
     }
-
+    
+    
+    // made by robin b
+    // create id used by reservations, and check if it matches the following regular expression.
+    [TestMethod] 
+    public void TestIDCreation()
+    {
+        ReservationsLogic logic = new ReservationsLogic();
+        Regex regex = new Regex(@"RES-\d+");
+        string id = logic.CreateID();
+        Assert.IsTrue(regex.IsMatch(id));
+    }
+    
+    // made by robin b
     // test if you get dates back when calling populate dates()
     // and that the correct result is a 2D datetime array
     [TestMethod] 
@@ -53,7 +70,7 @@ public class UnitTest1
         Assert.IsNotNull(result);
         Assert.IsTrue(result.GetType() == typeof(DateTime[,]));
     }
-
+    
     // made by Jona
     // tests if the email is valid
     [TestMethod]
@@ -69,6 +86,18 @@ public class UnitTest1
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
         email = "test@test.";
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
+    }
+    
+    
+    // Made by Rafiq
+    
+    [TestMethod]
+    public static void HidePass_ReturnsHiddenPassword()
+    {
+        string password = "mysecretpassword";
+        string expectedHiddenPassword = "****************";
+        string actualHiddenPassword = UserLogin.HidePass(password);
+        Assert.AreEqual(expectedHiddenPassword, actualHiddenPassword);
     }
 
 }

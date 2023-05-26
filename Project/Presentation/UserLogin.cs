@@ -1,6 +1,7 @@
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
-static class UserLogin
+public static class UserLogin
 {
     private static AccountsLogic _accountsLogic = new();
     private static MenuLogic _myMenu = new();
