@@ -6,75 +6,47 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 class EmailLogic
 {
-    public static async Task<bool> IsValidDomain(string domain)
+    public static bool CheckDomain(string email)
     {
-        string url = "https://data.iana.org/TLD/tlds-alpha-by-domain.txt";
-        bool containsSubstring = false;
-
-        using (HttpClient client = new HttpClient())
+        email = email.ToLower();
+        string page = "https://data.iana.org/TLD/tlds-alpha-by-domain.txt";
+        using (HttpClient httpClient = new HttpClient())
         {
-            try
+            HttpResponseMessage response = httpClient.GetAsync(page).Result;
+            if (response.IsSuccessStatusCode)
             {
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
-                containsSubstring = content.Contains(domain);
+                
+                int index = email.LastIndexOf(".");
+                string domain = email.Substring(index + 1);
+                string responseBody = response.Content.ReadAsStringAsync().Result.ToLower();
+                Console.WriteLine(domain);
+                if (responseBody.Contains(domain))
+                {
+                    return true;
+                }
+    
+                return false;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
-        }
-
-        return containsSubstring;
-    }
-    public static bool IsValidEmail(string email)
-    {
-        if (string.IsNullOrWhiteSpace(email))
-            return false;
-
-        try
-        {
-            // Normalize the domain
-            email = Regex.Replace(email, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
-
-            // Examines the domain part of the email and normalizes it.
-            string DomainMapper(Match match)
-            {
-                // Use IdnMapping class to convert Unicode domain names.
-                var idn = new IdnMapping();
-
-                // Pull out and process domain name (throws ArgumentException on invalid)
-                string domainName = idn.GetAscii(match.Groups[2].Value);
-                if (Convert.ToBoolean(IsValidDomain(domainName))) ;
-                return match.Groups[1].Value + domainName;
-            }
-        }
-        catch (RegexMatchTimeoutException e)
-        {
-            return false;
-        }
-        catch (ArgumentException e)
-        {
-            return false;
-        }
-        catch (InvalidCastException e)
-        {
-            return false;
-        }
-
-        try
-        {
-            return Regex.IsMatch(email,
-                @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-        }
-        catch (RegexMatchTimeoutException)
-        {
             return false;
         }
     }
+    public static bool IsValidEmail( string email)
+    {
+        try
+        {
+            var addr = new MailAddress(email);
+            if(addr.ToString().Contains(".")&&CheckDomain(email))
+            {
+                return true;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+        return false;
+    }
+
     public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
