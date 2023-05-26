@@ -4,7 +4,7 @@ using System;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-class EmailLogic
+public class EmailLogic
 {
     public static bool CheckDomain(string email)
     {

@@ -25,6 +25,9 @@ public class ReservationModel
     [JsonPropertyName("leave_time")]
     public TimeSpan LeaveTime { get; set; }
     
+    [JsonPropertyName("chosen_course")]
+    public int Course { get; set; }
+    
     [JsonIgnore]
     public bool isReserved { get; set; }
     
@@ -32,7 +35,7 @@ public class ReservationModel
     public int TableSize { get; set; }
     
     
-    public ReservationModel(string id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime, string res_id)
+    public ReservationModel(string id, string emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime, string res_id, int course)
     {
         Id = id;
         EmailAddress = emailAddress;
@@ -41,6 +44,7 @@ public class ReservationModel
         StartTime = starttime;
         LeaveTime = leavetime;
         Res_ID = res_id;
+        Course = course;
         isReserved = false;
     }
 }
