@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 public class EmailLogic
 {
+    // check if the domain of the email is valid
     public static bool CheckDomain(string email)
     {
         email = email.ToLower();
@@ -32,6 +33,8 @@ public class EmailLogic
             return false;
         }
     }
+
+    // check if the email is valid
     public static bool IsValidEmail( string email)
     {
         try
@@ -49,6 +52,7 @@ public class EmailLogic
         return false;
     }
 
+    // Send an email to the user after they have made a reservation
     public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
