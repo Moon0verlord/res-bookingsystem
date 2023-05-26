@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 public class EmailLogic
 {
+    // check if a domain is valid
     public static async Task<bool> IsValidDomain(string domain)
     {
         string url = "https://data.iana.org/TLD/tlds-alpha-by-domain.txt";
@@ -29,6 +30,8 @@ public class EmailLogic
 
         return containsSubstring;
     }
+
+    // check if an email is valid
     public static bool IsValidEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))
@@ -75,6 +78,8 @@ public class EmailLogic
             return false;
         }
     }
+
+    // sends a mail to the user after they have reserved a table
     public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
@@ -123,6 +128,7 @@ public class EmailLogic
         }
     }
 
+    // sends a mail to the user with a verification code if they want to change their password
     public static void SendVerificationMail(string email, string name, string vrfyCode){
        try
         {
@@ -162,6 +168,7 @@ public class EmailLogic
         } 
     }
 
+    // sends a mail to the user if their reservation couldn't be altered
     public static void SendCancellationMail(string email, string name){
        try
         {

@@ -39,6 +39,7 @@ public class EmployeeManagerLogic : IMenuLogic
             var selectedIndex = myMenu.RunMenu(options, "Medewerker toevoegen");
             switch (selectedIndex)
             {
+                // add email of employee
                 case 0:
                     Console.Clear();
                     Console.CursorVisible = true;
@@ -55,6 +56,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
 
                     break;
+                // add password of employee
                 case 1:
                     Console.Clear();
                     Console.CursorVisible = true;
@@ -74,6 +76,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         employeePassword = null!;
                         break;
                     }
+                // create account
                 case 2:
                     if (employeeEmail == null || employeePassword == null)
                     {
@@ -124,6 +127,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
 
                     break;
+                // exit
                 case 3:
                     MainMenu.Start();
                     break;
@@ -132,9 +136,11 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
+    // Remove an employee
     public static void RemoveEmployee(){
         Console.Clear();
         Console.WriteLine("Email");
+        // Show all employees
         foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
         {
             Console.WriteLine(item.EmailAddress);
@@ -175,6 +181,7 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
+    // change a reservation of a customer
     public static void ChangeReservation()
     {
         string id;
@@ -182,6 +189,8 @@ public class EmployeeManagerLogic : IMenuLogic
         {
             Console.Clear();
             Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
+
+            // show all reservations
             foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
             {
                 var Date = item.Date.ToString("dd-MM-yy");
@@ -218,12 +227,14 @@ public class EmployeeManagerLogic : IMenuLogic
             var selectedIndex = myMenu.RunMenu(options, "Vul hier de gegevens in");
             switch (selectedIndex)
             {
+                // set new date
                 case 0:
                     Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe datum in (dd-mm-jjjj)");
                     DateTime date = Convert.ToDateTime(Console.ReadLine());
                     reservation.Date = date;
                     break;
+                // set new time
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Vul hier het nieuwe tijdsslot in");
@@ -257,6 +268,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         break;
                     }
                     break;
+                // set new email
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe email in");
@@ -271,6 +283,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         Thread.Sleep(2000);
                     }
                     break;
+                // save changes and send email if possible else send cancellation email
                 case 3:
                     var User = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
                     foreach (var item in AccountsAccess.LoadAllReservations())
@@ -293,6 +306,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     Thread.Sleep(2000);
                     MainMenu.Start();
                     break;
+                // go back without saving
                 case 4:
                     MainMenu.Start();
                     break;
@@ -300,6 +314,7 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
+    // hide password for security
     public static string HidePass(string pass)
     {
         string hiddenPass = "";
@@ -311,6 +326,7 @@ public class EmployeeManagerLogic : IMenuLogic
         return hiddenPass;
     }
 
+    // write password in console
     public static string WritePassword()
     {
         string password = "";

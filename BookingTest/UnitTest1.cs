@@ -55,6 +55,7 @@ public class UnitTest1
     }
 
     // made by Jona
+    // tests if the email is valid
     [TestMethod]
     public void TestIsValidEmail()
     {
