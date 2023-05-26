@@ -15,17 +15,19 @@ public class EmailLogic
             HttpResponseMessage response = httpClient.GetAsync(page).Result;
             if (response.IsSuccessStatusCode)
             {
-                
+                Console.WriteLine();
                 int index = email.LastIndexOf(".");
-                string domain = email.Substring(index + 1);
+                string domain = email.Substring(index +1);
+                
                 string responseBody = response.Content.ReadAsStringAsync().Result.ToLower();
-                Console.WriteLine(domain);
-                if (responseBody.Contains(domain))
+                
+                if (domain.Length>0 && responseBody.Contains(domain))
                 {
                     return true;
+
                 }
-    
                 return false;
+                
             }
             return false;
         }
