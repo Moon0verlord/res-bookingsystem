@@ -88,6 +88,8 @@ public class UnitTest1
     }
     
     
+    // Made by Rafiq
+    
     [TestMethod]
     public static void HidePass_ReturnsHiddenPassword()
     {
