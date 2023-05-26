@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Project.Presentation;
 
 namespace TestProject1;
 
@@ -7,6 +8,7 @@ public class UnitTest1
 {
     //Allows writeline
     private TestContext testContextInstance;
+
     public TestContext TestContext
     {
         get { return testContextInstance; }
@@ -83,6 +85,16 @@ public class UnitTest1
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
         email = "test@test.";
         Assert.IsFalse(EmailLogic.IsValidEmail(email));
+    }
+    
+    
+    [TestMethod]
+    public static void HidePass_ReturnsHiddenPassword()
+    {
+        string password = "mysecretpassword";
+        string expectedHiddenPassword = "****************";
+        string actualHiddenPassword = UserLogin.HidePass(password);
+        Assert.AreEqual(expectedHiddenPassword, actualHiddenPassword);
     }
 
 }

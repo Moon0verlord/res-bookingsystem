@@ -1,5 +1,7 @@
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("BookingTest.csproj")]
 public static class UserLogin
 {
     private static AccountsLogic _accountsLogic = new();

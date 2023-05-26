@@ -529,5 +529,18 @@ public static class Dishes
                 break;
         }
     }
+    
+    
+    // added for testing
+    public static string HidePass(string pass)
+    {
+        string hiddenPass = "";
+        for (int i = 0; i < pass.Length; i++)
+        {
+            hiddenPass += "*";
+        }
+
+        return hiddenPass;
+    }
 
 }
