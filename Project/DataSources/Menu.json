@@ -1,160 +1,123 @@
 {
+  "Prijzen": {
+    "Prijzen": [
+      "€ 90,00",
+      "€ 50,00",
+      "€ 80,00"
+    ]
+  },
   "Vegetarisch": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Courgette en Maïs Fritters",
-        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries",
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "Courgette en Maïs Fritters",
+      "Veganistische Deviled Eggs",
+      "Veganistische Sushi Rolls"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Veganistische Deviled Eggs",
-        "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
-        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "Veganistische Pot Pie",
+      "Jackfruit Carnitas Tacos met Guacamole",
+      "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Veganistische Sushi Rolls",
-        "Soep": "Tom Kha Gai Soep",
-        "Maaltijd": "Veganistische Pot Pie",
-        "Nagerecht": "Chocolade Avocado Mousse",
-        "Prijs": "€ 55,00"
-      }
+    "Soep": [
+      "Tom Kha Gai Soep"
+    ],
+    "Nagerecht": [
+      "Blauwe Bessen Citroen Cheesecake Bars",
+      "Chocolade Avocado Mousse"
     ]
   },
   "Vis": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Gerookte zalm op crostini",
-        "Maaltijd": "Gegrilde tonijnsteak met gember-sojasaus",
-        "Soep": null,
-        "Nagerecht": null,
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "Kreeftenbisque",
+      "Shrimp Cocktail",
+      "Tuna Tartare with Avocado and Mango"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Shrimp Cocktail",
-        "Maaltijd": "Cedar Plank Salmon with Herb Butter",
-        "Nagerecht": "Key Lime Pie",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "Gegrilde tonijnsteak met gember-sojasaus",
+      "Cedar Plank Salmon with Herb Butter",
+      "Pan-Seared Scallops with Truffle Risotto"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Tuna Tartare with Avocado and Mango",
-        "Soep": "Lobster Bisque",
-        "Maaltijd": "Pan-Seared Scallops with Truffle Risotto",
-        "Nagerecht": "Chocolate Torte",
-        "Prijs": "€ 45,00"
-      }
+    "Soep": [
+      "Lobster Bisque"
+    ],
+    "Nagerecht": [
+      "Chocolate Torte",
+      "Key Lime Pie"
     ]
   },
   "Vlees": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Caesar Salad",
-        "Maaltijd": "Grilled Ribeye Steak with Red Wine Sauce",
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "Garnalen Scampi",
+      "Franse Uiensoep",
+      "Op de Huid Gebakken Coquilles met Citroen Knoflookboter"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Franse Uiensoep",
-        "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
-        "Nagerecht": "Crème Brûlée",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "Grilled Ribeye Steak with Red Wine Sauce",
+      "Op de Huid Gebakken Eendenborst met Kersensaus",
+      "Geroosterde Lamscarré met Rozemarijn en Knoflook"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Op de Huid Gebakken Coquilles met Citroen Knoflookboter",
-        "Soep": "Room van Champignonsoep",
-        "Maaltijd": "Geroosterde Lamscarré met Rozemarijn en Knoflook",
-        "Nagerecht": "Chocolademousse",
-        "Prijs": "€ 45,00"
-      }
+    "Soep": [
+      "Room van Champignonsoep"
+    ],
+    "Nagerecht": [
+      "Crème Brûlée",
+      "Chocolademousse"
     ]
   },
   "Veganistisch": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Mixed Green Salad",
-        "Maaltijd": "Roasted Vegetable Risotto",
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "Mixed Green Salad",
+      "Gegrilde Perzik en Rucola Salade",
+      "Geroosterde Venkel en Sinaasappel Salade"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Roasted Beet Salad",
-        "Maaltijd": "Eggplant Parmesan with Tomato Sauce",
-        "Nagerecht": "Vegan Chocolate Mousse",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "Roasted Vegetable Risotto",
+      "Eggplant Parmesan with Tomato Sauce",
+      "Gegrilde Tofu en Groente Kebabs"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Geroosterde Venkel en Sinaasappel Salade",
-        "Soep": "Romige Tomaat en Basilicum Soep",
-        "Maaltijd": "Gegrilde Tofu en Groente Kebabs",
-        "Nagerecht": "Raspberry Sorbet",
-        "Prijs": null
-      }
+    "Soep": [
+      "Romige Tomaat en Basilicum Soep"
+    ],
+    "Nagerecht": [
+      "Vegan Chocolate Mousse",
+      "Raspberry Sorbet"
     ]
   },
   "kerst": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "avocado zalmtartaar",
-        "Maaltijd": "varkensrollade met kruidge mandarijn-venkelsalade",
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "avocado zalmtartaar",
+      "carpaccio van groente",
+      "salade met gerookte eendenborst en frambozen"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "carpaccio van groente",
-        "Maaltijd": "gevulde varkenshaas",
-        "Nagerecht": "frozen yoghurt schotsen met fruit",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "varkensrollade met kruidge mandarijn-venkelsalade",
+      "gevulde varkenshaas",
+      "biefstukrollade met krokante roseval aardappelen"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "salade met gerookte eendenborst en frambozen",
-        "Soep": "romige preisoep met kerstboom soepstengels",
-        "Maaltijd": "biefstukrollade met krokante roseval aardappelen",
-        "Nagerecht": "witte soesjestoren met kokossneeuw",
-        "Prijs": "€ 45,00"
-      }
+    "Soep": [
+      "Romige Tomaat en Basilicum Soep"
+    ],
+    "Nagerecht": [
+      "frozen yoghurt schotsen met fruit",
+      "witte soesjestoren met kokossneeuw",
+      "Raspberry Sorbet"
     ]
   },
   "pasen": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "mozzarella met vijgen en hazelnoot",
-        "Maaltijd": "salade met warme geiten kaas",
-        "Prijs": "€ 25,00"
-      }
+    "Voorgerecht": [
+      "mozzarella met vijgen en hazelnoot",
+      "avocado zalmtartaar"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "paaseitjes met eierragout",
-        "Maaltijd": "truffelpolenta met champignons",
-        "Nagerecht": "passievruchtenmousse met gebrande meringue",
-        "Prijs": "€ 35,00"
-      }
+    "Maaltijd": [
+      "salade met warme geiten kaas",
+      "truffelpolenta met champignons",
+      "vlaams pasteitje"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "tartelettes met minigroente",
-        "Soep": "courgette soep met gerookte zalm",
-        "Maaltijd": "vlaams pasteitje",
-        "Nagerecht": "frambozen wittechocoladetaartje",
-        "Prijs": "€ 45,00"
-      }
+    "Soep": [
+      "courgette soep met gerookte zalm"
+    ],
+    "Nagerecht": [
+      "passievruchtenmousse met gebrande meringue",
+      "frambozen wittechocoladetaartje"
     ]
   }
 }

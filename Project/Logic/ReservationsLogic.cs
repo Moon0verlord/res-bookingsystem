@@ -32,6 +32,70 @@ public class ReservationsLogic
         return dates;
     }
     
+    public List<ReservationModel> PopulateTables(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
+    {
+        List<ReservationModel> reservedTables = AccountsAccess.LoadAllReservations();
+        List<ReservationModel> tablesToAdd = new List<ReservationModel>();
+        // these are needed to set each table's maximum allowed size of 2, 4 and 6.
+        // Starts at -1 so that the first if statement makes the index start at 0.
+        List<int> CurrentTableSizes = new List<int>() { 2, 4, 6 };
+        int tableIndex = -1;
+        for (int i = 1; i <= 15; i++)
+        {
+            string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
+            IEnumerable<ReservationModel> tablesWithThisID = reservedTables.Where(res => res.Id.Equals(i)&&res.Date==res_Date);
+            if (i == 1 || i == 9 || i == 14)
+            {
+                tableIndex++;
+            }
+            if (tablesWithThisID.Count() >= 1)
+            {
+                foreach (ReservationModel table in tablesWithThisID)
+                {
+                    if (table.Date == res_Date.Date)
+                    {
+                        if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
+                        {
+                            table.isReserved = true;
+                            table.TableSize = CurrentTableSizes[tableIndex];
+                            tablesToAdd.Add(table);
+                        }
+                        else
+                        {
+                            bool noDuplicates = true;
+                            foreach (ReservationModel check in tablesToAdd)
+                            {
+                                if (check != null)
+                                {
+                                    if (check.Id == ID)
+                                        noDuplicates = false;
+                                }
+                            }
+                            if (noDuplicates)
+                            {
+                                int size = CurrentTableSizes[tableIndex];
+                                var AddTable = AddDefaultTable(ID, size);
+                                tablesToAdd.Add(AddTable);
+                                
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        int size = CurrentTableSizes[tableIndex];
+                        tablesToAdd.Add(AddDefaultTable(ID, size));
+                    }
+                }
+            }
+            else
+            {
+                int size = CurrentTableSizes[tableIndex];
+                tablesToAdd.Add(AddDefaultTable(ID, size));
+            }
+        }
+        return tablesToAdd;
+    }
+    
     public ReservationModel[,] PopulateTables2D(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         int rowCount = -1;
@@ -59,9 +123,7 @@ public class ReservationsLogic
                 {
                     if (table.Date == res_Date.Date)
                     {
-                        if ((chosenTime.Item1 == table.StartTime && chosenTime.Item2 == table.LeaveTime) ||
-                            IsWithinTime(chosenTime.Item1, table.StartTime, table.LeaveTime) || 
-                            IsWithinTime(chosenTime.Item2, table.StartTime, table.LeaveTime))
+                        if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
                         {
                             table.isReserved = true;
                             table.TableSize = CurrentTableSizes[tableIndex];
@@ -105,30 +167,27 @@ public class ReservationsLogic
         return tables2D;
     }
 
-    private bool IsWithinTime(TimeSpan actual, TimeSpan startTime, TimeSpan leaveTime)
-        => actual > startTime && actual < leaveTime;
-
     public ReservationModel AddDefaultTable(string id, int size)
     {
-        ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null);
+        ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null, default);
         resm.isReserved = false;
         resm.TableSize = size;
         return resm;
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id)
+    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id, int course)
     {
         AccountModel User = AccountsAccess.LoadAll().Find(account => email == account.EmailAddress)!;
         if(User!=null)
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
             EmailLogic.SendEmail(email," "+User.FullName,chosenTable,res_Date);
             AccountsAccess.AddReservation(newReservation);
         }
         else
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
             EmailLogic.SendEmail(email,"",chosenTable,res_Date);
             AccountsAccess.AddReservation(newReservation);
         }
@@ -162,5 +221,22 @@ public class ReservationsLogic
         }
 
         return false;
+    }
+
+    public static ReservationModel GetReservationById(string res_id)
+    {
+        var all_res = AccountsAccess.LoadAllReservations();
+        foreach (ReservationModel res in all_res)
+        {
+            if (res.Res_ID != null)
+            {
+                if (res_id == res.Res_ID)
+                {
+                    return res;
+                }
+            }
+        }
+
+        return null;
     }
 }

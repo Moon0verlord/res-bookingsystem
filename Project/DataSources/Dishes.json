@@ -1,423 +1,249 @@
 {
   "Vegetarisch": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Geroosterde Wortel en Linzen Salade",
-        "Maaltijd": "Kikkererwten Curry met Basmati Rijst"
-      },
-      {
-        "Voorgerecht": "Veganistische Caesar Salade",
-        "Maaltijd": "Paddenstoelen Stroganoff"
-      },
-      {
-        "Voorgerecht": "Rauwe Groenten Spring Rolls",
-        "Maaltijd": "Thaise Groene Curry met Tofu"
-      },
-      {
-        "Voorgerecht": "Courgette en Maïs Fritters",
-        "Maaltijd": "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
-      }
+    "Voorgerecht": [
+      "Geroosterde Wortel en Linzen Salade",
+      "Veganistische Caesar Salade",
+      "Rauwe Groenten Spring Rolls",
+      "Courgette en Maïs Fritters"
+    ],    
+    "Soep": [
+      "Geroosterde Butternut Squash Soep",
+      "Gekruide Wortel en Kokos Soep",
+     "Veganistische Champignon Soep","Krokante Gebakken Artisjokken",
+      "Tom Kha Gai Soep"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Veganistische Caesar Salade",
-        "Maaltijd": "Gegrilde Portobello Paddenstoelen Steaks",
-        "Nagerecht": "Veganistische Chocolade Mousse"
-      },
-      {
-        "Voorgerecht": "Geroosterde Tomaat en Knoflook Soep",
-        "Maaltijd": "Gestoofde Tempeh met Zoete Aardappelen en Boerenkool",
-        "Nagerecht": "Kokosmelk Panna Cotta"
-      },
-      {
-        "Voorgerecht": "Veganistische Deviled Eggs",
-        "Maaltijd": "Jackfruit Carnitas Tacos met Guacamole",
-        "Nagerecht": "Blauwe Bessen Citroen Cheesecake Bars"
-      },
-      {
-        "Voorgerecht": "Veganistische Tonijn Salade op Crostini",
-        "Maaltijd": "Geroosterde Bloemkool Steaks met Chimichurri Saus",
-        "Nagerecht": "Aardbeien Shortcake"
-      }
+    "Maaltijd": [
+      "Kikkererwten Curry met Basmati Rijst",
+      "Paddenstoelen Stroganoff",
+      "Thaise Groene Curry met Tofu",
+      "Gevulde Eikelpompoen met Wilde Rijst en Cranberries"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Tomaten en Basilicum Bruschetta",
-        "Soep": "Geroosterde Butternut Squash Soep",
-        "Maaltijd": "Veganistische Lasagne",
-        "Nagerecht": "Rauwe Veganistische Cheesecake"
-      },
-      {
-        "Voorgerecht": "Baba Ghanoush met Pita",
-        "Soep": "Gekruide Wortel en Kokos Soep",
-        "Maaltijd": "Linzen Shepherd's Pie",
-        "Nagerecht": "Pompoentaart met Kruiden"
-      },
-      {
-        "Voorgerecht": "Bloemkool Buffalo Wings",
-        "Soep": "Veganistische Champignon Soep",
-        "Maaltijd": "Kikkererwten en Spinazie Gevulde Zoete Aardappelen",
-        "Nagerecht": "Veganistische Citroen Bars"
-      },
-      {
-        "Voorgerecht": "Veganistische Sushi Rolls",
-        "Soep": "Tom Kha Gai Soep",
-        "Maaltijd": "Veganistische Pot Pie",
-        "Nagerecht": "Chocolade Avocado Mousse"
-      }
+    "Nagerecht": [
+      "Veganistische Chocolade Mousse",
+      "Kokosmelk Panna Cotta",
+      "Blauwe Bessen Citroen Cheesecake Bars",
+      "Aardbeien Shortcake"
     ]
   },
   "Vis": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Kreeftenbisque",
-        "Maaltijd": "Zalmfilet met citroenbotersaus"
-      },
-      {
-        "Voorgerecht": "Krokante inktvisringen met pittige aioli",
-        "Maaltijd": "Gegrilde zwaardvis met mangosalsa"
-      },
-      {
-        "Voorgerecht": "Crab cakes met remouladesaus",
-        "Maaltijd": "Zwarte snapper met Creoolse saus"
-      },
-      {
-        "Voorgerecht": "Gerookte zalm op crostini",
-        "Maaltijd": "Gegrilde tonijnsteak met gember-sojasaus"
-      }
+    "Voorgerecht": [
+      "Kreeftenbisque",
+      "Krokante inktvisringen met pittige aioli",
+      "Crab cakes met remouladesaus",
+      "Gerookte zalm op crostini",
+      "Tartaar van tonijn met avocado en mango",
+      "Gevulde champignons met krab",
+      "Scampi in knoflookolie",
+      "Vis-taco's met mangosalsa"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Garnalencocktail",
-        "Maaltijd": "Zalmfilet op cederhout met kruidenboter",
-        "Nagerecht": "Key lime pie"
-      },
-      {
-        "Voorgerecht": "Oesters Rockefeller",
-        "Maaltijd": "Gevulde garnalen met krabvulling uit de oven",
-        "Nagerecht": "Chocolade lavacake"
-      },
-      {
-        "Voorgerecht": "Clam chowder",
-        "Maaltijd": "Gegrilde Mahi Mahi met ananassalsa",
-        "Nagerecht": "Crème brûlée"
-      },
-      {
-        "Voorgerecht": "Tuna poke bowl",
-        "Maaltijd": "Gebakken heilbotfilet met tomaten-basilsaus",
-        "Nagerecht": "Citroensorbet"
-      }
+    "Soep": [
+      "Kreeftenbisque",
+      "New England clam chowder",
+      "Tomaten-venkelsoep",
+      "Kokos-shrimpbisque"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Tartaar van tonijn met avocado en mango",
-        "Soep": "Kreeftenbisque",
-        "Maaltijd": "Gebakken coquilles met truffelrisotto",
-        "Nagerecht": "Chocoladetaart"
-      },
-      {
-        "Voorgerecht": "Gevulde champignons met krab",
-        "Soep": "New England clam chowder",
-        "Maaltijd": "Gegrilde zeebaars met citroen-kappersaus",
-        "Nagerecht": "Vanille panna cotta"
-      },
-      {
-        "Voorgerecht": "Scampi in knoflookolie",
-        "Soep": "Tomaten-venkelsoep",
-        "Maaltijd": "Gegrilde zalmfilet met honing-mosterdglaasje",
-        "Nagerecht": "Raspberry sorbet"
-      },
-      {
-        "Voorgerecht": "Vis-taco's met mangosalsa",
-        "Soep": "Kokos-shrimpbisque",
-        "Maaltijd": "Gebakken kabeljauw met geroosterde knoflookboter",
-        "Nagerecht": "Key lime cheesecake"
-      }
+    "Maaltijd": [
+      "Zalmfilet met citroenbotersaus",
+      "Gegrilde zwaardvis met mangosalsa",
+      "Zwarte snapper met Creoolse saus",
+      "Gegrilde tonijnsteak met gember-sojasaus",
+      "Zalmfilet op cederhout met kruidenboter",
+      "Gevulde garnalen met krabvulling uit de oven",
+      "Gegrilde Mahi Mahi met ananassalsa",
+      "Gebakken heilbotfilet met tomaten-basilsaus",
+      "Gebakken coquilles met truffelrisotto",
+      "Gegrilde zeebaars met citroen-kappersaus",
+      "Gegrilde zalmfilet met honing-mosterdglaasje",
+      "Gebakken kabeljauw met geroosterde knoflookboter"
+    ],
+    "Nagerecht": [
+      "Key lime pie",
+      "Chocolade lavacake",
+      "Crème brûlée",
+      "Citroensorbet",
+      "Chocoladetaart",
+      "Vanille panna cotta",
+      "Raspberry sorbet",
+      "Key lime cheesecake"
     ]
   },
   "Vlees": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Caesar Salade",
-        "Maaltijd": "Gegrilde Ribeye Steak met Rode Wijnsaus"
-      },
-      {
-        "Voorgerecht": "Spinazie en Artisjok Dip",
-        "Maaltijd": "Filet Mignon met Champignonsaus"
-      },
-      {
-        "Voorgerecht": "Garnalencocktail",
-        "Maaltijd": "Op de Huid Gebakken Zalm met Citroenbotersaus"
-      },
-      {
-        "Voorgerecht": "Gefrituurde Calamares",
-        "Maaltijd": "Kalfsparmezaan met Marinara Saus"
-      }
+    "Voorgerecht": [
+      "Caesar Salade",
+      "Spinazie en Artisjok Dip",
+      "Garnalencocktail",
+      "Gefrituurde Calamares",
+      "Butternut Pompoensoep",
+      "Kreeftenbisque",
+      "Caesar Salade",
+      "Franse Uiensoep",
+      "Beef Carpaccio met Rucola en Parmezaan",
+      "Op de Huid Gebakken Coquilles met Citroen Knoflookboter",
+      "Krokante Gefrituurde Kippenvleugels",
+      "Garnalen Scampi"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Butternut Pompoensoep",
-        "Maaltijd": "Geroosterde Kip met Knoflook en Kruidenboter",
-        "Nagerecht": "Appeltaart"
-      },
-      {
-        "Voorgerecht": "Kreeftenbisque",
-        "Maaltijd": "Gegrilde New York Strip Steak met Knoflookboter",
-        "Nagerecht": "Chocoladetaart"
-      },
-      {
-        "Voorgerecht": "Caesar Salade",
-        "Maaltijd": "Gestoofde Lamsschenkel met Rozemarijn en Rode Wijn",
-        "Nagerecht": "Tiramisu"
-      },
-      {
-        "Voorgerecht": "Franse Uiensoep",
-        "Maaltijd": "Op de Huid Gebakken Eendenborst met Kersensaus",
-        "Nagerecht": "Crème Brûlée"
-      }
+    "Soep": [
+      "Tomatenbisque",
+      "Room van Champignonsoep",
+      "Clam Chowder",
+      "Room van Broccolisoep"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Beef Carpaccio met Rucola en Parmezaan",
-        "Soep": "Tomatenbisque",
-        "Maaltijd": "Gestoofde Korte Ribs met Romige Polenta",
-        "Nagerecht": "Crème Brûlée"
-      },
-      {
-        "Voorgerecht": "Op de Huid Gebakken Coquilles met Citroen Knoflookboter",
-        "Soep": "Room van Champignonsoep",
-        "Maaltijd": "Geroosterde Lamscarré met Rozemarijn en Knoflook",
-        "Nagerecht": "Chocolademousse"
-      },
-      {
-        "Voorgerecht": "Krokante Gefrituurde Kippenvleugels",
-        "Soep": "Clam Chowder",
-        "Maaltijd": "Prime Rib met Mierikswortelsaus",
-        "Nagerecht": "Key Lime Pie"
-      },
-      {
-        "Voorgerecht": "Garnalen Scampi",
-        "Soep": "Room van Broccolisoep",
-        "Maaltijd": "Beef Wellington met Champignon Duxelles",
-        "Nagerecht": "Broodpudding met Bourbon Saus"
-      }
+    "Maaltijd": [
+      "Gegrilde Ribeye Steak met Rode Wijnsaus",
+      "Filet Mignon met Champignonsaus",
+      "Op de Huid Gebakken Zalm met Citroenbotersaus",
+      "Kalfsparmezaan met Marinara Saus",
+      "Geroosterde Kip met Knoflook en Kruidenboter",
+      "Gegrilde New York Strip Steak met Knoflookboter",
+      "Gestoofde Lamsschenkel met Rozemarijn en Rode Wijn",
+      "Op de Huid Gebakken Eendenborst met Kersensaus",
+      "Gestoofde Korte Ribs met Romige Polenta",
+      "Geroosterde Lamscarré met Rozemarijn en Knoflook",
+      "Prime Rib met Mierikswortelsaus",
+      "Beef Wellington met Champignon Duxelles"
+    ],
+    "Nagerecht": [
+      "Appeltaart",
+      "Chocoladetaart",
+      "Tiramisu",
+      "Crème Brûlée",
+      "Crème Brûlée",
+      "Chocolademousse",
+      "Key Lime Pie",
+      "Broodpudding met Bourbon Saus"
     ]
   },
   "Veganistisch": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "Gemengde Groene Salade",
-        "Maaltijd": "Geroosterde Groenten Risotto"
-      },
-      {
-        "Voorgerecht": "Tomaten en Basilicum Bruschetta",
-        "Maaltijd": "Gevulde Portobello Champignons met Spinazie en Feta"
-      },
-      {
-        "Voorgerecht": "Geroosterde Rode Paprika Hummus met Pita",
-        "Maaltijd": "Pesto Pasta met Gegrilde Groenten"
-      },
-      {
-        "Voorgerecht": "Gegrilde Perzik en Rucola Salade",
-        "Maaltijd": "Wilde Paddestoelen en Truffel Risotto"
-      },
-      {
-        "Voorgerecht": "Gegrilde Asperges met Citroen en Parmezaanse Kaas",
-        "Maaltijd": "Bloemkool en Kikkererwten Curry"
-      },
-      {
-        "Voorgerecht": "test",
-        "Maaltijd": "test"
-      }
+    "Voorgerecht": [
+      "Gemengde Groene Salade",
+      "Tomaten en Basilicum Bruschetta",
+      "Geroosterde Rode Paprika Hummus met Pita",
+      "Gegrilde Perzik en Rucola Salade",
+      "Gegrilde Asperges met Citroen en Parmezaanse Kaas",
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "Geroosterde Bieten Salade",
-        "Maaltijd": "Eggplant Parmesan met Tomatensaus",
-        "Nagerecht": "Veganistische Chocolademousse"
-      },
-      {
-        "Voorgerecht": "Zoete Aardappel en Zwarte Bonen Tacos",
-        "Maaltijd": "Courgette en Zongedroogde Tomaten Pasta",
-        "Nagerecht": "Kokosmelk Rijstpudding"
-      },
-      {
-        "Voorgerecht": "Koude Gazpacho",
-        "Maaltijd": "Butternut Squash en Salie Risotto",
-        "Nagerecht": "Gemengde Bessentaart"
-      },
-      {
-        "Voorgerecht": "Krokante Gebakken Artisjokken",
-        "Maaltijd": "Geroosterde Knoflook en Tomaat Linguine",
-        "Nagerecht": "Citroen Olijfolie Taart"
-      },
-      {
-        "Voorgerecht": "Gegrilde Halloumi en Watermeloen Salade",
-        "Maaltijd": "Champignon en Spinazie Lasagne",
-        "Nagerecht": "Aardbeien Rabarber Crisp"
-      }
+    "Soep": [
+      "Geroosterde Bieten Salade",
+      "Zoete Aardappel en Zwarte Bonen Tacos",
+      "Koude Gazpacho",
+      "Krokante Gebakken Artisjokken",
+      "Gegrilde Halloumi en Watermeloen Salade"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "Caprese Salade",
-        "Soep": "Butternut Squash Soep",
-        "Maaltijd": "Gegrilde Portobello Champignon met Quinoa en Geroosterde Groenten",
-        "Nagerecht": "Gemengde Bessensorbet"
-      },
-      {
-        "Voorgerecht": "Geroosterde Venkel en Sinaasappel Salade",
-        "Soep": "Romige Tomaat en Basilicum Soep",
-        "Maaltijd": "Gegrilde Tofu en Groente Kebabs",
-        "Nagerecht": "Raspberry Sorbet"
-      },
-      {
-        "Voorgerecht": "Grilled Eggplant with Tahini Dressing",
-        "Soep": "Miso Soep with Tofu and Seaweed",
-        "Maaltijd": "Vegetable Pot Pie with Herbed Biscuits",
-        "Nagerecht": "Peach and Raspberry Cobbler"
-      },
-      {
-        "Voorgerecht": "Roasted Brussels Sprouts with Balsamic Glaze",
-        "Soep": "Curried Carrot Soep",
-        "Maaltijd": "Stuffed Acorn Squash with Wild Rice and Cranberries",
-        "Nagerecht": "Dark Chocolate Truffles"
-      }
+    "Maaltijd": [
+      "Geroosterde Groenten Risotto",
+      "Gevulde Portobello Champignons met Spinazie en Feta",
+      "Pesto Pasta met Gegrilde Groenten",
+      "Wilde Paddestoelen en Truffel Risotto",
+      "Bloemkool en Kikkererwten Curry",
+      "Eggplant Parmesan met Tomatensaus",
+      "Courgette en Zongedroogde Tomaten Pasta",
+      "Butternut Squash en Salie Risotto",
+      "Geroosterde Knoflook en Tomaat Linguine",
+      "Champignon en Spinazie Lasagne"
+    ],
+    "Nagerecht": [
+      "Veganistische Chocolademousse",
+      "Kokosmelk Rijstpudding",
+      "Gemengde Bessentaart",
+      "Citroen Olijfolie Taart",
+      "Aardbeien Rabarber Crisp"
     ]
   },
   "pasen": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "gerookte zalm met dille en citroen",
-        "Maaltijd": "gegrilde kipfilet met groenten"
-      },
-      {
-        "Voorgerecht": "geitenkaas salade met honing en walnoten",
-        "Maaltijd": "risotto met paddenstoelen"
-      },
-      {
-        "Voorgerecht": "tomatensoep met basilicum",
-        "Maaltijd": "garnalen met knoflooksaus"
-      },
-      {
-        "Voorgerecht": "caprese salade met balsamicodressing",
-        "Maaltijd": "pasta carbonara"
-      }
+    "Voorgerecht": [
+      "gerookte zalm met dille en citroen",
+      "geitenkaas salade met honing en walnoten",
+      "tomatensoep met basilicum",
+      "caprese salade met balsamicodressing",
+      "aspergesoep met ham",
+      "gevulde champignons met roomkaas",
+      "geitenkaas met vijgen en rucola",
+      "garnalencocktail met cocktailsaus",
+      "gegratineerde oesters",
+      "coquilles met bloemkoolpuree",
+      "geitenkaas in filodeeg met honing",
+      "gerookte eendenborst met vijgencompote"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "aspergesoep met ham",
-        "Maaltijd": "kalfsschnitzel met champignonsaus",
-        "Nagerecht": "aardbeien parfait"
-      },
-      {
-        "Voorgerecht": "gevulde champignons met roomkaas",
-        "Maaltijd": "gegrilde zalm met citroenboter",
-        "Nagerecht": "chocolademousse met slagroom"
-      },
-      {
-        "Voorgerecht": "geitenkaas met vijgen en rucola",
-        "Maaltijd": "biefstuk met pepersaus",
-        "Nagerecht": "crème brûlée"
-      },
-      {
-        "Voorgerecht": "garnalencocktail met cocktailsaus",
-        "Maaltijd": "gevulde portobello met geitenkaas",
-        "Nagerecht": "mango sorbet"
-      }
+    "Soep": [
+      "turkse linzensoep met paprika",
+      "pompoensoep met krokante spekjes",
+      "tomatenbisque met basilicumolie",
+      "paddenstoelensoep"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "gegratineerde oesters",
-        "Soep": "Turkse linzensoep met paprika",
-        "Hoofdgerecht": "ossenhaas met rode wijnsaus",
-        "Nagerecht": "frambozentaart met vanille-ijs"
-      },
-      {
-        "Voorgerecht": "coquilles met bloemkoolpuree",
-        "Soep": "pompoensoep met krokante spekjes",
-        "Hoofdgerecht": "lamsrack met rozemarijnjus",
-        "Nagerecht": "citroen cheesecake"
-      },
-      {
-        "Voorgerecht": "geitenkaas in filodeeg met honing",
-        "Soep": "tomatenbisque met basilicumolie",
-        "Hoofdgerecht": "kabeljauw met beurre blanc saus",
-        "Nagerecht": "chocolade lava cake met vanillesaus"
-      },
-      {
-        "Voorgerecht": "gerookte eendenborst met vijgencompote",
-        "Soep": "paddenstoelensoep",
-        "Hoofdgerecht": "hertenbiefstuk met rode portsaus",
-        "Nagerecht": "tiramisu"
-      }
+    "Maaltijd": [
+      "gegrilde kipfilet met groenten",
+      "risotto met paddenstoelen",
+      "garnalen met knoflooksaus",
+      "pasta carbonara",
+      "kalfsschnitzel met champignonsaus",
+      "gegrilde zalm met citroenboter",
+      "biefstuk met pepersaus",
+      "gevulde portobello met geitenkaas",
+      "ossenhaas met rode wijnsaus",
+      "lamsrack met rozemarijnjus",
+      "kabeljauw met beurre blanc saus",
+      "hertenbiefstuk met rode portsaus"
+    ],
+    "Nagerecht": [
+      "aardbeien parfait",
+      "chocolademousse met slagroom",
+      "crème brûlée",
+      "mango sorbet",
+      "frambozentaart met vanille-ijs",
+      "citroen cheesecake",
+      "chocolade lava cake met vanillesaus",
+      "tiramisu"
     ]
   },
   "kerst": {
-    "2_Gangen": [
-      {
-        "Voorgerecht": "krabcocktail",
-        "Maaltijd": "gevulde kalkoen met cranberrysaus"
-      },
-      {
-        "Voorgerecht": "gerookte zalm met dillesaus",
-        "Maaltijd": "beef Wellington"
-      },
-      {
-        "Voorgerecht": "geitenkaassalade met granaatappel",
-        "Maaltijd": "gegrilde groentenlasagne"
-      },
-      {
-        "Voorgerecht": "tomaten-burrata salade",
-        "Maaltijd": "hertenbiefstuk met rode wijnsaus"
-      }
+    "Voorgerecht": [
+      "krabcocktail",
+      "gerookte zalm met dillesaus",
+      "geitenkaassalade met granaatappel",
+      "tomaten-burrata salade",
+      "pompoensoep met kastanjes",
+      "coquilles met bloemkoolmousse",
+      "garnalencocktail",
+      "gerookte eendenborstsalade",
+      "kreeftenbisque",
+      "gegrilde scampi's met knoflookboter",
+      "geitenkaas in filodeeg met honing en walnoten",
+      "carpaccio met truffelmayonaise"
     ],
-    "3_Gangen": [
-      {
-        "Voorgerecht": "pompoensoep met kastanjes",
-        "Maaltijd": "gevulde parelhoen met portsaus",
-        "Nagerecht": "chocolade lava cake met vanilleroomijs"
-      },
-      {
-        "Voorgerecht": "coquilles met bloemkoolmousse",
-        "Maaltijd": "ossenhaas met truffelsaus",
-        "Nagerecht": "frambozentaart met mascarponeslagroom"
-      },
-      {
-        "Voorgerecht": "garnalencocktail",
-        "Maaltijd": "zalm en croûte met dillesaus",
-        "Nagerecht": "tiramisu"
-      },
-      {
-        "Voorgerecht": "gerookte eendenborstsalade",
-        "Maaltijd": "hazenpeper met stoofpeertjes",
-        "Nagerecht": "crème brûlée"
-      }
+    "Soep": [
+      "paddenstoelensoep",
+      "tomatensoep met basilicum",
+      "pompoensoep met crème fraîche",
+      "uiensoep met kaascroutons"
     ],
-    "4_Gangen": [
-      {
-        "Voorgerecht": "kreeftenbisque",
-        "Soep": "paddenstoelensoep",
-        "Hoofdgerecht": "gevulde kalkoenrollade met cranberrysaus",
-        "Nagerecht": "kersentaart met slagroom"
-      },
-      {
-        "Voorgerecht": "gegrilde scampi's met knoflookboter",
-        "Soep": "tomatensoep met basilicum",
-        "Hoofdgerecht": "biefstuk met rode wijnsaus",
-        "Nagerecht": "chocolademousse met sinaasappelschil"
-      },
-      {
-        "Voorgerecht": "geitenkaas in filodeeg met honing en walnoten",
-        "Soep": "pompoensoep met crème fraîche",
-        "Hoofdgerecht": "zalmfilet met citroen-dillesaus",
-        "Nagerecht": "appelcrumble met vanille-ijs"
-      },
-      {
-        "Voorgerecht": "carpaccio met truffelmayonaise",
-        "Soep": "uiensoep met kaascroutons",
-        "Hoofdgerecht": "hertenbiefstuk met rode portsaus",
-        "Nagerecht": "panna cotta met rood fruit"
-      }
+    "Maaltijd": [
+      "gevulde kalkoen met cranberrysaus",
+      "beef Wellington",
+      "gegrilde groentenlasagne",
+      "hertenbiefstuk met rode wijnsaus",
+      "gevulde parelhoen met portsaus",
+      "ossenhaas met truffelsaus",
+      "zalm en croûte met dillesaus",
+      "hazenpeper met stoofpeertjes",
+      "gevulde kalkoenrollade met cranberrysaus",
+      "biefstuk met rode wijnsaus",
+      "zalmfilet met citroen-dillesaus",
+      "hertenbiefstuk met rode portsaus"
+    ],
+    "Nagerecht": [
+      "chocolade lava cake met vanilleroomijs",
+      "frambozentaart met mascarponeslagroom",
+      "tiramisu",
+      "crème brûlée",
+      "kersentaart met slagroom",
+      "chocolademousse met sinaasappelschil",
+      "appelcrumble met vanille-ijs",
+      "panna cotta met rood fruit"
+    ],
+    "Hoofdgerecht": [
+      "gevulde kalkoen met cranberrysaus",
+      "biefstuk met rode wijnsaus",
+      "zalmfilet met citroen-dillesaus",
+      "hertenbiefstuk met rode portsaus"
     ]
   }
 }

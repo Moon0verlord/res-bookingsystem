@@ -35,15 +35,17 @@ class AccountsLogic:IMenuLogic
     public void RefreshList()
     => _accounts = AccountsAccess.LoadAll();
 
+    // get an account by id
     public AccountModel GetById(int id)
     {
         return _accounts.Find(i => i.Id == id)!;
     }
 
+    // get an account by email
     public AccountModel GetByEmail(string email)
         => _accounts.Find(i => i.EmailAddress == email)!;
     
-    
+    // check if a login is valid
     public AccountModel CheckLogin(string email, string password)
     {
         AccountModel? acc = GetByEmail(email);
@@ -58,6 +60,7 @@ class AccountsLogic:IMenuLogic
         return null!;
     }
 
+    // method used if you forgot your password
     public void ForgotPassword(string email)
     {
         // get the account by email

@@ -126,7 +126,7 @@ static class InfoBoxes
         origRow = origrow;
         origCol = origcol;
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
-        string Information =
+        string information =
             @"
             Hier in Rotterdam vind u het prachtige /restaurant name/.
             Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
@@ -139,7 +139,7 @@ static class InfoBoxes
         int y = 0;
         WriteAt("Beschrijving", x + 38, y + 1);
         Console.ResetColor();
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
         for (var i = 1; i <= 8; i++)
@@ -160,7 +160,7 @@ static class InfoBoxes
         origRow = origrow;
         origCol = origcol;
         string boxBorder = "─────────────────────────────────────────";
-        string Information =
+        string information =
             @"
   Wijnhaven 107
   3011 WN / Rotterdam
@@ -170,7 +170,7 @@ static class InfoBoxes
         int x = 0;
         int y = 10;
         WriteAt("Contact Informatie", x + 12, y + 1);
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
         for (int i = 1; i <= 7; i++)
@@ -193,7 +193,7 @@ static class InfoBoxes
         // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
         // so i have to use manual whitespaces to format it correctly
         // i hate it too
-        string Information = @"
+        string information = @"
                                                          Ons restaurant is geopend van 16:00 tot 22:00.
                                                 Tijdens deze uren hebben wij 3 tijdssloten waarin u kunt reserveren.
                                                                       De tijdssloten zijn:
@@ -211,7 +211,7 @@ static class InfoBoxes
         int x = 46;
         int y = 10;
         WriteAt("Tijden", x + 37, y + 1);
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
         for (var i = 1; i <= 17; i++) 
@@ -234,7 +234,7 @@ static class InfoBoxes
         // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
         // so i have to use manual whitespaces to format it correctly
         // i hate it too
-        string Information = @"
+        string information = @"
                                                 Ons restaurant is geopend van 16:00 tot 00:00.
                                                 Onze reservatie tijden hangen af van uw gekozen gang.
                                                 Wanneer er een evenement plaatsvindt in ons restaurant zijn de tijden anders.
@@ -251,7 +251,7 @@ static class InfoBoxes
         int x = 46;
         int y = 10;
         WriteAt("Tijden", x + 37, y + 1);
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Cyan;
         WriteAt("┌", x, y);
         for (var i = 1; i <= 14; i++) 
@@ -272,7 +272,7 @@ static class InfoBoxes
         origRow = origrow;
         origCol = origcol;
         string boxBorder = "─────────────────────────────────────────";
-        string Information =
+        string information =
             @"
      Druk op een willekeurige toets
    om terug te gaan naar het hoofdmenu.
@@ -280,7 +280,7 @@ static class InfoBoxes
         int x = 0;
         int y = 20;
         WriteAt("Terug naar het hoofdmenu", x + 10, y + 1);
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Red;
         WriteAt("┌", x, y);
         for (var i = 1; i <= 4; i++) 
@@ -308,7 +308,7 @@ static class InfoBoxes
         origRow = origrow;
         origCol = origcol;
         string boxBorder = "───────────────────────────────────────────────────────";
-        string Information =
+        string information =
             @"
     Druk op de 'F1' toets linksboven op uw toetsenbord
           om te toggelen tussen '*' en letters.
@@ -318,7 +318,7 @@ static class InfoBoxes
         if (register)
             y += 8;
         WriteAt("Wachtwoord Toggle", x + 19, y + 1);
-        WriteAt(Information, x + 1, y + 2);
+        WriteAt(information, x + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Green;
         WriteAt("┌", x, y);
         for (int i = 1; i <= 4; i++)

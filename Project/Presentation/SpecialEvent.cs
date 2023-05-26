@@ -27,8 +27,8 @@ public class SpecialEvent
                 case 0:
                     Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
                     eventname = Console.ReadLine()!;
-                    int name_Length = eventname.Length;
-                    if (name_Length > 30)
+                    int nameLength = eventname.Length;
+                    if (nameLength > 30)
                     {
                         Console.WriteLine("De naam van het event is langer dan 30 tekens.");
                         Thread.Sleep(3000);
@@ -42,13 +42,13 @@ public class SpecialEvent
                     break;
                 case 2:
                     Console.Write("wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
-                    eventdate = Console.ReadLine();
+                    eventdate = Console.ReadLine()!;
                     if (eventdate.Contains("-") && eventdate.Length == 10)
                     {
                         JArray allEvents = AccountsAccess.ReadAllEvents();
-                        foreach (var event_item in allEvents)
+                        foreach (var eventItem in allEvents)
                         {
-                            if (eventdate == event_item["eventdate"].ToString())
+                            if (eventdate == eventItem["eventdate"]!.ToString())
                             {
                                 Console.WriteLine("Er is al een evenement op deze datum.");
                                 Thread.Sleep(3000);
@@ -167,11 +167,11 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         if (CheckIfEvent())
         {
             Console.WriteLine("Alle evenementen:");
-            foreach (var event_item in eventmenu)
+            foreach (var eventItem in eventmenu)
             {
-                Console.WriteLine(event_item["eventname"]);
-                Console.WriteLine(event_item["eventinfo"]);
-                Console.WriteLine(event_item["eventdate"]);
+                Console.WriteLine(eventItem["eventname"]);
+                Console.WriteLine(eventItem["eventinfo"]);
+                Console.WriteLine(eventItem["eventdate"]);
                 Console.WriteLine();
             }
             Console.WriteLine("Druk op een knop om verder te gaan");
