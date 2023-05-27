@@ -128,7 +128,7 @@ static class InfoBoxes
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
         string information =
             @"
-            Hier in Rotterdam vind u het prachtige /restaurant name/.
+            Hier in Rotterdam vind u het prachtige restaurant 'De Witte Haven'.
             Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
             Ook is het mogelijk om er een wijnarrangement bij te boeken. 
             Naast het reserveren van een tafel is er ook nog beschikking tot een bar.
