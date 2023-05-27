@@ -23,7 +23,7 @@ Contact Informatie:
 Wijnhaven 107
 3011 WN / Rotterdam
 0612345678
-/email/ 
+restaurant1234567891011@gmail.com
 ";
     static string Events =
 @"Speciale Evenementen:

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 public class EmailLogic
 {
+    // check if the domain of the email is valid
     public static bool CheckDomain(string email)
     {
         email = email.ToLower();
@@ -15,21 +16,25 @@ public class EmailLogic
             HttpResponseMessage response = httpClient.GetAsync(page).Result;
             if (response.IsSuccessStatusCode)
             {
-                
+                Console.WriteLine();
                 int index = email.LastIndexOf(".");
-                string domain = email.Substring(index + 1);
+                string domain = email.Substring(index +1);
+                
                 string responseBody = response.Content.ReadAsStringAsync().Result.ToLower();
-                Console.WriteLine(domain);
-                if (responseBody.Contains(domain))
+                
+                if (domain.Length>0 && responseBody.Contains(domain))
                 {
                     return true;
+
                 }
-    
                 return false;
+                
             }
             return false;
         }
     }
+
+    // check if the email is valid
     public static bool IsValidEmail( string email)
     {
         try
@@ -47,6 +52,7 @@ public class EmailLogic
         return false;
     }
 
+    // Send an email to the user after they have made a reservation
     public static void SendEmail(string email, string name, string table, DateTime Date)
     {
         try
@@ -95,6 +101,7 @@ public class EmailLogic
         }
     }
 
+    // sends a mail to the user with a verification code if they want to change their password
     public static void SendVerificationMail(string email, string name, string vrfyCode){
        try
         {
@@ -134,6 +141,7 @@ public class EmailLogic
         } 
     }
 
+    // sends a mail to the user if their reservation couldn't be altered
     public static void SendCancellationMail(string email, string name){
        try
         {
