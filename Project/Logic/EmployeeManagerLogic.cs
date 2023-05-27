@@ -14,10 +14,14 @@ public class EmployeeManagerLogic : IMenuLogic
 
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
-            var Date = item.Date.ToString("dd-MM-yy");
-            string id = Convert.ToString(item.Id);
-            string time = $"{item.StartTime.Hours}:{item.StartTime.Minutes}-{item.LeaveTime.Hours}:{item.LeaveTime.Minutes}";
-            Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", id, Date, time, item.EmailAddress));
+            if (item.Date > DateTime.Today)
+            {
+                var Date = item.Date.ToString("dd-MM-yy");
+                string id = Convert.ToString(item.Id);
+                string time = $"{item.StartTime.Hours}:{item.StartTime.Minutes}-{item.LeaveTime.Hours}:{item.LeaveTime.Minutes}";
+                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2:hhmm}0 | {3,5}", id, Date, time, item.EmailAddress));
+
+            }
         }
         Console.WriteLine("druk toets om terug te gaan");
         Console.ReadKey(true);
