@@ -4,15 +4,13 @@ public class Program
 {
     private static void Main()
     {
-        AnswerLogic logic = new AnswerLogic();
-        logic.CheckInput("Nee");
-        // // set windowsize here to make sure there's no bounding errors later in the program.
-        // try
-        // {
-        //     Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-        // }
-        // catch { }
-        // Console.Clear();
-        // MainMenu.Start();
+        // set windowsize here to make sure there's no bounding errors later in the program.
+        try
+        {
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+        }
+        catch { }
+        Console.Clear();
+        MainMenu.Start();
     }
 }
