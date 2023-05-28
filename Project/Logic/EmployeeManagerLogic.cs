@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic.CompilerServices;
+
 public class EmployeeManagerLogic : IMenuLogic
 {
     private static MenuLogic _myMenu = new();
@@ -9,21 +11,24 @@ public class EmployeeManagerLogic : IMenuLogic
     public static void CheckReservations()
     {
         Console.Clear();
-        //The weird spacing is there to make it show up nicer when called
-        Console.WriteLine("Tafel id |  Datum    | Tijd        | Email");
-
+        Console.WriteLine("Overzicht van alle reservaties\n-------------------------------");
+        Console.WriteLine(String.Format("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-13} | {5,-13} | {6,-10}", 
+            "Tafel ID", "Reservatie ID", "Datum", "Tijd", "Email", "Aantal pers.", "Gekozen gang"));
+        Console.ForegroundColor = ConsoleColor.White;
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
             if (item.Date > DateTime.Today)
             {
                 var Date = item.Date.ToString("dd-MM-yy");
                 string id = Convert.ToString(item.Id);
-                string time = $"{item.StartTime.Hours}:{item.StartTime.Minutes}-{item.LeaveTime.Hours}:{item.LeaveTime.Minutes}";
-                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2:hhmm}0 | {3,5}", id, Date, time, item.EmailAddress));
+                string time = $"{item.StartTime:hh}:{item.StartTime:mm} - {item.LeaveTime:hh}:{item.LeaveTime:mm}";
+                Console.WriteLine(String.Format("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-13} | {5,-13} | {6,-10}", 
+                    id, item.Res_ID, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString()));
 
             }
         }
-        Console.WriteLine("druk toets om terug te gaan");
+        Console.ResetColor();
+        Console.WriteLine("\nDruk op een toets om terug te gaan.");
         Console.ReadKey(true);
     }
 
