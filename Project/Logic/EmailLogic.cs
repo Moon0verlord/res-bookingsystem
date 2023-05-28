@@ -68,8 +68,8 @@ public class EmailLogic
             NetworkCredential basicAuthenticationInfo = new
                 NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
-            
-            
+            // todo : placeholders, remove this and make these the right variables asap
+            var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), "RES-102934");
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
             MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
@@ -79,10 +79,7 @@ public class EmailLogic
             MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
             LinkedResource imageResource = new LinkedResource(imagePath, "image/jpeg");
             imageResource.ContentId = "image1";
-            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
-                $"<html><body><div><h1>Hallo{name}!</h1></div><img src=\"cid:image1\"><div><p><h3>U heeft een reservatie op <b>{Date:d/MMMM/yyyy}</b> om " +
-                $"<b><b>{Date:hh:mm:ss}</b> </b>voor tafel <b>{table}</b>. " +
-                $"<br>tot dan!</br></h3></div></body></html>", null, "text/html");
+            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
             htmlView.LinkedResources.Add(imageResource);
             myMail.AlternateViews.Add(htmlView);
             
