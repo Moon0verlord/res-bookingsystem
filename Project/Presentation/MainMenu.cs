@@ -49,7 +49,7 @@ class MainMenu : IMenuLogic
                         SpecialEvent.Eventmenu();
                         break;
                     case 4:
-                        Reservation.ViewRes();
+                        Reservation.ViewRes2();
                         break;
                     case 5:
                         Reservation.ResStart(Account);
@@ -176,9 +176,7 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 3:
-                        Reservation.ViewRes(Account.EmailAddress);
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        Console.ReadKey(true);
+                        Reservation.ViewResAccount();
                         break;
                     case 4:
                         if (Account.LoggedIn)
