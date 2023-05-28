@@ -387,9 +387,11 @@ static class Reservation
         List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
         List<string> reservationsPerson = new();
         List<int> reservationPersonPositions = new();
+        Console.WriteLine("Enter your reservation id:");
+        string? resid = Console.ReadLine();
         foreach (ReservationModel res in allRes)
         {
-            if (email == res.EmailAddress && res.Date >= DateTime.Now.Date)
+            if (email == res.EmailAddress && res.Res_ID == resid && res.Date >= DateTime.Now.Date)
             {
                 reservationsPerson.Add(
                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.ToString("dd-MM-yyyy")}. Tijdslot: {res.StartTime} - {res.LeaveTime}");

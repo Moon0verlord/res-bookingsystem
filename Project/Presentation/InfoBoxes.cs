@@ -128,7 +128,7 @@ static class InfoBoxes
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
         string information =
             @"
-            Hier in Rotterdam vind u het prachtige /restaurant name/.
+            Hier in Rotterdam vind u het prachtige restaurant 'De Witte Haven'.
             Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
             Ook is het mogelijk om er een wijnarrangement bij te boeken. 
             Naast het reserveren van een tafel is er ook nog beschikking tot een bar.
@@ -240,9 +240,9 @@ static class InfoBoxes
                                                 Wanneer er een evenement plaatsvindt in ons restaurant zijn de tijden anders.
 
                                                                2 Gangen        3 Gangen       4 Gangen      
-                                                            16:00 - 18:00   16:00 - 18:15   16:00 - 18:30
-                                                            18:00 - 20:00   18:15 - 20:30   18:30 - 21:00
-                                                            20:00 - 22:00   20:30 - 22:45   21:00 - 23:30
+                                                            16:00 - 17:30   16:00 - 18:00   16:00 - 18:30
+                                                            17:30 - 19:00   18:00 - 20:00   18:30 - 21:00
+                                                            19:00 - 20:30   20:00 - 22:00   21:00 - 23:30
 
                                                                             Evenementtijden
                                                                              16:00 - 19:00

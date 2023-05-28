@@ -30,7 +30,7 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Log-in portal", "Informatie", "Tijden", "Bekijk het menu","Special Events", "Maak een reservatie met e-mail", "Afsluiten" };
+                string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Maak een reservatie met e-mail", "Afsluiten" };
                 string prompt = $"{ascii}";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -42,21 +42,16 @@ class MainMenu : IMenuLogic
                         restaurantInfo.Start();
                         break;
                     case 2:
-                        TimeInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu");
-                        Console.ReadKey(true);
-                        break;
-                    case 3:
                         Dishes.UserOptions();
                         Thread.Sleep(5000);
                         break;
-                    case 4:
+                    case 3:
                         SpecialEvent.Eventmenu();
                         break;
-                    case 5:
+                    case 4:
                         Reservation.ResStart(Account);
                         break;
-                    case 6:
+                    case 5:
                         Environment.Exit(0);
                         break;
 
@@ -162,33 +157,27 @@ class MainMenu : IMenuLogic
         {
             while (true)
             {
-                string[] options = { "Informatie", "Tijden", "Bekijk het menu", "Reserveren", "Reserveringen bekijken", "Uitloggen", "Afsluiten (En gelijk uitloggen)" };
+                string[] options = { "Informatie", "Bekijk het menu", "Reserveren", "Reserveringen bekijken", "Uitloggen", "Afsluiten (En gelijk uitloggen)" };
                 string prompt = $"\nWelkom {Account.FullName}:";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
                     case 0:
                         restaurantInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        Console.ReadKey(true);
                         break;
                     case 1:
-                        TimeInfo.Start();
-                        Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
-                        break;
-                    case 2:
                         Dishes.UserSelection();
                         Thread.Sleep(5000); ;
                         break;
-                    case 3:
+                    case 2:
                         Reservation.ResStart(Account);
                         break;
-                    case 4:
+                    case 3:
                         Reservation.ViewRes(Account.EmailAddress);
                         Console.WriteLine("Druk op een knop om terug te gaan naar het hoofdmenu.");
                         Console.ReadKey(true);
                         break;
-                    case 5:
+                    case 4:
                         if (Account.LoggedIn)
                         {
                             Console.CursorVisible = true;
@@ -208,7 +197,7 @@ class MainMenu : IMenuLogic
                             Console.WriteLine("U bent al uitgelogd");
                         }
                         break;
-                    case 6:
+                    case 5:
                         Environment.Exit(0);
                         break;
                 }
