@@ -77,17 +77,7 @@ class MainMenu : IMenuLogic
                         case 0:
                             if (Account.LoggedIn)
                             {
-                                Console.CursorVisible = true;
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("Weet u het zeker? (j/n): ");
-                                Console.ResetColor();
-                                string userAnswer = Console.ReadLine()!;
-                                if (userAnswer == "j" || userAnswer == "J")
-                                {
-                                    Account = null!;
-                                    Start();
-                                }
+                                AccountsLogic.LogOut();
                             }
                             else
                             {
@@ -128,17 +118,7 @@ class MainMenu : IMenuLogic
                     case 2:
                         if (Account.LoggedIn)
                         {
-                            Console.CursorVisible = true;
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("Weet u het zeker? (j/n): ");
-                            Console.ResetColor();
-                            string userAnswer = Console.ReadLine()!;
-                            if (userAnswer == "j" || userAnswer == "J")
-                            {
-                                Account = null!;
-                                Start();
-                            }
+                            AccountsLogic.LogOut();
                         }
                         else
                         {
@@ -183,17 +163,7 @@ class MainMenu : IMenuLogic
                     case 4:
                         if (Account.LoggedIn)
                         {
-                            Console.CursorVisible = true;
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("Weet u het zeker? (j/n): ");
-                            Console.ResetColor();
-                            string userAnswer = Console.ReadLine()!;
-                            if (userAnswer == "j" || userAnswer == "J")
-                            {
-                                Account = null!;
-                                Start();
-                            }
+                            AccountsLogic.LogOut();
                         }
                         else
                         {

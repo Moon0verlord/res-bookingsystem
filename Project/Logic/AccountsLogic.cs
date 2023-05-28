@@ -120,6 +120,28 @@ class AccountsLogic:IMenuLogic
         } 
         while (password != confirmPassword);
     }
+
+    public static void LogOut()
+    {
+        string userAnswer;
+        do
+        {
+            Console.CursorVisible = true;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Weet u het zeker? (j/n): ");
+            Console.ResetColor();
+            userAnswer = Console.ReadLine()!;
+        } while (!AnswerLogic.Contains(userAnswer));
+                            
+
+        if (AnswerLogic.CheckInput(userAnswer))
+        {
+            userAnswer = "";
+            MainMenu.Account = null!;
+            MainMenu.Start();
+        }
+    }
 }
 
 

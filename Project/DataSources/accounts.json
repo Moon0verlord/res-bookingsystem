@@ -46,5 +46,21 @@
     "fullName": "Klant",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 17,
+    "emailAddress": "m@w.com",
+    "password": "$2a$12$4UmarckU917DbJelUarPn.9QlFiMhR47bs.EqwQvZccy9Mm.J1cLm",
+    "fullName": "Mart",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 18,
+    "emailAddress": "w@l.com",
+    "password": "$2a$12$hSZ0u2mQtsGQHCGKtDmO0.RzLFn8u0Al/8y9j3BXprWxAyn195c0u",
+    "fullName": "Test",
+    "Employee": false,
+    "Manager": false
   }
 ]
