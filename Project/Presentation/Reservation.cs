@@ -463,13 +463,13 @@ static class Reservation
 
     public static void ViewResAccount()
     {
-        var allRes = AccountsAccess.LoadAllReservations();
-        var menuViewable = allRes.Select(x => 
-                x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
-                .OrderBy(x => x).Append("Ga terug").ToArray();
         bool inMenu = true;
         while (inMenu)
         {
+            var allRes = AccountsAccess.LoadAllReservations();
+            var menuViewable = allRes.Select(x => 
+                    x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
+                .OrderBy(x => x).Append("Ga terug").ToArray();
             int chosenOption = _my1DMenu.RunMenu(menuViewable, "Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n");
             switch (menuViewable[chosenOption])
             {
