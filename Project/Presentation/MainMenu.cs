@@ -30,7 +30,7 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Maak een reservatie met e-mail", "Afsluiten" };
+                string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Reservaties bekijken", "Maak een reservatie met e-mail", "Afsluiten" };
                 string prompt = $"{ascii}";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -49,9 +49,12 @@ class MainMenu : IMenuLogic
                         SpecialEvent.Eventmenu();
                         break;
                     case 4:
-                        Reservation.ResStart(Account);
+                        Reservation.ViewRes();
                         break;
                     case 5:
+                        Reservation.ResStart(Account);
+                        break;
+                    case 6:
                         Environment.Exit(0);
                         break;
 

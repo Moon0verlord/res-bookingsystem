@@ -387,7 +387,7 @@ static class Reservation
         List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
         List<string> reservationsPerson = new();
         List<int> reservationPersonPositions = new();
-        Console.WriteLine("Enter your reservation id:");
+        Console.WriteLine("Voer uw reservatie ID in: ");
         string? resid = Console.ReadLine();
         foreach (ReservationModel res in allRes)
         {
@@ -456,6 +456,77 @@ static class Reservation
 
                         break;
                 }
+            }
+        }
+    }
+
+    public static void ViewRes()
+    {
+        Console.Clear();
+        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
+        Console.CursorVisible = true;
+        Console.Write("Voer uw reservatie ID in: ");
+        string? resid = Console.ReadLine();
+        ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
+        if (chosenRes == default)
+        {
+            Console.WriteLine($"Geen reservatie gevonden met reservatie ID: {resid}");
+            Thread.Sleep(1500);
+            UserLogin.DiscardKeys();
+        }
+        else
+        {
+            bool inMenu = true;
+            while (inMenu)
+            {
+                string resInfo = $"Reservatie {resid}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
+                                 $"Tijd: {chosenRes.StartTime:hh}:{chosenRes.StartTime:mm} - {chosenRes.LeaveTime:hh}:{chosenRes.LeaveTime:mm}" +
+                                 $"\nTafel: {chosenRes.Id}\nGroepsgrootte: {chosenRes.GroupSize}\nGekozen gang: {chosenRes.Course}\n";
+                int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservatie annuleren", "Ga terug" }, resInfo);
+                switch (chosenOption)
+                {
+                    case 0:
+                        if ((chosenRes.Date.Date - DateTime.Now.Date).Days <= 1)
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                           Console.WriteLine("Reservatie is morgen, en dan kunt u" +
+                                             " niet annuleren via dit programma.\nVerwijs naar het informatie tab " +
+                                             "binnen het hoofdmenu om te bellen voor annulering.\n\n\nDruk op een knop om terug te gaan.");
+                           Console.ReadKey(true);
+                           Console.ResetColor();
+                        }
+                        else
+                        {
+
+                            Console.Clear();
+                            Console.CursorVisible = true;
+                            Console.Write("Weet u zeker dat u deze reservatie wilt annuleren? (j/n): ");
+                            string choice = Console.ReadLine()!.ToLower();
+                            switch (choice)
+                            {
+                                case "j":
+                                case "ja":
+                                    allRes.Remove(chosenRes);
+                                    AccountsAccess.WriteAllReservations(allRes);
+                                    Console.WriteLine("\nReservatie is verwijderd.");
+                                    Thread.Sleep(1500);
+                                    UserLogin.DiscardKeys();
+                                    inMenu = false;
+                                    break;
+                                default:
+                                    Console.WriteLine("\nReservatie is niet verwijderd.");
+                                    Thread.Sleep(1500);
+                                    UserLogin.DiscardKeys();
+                                    break;
+                            }
+                        }
+
+                        break;
+                    case 1:
+                        inMenu = false;
+                        break;
+                }   
             }
         }
     }
