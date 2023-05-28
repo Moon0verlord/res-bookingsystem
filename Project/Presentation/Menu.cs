@@ -227,21 +227,20 @@ public static class Dishes
         // Displays the added dish to the user
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Het type menu: {type} in {category} is aangepast.");
-        if (category == "Voorgerecht")
+        switch (category)
         {
-            Console.WriteLine($"Voorgerecht: {dishtoadd["Voorgerecht"]}");
-        }
-        else if (category == "Soep")
-        {
-            Console.WriteLine($"Soep: {dishtoadd["Soep"]}");
-        }
-        else if (category == "Maaltijd")
-        {
-            Console.WriteLine($"Maaltijd: {dishtoadd["Maaltijd"]}");
-        }
-        else if (category == "Nagerecht")
-        {
-            Console.WriteLine($"Nagerecht: {dishtoadd["Nagerecht"]}");
+            case "Voorgerecht":
+                Console.WriteLine($"Voorgerecht: {dishtoadd["Voorgerecht"]}");
+                break;
+            case "Soep":
+                Console.WriteLine($"Soep: {dishtoadd["Soep"]}");
+                break;
+            case "Maaltijd":
+                Console.WriteLine($"Maaltijd: {dishtoadd["Maaltijd"]}");
+                break;
+            case "Nagerecht":
+                Console.WriteLine($"Nagerecht: {dishtoadd["Nagerecht"]}");
+                break;
         }
         Console.WriteLine("is toegevoegd aan het menu");
         Console.ResetColor();
@@ -271,7 +270,7 @@ public static class Dishes
         // Get user selection
         string prompt = $"\nWelke maaltijd wil je veranderen in de categorie '{category}'?:";
         int input = _myMenu.RunMenu(options, prompt);
-
+    
         if (input >= 0 && input < dishArray.Count)
         {
             return new JObject(new JProperty(category, dishArray[input]));

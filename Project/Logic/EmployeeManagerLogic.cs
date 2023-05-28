@@ -121,7 +121,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 case "Ja":
                                     {
                                         Console.Clear();
-                                        var employeeacc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                        var employeeAcc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
                                         Console.WriteLine("Medewerker toegevoegd");
                                         Thread.Sleep(3000);
                                     }
@@ -153,33 +153,29 @@ public class EmployeeManagerLogic : IMenuLogic
         while (true)
         {
             string email = Console.ReadLine();
-            if (AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
+            if (email!=null&&AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
             {
                 Console.WriteLine("Weet je zeker dat je deze medewerker wilt verwijderen? (j/n)");
-                string answer = Console.ReadLine().ToLower();
-                if (answer == "j")
+                string answer = Console.ReadLine()!.ToLower();
+                switch (answer)
                 {
-                    AccountsAccess.RemoveAccount(email);
-                    Console.WriteLine("Medewerker verwijderd");
-                    Thread.Sleep(3000);
-                    break;
-                }
-                else if (answer == "n")
-                {
-                    Console.WriteLine("Medewerker niet verwijderd");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Ongeldige invoer");
+                    case "j":case"J":case"Ja":case"ja:":
+                        AccountsAccess.RemoveAccount(email);
+                        Console.WriteLine("Medewerker verwijderd");
+                        Thread.Sleep(3000);
+                        break;
+                    case "n":case"N":case"nee":case"Nee":
+                        Console.WriteLine("Medewerker niet verwijderd");
+                        break;
+                    default:
+                        Console.WriteLine("Ongeldige invoer");
+                        break;
                 }
             }
             else
             {
                 Console.WriteLine("Deze medewerker bestaat niet");
-            }
-            if (email == "")
-            {
+                Thread.Sleep(2000);
                 break;
             }
         }

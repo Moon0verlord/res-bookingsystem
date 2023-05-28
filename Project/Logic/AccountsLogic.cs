@@ -81,18 +81,11 @@ class AccountsLogic:IMenuLogic
         {
             Console.WriteLine("Voer de verificatie code in: ");
             code = Console.ReadLine()!;
-            if (code == sixDigitNumber)
-            {
-                Console.WriteLine("Verificatie gelukt!");
-            }
-            else
-            {
-                Console.WriteLine("Incorrecte code");
-            }
+            Console.WriteLine(code == sixDigitNumber ? "Verificatie gelukt!" : "Incorrecte code");
         } 
         while (code != sixDigitNumber);
-        string password = "";
-        string confirmPassword = "";
+        string password;
+        string confirmPassword;
 
         // check if the passwords are equal
         do{

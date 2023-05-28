@@ -30,5 +30,21 @@
     "fullName": "jona",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 15,
+    "emailAddress": "klant@res.nl",
+    "password": "$2a$12$F82CEl7JsrNiULKDZcJEf.14RGKnjFLZJUYFw/ZwshAlWnxStwl2q",
+    "fullName": "klant",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 16,
+    "emailAddress": "Klant@icloud.com",
+    "password": "$2a$12$UFXnA0Oy5.XP2NFylfGuluFiO2phDRdy3WyzA5DX5ADIBsZ95ae4S",
+    "fullName": "Klant",
+    "Employee": false,
+    "Manager": false
   }
 ]

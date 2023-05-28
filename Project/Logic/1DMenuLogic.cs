@@ -2,9 +2,9 @@
 {
     private int _currentIndex = 0;
     private string[] _options = null;
-    private List<string> sizes = new List<string>();
-    private List<int> forbiddenIndex = new List<int>();
-    private List<ReservationModel> tables = new List<ReservationModel>();
+    private List<string> sizes = new ();
+    private List<int> forbiddenIndex = new ();
+    private List<ReservationModel> tables = new ();
     private int res_GroupSize = default;
 
     private void DisplayOptions(string prompt, bool printPrompt)
