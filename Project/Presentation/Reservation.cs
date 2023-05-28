@@ -466,11 +466,12 @@ static class Reservation
         List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
         Console.CursorVisible = true;
         Console.Write("Voer uw reservatie ID in: ");
-        string? resid = Console.ReadLine();
+        string? resid = Console.ReadLine()!.ToUpper();
+        resid = resid!.Contains("RES-") ? resid : "RES-" + resid;
         ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
         if (chosenRes == default)
         {
-            Console.WriteLine($"Geen reservatie gevonden met reservatie ID: {resid}");
+            Console.WriteLine($"Geen reservatie gevonden met het gegeven reservatie ID.");
             Thread.Sleep(1500);
             UserLogin.DiscardKeys();
         }
