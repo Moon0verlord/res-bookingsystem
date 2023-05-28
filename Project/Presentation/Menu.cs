@@ -60,7 +60,7 @@ public static class Dishes
         Console.WriteLine($"4 gangen: {price4}");
         
         Console.WriteLine();
-        Console.WriteLine("gerechten:");
+        Console.WriteLine($"{choice} gerechten:");
 
         Console.WriteLine();
         Console.WriteLine("Voorgerechten:");
@@ -344,7 +344,7 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string choice = "";
         Console.CursorVisible = false;
-        string[] options = { "Rode Wijn", "Witte Wijn", "Bubbles" };
+        string[] options = { "Rode Wijn", "Witte Wijn", "Champagne" };
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -464,6 +464,7 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
+        // takes dish name from user and writes this to the json
         Console.WriteLine("Wat is de naam van het gerecht?");
         name = Console.ReadLine();
         JArray SelectionArray = (JArray)DishesOBJ[type]![category]!;
@@ -482,7 +483,7 @@ public static class Dishes
     public static void UserOptions()
     {
         Console.CursorVisible = false;
-        string[] options = { "Menu zien", "Wijn Arrangement", "Terug naar hoofdmenu" };
+        string[] options = { "Bekijk het menu", "Wijn Arrangement", "Terug naar hoofdmenu" };
         string prompt = "\nKies een optie:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)

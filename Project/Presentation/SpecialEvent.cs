@@ -118,23 +118,19 @@ public class SpecialEvent
     public static void Eventmenu()
     {
         string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Organiseer een evenement", "Menu","View Events","Terug naar hoofdmenu" };
+        string[] options = { "Bekijk het menu","Aankomende evenementen bekijken","Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
         {
             case 0:
                 Console.Clear();
-                ResEvent();
+                EventsFood();
                 break;
             case 1:
                 Console.Clear();
-                EventsFood();
-                break;
-            case 2:
-                Console.Clear();
                 Start();
                 break;
-            case 3:
+            case 2:
                 Console.Clear();
                 MainMenu.Start();
                 break;
@@ -166,14 +162,19 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
         if (CheckIfEvent())
         {
-            Console.WriteLine("Alle evenementen:");
+            Console.WriteLine("Komende evenementen:");
             foreach (var eventItem in eventmenu)
             {
-                Console.WriteLine(eventItem["eventname"]);
-                Console.WriteLine(eventItem["eventinfo"]);
-                Console.WriteLine(eventItem["eventdate"]);
-                Console.WriteLine();
+                DateTime eventDate = DateTime.Parse(eventItem["eventdate"].ToString());
+                if (eventDate > DateTime.Now)
+                {
+                    Console.WriteLine("-------");
+                    Console.WriteLine($"{eventItem["eventname"]}:");
+                    Console.WriteLine($"{eventItem["eventinfo"]}");
+                    Console.WriteLine($"{eventItem["eventdate"]}");
+                }
             }
+            Console.WriteLine();
             Console.WriteLine("Druk op een knop om verder te gaan");
             Console.ReadKey();
             MainMenu.Start();
@@ -183,6 +184,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
             Console.WriteLine(Events);
         }
     }
+
     
     
 }
