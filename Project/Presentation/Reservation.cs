@@ -467,10 +467,11 @@ static class Reservation
         Console.CursorVisible = true;
         Console.Write("Voer uw reservatie ID in: ");
         string? resid = Console.ReadLine();
+        resid = resid!.Contains("RES-") ? resid : "RES-" + resid;
         ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
         if (chosenRes == default)
         {
-            Console.WriteLine($"Geen reservatie gevonden met reservatie ID: {resid}");
+            Console.WriteLine($"Geen reservatie gevonden met het gegeven reservatie ID.");
             Thread.Sleep(1500);
             UserLogin.DiscardKeys();
         }
