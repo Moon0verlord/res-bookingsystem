@@ -466,7 +466,7 @@ static class Reservation
         bool inMenu = true;
         while (inMenu)
         {
-            var allRes = AccountsAccess.LoadAllReservations();
+            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToArray();
             var menuViewable = allRes.Select(x => 
                     x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
                 .OrderBy(x => x).Append("Ga terug").ToArray();
@@ -487,7 +487,7 @@ static class Reservation
     public static void ViewRes2(string resid = null)
     {
         Console.Clear();
-        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
+        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToList();
         Console.CursorVisible = true;
         if (resid == null)
         {
@@ -496,7 +496,6 @@ static class Reservation
             resid = resid!.Contains("RES-") ? resid : "RES-" + resid;   
         }
         ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
-        // todo : add check for reservations that already happened
         if (chosenRes == default)
         {
             Console.WriteLine($"Geen reservatie gevonden met het gegeven reservatie ID.");
