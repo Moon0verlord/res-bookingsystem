@@ -1,11 +1,13 @@
 
 public class AnswerLogic
 {
-    public Dictionary<List<string>, bool> AnswerValues = new()
+    public static Dictionary<List<string>, bool> AnswerValues = new()
     {
         {
              new List<string>
             {
+                "J",
+                "j",
                 "JA",
                 "Ja",
                 "ja",
@@ -35,6 +37,8 @@ public class AnswerLogic
         {
              new List<string>
             {
+                "n",
+                "N",
                 "NEE",
                 "nee",
                 "Nee",
@@ -57,9 +61,23 @@ public class AnswerLogic
         }
     };
 
-    public bool CheckInput(string answer)
+    public static bool CheckInput(string answer)
     {
-        var Query = (from item in AnswerValues where item.Key.Contains(answer) select item.Value).ToList();
-        return Query[0];
+        try
+        {
+            var Query = (from item in AnswerValues where item.Key.Contains(answer) select item.Value).ToList();
+            return Query[0];
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Console.WriteLine("incorrecte invoer");
+            Thread.Sleep(2000);
+            return false;
+        }
+    }
+
+    public static bool Contains(string choice)
+    {
+        return AnswerValues.Any(x => x.Key.Contains(choice));
     }
 }
