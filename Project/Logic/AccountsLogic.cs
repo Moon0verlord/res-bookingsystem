@@ -1,4 +1,7 @@
 ﻿//This class is not static so later on we can use inheritance and interfaces
+
+using System.Text.RegularExpressions;
+
 class AccountsLogic:IMenuLogic
 {
     private List<AccountModel> _accounts;
@@ -123,24 +126,18 @@ class AccountsLogic:IMenuLogic
 
     public static void LogOut()
     {
-        string userAnswer;
-        do
+        Console.CursorVisible = true;
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("Weet u het zeker? (j/n): ");
+        Console.ResetColor();
+        var userAnswer = Console.ReadLine()!.ToLower();
+        if (AnswerLogic.CheckInput(userAnswer)) 
         {
-            Console.CursorVisible = true;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Weet u het zeker? (j/n): ");
-            Console.ResetColor();
-            userAnswer = Console.ReadLine()!;
-        } while (!AnswerLogic.Contains(userAnswer));
-                            
-
-        if (AnswerLogic.CheckInput(userAnswer))
-        {
-            userAnswer = "";
             MainMenu.Account = null!;
             MainMenu.Start();
         }
+        
     }
 }
 
