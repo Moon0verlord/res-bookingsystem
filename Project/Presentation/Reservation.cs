@@ -380,6 +380,7 @@ static class Reservation
         }
     }
 
+ 
     public static void ViewRes(string email)
     {
         Console.Clear();
@@ -460,14 +461,40 @@ static class Reservation
         }
     }
 
-    public static void ViewRes()
+    public static void ViewResAccount()
+    {
+        bool inMenu = true;
+        while (inMenu)
+        {
+            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToArray();
+            var menuViewable = allRes.Select(x => 
+                    x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
+                .OrderBy(x => x).Append("Ga terug").ToArray();
+            int chosenOption = _my1DMenu.RunMenu(menuViewable, "Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n");
+            switch (menuViewable[chosenOption])
+            {
+                case "Ga terug":
+                    inMenu = false;
+                    break;
+                default:
+                    ViewRes2(allRes[chosenOption].Res_ID);
+                    break;
+            }   
+        }
+    }
+
+    // todo : name is this for now to not be an overload for martijn's viewres. will change.
+    public static void ViewRes2(string resid = null)
     {
         Console.Clear();
-        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
+        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToList();
         Console.CursorVisible = true;
-        Console.Write("Voer uw reservatie ID in: ");
-        string? resid = Console.ReadLine()!.ToUpper();
-        resid = resid!.Contains("RES-") ? resid : "RES-" + resid;
+        if (resid == null)
+        {
+            Console.Write("Voer uw reservatie ID in: ");
+            resid = Console.ReadLine()!.ToUpper();
+            resid = resid!.Contains("RES-") ? resid : "RES-" + resid;   
+        }
         ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
         if (chosenRes == default)
         {
@@ -480,9 +507,10 @@ static class Reservation
             bool inMenu = true;
             while (inMenu)
             {
-                string resInfo = $"Reservatie {resid}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
-                                 $"Tijd: {chosenRes.StartTime:hh}:{chosenRes.StartTime:mm} - {chosenRes.LeaveTime:hh}:{chosenRes.LeaveTime:mm}" +
-                                 $"\nTafel: {chosenRes.Id}\nGroepsgrootte: {chosenRes.GroupSize}\nGekozen gang: {chosenRes.Course}\n";
+                string resInfo =
+                    $"Reservatie {resid}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
+                    $"Tijd: {chosenRes.StartTime:hh}:{chosenRes.StartTime:mm} - {chosenRes.LeaveTime:hh}:{chosenRes.LeaveTime:mm}" +
+                    $"\nTafel: {chosenRes.Id}\nGroepsgrootte: {chosenRes.GroupSize}\nGekozen gang: {chosenRes.Course}\n";
                 int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservatie annuleren", "Ga terug" }, resInfo);
                 switch (chosenOption)
                 {
@@ -491,11 +519,11 @@ static class Reservation
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                           Console.WriteLine("Reservatie is morgen, en dan kunt u" +
-                                             " niet annuleren via dit programma.\nVerwijs naar het informatie tab " +
-                                             "binnen het hoofdmenu om te bellen voor annulering.\n\n\nDruk op een knop om terug te gaan.");
-                           Console.ReadKey(true);
-                           Console.ResetColor();
+                            Console.WriteLine("Reservatie is morgen, en dan kunt u" +
+                                              " niet annuleren via dit programma.\nVerwijs naar het informatie tab " +
+                                              "binnen het hoofdmenu om te bellen voor annulering.\n\n\nDruk op een knop om terug te gaan.");
+                            Console.ReadKey(true);
+                            Console.ResetColor();
                         }
                         else
                         {
@@ -527,7 +555,7 @@ static class Reservation
                     case 1:
                         inMenu = false;
                         break;
-                }   
+                }
             }
         }
     }
