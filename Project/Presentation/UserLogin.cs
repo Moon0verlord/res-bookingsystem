@@ -204,7 +204,7 @@ public static class UserLogin
                             $"{HidePass(userPassword)}\nWeet u zeker dat u een account wil aanmaken met deze gegevens? (j/n)");
                         Console.ResetColor();
                         var answer = Console.ReadLine()!;
-                        if (AnswerLogic.CheckInput(answer))
+                        if (AnswerLogic.CheckInput(answer)==1)
                         {
                             AccountsAccess.AddAccount(userEmail, userPassword, fullName, false, false);
                             Console.Clear();

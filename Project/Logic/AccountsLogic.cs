@@ -132,10 +132,17 @@ class AccountsLogic:IMenuLogic
         Console.Write("Weet u het zeker? (j/n): ");
         Console.ResetColor();
         var userAnswer = Console.ReadLine()!.ToLower();
-        if (AnswerLogic.CheckInput(userAnswer)) 
+        switch (AnswerLogic.CheckInput(userAnswer)) 
         {
+            case 1:
             MainMenu.Account = null!;
             MainMenu.Start();
+            break;
+            case 0:
+                break;
+            case -1:
+                LogOut();
+                break;
         }
         
     }

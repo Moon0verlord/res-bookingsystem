@@ -62,5 +62,13 @@
     "fullName": "Test",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 19,
+    "emailAddress": "m@s.com",
+    "password": "$2a$12$P.WLqpb24zaCrT.v4EqGpuLLUdT9vAvRC33sMB.nBd5l9yTVesPI2",
+    "fullName": "TEster",
+    "Employee": false,
+    "Manager": false
   }
 ]

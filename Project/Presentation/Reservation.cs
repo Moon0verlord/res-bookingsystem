@@ -534,7 +534,7 @@ static class Reservation
                             string choice = Console.ReadLine()!.ToLower();
                             switch (AnswerLogic.CheckInput(choice))
                             {
-                                case true: 
+                                case 1: 
                                     allRes.Remove(chosenRes);
                                     AccountsAccess.WriteAllReservations(allRes);
                                     Console.WriteLine("\nReservatie is verwijderd.");
@@ -542,7 +542,7 @@ static class Reservation
                                     UserLogin.DiscardKeys();
                                     inMenu = false;
                                     break;
-                                default:
+                                case 0 :
                                     Console.WriteLine("\nReservatie is niet verwijderd.");
                                     Thread.Sleep(1500);
                                     UserLogin.DiscardKeys();
