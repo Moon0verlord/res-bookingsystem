@@ -129,10 +129,9 @@ static class Reservation
             Console.ResetColor();
             Console.CursorVisible = true;
             string answer = Console.ReadLine()!;
-            switch (answer.ToLower())
+            switch (AnswerLogic.CheckInput(answer))
             {
-                case "ja":
-                case "j":
+                case 1:
                     string Res_ID = Reservations.CreateID();
                     Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID, _chosenCourse);
@@ -142,11 +141,10 @@ static class Reservation
                     UserLogin.DiscardKeys();
                     MainMenu.Start(_acc);
                     break;
-                case "nee":
-                case "n":
+                case 0:
                     MainMenu.Start(_acc);
                     break;
-                default:
+                case -1:
                     break;
             }
         }
@@ -425,12 +423,9 @@ static class Reservation
                         Console.ResetColor();
                         Console.CursorVisible = true;
                         var choice = Console.ReadLine();
-                        switch (choice)
+                        switch (AnswerLogic.CheckInput(choice))
                         {
-                            case "J":
-                            case "j":
-                            case "Ja":
-                            case "ja":
+                            case 1:
                                 Console.WriteLine("De reservatie is verwijderd");
                                 allRes.RemoveAt(reservationPersonPositions[reservInput]);
                                 reservationsPerson.RemoveAt(reservInput);
@@ -438,15 +433,12 @@ static class Reservation
                                 Thread.Sleep(5000);
                                 UserLogin.DiscardKeys();
                                 break;
-                            case "N":
-                            case "n":
-                            case "Nee":
-                            case "nee":
+                            case 0:
                                 Console.WriteLine("De reservatie is niet verwijderd");
                                 Thread.Sleep(2000);
                                 UserLogin.DiscardKeys();
                                 break;
-                            default:
+                            case -1:
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Incorrecte input");

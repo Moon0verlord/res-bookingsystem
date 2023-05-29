@@ -117,20 +117,25 @@ public class EmployeeManagerLogic : IMenuLogic
                                 $"{HidePass(employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
-                            switch (answer)
+                            switch (AnswerLogic.CheckInput(answer))
                             {
 
-                                case "j":
-                                case "J":
-                                case "ja":
-                                case "Ja":
+                                case 1:
                                     {
                                         Console.Clear();
                                         var employeeAcc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
                                         Console.WriteLine("Medewerker toegevoegd");
                                         Thread.Sleep(3000);
+                                        MainMenu.Start();
                                     }
                                     break;
+                                case 0:
+                                    Console.WriteLine("Medewerker niet toegevoegd");
+                                    Thread.Sleep(3000);
+                                    break;
+                                case -1:
+                                    break;
+                                    
                             }
                         }
                     }
@@ -162,18 +167,17 @@ public class EmployeeManagerLogic : IMenuLogic
             {
                 Console.WriteLine("Weet je zeker dat je deze medewerker wilt verwijderen? (j/n)");
                 string answer = Console.ReadLine()!.ToLower();
-                switch (answer)
+                switch (AnswerLogic.CheckInput(answer))
                 {
-                    case "j":case"J":case"Ja":case"ja:":
+                    case 1:
                         AccountsAccess.RemoveAccount(email);
                         Console.WriteLine("Medewerker verwijderd");
                         Thread.Sleep(3000);
                         break;
-                    case "n":case"N":case"nee":case"Nee":
+                    case 0:
                         Console.WriteLine("Medewerker niet verwijderd");
                         break;
-                    default:
-                        Console.WriteLine("Ongeldige invoer");
+                    case -1:
                         break;
                 }
             }

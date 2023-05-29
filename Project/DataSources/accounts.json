@@ -70,5 +70,21 @@
     "fullName": "TEster",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 20,
+    "emailAddress": "m@r.com",
+    "password": "$2a$12$WlgAgiboKrxOfaqBznNgtOP2NDU8FQ9hO9keOAhH17Dq0QAt0bm.i",
+    "fullName": "medeqwekwewqas",
+    "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 21,
+    "emailAddress": "j@j.nl",
+    "password": "$2a$12$h1IwI1QjYELEaJOciXW7fehQ41i73ctZsPK6TrQHnp/z7yoIIZn6y",
+    "fullName": "Nee",
+    "Employee": true,
+    "Manager": false
   }
 ]

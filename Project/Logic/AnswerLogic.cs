@@ -4,17 +4,18 @@ public class AnswerLogic
 
     public static int CheckInput(string answer)
     {
+        answer = answer.ToLower();
         //1 is correct output
         //0 is false output
         //-1 is error
         string pattern = @"^j[a]+$";
         string pattern2 = @"^n[e]+$";
        
-            if (Regex.IsMatch(answer.ToLower(),pattern))
+            if (Regex.IsMatch(answer.ToLower(),pattern)||answer =="j")
             {
                 return 1;
             } 
-            if (Regex.IsMatch(answer.ToLower(),pattern2))
+            if (Regex.IsMatch(answer.ToLower(),pattern2)||answer =="n")
             {
                 return 0;
             }
