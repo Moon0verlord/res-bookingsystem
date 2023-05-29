@@ -68,7 +68,6 @@ public class EmailLogic
             NetworkCredential basicAuthenticationInfo = new
                 NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
-            // todo : placeholders, remove this and make these the right variables asap
             var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), code, $"{StartTime:hh}:{StartTime:mm} - {LeaveTime:hh}:{LeaveTime:mm}");
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
