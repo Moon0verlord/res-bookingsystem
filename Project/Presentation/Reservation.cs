@@ -467,10 +467,9 @@ static class Reservation
         bool inMenu = true;
         while (inMenu)
         {
-            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).ToArray();
+            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).OrderBy(x => x.Date).ToArray();
             var menuViewable = allRes.Select(x => 
-                    x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
-                .OrderBy(x => x).Append("Ga terug").ToArray();
+                    x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})").Append("Ga terug").ToArray();
             int chosenOption = _my1DMenu.RunMenu(menuViewable, "Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n");
             switch (menuViewable[chosenOption])
             {
