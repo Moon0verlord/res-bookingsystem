@@ -9,6 +9,7 @@ static class Reservation
     private static MenuLogic _my1DMenu = new MenuLogic();
     private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
     private static readonly ReservationsLogic Reservations = new ReservationsLogic();
+    private static AnswerLogic _answerLogic = new AnswerLogic();
     private static ReservationTableLogic _tableLogic = new ReservationTableLogic();
     private static string _userEmail;
     private static int _amountOfPeople;
@@ -466,7 +467,7 @@ static class Reservation
         bool inMenu = true;
         while (inMenu)
         {
-            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToArray();
+            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).ToArray();
             var menuViewable = allRes.Select(x => 
                     x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})")
                 .OrderBy(x => x).Append("Ga terug").ToArray();
@@ -487,7 +488,7 @@ static class Reservation
     public static void ViewRes2(string resid = null)
     {
         Console.Clear();
-        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date >= DateTime.Now).ToList();
+        List<ReservationModel> allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).ToList();
         Console.CursorVisible = true;
         if (resid == null)
         {
@@ -514,7 +515,7 @@ static class Reservation
                 int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservatie annuleren", "Ga terug" }, resInfo);
                 switch (chosenOption)
                 {
-                    case 0:
+                   case 0 :
                         if ((chosenRes.Date.Date - DateTime.Now.Date).Days <= 1)
                         {
                             Console.Clear();
@@ -532,10 +533,9 @@ static class Reservation
                             Console.CursorVisible = true;
                             Console.Write("Weet u zeker dat u deze reservatie wilt annuleren? (j/n): ");
                             string choice = Console.ReadLine()!.ToLower();
-                            switch (choice)
+                            switch (AnswerLogic.CheckInput(choice))
                             {
-                                case "j":
-                                case "ja":
+                                case true: 
                                     allRes.Remove(chosenRes);
                                     AccountsAccess.WriteAllReservations(allRes);
                                     Console.WriteLine("\nReservatie is verwijderd.");
