@@ -306,7 +306,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         }
                     }
                     AccountsAccess.ChangeReservationJson(reservation);
-                    EmailLogic.SendEmail(reservation.EmailAddress, User.FullName, reservation.Id, reservation.Date);
+                    EmailLogic.SendEmail(reservation.EmailAddress, reservation.Date, reservation.Res_ID, reservation.StartTime, reservation.LeaveTime);
                     Console.WriteLine("Reservering aangepast");
                     Thread.Sleep(2000);
                     MainMenu.Start();

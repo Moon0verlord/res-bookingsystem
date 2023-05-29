@@ -182,13 +182,13 @@ public class ReservationsLogic
         if(User!=null)
         {
             ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
-            EmailLogic.SendEmail(email," "+User.FullName,chosenTable,res_Date);
+            EmailLogic.SendEmail(email, res_Date, res_id, entertime, leavetime);
             AccountsAccess.AddReservation(newReservation);
         }
         else
         {
             ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
-            EmailLogic.SendEmail(email,"",chosenTable,res_Date);
+            EmailLogic.SendEmail(email, res_Date, res_id, entertime, leavetime);
             AccountsAccess.AddReservation(newReservation);
         }
         

@@ -53,7 +53,7 @@ public class EmailLogic
     }
 
     // Send an email to the user after they have made a reservation
-    public static void SendEmail(string email, string name, string table, DateTime Date)
+    public static void SendEmail(string email, DateTime Date, string code, TimeSpan StartTime, TimeSpan LeaveTime)
     {
         try
         {
@@ -69,7 +69,7 @@ public class EmailLogic
                 NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
             Smtp.Credentials = basicAuthenticationInfo;
             // todo : placeholders, remove this and make these the right variables asap
-            var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), "RES-102934");
+            var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), code, $"{StartTime:hh}:{StartTime:mm} - {LeaveTime:hh}:{LeaveTime:mm}");
 
             //Who the email is from, who its going to, the mail message and what the reply email is 
             MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
