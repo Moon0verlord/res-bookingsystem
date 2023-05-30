@@ -18,6 +18,7 @@ static class Reservation
     private static (TimeSpan, TimeSpan) _chosenTimeslot;
     private static string _chosenTable;
     private static int _chosenCourse;
+    private static bool _chosenWine;
     private static int _stepCounter;
 
     public static void ResStart(AccountModel acc = null)
@@ -31,6 +32,7 @@ static class Reservation
         _chosenTimeslot = (default, default);
         _chosenTable = "";
         _chosenCourse = 0;
+        _chosenWine = false;
         _stepCounter = 1;
         Console.Clear();
         if (acc == null!)
@@ -97,7 +99,7 @@ static class Reservation
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("\nVul eerst uw e-mail in.");
+                            Console.Write("\nVul eerst al uw gegevens in.");
                             Thread.Sleep(1800);
                             Console.ResetColor();
                         }
@@ -127,29 +129,52 @@ static class Reservation
         while (loop)
         {
             Console.Clear();
-            string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
+            string prompt = $"\n\n\nVul hier een paar gegevens in die nodig zijn voor uw reservering";
             string[] options =
             {
                 $"Vul hier groepsgrootte in" + (gr_size == 0 ? "" : $": {gr_size}"),
                 "Kies hier uw gewenste gang" + (course == 0 ? "" : $": {course} gangen"),
-                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)" : ": Ja"), "Ga terug"
+                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)" : ": Ja"), 
+                "Doorgaan", "Ga terug"
             };
             int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
+            switch (selectedIndex)
+            {
+                case 0:
+                    gr_size = ChooseGroupSize();
+                    break;
+                case 1:
+                    course = ChooseCourse();
+                    break;
+                case 2:
+                    wine = ChooseWine();
+                    break;
+                case 3:
+                    if (gr_size == 0 || course == 0)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\nVul eerst al de informatie in.");
+                        Console.ResetColor();
+                        Thread.Sleep(2000);
+                        UserLogin.DiscardKeys();
+                    }
+                    else
+                    {
+                        _amountOfPeople = gr_size;
+                        _chosenCourse = course;
+                        _chosenWine = wine;
+                        loop = false;
+                    }
+                    break;
+                case 4:
+                    ResStart();
+                    break;
+            }
         }
-        _amountOfPeople = ChooseGroupSize();
-        if (_amountOfPeople <= 0)
-        {
-            _stepCounter--;
-            if (_acc == null!)
-                ResStart();
-            else MainMenu.Start();
-        }
-        else
-        {
-            _stepCounter++;
-            ChooseCourse();
-        }
-
+        // this will loop trough all the other functions until all are called and it returns here.
+        ChooseDate();
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
         while (true)
         {
@@ -184,31 +209,35 @@ static class Reservation
         }
     }
 
-    public static void ChooseCourse()
+    public static bool ChooseWine()
+    {
+        string prompt = "Kies hier of u een wijnarrangement wilt.\n" +
+                        "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.";
+        string[] options = new[] { "Ja", "Nee"};
+        int chosenOption = _my1DMenu.RunMenu(options, prompt);
+        switch (chosenOption)
+        {
+            case 0:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public static int ChooseCourse()
     {
         string[] options = new[] { "2 Gangen", "3 Gangen", "4 Gangen", "Ga terug" };
         int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", _stepCounter);
         switch (chosenIndex)
         {
             case 0:
-                _chosenCourse = 2;
-                _stepCounter++;
-                ChooseDate();
-                break;
+                return 2;
             case 1:
-                _chosenCourse = 3;
-                _stepCounter++;
-                ChooseDate();
-                break;
+                return 3;
             case 2:
-                _chosenCourse = 4;
-                _stepCounter++;
-                ChooseDate();
-                break;
-            case 3:
-                _stepCounter--;
-                ResMenu();
-                break;
+                return 4;
+            default:
+                return 0;
         }
     }
 
