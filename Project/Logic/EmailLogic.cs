@@ -185,7 +185,7 @@ public class EmailLogic
             throw new ApplicationException(ex.Message);
        } 
     }
-
+        //Progress bar
     public static void Progress()
     {
         var Bar = new [] {".",".",".",".","."};
