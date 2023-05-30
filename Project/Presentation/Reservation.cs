@@ -12,6 +12,7 @@ static class Reservation
     private static AnswerLogic _answerLogic = new AnswerLogic();
     private static ReservationTableLogic _tableLogic = new ReservationTableLogic();
     private static string _userEmail;
+    private static string _userName;
     private static int _amountOfPeople;
     private static DateTime _chosenDate;
     private static (TimeSpan, TimeSpan) _chosenTimeslot;
@@ -24,6 +25,7 @@ static class Reservation
         // resetting all static fields for a fresh reservation start
         _acc = acc;
         _userEmail = null;
+        _userName = null;
         _amountOfPeople = 0;
         _chosenDate = default;
         _chosenTimeslot = (default, default);
@@ -33,6 +35,7 @@ static class Reservation
         Console.Clear();
         if (acc == null!)
         {
+            string name = null!;
             string email = null!;
             bool loop = true;
             while (loop)
@@ -41,8 +44,8 @@ static class Reservation
                 string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
                 string[] options =
                 {
-                    $"Vul hier uw e-mail in" + (email == null ? "\n" : $": {email}\n"), "Doorgaan",
-                    "Reservering bekijken", "Ga terug"
+                    $"Vul hier uw e-mail in" + (email == null ? "" : $": {email}"),
+                    "Vul hier uw volledige naam in" + (name == null ? "\n" : $": {name}\n"), "Doorgaan", "Ga terug"
                 };
                 int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
                 switch (selectedIndex)
@@ -60,16 +63,34 @@ static class Reservation
                                 "\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                             Console.ResetColor();
                             email = null;
-                            Thread.Sleep(3000);
+                            Thread.Sleep(2000);
                             UserLogin.DiscardKeys();
                         }
 
                         break;
                     case 1:
-                        if (email != null)
+                        Console.Clear();
+                        Console.CursorVisible = true;
+                        Console.Write("\n Vul hier uw volledige naam in: ");
+                        name = Console.ReadLine()!;
+                        if (!name.Contains(" "))
+                        {
+                            name = null;
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "\nOnjuiste naam. Een volledige naam moet minimaal een spatie bevatten.");
+                            Console.ResetColor();
+                            Thread.Sleep(2000);
+                            UserLogin.DiscardKeys();
+                        }
+                        break;
+                    case 2:
+                        if (email != null && name != null)
                         {
                             loop = false;
                             _userEmail = email;
+                            _userName = name;
                             _stepCounter++;
                             ResMenu();
                         }
@@ -81,9 +102,6 @@ static class Reservation
                             Console.ResetColor();
                         }
 
-                        break;
-                    case 2:
-                        ViewRes(email!);
                         break;
                     case 3:
                         MainMenu.Start();
@@ -101,7 +119,23 @@ static class Reservation
 
     public static void ResMenu()
     {
+        int gr_size = 0;
+        int course = 0;
+        bool wine = false;
+        bool loop = true;
         Console.Clear();
+        while (loop)
+        {
+            Console.Clear();
+            string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
+            string[] options =
+            {
+                $"Vul hier groepsgrootte in" + (gr_size == 0 ? "" : $": {gr_size}"),
+                "Kies hier uw gewenste gang" + (course == 0 ? "" : $": {course} gangen"),
+                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)" : ": Ja"), "Ga terug"
+            };
+            int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
+        }
         _amountOfPeople = ChooseGroupSize();
         if (_amountOfPeople <= 0)
         {
