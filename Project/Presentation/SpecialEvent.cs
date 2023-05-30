@@ -10,15 +10,15 @@ public class SpecialEvent
     public static string ResEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        string eventname = null;
-        string eventinfo = null;
-        string eventdate = null;
+        string eventName = null!;
+        string eventInfo = null!;
+        string eventDate = null!;
         while (true)
         {
             string[] options = new[]
-                { "Vul hier in wat de event naam is." + (eventname == null ? "" : $": {eventname}"),
-                "Vul hier de extra informatie over het event in." + (eventinfo == null ? "" : $": {eventinfo}"),
-                "Vul hier de datum in van het event." + (eventdate == null ? "" : $": {eventdate}"),
+                { "Vul hier in wat de event naam is." + (eventName == null ? "" : $": {eventName}"),
+                "Vul hier de extra informatie over het event in." + (eventInfo == null ? "" : $": {eventInfo}"),
+                "Vul hier de datum in van het event." + (eventDate == null ? "" : $": {eventDate}"),
                 "Het evenement definitief maken", "Ga terug" };
             int selectedIndex = _myMenu.RunMenu(options, "Vul de volgende gegevens in:");
             Console.Clear();
@@ -26,8 +26,8 @@ public class SpecialEvent
             {
                 case 0:
                     Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
-                    eventname = Console.ReadLine()!;
-                    int nameLength = eventname.Length;
+                    eventName = Console.ReadLine()!;
+                    int nameLength = eventName.Length;
                     if (nameLength > 30)
                     {
                         Console.WriteLine("De naam van het event is langer dan 30 tekens.");
@@ -38,17 +38,17 @@ public class SpecialEvent
                     break;
                 case 1:
                     Console.Write("wat wordt de extra informatie van het event: ");
-                    eventinfo = Console.ReadLine()!;
+                    eventInfo = Console.ReadLine()!;
                     break;
                 case 2:
                     Console.Write("wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
-                    eventdate = Console.ReadLine()!;
-                    if (eventdate.Contains("-") && eventdate.Length == 10)
+                    eventDate = Console.ReadLine()!;
+                    if (eventDate.Contains("-") && eventDate.Length == 10)
                     {
                         JArray allEvents = AccountsAccess.ReadAllEvents();
                         foreach (var eventItem in allEvents)
                         {
-                            if (eventdate == eventItem["eventdate"]!.ToString())
+                            if (eventDate == eventItem["eventdate"]!.ToString())
                             {
                                 Console.WriteLine("Er is al een evenement op deze datum.");
                                 Thread.Sleep(3000);
@@ -67,10 +67,10 @@ public class SpecialEvent
                     }
 
                 case 3:
-                    if (eventname != null && eventinfo != null && eventdate != null)
+                    if (eventName != null && eventInfo != null && eventDate != null)
                     {
                         var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
-                        EventModel newEvent = new EventModel(eventname, eventinfo, eventdate);
+                        EventModel newEvent = new EventModel(eventName, eventInfo, eventDate);
                         allEvents.Add(newEvent);
                         AccountsAccess.WriteAllEventsJson(allEvents);
                         Console.Clear();
@@ -148,7 +148,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string json = File.ReadAllText(path);
         JArray eventmenu = JArray.Parse(json);
-        foreach (var course in eventmenu)
+        foreach (var _ in eventmenu)
         {
             if (json != null) return true;
         }
@@ -165,7 +165,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
             Console.WriteLine("Komende evenementen:");
             foreach (var eventItem in eventmenu)
             {
-                DateTime eventDate = DateTime.Parse(eventItem["eventdate"].ToString());
+                DateTime eventDate = DateTime.Parse(eventItem["eventdate"]!.ToString());
                 if (eventDate > DateTime.Now)
                 {
                     Console.WriteLine("-------");

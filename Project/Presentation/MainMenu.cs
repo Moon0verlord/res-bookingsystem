@@ -1,13 +1,13 @@
-using System.Data;
+
 using Project.Presentation;
-using Newtonsoft.Json;
+
 
 class MainMenu : IMenuLogic
 {
     private static MenuLogic _myMenu = new MenuLogic();
-    static public AccountModel Account { get; set; }
+    public static AccountModel Account { get; set; }
 
-    private static string ascii = @"  
+    private static string _ascii = @"  
 ██╗  ██╗ ██████╗  ██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
 ██║  ██║██╔═══██╗██╔═══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║██║   ██║
 ███████║██║   ██║██║   ██║█████╗  ██║  ██║██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
@@ -31,7 +31,7 @@ class MainMenu : IMenuLogic
             {
                 // main menu functionality for non-logged in users.
                 string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Reservaties bekijken", "Maak een reservatie met e-mail", "Afsluiten" };
-                string prompt = $"{ascii}";
+                string prompt = $"{_ascii}";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
                 {
@@ -52,7 +52,7 @@ class MainMenu : IMenuLogic
                         Reservation.ViewRes2();
                         break;
                     case 5:
-                        Reservation.ResStart(Account);
+                        Reservation.ResStart(Account!);
                         break;
                     case 6:
                         Environment.Exit(0);
@@ -150,7 +150,7 @@ class MainMenu : IMenuLogic
                         break;
                     case 1:
                         Dishes.UserSelection();
-                        Thread.Sleep(5000); ;
+                        Thread.Sleep(5000);
                         break;
                     case 2:
                         Reservation.ResStart(Account);
