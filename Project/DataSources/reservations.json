@@ -108,5 +108,15 @@
     "start_time": "16:00:00",
     "leave_time": "18:30:00",
     "chosen_course": 4
+  },
+  {
+    "table_id": "3S",
+    "res_id": "RES-407346",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-31T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
   }
 ]

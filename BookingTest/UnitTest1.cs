@@ -14,13 +14,8 @@ public class UnitTest1
         get { return testContextInstance; }
         set { testContextInstance = value; }
     }
-    [TestMethod]
-    public void AccountTest()
-    {
-        AccountModel model = new AccountModel(1, "@.@", "xyz", "Mark", false, false);
-        Assert.IsTrue(model.Id == 1);
-    }
-
+    //Made by martijn 
+    //Test if multiple accounts can be added correctly
     [TestMethod]
     [DataRow(1, "Test1", "8D0123", "Test", false, false)]
     [DataRow(2, "Test2", "328W90", "Test1", true, false)]
@@ -34,7 +29,8 @@ public class UnitTest1
         Assert.IsNotNull(AccountsAccess.LoadAll().Find(account => account.EmailAddress == email));
         AccountsAccess.ClearJsonFiles(1);
     }
-
+    //Made my Martijn
+    //Tests if reservations can be added correctly 
     [TestMethod]
     public void TestReservations()
     {
