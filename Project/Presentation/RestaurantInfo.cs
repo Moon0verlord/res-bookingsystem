@@ -36,7 +36,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string json = File.ReadAllText(path);
         JArray eventmenu = JArray.Parse(json);
-        foreach (var course in eventmenu)
+        foreach (var _ in eventmenu)
         {
             if (json != null) return true;
         }
