@@ -211,7 +211,7 @@ public class EmployeeManagerLogic : IMenuLogic
             string[] res_ids = (from res in AccountsAccess.LoadAllReservations() select res.Res_ID).ToArray();
             if (id == "")
             {
-                break;
+                MainMenu.Start();
             }
             if (!res_ids.Contains(id))
             {
@@ -396,7 +396,7 @@ public class EmployeeManagerLogic : IMenuLogic
         }
     }
 
-    // hide password for security
+    // hides password from user for security
     public static string HidePass(string pass)
     {
         string hiddenPass = "";
@@ -408,7 +408,7 @@ public class EmployeeManagerLogic : IMenuLogic
         return hiddenPass;
     }
 
-    // write password in console
+    // writes password in console as *
     public static string WritePassword()
     {
         string password = "";
