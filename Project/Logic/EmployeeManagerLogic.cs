@@ -364,13 +364,22 @@ public class EmployeeManagerLogic : IMenuLogic
                         if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id && item.EmailAddress == reservation.EmailAddress)
                         {
                             Console.WriteLine("Er is al een reservering op deze datum en tijd");
-                            if (User != null)
-                                EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                            Console.WriteLine("Wilt u de reservering annuleren? (j/n)");
+                            string answer = Console.ReadLine();
+                            if (answer == "j")
+                            {
+                                if (User != null)
+                                    EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                                else
+                                    EmailLogic.SendCancellationMail(item.EmailAddress, "Gebruiker");
+                                AccountsAccess.RemoveReservation(item);
+                                Thread.Sleep(2000);
+                                MainMenu.Start();
+                            }
                             else
-                                EmailLogic.SendCancellationMail(item.EmailAddress, "Gebruiker");
-                            AccountsAccess.RemoveReservation(item);
-                            Thread.Sleep(2000);
-                            MainMenu.Start();
+                            {
+                                MainMenu.Start();
+                            }
                         }
                     }
                     AccountsAccess.ChangeReservationJson(reservation);
