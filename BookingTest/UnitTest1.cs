@@ -6,13 +6,13 @@ namespace TestProject1;
 [TestClass]
 public class UnitTest1
 {
-    //Allows writeline
+    //Allows write line
     private TestContext testContextInstance;
 
     public TestContext TestContext
     {
-        get { return testContextInstance; }
-        set { testContextInstance = value; }
+        get => testContextInstance;
+        set => testContextInstance = value; 
     }
     //Made by martijn 
     //Test if multiple accounts can be added correctly
@@ -26,7 +26,7 @@ public class UnitTest1
 
         AccountModel account = new AccountModel(id, email, password, name, employee, manager);
         AccountsAccess.AddAccount(account.EmailAddress, account.Password, account.FullName, account.IsEmployee, account.IsManager);
-        Assert.IsNotNull(AccountsAccess.LoadAll().Find(account => account.EmailAddress == email));
+        Assert.IsNotNull(AccountsAccess.LoadAll().Find(userAcc => userAcc.EmailAddress == email));
         AccountsAccess.ClearJsonFiles(1);
     }
     //Made my Martijn
@@ -34,11 +34,10 @@ public class UnitTest1
     [TestMethod]
     public void TestReservations()
     {
-        //Tried to add a datarow to this method, the datetime and timespan functions woudltn cooperate so i had to do this
-        ReservationsLogic reservations = new ReservationsLogic();
+        //Tried to add a data row to this method, the datetime and timespan functions woudltn cooperate so i had to do this
         AccountsAccess.AddReservation(new ReservationModel("1S", "Test@gmail.com", new DateTime(2003, 12, 2), 4, new TimeSpan(12), new TimeSpan(13), "RES-180439", 2));
-        var Reservation = AccountsAccess.LoadAllReservations().Find(account => account.EmailAddress == "Test@gmail.com");
-        Assert.IsTrue(Reservation != null);
+        var reservation = AccountsAccess.LoadAllReservations().Find(account => account.EmailAddress == "Test@gmail.com");
+        Assert.IsTrue(reservation != null);
         AccountsAccess.ClearJsonFiles(2);
 
     }
@@ -47,7 +46,7 @@ public class UnitTest1
     // made by robin b
     // create id used by reservations, and check if it matches the following regular expression.
     [TestMethod]
-    public void TestIDCreation()
+    public void TestidCreation()
     {
         ReservationsLogic logic = new ReservationsLogic();
         Regex regex = new Regex(@"RES-\d+");
@@ -105,8 +104,8 @@ public class UnitTest1
     public void TestCheckInput()
     {
         string answer = "j";
-        int expectedanswer = 1;
-        int actualanswer = AnswerLogic.CheckInput(answer);
-        Assert.AreEqual(expectedanswer, actualanswer);
+        int expectAns = 1;
+        int actAns = AnswerLogic.CheckInput(answer);
+        Assert.AreEqual(expectAns, actAns);
     }
 }
