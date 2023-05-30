@@ -135,10 +135,11 @@ static class Reservation
                     string Res_ID = Reservations.CreateID();
                     Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID, _chosenCourse);
-                    Console.Clear();
-                    Console.WriteLine("\nReservatie is gemaakt.");
+                    
+                    Console.WriteLine("Reservatie is gemaakt.");
                     Thread.Sleep(1500);
                     UserLogin.DiscardKeys();
+                    Console.Clear();
                     MainMenu.Start(_acc);
                     break;
                 case 0:

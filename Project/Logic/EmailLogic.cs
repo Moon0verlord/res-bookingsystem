@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading;
+using System.ComponentModel;
 public class EmailLogic
 {
+    static bool mailSent = false;
     // check if the domain of the email is valid
     private static bool CheckDomain(string email)
     {
@@ -51,17 +54,16 @@ public class EmailLogic
     }
 
     // Send an email to the user after they have made a reservation
-    public static async Task SendEmail(string email, DateTime Date, string code, TimeSpan StartTime, TimeSpan LeaveTime)
+    public static void SendEmail(string email, DateTime Date, string code, TimeSpan StartTime, TimeSpan LeaveTime)
     {
         try
         {
-           
             // create the linked resource for the image (assuming the image file is in a subdirectory of the program's working directory)
                 string imagePath = Path.Combine(Environment.CurrentDirectory, "DataSources",
                     "360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg");
                 //Which of the servers hostnames is gonna be used to send emails
                 var Smtp = new SmtpClient("smtp.gmail.com", 587);
-                Progress();
+            
                 //Authentification info
                 Smtp.UseDefaultCredentials = false;
                 NetworkCredential basicAuthenticationInfo = new
@@ -73,7 +75,7 @@ public class EmailLogic
               
                 MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
                 MailAddress to = new MailAddress(email, $"{email}");
-                Progress();
+          
                 MailMessage myMail = new MailMessage(from, to);
                 MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
                 LinkedResource imageResource = new LinkedResource(imagePath, "image/jpeg");
@@ -81,7 +83,7 @@ public class EmailLogic
                 AlternateView htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
                 htmlView.LinkedResources.Add(imageResource);
                 myMail.AlternateViews.Add(htmlView);
-                Progress();
+             
                 //Reply toList is what it says on the tin, the reply to option in mail can contain multiple emails
                 myMail.ReplyToList.Add(replyTo);
 
@@ -90,11 +92,17 @@ public class EmailLogic
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
                 myMail.IsBodyHtml = true;
-                Progress();
+              
                 //Encrypts the emails being sent for extra security
                 Smtp.EnableSsl = true;
                 
-                Smtp.Send(myMail);
+                Smtp.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
+                string userState = "bericht1";
+                Smtp.SendAsync(myMail, userState);
+                Console.WriteLine("Mail versturen...");
+                Thread.Sleep(3000);
+                myMail.Dispose();
+            
         }
         catch (SmtpException ex)
         {
@@ -106,7 +114,6 @@ public class EmailLogic
     public static void SendVerificationMail(string email, string name, string vrfyCode){
        try
        {
-           
            //Which of the servers hostnames is gonna be used to send emails
             var Smtp = new SmtpClient("smtp.gmail.com", 587);
             //Authentification info
@@ -186,16 +193,22 @@ public class EmailLogic
        } 
     }
         //Progress bar
-    public static void Progress()
-    {
-        var Bar = new [] {".",".",".",".","."};
-        for (int i = 0; i < 5; i++)
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         {
-            Console.Clear();
-            Console.WriteLine("Laden");
-            Bar[i] = "#";
-            Console.WriteLine($"[{String.Join(" ",Bar)}]");
-            Thread.Sleep(50);
+            // Get the unique identifier for this asynchronous operation.
+            String token = (string) e.UserState!;
+
+            if (e.Cancelled)
+            {
+                Console.WriteLine("[{0}] Send canceled.", token);
+            } 
+            if (e.Error != null)
+            {
+                Console.WriteLine("[{0}] {1}", token, e.Error);
+            } else
+            {
+                Console.WriteLine("Bericht verstuurd.");
+            }
+            mailSent = true;
         }
-    }
 }

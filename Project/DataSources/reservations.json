@@ -8,5 +8,125 @@
     "start_time": "17:30:00",
     "leave_time": "19:00:00",
     "chosen_course": 2
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-537881",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-971429",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00",
+    "chosen_course": 3
+  },
+  {
+    "table_id": "2S",
+    "res_id": "RES-805432",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "3S",
+    "res_id": "RES-287500",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-327935",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00",
+    "chosen_course": 3
+  },
+  {
+    "table_id": "2S",
+    "res_id": "RES-632264",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00",
+    "chosen_course": 3
+  },
+  {
+    "table_id": "1M",
+    "res_id": "RES-490363",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "18:30:00",
+    "leave_time": "21:00:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-117776",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 1,
+    "start_time": "16:00:00",
+    "leave_time": "17:30:00",
+    "chosen_course": 2
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-476938",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-31T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "4S",
+    "res_id": "RES-406486",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "1M",
+    "res_id": "RES-733712",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00",
+    "chosen_course": 3
+  },
+  {
+    "table_id": "3S",
+    "res_id": "RES-385349",
+    "emailAddress": "m@w.com",
+    "res_date": "2023-05-30T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:00:00",
+    "chosen_course": 3
   }
 ]
