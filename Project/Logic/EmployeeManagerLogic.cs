@@ -247,34 +247,98 @@ public class EmployeeManagerLogic : IMenuLogic
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Vul hier het nieuwe tijdsslot in");
-                    while (true)
-                    {
-                        string[] time =
+                    if (reservation.Course == 2){
+                        while (true)
                         {
-                            "16:00-18:00",
-                            "18:00-20:00",
-                            "22:00-00:00",
-                            "Terug"
-                        };
-                        var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
-                        switch (sltdIndex)
-                        {
-                            case 0:
-                                reservation.StartTime = new TimeSpan(16, 0, 0);
-                                reservation.LeaveTime = new TimeSpan(18, 0, 0);
-                                break;
-                            case 1:
-                                reservation.StartTime = new TimeSpan(18, 0, 0);
-                                reservation.LeaveTime = new TimeSpan(20, 0, 0);
-                                break;
-                            case 2:
-                                reservation.StartTime = new TimeSpan(22, 0, 0);
-                                reservation.LeaveTime = new TimeSpan(00, 0, 0);
-                                break;
-                            case 3:
-                                break;
+                            string[] time =
+                            {
+                                "16:00-17:30",
+                                "17:30-19:00",
+                                "19:00-20:30",
+                                "Terug"
+                            };
+                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            switch (sltdIndex)
+                            {
+                                case 0:
+                                    reservation.StartTime = new TimeSpan(16, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(17, 30, 0);
+                                    break;
+                                case 1:
+                                    reservation.StartTime = new TimeSpan(17, 30, 0);
+                                    reservation.LeaveTime = new TimeSpan(19, 0, 0);
+                                    break;
+                                case 2:
+                                    reservation.StartTime = new TimeSpan(19, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(20, 30, 0);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+                            break;
                         }
-                        break;
+                    }
+                    else if(reservation.Course == 3){
+                        while (true)
+                        {
+                            string[] time =
+                            {
+                                "16:00-18:00",
+                                "18:00-20:00",
+                                "20:00-22:00",
+                                "Terug"
+                            };
+                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            switch (sltdIndex)
+                            {
+                                case 0:
+                                    reservation.StartTime = new TimeSpan(16, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(18, 0, 0);
+                                    break;
+                                case 1:
+                                    reservation.StartTime = new TimeSpan(18, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(20, 0, 0);
+                                    break;
+                                case 2:
+                                    reservation.StartTime = new TimeSpan(20, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(22, 0, 0);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+                            break;
+                        }
+                    }
+                    else{
+                        while (true)
+                        {
+                            string[] time =
+                            {
+                                "16:00-18:30",
+                                "18:30-21:00",
+                                "21:00-23:30",
+                                "Terug"
+                            };
+                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            switch (sltdIndex)
+                            {
+                                case 0:
+                                    reservation.StartTime = new TimeSpan(16, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(18, 30, 0);
+                                    break;
+                                case 1:
+                                    reservation.StartTime = new TimeSpan(18, 30, 0);
+                                    reservation.LeaveTime = new TimeSpan(21, 0, 0);
+                                    break;
+                                case 2:
+                                    reservation.StartTime = new TimeSpan(21, 0, 0);
+                                    reservation.LeaveTime = new TimeSpan(23, 30, 0);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+                            break;
+                        }
                     }
                     break;
                 // set new email
@@ -297,7 +361,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     var User = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
                     foreach (var item in AccountsAccess.LoadAllReservations())
                     {
-                        if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id)
+                        if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id && item.EmailAddress == reservation.EmailAddress)
                         {
                             Console.WriteLine("Er is al een reservering op deze datum en tijd");
                             if (User != null)
