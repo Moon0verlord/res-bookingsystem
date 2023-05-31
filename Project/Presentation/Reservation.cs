@@ -1,6 +1,7 @@
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Newtonsoft.Json.Linq;
 
 static class Reservation
@@ -20,6 +21,7 @@ static class Reservation
     private static string _chosenTable;
     private static int _chosenCourse;
     private static bool _chosenWine;
+    private static int _howManyWine;
     private static int _stepCounter;
 
     public static void ResStart(AccountModel acc = null)
@@ -29,6 +31,18 @@ static class Reservation
         FieldReset();
         // main menu functionality
         // step counter handles the current chosen option, so users can go back and forth
+        // todo : temp
+        // _userEmail = "n@b.cl";
+        // _userName = "Robin Bos";
+        // _amountOfPeople = 3;
+        // _underageMembers = 2;
+        // _chosenDate = DateTime.Now;
+        // _chosenTimeslot = (new TimeSpan(0, 16, 0), new TimeSpan(0, 17, 30));
+        // _chosenTable = "2M";
+        // _chosenCourse = 4;
+        // _chosenWine = true;
+        // _howManyWine = 2;
+        // _stepCounter = 9;
         bool loop = true;
         while (loop)
         {
@@ -45,10 +59,16 @@ static class Reservation
                         _stepCounter++;
                     else
                         _stepCounter--;
+                    break;      
+                case 3:
+                    if (HasUnderageMembers())
+                        _stepCounter++;
+                    else 
+                        _stepCounter --;
                     break;
                 // ChooseWine returns an int, because there are 3 options. A bool would not work.
                 // 0: go back, 1: yes to wine, 2: no to wine
-                case 3:
+                case 4:
                     switch (ChooseWine())
                     {
                         case 0:
@@ -62,23 +82,18 @@ static class Reservation
                             break;
                     }
                     break;
-                case 4:
+                case 5:
                     if (ChooseWineAmount())
                         _stepCounter++;
                     else
                         _stepCounter--;
                     break;
-                case 5:
-                    if (HasUnderageMembers())
-                        _stepCounter++;
-                    else 
-                        _stepCounter -= 2;
-                    break;
+          
                 case 6:
                     if (ChooseDate())
                         _stepCounter++;
                     else
-                        _stepCounter--;
+                        _stepCounter -= 2;
                     break;
                 case 7:
                     if (ChooseTimeslot(_chosenDate))
@@ -93,8 +108,10 @@ static class Reservation
                         _stepCounter--;
                     break;
                 case 9:
-                    Console.WriteLine("finish rn still bugged");
-                    Console.ReadLine();
+                    if (FinishReservation())
+                        loop = false;
+                    else
+                        _stepCounter--;
                     break;
             }   
         }
@@ -111,8 +128,46 @@ static class Reservation
         _chosenTable = "";
         _chosenCourse = 0;
         _chosenWine = false;
+        _howManyWine = 0;
         _stepCounter = 1;
         Console.Clear();
+    }
+
+    public static bool FinishReservation()
+    {
+        while (true)
+        {
+            _stepCounter++;
+            Console.Clear();
+            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, _stepCounter);
+            InfoBoxes.WriteBill(Console.CursorTop, Console.CursorLeft, _amountOfPeople, _underageMembers, _chosenCourse, _chosenWine, _howManyWine);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(2, 3);
+            Console.WriteLine(
+                $"\n   Email: {_userEmail}\n   Naam: {_userName}\n   Groepgrootte: {_amountOfPeople}\n" +
+                $"   Reservatie tafel nummer: {_chosenTable}\n   Datum: {_chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"\n   Tijd: ({_chosenTimeslot.Item1} - {_chosenTimeslot.Item2})\n");
+            Console.Write("\n \n        Weet u zeker dat u met deze gegevens wilt reserveren? (j/n): ");
+            Console.ResetColor();
+            Console.CursorVisible = true;
+            string answer = Console.ReadLine()!;
+            switch (AnswerLogic.CheckInput(answer))
+            {
+                case 1:
+                    string Res_ID = Reservations.CreateID();
+                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
+                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID, _chosenCourse);
+                    Console.Clear();
+                    Console.WriteLine("\nReservatie is gemaakt.");
+                    Thread.Sleep(1500);
+                    UserLogin.DiscardKeys();
+                    return true;
+                case 0:
+                    return false;
+                case -1:
+                    break;
+            }
+        }
     }
 
     // ask users to fill in their email en full name.
@@ -205,6 +260,7 @@ static class Reservation
         while (loop)
         {
             Console.Clear();
+            Console.ResetColor();
             string prompt = $"\n\n\nVul hier een paar gegevens in die nodig zijn voor uw reservering";
             string[] options =
             {
@@ -252,25 +308,121 @@ static class Reservation
     // return a 2 if no to wine
     public static int ChooseWine()
     {
-        string prompt = "\n\n\nKies hier of u een wijnarrangement wilt.\n" +
-                        "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.\n" +
-                        "Een wijnarrangement kost €10 extra voor ieder persoon in uw groep die het wilt.\n" +
-                        "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.";
-        string[] options = new[] { "Ja, ik wil een wijnarrangement", "Nee, ik wil geen wijnarrangement\n", "Ga terug"};
-        int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
-        switch (chosenOption)
+        while (true)
         {
-            case 0:
-                _chosenWine = true;
-                return 1;
-            case 1:
-                _chosenWine = false;
-                return 2;
-            default:
-                return 0;
+            string prompt = "\n\n\nKies hier of u een wijnarrangement wilt.\n" +
+                            "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.\n" +
+                            "Een wijnarrangement kost €10 extra voor ieder persoon in uw groep die het wilt.\n" +
+                            "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.";
+            string[] options = new[] { "Ja, ik wil een wijnarrangement", "Nee, ik wil geen wijnarrangement\n", "Ga terug"};
+            int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
+            switch (chosenOption)
+            {
+                case 0:
+                    if (_amountOfPeople == _underageMembers)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\nDeze groep bestaat uit alleen maar minderjarige groepsleden\n" +
+                            "Daarom bent u verboden om een wijnarrangement te bestellen.");
+                        Console.ResetColor();
+                        Thread.Sleep(2000);
+                        UserLogin.DiscardKeys();
+                        continue;
+                    }
+                    _chosenWine = true;
+                    return 1;
+                case 1:
+                    _chosenWine = false;
+                    return 2;
+                default:
+                    return 0;
+            }   
         }
     }
 
+    public static bool ChooseWineAmount()
+    {
+        int wineamount = 0;
+        int num;
+        while (true)
+        {
+            Console.ResetColor();
+            string prompt = "\n\n\nU heeft aangegeven dat u een wijnarrangement wilt.\n" +
+                            "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
+                            "Let op: per persoon kost een wijnarrangement €10.";
+            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineamount == 0 ? "\n" : $": {wineamount}\n"), 
+                "Doorgaan", "Ga terug"};
+            int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
+            switch (chosenOption)
+            {
+                case 0:
+                    Console.CursorVisible = true;
+                    Console.Clear();
+                    Console.Write("Typ hier hoeveel mensen een wijnarrangement willen: ");
+                    string answer = Console.ReadLine()!;
+                    bool success = int.TryParse(answer, out num);
+                    if (!success)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
+                        Thread.Sleep(2500);
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        if (num <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+
+                        else if (num > _amountOfPeople)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"U kunt niet meer mensen aanwijzen dan de grootte van uw groep ({_amountOfPeople}). Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+                        else if (num > (_amountOfPeople - _underageMembers))
+                        {
+                            int amountAllowed = _amountOfPeople - _underageMembers;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"U heeft een groepsgrootte aangewezen van {_amountOfPeople} personen\n met {_underageMembers} minderjarige personen.\n" +
+                                              $"Dit betekent dat u maximaal {amountAllowed} wijnarrangementen mag bestellen.\n" +
+                                              $"Druk op een knop om verder te gaan als u dit bericht gelezen heeft.");
+                            Console.ReadKey(true);
+                        }
+                        else
+                            wineamount = num;
+                    }
+                    break;
+                case 1:
+                    if (wineamount == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"\nVul eerst in hoeveel mensen een wijnarrangement willen.");
+                        Thread.Sleep(2500);
+                        UserLogin.DiscardKeys();
+                    }
+                    else
+                    {
+                        _howManyWine = wineamount;
+                        return true;
+                    }
+                    break;
+                case 2:
+                    return false;
+            }   
+        }
+    }
+    
     public static bool HasUnderageMembers()
     {
         int num;
@@ -279,7 +431,7 @@ static class Reservation
         {
             string prompt = "\n\n\nHeeft u minderjarige personen in uw groep?\n" +
                             "Als dit zo is, kies dan 'Ja', en vul in hoeveel personen minderjarig zijn\n" +
-                            "Dit geeft u wat extra korting per minderjarig persoon.";
+                            "Dit geeft u wat extra korting per minderjarig persoon. (10%)";
             string[] options = new[] { "Ja, ik heb minderjarige in mijn groep", "Nee, ik heb geen minderjarige in mijn groep\n", "Ga terug"};
             int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
@@ -336,81 +488,12 @@ static class Reservation
         return false;
     }
 
-    public static bool ChooseWineAmount()
-    {
-        int wineamount = 0;
-        int num;
-        while (true)
-        {
-            Console.ResetColor();
-            string prompt = "\n\n\nU heeft aangegeven dat u een wijnarrangement wilt.\n" +
-                            "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
-                            "Let op: per persoon kost een wijnarrangement €10.";
-            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineamount == 0 ? "\n" : $": {wineamount}\n"), 
-                "Doorgaan", "Ga terug"};
-            int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
-            switch (chosenOption)
-            {
-                case 0:
-                    Console.CursorVisible = true;
-                    Console.Clear();
-                    Console.Write("Typ hier hoeveel mensen een wijnarrangement willen: ");
-                    string answer = Console.ReadLine()!;
-                    bool success = int.TryParse(answer, out num);
-                    if (!success)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
-                        Thread.Sleep(2500);
-                        break;
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        if (num <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine(
-                                "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
-                            Thread.Sleep(2500);
-                            UserLogin.DiscardKeys();
-                        }
-
-                        else if (num > _amountOfPeople)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"U kunt niet meer mensen aanwijzen dan de grootte van uw groep ({_amountOfPeople}). Voer opnieuw in.");
-                            Thread.Sleep(2500);
-                            UserLogin.DiscardKeys();
-                        }
-                        else
-                            wineamount = num;
-                    }
-                    break;
-                case 1:
-                    if (wineamount == 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"\nVul eerst in hoeveel mensen een wijnarrangement willen.");
-                        Thread.Sleep(2500);
-                        UserLogin.DiscardKeys();
-                    }
-                    else 
-                        return true;
-                    break;
-                case 2:
-                    return false;
-            }   
-        }
-    }
-
     public static int ChooseCourse()
     {
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         JObject menu = AccountsAccess.LoadAllMenu();
         var pricing = menu["Prijzen"]!["Prijzen"];
-        string[] options = new[] { $"2 Gangen ({pricing[0]})", $"3 Gangen ({pricing[1]})", $"4 Gangen ({pricing[2]})", "Ga terug" };
+        string[] options = new[] { $"2 Gangen ({pricing![0]})", $"3 Gangen ({pricing[1]})", $"4 Gangen ({pricing[2]})", "Ga terug" };
         int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", _stepCounter);
         switch (chosenIndex)
         {
@@ -427,58 +510,39 @@ static class Reservation
 
     public static int ChooseGroupSize()
     {
-        string amountofPeople;
-        while (true)
+        Console.Clear();
+        Console.CursorVisible = true;
+        Console.Write("Typ hier met hoeveel mensen u van plan bent te komen: ");
+        string amountofPeople = Console.ReadLine()!;
+        bool success = int.TryParse(amountofPeople, out int number);
+        if (!success)
         {
-            Console.ResetColor();
-            string[] options = new[]
-                { "Vul hier in met hoeveel mensen u komt.", "Ga terug" };
-            int selectedIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies hier uw groepsgrootte:", _stepCounter);
-            Console.Clear();
-            switch (selectedIndex)
-            {
-                case 0:
-                    Console.CursorVisible = true;
-                    Console.Write("Typ hier met hoeveel mensen u van plan bent te komen: ");
-                    amountofPeople = Console.ReadLine()!;
-                    bool success = int.TryParse(amountofPeople, out int number);
-                    if (!success)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
-                        Thread.Sleep(2500);
-                        amountofPeople = default;
-                        break;
-                    }
-                    else
-                    {
-                        if (number <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine(
-                                "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
-                            Thread.Sleep(2500);
-                            amountofPeople = default;
-                            break;
-                        }
-                        else if (number > 6)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine(
-                                "U moet bellen voor groepsgroottes boven de zes personen, bekijk onze contactinformatie in het hoofdmenu.");
-                            Thread.Sleep(2500);
-                            amountofPeople = default;
-                            break;
-                        }
-                        else return number;
-                    }
-
-                    break;
-                case 1:
-                    return 0;
-                    break;
-            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
+            Thread.Sleep(2500);
         }
+        else
+        {
+            if (number <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
+                Thread.Sleep(2500);
+                return 0;
+            }
+            else if (number > 6)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    "U moet bellen voor groepsgroottes boven de zes personen, bekijk onze contactinformatie in het hoofdmenu.");
+                Thread.Sleep(2500);
+                return 0;
+            }
+            return number;
+        }
+
+        return 0;
     }
 
     public static bool ChooseDate()

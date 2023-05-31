@@ -26,6 +26,7 @@
     <None Include="bin\Debug\net6.0\DataSources\Events.json" />
     <None Include="bin\Debug\net6.0\DataSources\Menu.json" />
     <None Include="bin\Debug\net6.0\DataSources\reservations.json" />
+    <None Include="bin\Debug\net6.0\DataSources\WineMenu.json" />
   </ItemGroup>
 
 </Project>
