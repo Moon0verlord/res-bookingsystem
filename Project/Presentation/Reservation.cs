@@ -14,6 +14,7 @@ static class Reservation
     private static string _userEmail;
     private static string _userName;
     private static int _amountOfPeople;
+    private static int _underageMembers;
     private static DateTime _chosenDate;
     private static (TimeSpan, TimeSpan) _chosenTimeslot;
     private static string _chosenTable;
@@ -26,7 +27,27 @@ static class Reservation
         // resetting all static fields for a fresh reservation start
         _acc = acc;
         FieldReset();
-        if (acc == null!)
+        
+    }
+
+    private static void FieldReset()
+    {
+        _userEmail = null;
+        _userName = null;
+        _amountOfPeople = 0;
+        _underageMembers = 0;
+        _chosenDate = default;
+        _chosenTimeslot = (default, default);
+        _chosenTable = "";
+        _chosenCourse = 0;
+        _chosenWine = false;
+        _stepCounter = 1;
+        Console.Clear();
+    }
+
+    public static void EnterCredentials()
+    {
+        if (_acc == null!)
         {
             string name = null!;
             string email = null!;
@@ -105,23 +126,9 @@ static class Reservation
         else
         {
             _stepCounter++;
-            _userEmail = acc.EmailAddress;
+            _userEmail = _acc.EmailAddress;
             ResMenu();
         }
-    }
-
-    private static void FieldReset()
-    {
-        _userEmail = null;
-        _userName = null;
-        _amountOfPeople = 0;
-        _chosenDate = default;
-        _chosenTimeslot = (default, default);
-        _chosenTable = "";
-        _chosenCourse = 0;
-        _chosenWine = false;
-        _stepCounter = 1;
-        Console.Clear();
     }
 
     public static void ResMenu()
@@ -182,39 +189,6 @@ static class Reservation
                     break;
             }
         }
-        // this will loop trough all the other functions until all are called and it returns here.
-        //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
-        while (true)
-        {
-            _stepCounter++;
-            Console.Clear();
-            InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, _stepCounter);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(
-                $"\n\n\nEmail:{_userEmail}\nReservatie tafel nummer: {_chosenTable}\nDatum: {_chosenDate.Date.ToString("dd-MM-yyyy")}" +
-                $"\nTijd: ({_chosenTimeslot.Item1} - {_chosenTimeslot.Item2})\nWeet u zeker dat u deze tijd wil reserveren? (j/n): ");
-            Console.ResetColor();
-            Console.CursorVisible = true;
-            string answer = Console.ReadLine()!;
-            switch (AnswerLogic.CheckInput(answer))
-            {
-                case 1:
-                    string Res_ID = Reservations.CreateID();
-                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
-                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID, _chosenCourse);
-                    Console.Clear();
-                    Console.WriteLine("\nReservatie is gemaakt.");
-                    Thread.Sleep(1500);
-                    UserLogin.DiscardKeys();
-                    MainMenu.Start(_acc);
-                    break;
-                case 0:
-                    MainMenu.Start(_acc);
-                    break;
-                case -1:
-                    break;
-            }
-        }
     }
 
     public static bool ChooseWine()
@@ -231,6 +205,66 @@ static class Reservation
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public static void HasUnderageMembers()
+    {
+        int num;
+        bool loop = true;
+        while (loop)
+        {
+            string prompt = "Heeft u minderjarige personen in uw groep?\n" +
+                            "Als dit zo is, vul dan 'Ja' in, en vul in hoeveel personen minderjarig zijn\n" +
+                            "Dit geeft u wat extra korting per minderjarig persoon.\n";
+            string[] options = new[] { "Ja", "Nee"};
+            int chosenOption = _my1DMenu.RunMenu(options, prompt);
+            switch (chosenOption)
+            {
+                case 0:
+                    Console.CursorVisible = true;
+                    Console.Clear();
+                    Console.Write("Typ hier hoeveel mensen een wijnarrangement willen: ");
+                    string answer = Console.ReadLine()!;
+                    bool success = int.TryParse(answer, out num);
+                    if (!success)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
+                        Thread.Sleep(2500);
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        if (num <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+
+                        else if (num > _amountOfPeople)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                $"U kunt niet meer mensen aanwijzen dan de grootte van uw groep ({_amountOfPeople}). Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+                        else
+                        {
+                            
+                            loop = false;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
