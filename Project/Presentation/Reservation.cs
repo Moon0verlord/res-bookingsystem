@@ -31,18 +31,6 @@ static class Reservation
         FieldReset();
         // main menu functionality
         // step counter handles the current chosen option, so users can go back and forth
-        // todo : temp
-        // _userEmail = "n@b.cl";
-        // _userName = "Robin Bos";
-        // _amountOfPeople = 3;
-        // _underageMembers = 2;
-        // _chosenDate = DateTime.Now;
-        // _chosenTimeslot = (new TimeSpan(0, 16, 0), new TimeSpan(0, 17, 30));
-        // _chosenTable = "2M";
-        // _chosenCourse = 4;
-        // _chosenWine = true;
-        // _howManyWine = 2;
-        // _stepCounter = 9;
         bool loop = true;
         while (loop)
         {
@@ -117,6 +105,7 @@ static class Reservation
         }
     }
 
+    // reset all fields so that the static class doesn't remember between calls
     private static void FieldReset()
     {
         _userEmail = null;
@@ -133,6 +122,7 @@ static class Reservation
         Console.Clear();
     }
 
+    // called at the end of the main menu switch case, finishes up with all the filled n fields and asks user for confirmation.
     public static bool FinishReservation()
     {
         while (true)
@@ -251,6 +241,7 @@ static class Reservation
         return true;
     }
 
+    // asks user to enter group size and course.
     public static bool ResMenu()
     {
         int gr_size = 0;
@@ -341,7 +332,9 @@ static class Reservation
             }   
         }
     }
-
+    
+    // if user said yes to wine, user chooses amount of wine arrangements wanted here
+    // calculates group size - amount of minors in the group, so you can't order 6 wine arrangements when you have 3 kids with you.
     public static bool ChooseWineAmount()
     {
         int wineamount = 0;
@@ -423,6 +416,7 @@ static class Reservation
         }
     }
     
+    // asks user if there are any minors in the group, so they can get a discount and aren't eligible for the wine course.
     public static bool HasUnderageMembers()
     {
         int num;
@@ -488,6 +482,7 @@ static class Reservation
         return false;
     }
 
+    // choose 2, 3, or 4 meal course
     public static int ChooseCourse()
     {
         Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -507,6 +502,8 @@ static class Reservation
                 return 0;
         }
     }
+    
+    // ask user how many people the group will consist of.
 
     public static int ChooseGroupSize()
     {
@@ -545,6 +542,7 @@ static class Reservation
         return 0;
     }
 
+    // let the user choose a date for reservation based on current month
     public static bool ChooseDate()
     {
         Console.Clear();
@@ -563,6 +561,7 @@ static class Reservation
         return true;
     }
 
+    // let user make decision on their timeslot based on chosen course (extra time for bigger courses)
     public static bool ChooseTimeslot(DateTime chosenDate)
     {
         bool todayeventcheck = false;
@@ -647,6 +646,7 @@ static class Reservation
         return false;
     }
 
+    // let user choose the table they want
     public static bool ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         var tablesOnly = Reservations.PopulateTables2D(res_Date, chosenTime);
