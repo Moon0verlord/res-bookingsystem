@@ -31,18 +31,6 @@ Er zijn op dit moment nog geen evenementen.
 Kom terug op een later moment om te zien of er al evenementen zijn.
 ";
 
-    public static bool CheckIfEvent()
-    {
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
-        string json = File.ReadAllText(path);
-        JArray eventmenu = JArray.Parse(json);
-        foreach (var course in eventmenu)
-        {
-            if (json != null) return true;
-        }
-        return false;
-    }
-
     public static void Start()
     {
         Console.Clear();

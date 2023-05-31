@@ -7,6 +7,31 @@ public class SpecialEvent
     private static int _currentIndex;
 
     static private MenuLogic _myMenu = new MenuLogic();
+
+    // function where you can see the events menu
+    public static void Eventmenu()
+    {
+        string prompt = "Welkom in het menu voor special events. \n";
+        string[] options = { "Bekijk het menu", "Aankomende evenementen bekijken", "Terug naar hoofdmenu" };
+        var selectedIndex = _myMenu.RunMenu(options, prompt);
+        switch (selectedIndex)
+        {
+            case 0:
+                Console.Clear();
+                EventsFood();
+                break;
+            case 1:
+                Console.Clear();
+                ViewEvents();
+                break;
+            case 2:
+                Console.Clear();
+                MainMenu.Start();
+                break;
+        }
+    }
+
+    // function to create a new event
     public static string ResEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
@@ -92,10 +117,10 @@ public class SpecialEvent
         }
     }
 
-
+    // function where you can see the events food
     public static void EventsFood()
     {
-         string prompt = "Welkom in het eten menu voor special events. \n";
+        string prompt = "Welkom in het eten menu voor special events. \n";
         string[] options = { "Paas gerechten", "Kerst gerechten", "Terug naar hoofdmenu" };
         var selectedIndex = _myMenu.RunMenu(options, prompt);
         switch (selectedIndex)
@@ -115,34 +140,13 @@ public class SpecialEvent
         }
     }
 
-    public static void Eventmenu()
-    {
-        string prompt = "Welkom in het menu voor special events. \n";
-        string[] options = { "Bekijk het menu","Aankomende evenementen bekijken","Terug naar hoofdmenu" };
-        var selectedIndex = _myMenu.RunMenu(options, prompt);
-        switch (selectedIndex)
-        {
-            case 0:
-                Console.Clear();
-                EventsFood();
-                break;
-            case 1:
-                Console.Clear();
-                Start();
-                break;
-            case 2:
-                Console.Clear();
-                MainMenu.Start();
-                break;
-        }
-    }
-    
     static string Events =
         @"Speciale Evenementen:
 Er zijn op dit moment nog geen evenementen.
 Kom terug op een later moment om te zien of er al evenementen zijn.
 ";
 
+    // function to check if there is an event
     public static bool CheckIfEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
@@ -155,7 +159,8 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         return false;
     }
 
-    public static void Start()
+    // start function for the events
+    public static void ViewEvents()
     {
         JArray eventmenu = AccountsAccess.ReadAllEvents();
         Console.Clear();
@@ -165,8 +170,8 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
             Console.WriteLine("Komende evenementen:");
             foreach (var eventItem in eventmenu)
             {
-                DateTime eventDate = DateTime.Parse(eventItem["eventdate"].ToString());
-                if (eventDate > DateTime.Now)
+                DateTime eventDate = DateTime.ParseExact(eventItem["eventdate"].ToString(), "dd-MM-yyyy", null);
+                if (eventDate >= DateTime.Now)
                 {
                     Console.WriteLine("-------");
                     Console.WriteLine($"{eventItem["eventname"]}:");
@@ -185,6 +190,6 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         }
     }
 
-    
-    
+
+
 }
