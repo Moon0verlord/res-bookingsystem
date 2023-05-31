@@ -127,7 +127,6 @@ static class Reservation
     {
         while (true)
         {
-            _stepCounter++;
             Console.Clear();
             InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, _stepCounter);
             InfoBoxes.WriteBill(Console.CursorTop, Console.CursorLeft, _amountOfPeople, _underageMembers, _chosenCourse, _chosenWine, _howManyWine);
