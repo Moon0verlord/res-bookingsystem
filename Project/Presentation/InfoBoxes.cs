@@ -109,6 +109,42 @@ static class InfoBoxes
         WriteAt($"  Stap {(stepcount <= 7?stepcount:7)} / 7   ", x + 1, y + 1);
         Console.ResetColor();
     }
+    
+    private static void WriteBill(int origrow, int origcol)
+    {
+        origRow = origrow;
+        origCol = origcol;
+        string boxBorder = "──────────────────────────────────────────";
+        string information =
+            @"
+               De Witte Haven
+              ----------------
+       6 personen x 4 gangen (35 euro)  240 euro
+       Wijn arrangement: Nee
+            ";
+        string info1 = String.Format("{0,-8}: {1,-15}", "6 personen x 4 gangen (35)", 250);
+        string info2 = String.Format("{0,-8}: {1,-15}", "Wijn arrangement", "Nee");
+        string info3 = String.Format("{0,-8}: {1,-15}", "2 personen minderjarig", 20);
+        string info4 = String.Format("{0,-8}: {1,-15}", "Totaal", 270);
+        int x = 10;
+        int y = 0;
+        WriteAt("Voorlopige rekening", x + 38, y + 1);
+        Console.ResetColor();
+        WriteAt(information, x + 1, y + 2);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        WriteAt("┌", x, y);
+        for (var i = 1; i <= 8; i++)
+            WriteAt("│", x, y + i);
+        WriteAt("└", x, y + 9);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt(boxBorder, x + 1, y + 9);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        for (var i = 1; i <= 8; i++) 
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 9);
+        Console.ResetColor();
+    }
 
     public static void WriteInformation(int origrow, int origcol)
     {

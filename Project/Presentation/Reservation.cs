@@ -134,7 +134,7 @@ static class Reservation
             {
                 $"Vul hier groepsgrootte in" + (gr_size == 0 ? "" : $": {gr_size}"),
                 "Kies hier uw gewenste gang" + (course == 0 ? "" : $": {course} gangen"),
-                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)" : ": Ja"), 
+                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)\n" : ": Ja\n"), 
                 "Doorgaan", "Ga terug"
             };
             int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
@@ -166,6 +166,10 @@ static class Reservation
                         _chosenCourse = course;
                         _chosenWine = wine;
                         loop = false;
+                        if (_chosenWine)
+                            ChooseWineAmount();
+                        else 
+                            ChooseDate();
                     }
                     break;
                 case 4:
@@ -174,7 +178,6 @@ static class Reservation
             }
         }
         // this will loop trough all the other functions until all are called and it returns here.
-        ChooseDate();
         //chosenTimeslot item 1 is time when entering, item 2 is time when leaving.
         while (true)
         {
@@ -212,7 +215,9 @@ static class Reservation
     public static bool ChooseWine()
     {
         string prompt = "Kies hier of u een wijnarrangement wilt.\n" +
-                        "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.";
+                        "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.\n" +
+                        "Een wijnarrangement kost €10 extra voor ieder persoon in uw groep die het wilt.\n" +
+                        "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.\n";
         string[] options = new[] { "Ja", "Nee"};
         int chosenOption = _my1DMenu.RunMenu(options, prompt);
         switch (chosenOption)
@@ -224,9 +229,84 @@ static class Reservation
         }
     }
 
+    public static void ChooseWineAmount()
+    {
+        int wineamount = 0;
+        int num;
+        while (true)
+        {
+            Console.ResetColor();
+            string prompt = "U heeft aangegeven dat u een wijnarrangement wilt.\n" +
+                            "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
+                            "Let op: per persoon kost een wijnarrangement €10.\n";
+            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineamount == 0 ? "\n" : $": {wineamount}\n"), 
+                "Doorgaan", "Ga terug"};
+            int chosenOption = _my1DMenu.RunMenu(options, prompt);
+            switch (chosenOption)
+            {
+                case 0:
+                    Console.CursorVisible = true;
+                    Console.Clear();
+                    Console.Write("Typ hier hoeveel mensen een wijnarrangement willen: ");
+                    string answer = Console.ReadLine()!;
+                    bool success = int.TryParse(answer, out num);
+                    if (!success)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Voer enkel geldige nummers in, alstublieft.");
+                        Thread.Sleep(2500);
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        if (num <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "Nummers kleiner of gelijk aan nul zijn niet toegestaan. Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+
+                        else if (num > _amountOfPeople)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"U kunt niet meer mensen aanwijzen dan de grootte van uw groep ({_amountOfPeople}). Voer opnieuw in.");
+                            Thread.Sleep(2500);
+                            UserLogin.DiscardKeys();
+                        }
+                        else
+                            wineamount = num;
+                    }
+                    break;
+                case 1:
+                    if (wineamount == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"\nVul eerst in hoeveel mensen een wijnarrangement willen.");
+                        Thread.Sleep(2500);
+                        UserLogin.DiscardKeys();
+                    }
+                    else
+                    {
+                        ChooseDate();
+                    }
+                    break;
+                case 2:
+                    ResMenu();
+                    break;
+            }   
+        }
+    }
+
     public static int ChooseCourse()
     {
-        string[] options = new[] { "2 Gangen", "3 Gangen", "4 Gangen", "Ga terug" };
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        JObject menu = AccountsAccess.LoadAllMenu();
+        var pricing = menu["Prijzen"]!["Prijzen"];
+        string[] options = new[] { $"2 Gangen ({pricing[0]})", $"3 Gangen ({pricing[1]})", $"4 Gangen ({pricing[2]})", "Ga terug" };
         int chosenIndex = _my1DMenu.RunResMenu(options, "\n\n\nKies een gang voor uw reservering:", _stepCounter);
         switch (chosenIndex)
         {

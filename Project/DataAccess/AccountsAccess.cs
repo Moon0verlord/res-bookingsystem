@@ -5,6 +5,7 @@ public static class AccountsAccess
 {
     static string _accPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
     static string _resPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
+    static string _menuPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
     private static AccountsLogic _accountsLogic = new AccountsLogic();
 
     // load all accounts from the json file
@@ -19,6 +20,12 @@ public static class AccountsAccess
     {
         string json = File.ReadAllText(_resPath);
         return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
+    }
+    
+    public static JObject LoadAllMenu()
+    {
+        string json = File.ReadAllText(_menuPath);
+        return JObject.Parse(json);
     }
 
     // write all accounts to the json file
