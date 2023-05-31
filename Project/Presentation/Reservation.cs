@@ -27,7 +27,77 @@ static class Reservation
         // resetting all static fields for a fresh reservation start
         _acc = acc;
         FieldReset();
-        
+        // main menu functionality
+        // step counter handles the current chosen option, so users can go back and forth
+        bool loop = true;
+        while (loop)
+        {
+            switch (_stepCounter)
+            {
+                case 1:
+                    if (EnterCredentials())
+                        _stepCounter++;
+                    else
+                        loop = false;
+                    break;
+                case 2:
+                    if (ResMenu())
+                        _stepCounter++;
+                    else
+                        _stepCounter--;
+                    break;
+                // ChooseWine returns an int, because there are 3 options. A bool would not work.
+                // 0: go back, 1: yes to wine, 2: no to wine
+                case 3:
+                    switch (ChooseWine())
+                    {
+                        case 0:
+                            _stepCounter--;
+                            break;
+                        case 1:
+                            _stepCounter++;
+                            break;
+                        case 2:
+                            _stepCounter += 2; 
+                            break;
+                    }
+                    break;
+                case 4:
+                    if (ChooseWineAmount())
+                        _stepCounter++;
+                    else
+                        _stepCounter--;
+                    break;
+                case 5:
+                    if (HasUnderageMembers())
+                        _stepCounter++;
+                    else 
+                        _stepCounter -= 2;
+                    break;
+                case 6:
+                    if (ChooseDate())
+                        _stepCounter++;
+                    else
+                        _stepCounter--;
+                    break;
+                case 7:
+                    if (ChooseTimeslot(_chosenDate))
+                        _stepCounter++;
+                    else
+                        _stepCounter--;
+                    break;
+                case 8:
+                    if (ChooseTable(_chosenDate, _chosenTimeslot))
+                        _stepCounter++;
+                    else
+                        _stepCounter--;
+                    break;
+                case 9:
+                    Console.WriteLine("finish rn still bugged");
+                    Console.ReadLine();
+                    break;
+            }   
+        }
     }
 
     private static void FieldReset()
@@ -45,7 +115,9 @@ static class Reservation
         Console.Clear();
     }
 
-    public static void EnterCredentials()
+    // ask users to fill in their email en full name.
+    // If the user has an account, this will be skipped inside this method.
+    public static bool EnterCredentials()
     {
         if (_acc == null!)
         {
@@ -102,11 +174,9 @@ static class Reservation
                     case 2:
                         if (email != null && name != null)
                         {
-                            loop = false;
                             _userEmail = email;
                             _userName = name;
-                            _stepCounter++;
-                            ResMenu();
+                            return true;
                         }
                         else
                         {
@@ -115,27 +185,21 @@ static class Reservation
                             Thread.Sleep(1800);
                             Console.ResetColor();
                         }
-
                         break;
                     case 3:
-                        MainMenu.Start();
-                        break;
+                        return false;
                 }
             }
         }
-        else
-        {
-            _stepCounter++;
-            _userEmail = _acc.EmailAddress;
-            ResMenu();
-        }
+        _userEmail = _acc!.EmailAddress;
+        _userName = _acc.FullName;
+        return true;
     }
 
-    public static void ResMenu()
+    public static bool ResMenu()
     {
         int gr_size = 0;
         int course = 0;
-        bool wine = false;
         bool loop = true;
         Console.Clear();
         while (loop)
@@ -145,8 +209,7 @@ static class Reservation
             string[] options =
             {
                 $"Vul hier groepsgrootte in" + (gr_size == 0 ? "" : $": {gr_size}"),
-                "Kies hier uw gewenste gang" + (course == 0 ? "" : $": {course} gangen"),
-                "Kies hier of u een wijnarrangement wilt" + (!wine ? $": Nee (standaard)\n" : ": Ja\n"), 
+                "Kies hier uw gewenste gang" + (course == 0 ? "\n" : $": {course} gangen\n"),
                 "Doorgaan", "Ga terug"
             };
             int selectedIndex = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
@@ -159,9 +222,6 @@ static class Reservation
                     course = ChooseCourse();
                     break;
                 case 2:
-                    wine = ChooseWine();
-                    break;
-                case 3:
                     if (gr_size == 0 || course == 0)
                     {
                         Console.Clear();
@@ -176,55 +236,58 @@ static class Reservation
                     {
                         _amountOfPeople = gr_size;
                         _chosenCourse = course;
-                        _chosenWine = wine;
-                        loop = false;
-                        if (_chosenWine)
-                            ChooseWineAmount();
-                        else 
-                            ChooseDate();
+                        return true;
                     }
                     break;
-                case 4:
-                    ResStart();
-                    break;
+                case 3:
+                    return false;
             }
         }
+
+        return false;
     }
 
-    public static bool ChooseWine()
+    // return a 0 if going back
+    // return a 1 if yes to wine
+    // return a 2 if no to wine
+    public static int ChooseWine()
     {
-        string prompt = "Kies hier of u een wijnarrangement wilt.\n" +
+        string prompt = "\n\n\nKies hier of u een wijnarrangement wilt.\n" +
                         "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.\n" +
                         "Een wijnarrangement kost €10 extra voor ieder persoon in uw groep die het wilt.\n" +
-                        "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.\n";
-        string[] options = new[] { "Ja", "Nee"};
-        int chosenOption = _my1DMenu.RunMenu(options, prompt);
+                        "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.";
+        string[] options = new[] { "Ja, ik wil een wijnarrangement", "Nee, ik wil geen wijnarrangement\n", "Ga terug"};
+        int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
         switch (chosenOption)
         {
             case 0:
-                return true;
+                _chosenWine = true;
+                return 1;
+            case 1:
+                _chosenWine = false;
+                return 2;
             default:
-                return false;
+                return 0;
         }
     }
 
-    public static void HasUnderageMembers()
+    public static bool HasUnderageMembers()
     {
         int num;
         bool loop = true;
         while (loop)
         {
-            string prompt = "Heeft u minderjarige personen in uw groep?\n" +
-                            "Als dit zo is, vul dan 'Ja' in, en vul in hoeveel personen minderjarig zijn\n" +
-                            "Dit geeft u wat extra korting per minderjarig persoon.\n";
-            string[] options = new[] { "Ja", "Nee"};
-            int chosenOption = _my1DMenu.RunMenu(options, prompt);
+            string prompt = "\n\n\nHeeft u minderjarige personen in uw groep?\n" +
+                            "Als dit zo is, kies dan 'Ja', en vul in hoeveel personen minderjarig zijn\n" +
+                            "Dit geeft u wat extra korting per minderjarig persoon.";
+            string[] options = new[] { "Ja, ik heb minderjarige in mijn groep", "Nee, ik heb geen minderjarige in mijn groep\n", "Ga terug"};
+            int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
             {
                 case 0:
                     Console.CursorVisible = true;
                     Console.Clear();
-                    Console.Write("Typ hier hoeveel mensen een wijnarrangement willen: ");
+                    Console.Write("Typ hier hoeveel mensen minderjarig zijn: ");
                     string answer = Console.ReadLine()!;
                     bool success = int.TryParse(answer, out num);
                     if (!success)
@@ -257,30 +320,35 @@ static class Reservation
                         }
                         else
                         {
-                            
-                            loop = false;
+                            _underageMembers = num;
+                            return true;
                         }
                     }
                     break;
+                case 1:
+                    _underageMembers = 0;
+                    return true;
                 default:
-                    break;
+                    return false;
             }
         }
+
+        return false;
     }
 
-    public static void ChooseWineAmount()
+    public static bool ChooseWineAmount()
     {
         int wineamount = 0;
         int num;
         while (true)
         {
             Console.ResetColor();
-            string prompt = "U heeft aangegeven dat u een wijnarrangement wilt.\n" +
+            string prompt = "\n\n\nU heeft aangegeven dat u een wijnarrangement wilt.\n" +
                             "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
-                            "Let op: per persoon kost een wijnarrangement €10.\n";
+                            "Let op: per persoon kost een wijnarrangement €10.";
             string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineamount == 0 ? "\n" : $": {wineamount}\n"), 
                 "Doorgaan", "Ga terug"};
-            int chosenOption = _my1DMenu.RunMenu(options, prompt);
+            int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
             {
                 case 0:
@@ -328,14 +396,11 @@ static class Reservation
                         Thread.Sleep(2500);
                         UserLogin.DiscardKeys();
                     }
-                    else
-                    {
-                        ChooseDate();
-                    }
+                    else 
+                        return true;
                     break;
                 case 2:
-                    ResMenu();
-                    break;
+                    return false;
             }   
         }
     }
@@ -416,7 +481,7 @@ static class Reservation
         }
     }
 
-    public static void ChooseDate()
+    public static bool ChooseDate()
     {
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
@@ -429,19 +494,12 @@ static class Reservation
 
         DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", _stepCounter, false);
         if (userChoice == default)
-        {
-            _stepCounter--;
-            ChooseCourse();
-        }
-        else
-        {
-            _stepCounter++;
-            _chosenDate = userChoice;
-            ChooseTimeslot(_chosenDate);
-        }
+            return false;
+        _chosenDate = userChoice;
+        return true;
     }
 
-    public static void ChooseTimeslot(DateTime chosenDate)
+    public static bool ChooseTimeslot(DateTime chosenDate)
     {
         bool todayeventcheck = false;
         JArray allEvents = AccountsAccess.ReadAllEvents();
@@ -466,20 +524,14 @@ static class Reservation
                     ts1 = new TimeSpan(0, 16, 0, 0);
                     ts2 = new TimeSpan(0, 19, 0, 0);
                     _chosenTimeslot = (ts1, ts2);
-                    _stepCounter++;
-                    ChooseTable(_chosenDate, _chosenTimeslot);
-                    break;
+                    return true;
                 case 1:
                     ts1 = new TimeSpan(0, 19, 0, 0);
                     ts2 = new TimeSpan(0, 22, 0, 0);
                     _chosenTimeslot = (ts1, ts2);
-                    _stepCounter++;
-                    ChooseTable(_chosenDate, _chosenTimeslot);
-                    break;
+                    return true;
                 case 2:
-                    _stepCounter--;
-                    ChooseDate();
-                    break;
+                    return false;
             }
         }
         else
@@ -504,9 +556,7 @@ static class Reservation
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
                     _chosenTimeslot = (ts1, ts2);
-                    _stepCounter++;
-                    ChooseTable(_chosenDate, _chosenTimeslot);
-                    break;
+                    return true;
                 case 1:
                     entertime = timeslot2.Split("-")[0].Split(":");
                     leavetime = timeslot2.Split("-")[1].Split(":");
@@ -515,9 +565,7 @@ static class Reservation
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
                     _chosenTimeslot = (ts1, ts2);
-                    _stepCounter++;
-                    ChooseTable(_chosenDate, _chosenTimeslot);
-                    break;
+                    return true;
                 case 2:
                     entertime = timeslot3.Split("-")[0].Split(":");
                     leavetime = timeslot3.Split("-")[1].Split(":");
@@ -526,18 +574,16 @@ static class Reservation
                     ts2 = new TimeSpan(0, Convert.ToInt32(leavetime[0].Trim()), Convert.ToInt32(leavetime[1].Trim()),
                         0);
                     _chosenTimeslot = (ts1, ts2);
-                    _stepCounter++;
-                    ChooseTable(_chosenDate, _chosenTimeslot);
-                    break;
+                    return true;
                 case 3:
-                    _stepCounter--;
-                    ChooseDate();
-                    break;
+                    return false;
             }
         }
+
+        return false;
     }
 
-    public static void ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
+    public static bool ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
     {
         var tablesOnly = Reservations.PopulateTables2D(res_Date, chosenTime);
         // another setwindowsize here to make sure the user didn't make the window too small when choosing other options
@@ -553,12 +599,12 @@ static class Reservation
         _tableLogic.TableStart(tablesOnly, _amountOfPeople, _stepCounter);
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly,
             "  Kies uw tafel (of druk op 'q' om terug te gaan):", _amountOfPeople);
-        if (selectedTable != default!) _chosenTable = selectedTable.Id;
-        else
+        if (selectedTable != default!)
         {
-            _stepCounter--;
-            ChooseTimeslot(res_Date);
+            _chosenTable = selectedTable.Id;
+            return true;
         }
+        return false;
     }
 
  

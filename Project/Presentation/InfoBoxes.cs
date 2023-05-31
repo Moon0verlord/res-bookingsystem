@@ -106,7 +106,7 @@ static class InfoBoxes
         WriteAt("┘", x + boxBorder.Length + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Black;
         Console.BackgroundColor = ConsoleColor.DarkGreen;
-        WriteAt($"  Stap {(stepcount <= 7?stepcount:7)} / 7   ", x + 1, y + 1);
+        WriteAt($"  Stap {(stepcount <= 9?stepcount:9)} / 9   ", x + 1, y + 1);
         Console.ResetColor();
     }
     
