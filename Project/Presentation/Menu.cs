@@ -106,6 +106,7 @@ public static class Dishes
         MainMenu.Start();
     }
 
+    
 
 
     // adds the ability to update dishes on the menu
@@ -141,7 +142,7 @@ public static class Dishes
             case 5:
                 type = "pasen";
                 break;
-            case 7:
+            case 6:
                 MainMenu.Start();
                 break;
             default:
@@ -292,51 +293,100 @@ public static class Dishes
 
     // Gives manager option to change price of items on menu
     public static void PriceManager()
-    {
-        string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
-        string json = File.ReadAllText(path);
-        JObject menu = JObject.Parse(json);
-        string? price2 = (string)menu["Prijzen"]!["Prijzen"]![0]!;
-        string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
-        string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
-        Console.OutputEncoding = System.Text.Encoding.Unicode;
+{
+    
+    string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
+    string json = File.ReadAllText(path);
+    JObject menu = JObject.Parse(json);
+    string? price2 = (string)menu["Prijzen"]!["Prijzen"]![0]!;
+    string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
+    string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
+    Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-        string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
-        string prompt = "\nWelke prijs will je veranderen:";
-        int input = _myMenu.RunMenu(options, prompt);
-        switch (input)
-        {
-            case 0:
-                Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice2 = Console.ReadLine()!;
+    string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
+    string prompt = "\nWelke prijs wil je veranderen:";
+    int input = _myMenu.RunMenu(options, prompt);
+    switch (input)
+    {
+        case 0:
+            Console.WriteLine("Voer een nieuwe prijs in het formaat 00,00:");
+            string newprice2 = Console.ReadLine()!;
+            if (IsValidPriceFormat(newprice2))
+            {
                 menu["Prijzen"]!["Prijzen"]![0] = $"€ {newprice2}";
-                break;
-            case 1:
-                Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice3 = Console.ReadLine()!;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nPrijs is bijgewerkt!\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ongeldige prijsindeling. Voer een prijs in het formaat 00,00.");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                PriceManager();
+            }
+            break;
+        case 1:
+            Console.WriteLine("Voer een nieuwe prijs in:");
+            string newprice3 = Console.ReadLine()!;
+            if (IsValidPriceFormat(newprice3))
+            {
                 menu["Prijzen"]!["Prijzen"]![1] = $"€ {newprice3}";
-                break;
-            case 2:
-                Console.WriteLine("Voer een nieuwe prijs in:");
-                string newprice4 = Console.ReadLine()!;
-                    menu["Prijzen"]!["Prijzen"]![2] = $"€ {newprice4}";
-                break;
-            case 3:
-                MainMenu.Start();
-                break;
-            default:
-                Console.WriteLine("Keuze ongeldig probeer opnieuw");
-                break;
-        }
-        // write the updated JSON to the file
-        string updatedJson = menu.ToString();
-        File.WriteAllText(path, updatedJson);
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\nPrijs is bijgewerkt!\n");
-        Console.ResetColor();
-        Thread.Sleep(2000);
-        UserLogin.DiscardKeys();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nPrijs is bijgewerkt!\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ongeldige prijsindeling. Voer een prijs in het formaat 00,00.");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                PriceManager();
+            }
+            break;
+        case 2:
+            Console.WriteLine("Voer een nieuwe prijs in:");
+            string newprice4 = Console.ReadLine()!;
+            if (IsValidPriceFormat(newprice4))
+            {
+                menu["Prijzen"]!["Prijzen"]![2] = $"€ {newprice4}";
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nPrijs is bijgewerkt!\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ongeldige prijsindeling. Voer een prijs in het formaat 00,00.");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                PriceManager();
+            }
+            break;
+        case 3:
+            MainMenu.Start();
+            break;
+        default:
+            Console.WriteLine("Keuze ongeldig. Probeer opnieuw.");
+            break;
     }
+    // write the updated JSON to the file
+    string updatedJson = menu.ToString();
+    File.WriteAllText(path, updatedJson);
+    Thread.Sleep(2000);
+    UserLogin.DiscardKeys();
+}
+
+
+    // Use regex to validate the price format (00,00)
+    private static bool IsValidPriceFormat(string price)
+    {
+        string pattern = @"^\d{1,3}(,\d{2})?$";
+        return Regex.IsMatch(price, pattern);
+    }
+
 
     // Displays wines based on user selection
     public static void WineDisplay()
@@ -404,11 +454,11 @@ public static class Dishes
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
         JObject DishesOBJ = JObject.Parse(json);
-        
+
         string type = "";
         string category = "";
         string name = "";
-        
+
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
         string prompt = "\nWelk type gerecht zou je willen veranderen?:";
         int input = _myMenu.RunMenu(options, prompt);
@@ -442,7 +492,7 @@ public static class Dishes
         }
 
         // select course
-        string[] options2 = { "Voorgerecht", "Maaltijd", "Soep ","Nagerecht", "Terug naar hoofdmenu" };
+        string[] options2 = { "Voorgerecht", "Maaltijd", "Soep", "Nagerecht", "Terug naar hoofdmenu" };
         string prompt2 = "\nWat wil je toevoegen?:";
         int input2 = _myMenu.RunMenu(options2, prompt2);
         _currentIndex = 0;
@@ -467,9 +517,21 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
+
         // takes dish name from user and writes this to the json
         Console.WriteLine("Wat is de naam van het gerecht?");
         name = Console.ReadLine();
+
+        if (!IsValidDishName(name) || name == "")
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ongeldige gerechtnaam. Voer een geldige naam in zonder speciale tekens.");
+            Console.ResetColor();
+            Thread.Sleep(2000);
+            MainMenu.Start();
+            return;
+        }
+
         JArray SelectionArray = (JArray)DishesOBJ[type]![category]!;
         SelectionArray.Add(name);
         string output = Newtonsoft.Json.JsonConvert.SerializeObject(DishesOBJ, Newtonsoft.Json.Formatting.Indented);
@@ -481,6 +543,14 @@ public static class Dishes
         Console.ReadKey();
         MainMenu.Start();
     }
+
+    // Use regex to validate the dish name (only letters and spaces allowed)
+    private static bool IsValidDishName(string name)
+    {
+        string pattern = @"^[a-zA-Z\s]+$";
+        return Regex.IsMatch(name, pattern);
+    }
+
     
     // User options to choose between food menu or wine arrangement
     public static void UserOptions()

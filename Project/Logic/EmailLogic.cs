@@ -1,11 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
-using System;
-using System.Globalization;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
+using System.Net.Mime;
+using System.Threading;
+using System.ComponentModel;
 public class EmailLogic
 {
+    static bool mailSent = false;
     // check if the domain of the email is valid
     private static bool CheckDomain(string email)
     {
@@ -58,44 +59,51 @@ public class EmailLogic
         try
         {
             // create the linked resource for the image (assuming the image file is in a subdirectory of the program's working directory)
-            string imagePath = Path.Combine(Environment.CurrentDirectory, "DataSources", "360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg");
+                string imagePath = Path.Combine(Environment.CurrentDirectory, "DataSources",
+                    "360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg");
+                //Which of the servers hostnames is gonna be used to send emails
+                var Smtp = new SmtpClient("smtp.gmail.com", 587);
             
-            //Which of the servers hostnames is gonna be used to send emails
-            var Smtp = new SmtpClient("smtp.gmail.com", 587);
-            
-            //Authentification info
-            Smtp.UseDefaultCredentials = false;     
-            NetworkCredential basicAuthenticationInfo = new
-                NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
-            Smtp.Credentials = basicAuthenticationInfo;
-            var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), code, $"{StartTime:hh}:{StartTime:mm} - {LeaveTime:hh}:{LeaveTime:mm}");
+                //Authentification info
+                Smtp.UseDefaultCredentials = false;
+                NetworkCredential basicAuthenticationInfo = new
+                    NetworkCredential("restaurant1234567891011@gmail.com", "vqxjoomtkvrjmnxu");
+                Smtp.Credentials = basicAuthenticationInfo;
+                var htmlBody = HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), code,
+                    $"{StartTime:hh}:{StartTime:mm} - {LeaveTime:hh}:{LeaveTime:mm}");
+                //Who the email is from, who its going to, the mail message and what the reply email is 
+              
+                MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
+                MailAddress to = new MailAddress(email, $"{email}");
+          
+                MailMessage myMail = new MailMessage(from, to);
+                MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
+                LinkedResource imageResource = new LinkedResource(imagePath, "image/jpeg");
+                imageResource.ContentId = "image1";
+                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
+                htmlView.LinkedResources.Add(imageResource);
+                myMail.AlternateViews.Add(htmlView);
+             
+                //Reply toList is what it says on the tin, the reply to option in mail can contain multiple emails
+                myMail.ReplyToList.Add(replyTo);
 
-            //Who the email is from, who its going to, the mail message and what the reply email is 
-            MailAddress from = new MailAddress("testrestaurant12356789@gmail.com", "Restaurant");
-            MailAddress to = new MailAddress(email, $"{email}");
+                //What is the subject, the encoding, the message in the body and its encoding etc
+                myMail.Subject = "Reservatie";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+                myMail.IsBodyHtml = true;
+              
+                //Encrypts the emails being sent for extra security
+                Smtp.EnableSsl = true;
+                
+                Smtp.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
+                string userState = "bericht1";
+                Smtp.SendAsync(myMail, userState);
+                Console.WriteLine("Mail versturen...");
+                Thread.Sleep(3000);
+                myMail.Dispose();
             
-            MailMessage myMail = new MailMessage(from, to);
-            MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
-            LinkedResource imageResource = new LinkedResource(imagePath, "image/jpeg");
-            imageResource.ContentId = "image1";
-            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
-            htmlView.LinkedResources.Add(imageResource);
-            myMail.AlternateViews.Add(htmlView);
-            
-            //Reply toList is what it says on the tin, the reply to option in mail can contain multiple emails
-            myMail.ReplyToList.Add(replyTo);
-            
-            //What is the subject, the encoding, the message in the body and its encoding etc
-            myMail.Subject = "Reservatie";
-            myMail.SubjectEncoding = System.Text.Encoding.UTF8;
-            myMail.BodyEncoding = System.Text.Encoding.UTF8;
-            myMail.IsBodyHtml = true;
-            
-            //Encrypts the emails being sent for extra security
-            Smtp.EnableSsl = true;
-            Smtp.Send(myMail);
         }
-
         catch (SmtpException ex)
         {
             throw new ApplicationException(ex.Message);
@@ -106,7 +114,7 @@ public class EmailLogic
     public static void SendVerificationMail(string email, string name, string vrfyCode){
        try
        {
-            //Which of the servers hostnames is gonna be used to send emails
+           //Which of the servers hostnames is gonna be used to send emails
             var Smtp = new SmtpClient("smtp.gmail.com", 587);
             //Authentification info
             Smtp.UseDefaultCredentials = false;
@@ -133,7 +141,8 @@ public class EmailLogic
             myMail.IsBodyHtml = true;
             //Encrypts the emails being sent for extra security
             Smtp.EnableSsl = true;
-            Smtp.Send(myMail);
+           
+           Smtp.Send(myMail);
        }
 
        catch (SmtpException ex)
@@ -183,4 +192,23 @@ public class EmailLogic
             throw new ApplicationException(ex.Message);
        } 
     }
+        //Progress bar
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            // Get the unique identifier for this asynchronous operation.
+            String token = (string) e.UserState!;
+
+            if (e.Cancelled)
+            {
+                Console.WriteLine("[{0}] Send canceled.", token);
+            } 
+            if (e.Error != null)
+            {
+                Console.WriteLine("[{0}] {1}", token, e.Error);
+            } else
+            {
+                Console.WriteLine("Bericht verstuurd.");
+            }
+            mailSent = true;
+        }
 }
