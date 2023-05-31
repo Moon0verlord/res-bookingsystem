@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.RegularExpressions;
 
 static class InfoBoxes
 {
@@ -106,7 +107,59 @@ static class InfoBoxes
         WriteAt("┘", x + boxBorder.Length + 1, y + 2);
         Console.ForegroundColor = ConsoleColor.Black;
         Console.BackgroundColor = ConsoleColor.DarkGreen;
-        WriteAt($"  Stap {(stepcount <= 7?stepcount:7)} / 7   ", x + 1, y + 1);
+        WriteAt($"  Stap {(stepcount <= 9?stepcount:9)} / 9   ", x + 1, y + 1);
+        Console.ResetColor();
+    }
+    
+    public static void WriteBill(int origrow, int origcol,int _amountOfPeople, int _underageMembers, int chosenCourse, bool _chosenWine, int _howManyWine)
+    {
+        // variables here
+        origRow = origrow;
+        origCol = origcol;
+        int x = 20;
+        int y = 0;
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        int amountAdult = _amountOfPeople - _underageMembers;
+        var pricingstring = AccountsAccess.LoadAllMenu()["Prijzen"]!["Prijzen"]![chosenCourse - 2]!.ToObject<string>()!;
+        Match match = Regex.Match(pricingstring, @"^€\s+(\d+)");
+        int pricing = int.Parse(match.Groups[1].Value);
+        // word writing here
+        string boxBorder = "─────────────────────────────────────────────────────────────────────────────────";
+        string info1 =
+            $"{$"{amountAdult} volwassen personen x {match.Groups[0].Value} ({chosenCourse} gangen)",-8}: {"€ " + amountAdult * pricing,-30}";
+        
+        string info2 = (_underageMembers == 0 ? "Geen minderjarige personen in groep" :
+            String.Format("{0,-8}: {1,-30}", $"{_underageMembers} minderjarige personen in groep x € {pricing * 0.90} (10% korting)", "€ " + _underageMembers * (pricing * 0.90)));
+        
+        string info3 = String.Format("{0,-8}: {1,-30}", (_chosenWine ? $"Wijn arrangement: Ja ({_howManyWine} arrangementen x €10)" : "Wijn arrangement"),
+            (_chosenWine ? "€ " + (10 * _howManyWine) : "Nee"));
+        
+        string info4 = String.Format("{0,-3}: {1,-30}", "Totaal",
+            "€ " + ((amountAdult * pricing) + (_underageMembers * (pricing * 0.90)) + (_chosenWine ? 10 * _howManyWine : 0)));
+        Console.ResetColor();
+        WriteAt("Rekening", x + 38, y + 1);
+        WriteAt("Wij verzorgen geen betalingen via dit programma, dit is alleen een hulpmiddel", x + 2, y + 3);
+        WriteAt("om te laten zien wat het gaat kosten in ons restaurant.", x + 2, y + 4);
+        WriteAt(info1, x + 2, y + 6);
+        WriteAt(info2, x + 2, y + 7);
+        WriteAt(info3, x + 2, y + 8);
+        Console.ForegroundColor = ConsoleColor.White;
+        WriteAt(info4, x + 2, y + 10);
+        // box writing here
+        Console.ForegroundColor = ConsoleColor.Green;
+        WriteAt("┌", x, y);
+        for (var i = 1; i <= 10; i++)
+            WriteAt("│", x, y + i);
+        WriteAt("└", x, y + 11);
+        WriteAt(boxBorder, x + 1, y);
+        WriteAt(boxBorder, x + 1, y + 2);
+        WriteAt(boxBorder, x + 1, y + 5);
+        WriteAt(boxBorder, x + 1, y + 9);
+        WriteAt(boxBorder, x + 1, y + 11);
+        WriteAt("┐", x + boxBorder.Length + 1, y);
+        for (var i = 1; i <= 10; i++) 
+            WriteAt("│", x + boxBorder.Length + 1, y + i);
+        WriteAt("┘", x + boxBorder.Length + 1, y + 11);
         Console.ResetColor();
     }
 
