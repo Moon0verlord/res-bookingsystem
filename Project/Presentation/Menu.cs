@@ -344,7 +344,7 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string choice = "";
         Console.CursorVisible = false;
-        string[] options = { "Rode Wijn", "Witte Wijn", "Champagne" };
+        string[] options = { "Rode Wijn", "Witte Wijn", "Champagne", "Terug naar hoofdmenu"};
         string prompt = "\nKies een type gerechten:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
@@ -357,6 +357,9 @@ public static class Dishes
                 break;
             case 2:
                 choice = "sparkling";
+                break;
+            case 3:
+                MainMenu.Start();
                 break;
             default:
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");

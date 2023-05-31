@@ -18,11 +18,6 @@ public class EventModel
         EventInfo = eventinfo;
         EventDate = eventdate;
     }
-
-    public EventModel()
-    {
-    }
-    // can only be placed here, is used in EmployeeManagerLogic
 }
 
 

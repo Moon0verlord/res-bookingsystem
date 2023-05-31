@@ -1,6 +1,3 @@
-using System.Drawing;
-using System.Runtime.CompilerServices;
-
 public static class UserLogin
 {
     private static AccountsLogic _accountsLogic = new();
@@ -59,7 +56,7 @@ public static class UserLogin
                     InfoBoxes.WritePasswordToggle(Console.CursorTop, Console.CursorLeft, false);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword()!;
+                    userPassword = WritePassword();
                     break;
                 case 2:
                     if (userEmail == null || userPassword == null)
@@ -146,7 +143,7 @@ public static class UserLogin
                     InfoBoxes.WriteBoxUserPassword(Console.CursorTop, Console.CursorLeft);
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
-                    userPassword = WritePassword()!;
+                    userPassword = WritePassword();
                     if (!PasswordCheck(userPassword))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -158,7 +155,7 @@ public static class UserLogin
                         break;
                     }
                     Console.Write("\n Vul uw wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword()!;
+                    var verifyUserPassword = WritePassword();
                     if (userPassword != verifyUserPassword) 
                     {
                       Console.ForegroundColor = ConsoleColor.Red;
@@ -263,9 +260,9 @@ public static class UserLogin
             }
         }
     }
-    private static AccountModel CreateAccount(string email, string password, string name,bool IsEmployee,bool IsManager)
+    private static AccountModel CreateAccount(string email, string password, string name,bool isEmployee,bool isManager)
     {
-        var newAccount = AccountsAccess.AddAccount(email, password, name,IsEmployee,IsManager);
+        var newAccount = AccountsAccess.AddAccount(email, password, name,isEmployee,isManager);
         return newAccount;
     }
 
@@ -284,7 +281,7 @@ public static class UserLogin
     {
         string currentMode = "stars";
         string password = "";
-        ConsoleKey currKey = default;
+        ConsoleKey currKey;
         do
         {
             var keyInfo = Console.ReadKey(true);
