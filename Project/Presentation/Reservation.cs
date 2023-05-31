@@ -25,16 +25,7 @@ static class Reservation
     {
         // resetting all static fields for a fresh reservation start
         _acc = acc;
-        _userEmail = null;
-        _userName = null;
-        _amountOfPeople = 0;
-        _chosenDate = default;
-        _chosenTimeslot = (default, default);
-        _chosenTable = "";
-        _chosenCourse = 0;
-        _chosenWine = false;
-        _stepCounter = 1;
-        Console.Clear();
+        FieldReset();
         if (acc == null!)
         {
             string name = null!;
@@ -117,6 +108,20 @@ static class Reservation
             _userEmail = acc.EmailAddress;
             ResMenu();
         }
+    }
+
+    private static void FieldReset()
+    {
+        _userEmail = null;
+        _userName = null;
+        _amountOfPeople = 0;
+        _chosenDate = default;
+        _chosenTimeslot = (default, default);
+        _chosenTable = "";
+        _chosenCourse = 0;
+        _chosenWine = false;
+        _stepCounter = 1;
+        Console.Clear();
     }
 
     public static void ResMenu()
