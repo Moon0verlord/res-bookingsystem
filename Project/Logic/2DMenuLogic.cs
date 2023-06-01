@@ -98,6 +98,7 @@ class _2DMenuLogic
         {
             Console.SetCursorPosition(0, 0);
             InfoBoxes.WriteBoxStepCounter(Console.CursorTop, Console.CursorLeft, stepCounter);
+            Console.SetCursorPosition(0, 2);
             DisplayDateOptions(prompt, printPrompt);
             ConsoleKeyInfo selectedKey = Console.ReadKey(true);
             keyPressed = selectedKey.Key;

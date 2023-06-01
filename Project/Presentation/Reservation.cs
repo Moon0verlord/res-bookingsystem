@@ -546,12 +546,11 @@ static class Reservation
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
         Console.WriteLine(
-            $"\n\n\nU kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):\n");
+            $"\n\n\nU kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):");
         for (int i = 0; i < thisMonth.GetLength(1); i++)
         {
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
         }
-
         DateTime userChoice = _my2DMenu.RunMenu(thisMonth, "", _stepCounter, false);
         if (userChoice == default)
             return false;
