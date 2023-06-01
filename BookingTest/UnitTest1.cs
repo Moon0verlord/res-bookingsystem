@@ -1,11 +1,49 @@
 using System.Text.RegularExpressions;
-using Project.Presentation;
-
+using System.ComponentModel;
+using System;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading;
+using System.ComponentModel;
 namespace TestProject1;
+[TestClass]
+public class EmailTest
+    {
+  
 
+        [TestMethod]
+        public void TestinMail()
+        {
+            EmailLogic.SendEmail("j@j.com",new DateTime(2003,12,3),"RE1",new TimeSpan(10,2,3),
+                new TimeSpan(12,0,0));
+        }
+        // private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        // {
+        //     // Get the unique identifier for this asynchronous operation.
+        //     String token = (string)e.UserState;
+        //     mailSent = false;
+        //     if (e.Cancelled)
+        //     {
+        //         mailSent = false;
+        //     }
+        //
+        //     if (e.Error != null)
+        //     {
+        //         mailSent = false;
+        //     }
+        //     else
+        //     {
+        //         mailSent = true;
+        //     }
+        //
+        //     Assert.IsTrue(mailSent);
+        // }
+    }
 [TestClass]
 public class UnitTest1
 {
+    
     //Allows write line
     private TestContext testContextInstance;
 
@@ -41,8 +79,7 @@ public class UnitTest1
         AccountsAccess.ClearJsonFiles(2);
 
     }
-
-
+    
     // made by robin b
     // create id used by reservations, and check if it matches the following regular expression.
     [TestMethod]

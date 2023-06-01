@@ -6,7 +6,7 @@ using System.Threading;
 using System.ComponentModel;
 public class EmailLogic
 {
-    static bool mailSent = false;
+    public static bool mailSent = false;
     // check if the domain of the email is valid
     private static bool CheckDomain(string email)
     {
