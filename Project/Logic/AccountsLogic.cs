@@ -39,10 +39,8 @@ class AccountsLogic:IMenuLogic
     => _accounts = AccountsAccess.LoadAll();
 
     // get an account by id
-    public AccountModel GetById(int id)
-    {
-        return _accounts.Find(i => i.Id == id)!;
-    }
+    public AccountModel GetById(int id) => _accounts.Find(i => i.Id == id)!;
+    
 
     // get an account by email
     public AccountModel GetByEmail(string email)
@@ -134,13 +132,16 @@ class AccountsLogic:IMenuLogic
         var userAnswer = Console.ReadLine()!.ToLower();
         switch (AnswerLogic.CheckInput(userAnswer)) 
         {
+            //1 after a true output
             case 1:
             MainMenu.Account = null!;
             MainMenu.Start();
             break;
+            //0 after a false output
             case 0:
                 break;
-            case -1:
+            case -1: 
+                //-1 after a incorrect input 
                 LogOut();
                 break;
         }

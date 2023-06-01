@@ -2,15 +2,14 @@ using System.ComponentModel;
 
 class _2DMenuLogic
 {
-    private bool noSpace = false;
-    private int _rowIndex = 0;
-    private int _columnIndex = 0;
-    private int res_GroupSize = 0;
+    private bool noSpace;
+    private int _rowIndex;
+    private int _columnIndex;
+    private int res_GroupSize;
     private string[] _options = null;
-    private DateTime[,] _dateTimes = null;
-    private ReservationModel[,] Tables = null;
-    private List<string> sizes = new List<string>();
-    private List<(int, int)> forbiddenIndex = new List<(int, int)>();
+    private DateTime[,] _dateTimes;
+    private ReservationModel[,] Tables;
+    private List<(int, int)> forbiddenIndex = new ();
     
     
     public void DisplayDateOptions(string prompt, bool printPrompt)
@@ -52,7 +51,7 @@ class _2DMenuLogic
         {
             for (int j = 0; j < Tables.GetLength(1); j++)
             {
-                if (Tables[i, j] != null)
+                if (Tables[i, j] != null!)
                 {
                     bool groupcheck = (res_GroupSize - Tables[i, j].TableSize == 0 || res_GroupSize - Tables[i, j].TableSize == -1);
                     string toWrite = $"Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
@@ -75,9 +74,9 @@ class _2DMenuLogic
                     Console.Write($"{toWrite, -18}");
                     Console.ResetColor();
                     // this is so the seperator "|" is always on the same place, no matter how long the actual string is.
-                    int sep_Length = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
+                    int sepLength = (toWrite.Length == 25 ? 1 : toWrite.Length == 23 ? 3 : 8);
                     // Write whitespaces for the above length, and then write the seperator string except for the last column.
-                    Console.Write(String.Concat(Enumerable.Repeat(" ", sep_Length)) + (j != 2 ? " │" : "  "));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", sepLength)) + (j != 2 ? " │" : "  "));
 
                     Console.ResetColor();
                 }

@@ -2,7 +2,7 @@
 {
     protected static int origRow;
     protected static int origCol;
-    private ReservationModel[,] _tables = null;
+    private ReservationModel[,] _tables;
     private int _groupSize;
 
     public void TableStart(ReservationModel[,] tables , int amountOfPeople, int stepCounter)

@@ -32,7 +32,7 @@ public class SpecialEvent
     }
 
     // function to create a new event
-    public static string ResEvent()
+    public static void ResEvent()
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string eventName = null!;
@@ -40,11 +40,13 @@ public class SpecialEvent
         string eventDate = null!;
         while (true)
         {
-            string[] options = new[]
-                { "Vul hier in wat de event naam is." + (eventName == null ? "" : $": {eventName}"),
+            string[] options =
+            {
+                "Vul hier in wat de event naam is." + (eventName == null ? "" : $": {eventName}"),
                 "Vul hier de extra informatie over het event in." + (eventInfo == null ? "" : $": {eventInfo}"),
                 "Vul hier de datum in van het event." + (eventDate == null ? "" : $": {eventDate}"),
-                "Het evenement definitief maken", "Ga terug" };
+                "Het evenement definitief maken", "Ga terug"
+            };
             int selectedIndex = _myMenu.RunMenu(options, "Vul de volgende gegevens in:");
             Console.Clear();
             switch (selectedIndex)
@@ -60,6 +62,7 @@ public class SpecialEvent
                         ResEvent();
                         break;
                     }
+
                     break;
                 case 1:
                     Console.Write("wat wordt de extra informatie van het event: ");
@@ -81,6 +84,7 @@ public class SpecialEvent
                                 break;
                             }
                         }
+
                         break;
                     }
                     else
@@ -94,7 +98,8 @@ public class SpecialEvent
                 case 3:
                     if (eventName != null && eventInfo != null && eventDate != null)
                     {
-                        var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ?? new List<EventModel>();
+                        var allEvents = JsonSerializer.Deserialize<List<EventModel>>(File.ReadAllText(path)) ??
+                                        new List<EventModel>();
                         EventModel newEvent = new EventModel(eventName, eventInfo, eventDate);
                         allEvents.Add(newEvent);
                         AccountsAccess.WriteAllEventsJson(allEvents);
@@ -109,6 +114,7 @@ public class SpecialEvent
                         Thread.Sleep(3000);
                         ResEvent();
                     }
+
                     break;
                 case 4:
                     Eventmenu();
@@ -140,7 +146,7 @@ public class SpecialEvent
         }
     }
 
-    static string Events =
+    static string _events =
         @"Speciale Evenementen:
 Er zijn op dit moment nog geen evenementen.
 Kom terug op een later moment om te zien of er al evenementen zijn.
@@ -151,26 +157,27 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
     {
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string json = File.ReadAllText(path);
-        JArray eventmenu = JArray.Parse(json);
-        foreach (var _ in eventmenu)
+        JArray eventMenu = JArray.Parse(json);
+        foreach (var _ in eventMenu)
         {
             if (json != null) return true;
         }
+
         return false;
     }
 
     // start function for the events
     public static void ViewEvents()
     {
-        JArray eventmenu = AccountsAccess.ReadAllEvents();
+        JArray eventMenu = AccountsAccess.ReadAllEvents();
         Console.Clear();
 
         if (CheckIfEvent())
         {
             Console.WriteLine("Komende evenementen:");
-            foreach (var eventItem in eventmenu)
+            foreach (var eventItem in eventMenu)
             {
-                DateTime eventDate = DateTime.ParseExact(eventItem["eventdate"].ToString(), "dd-MM-yyyy", null);
+                DateTime eventDate = DateTime.ParseExact(eventItem["eventdate"]!.ToString(), "dd-MM-yyyy", null);
                 if (eventDate >= DateTime.Now)
                 {
                     Console.WriteLine("-------");
@@ -179,6 +186,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
                     Console.WriteLine($"{eventItem["eventdate"]}");
                 }
             }
+
             Console.WriteLine();
             Console.WriteLine("Druk op een knop om verder te gaan");
             Console.ReadKey();
@@ -186,10 +194,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         }
         else
         {
-            Console.WriteLine(Events);
+            Console.WriteLine(_events);
         }
     }
-
-
-
 }
