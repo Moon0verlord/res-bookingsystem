@@ -201,14 +201,17 @@ public class EmailLogic
             if (e.Cancelled)
             {
                 Console.WriteLine("[{0}] Send canceled.", token);
+                mailSent = false;
             } 
             if (e.Error != null)
             {
                 Console.WriteLine("[{0}] {1}", token, e.Error);
+                mailSent = false;
             } else
             {
                 Console.WriteLine("Bericht verstuurd.");
+                mailSent = true;
             }
-            mailSent = true;
+            
         }
 }

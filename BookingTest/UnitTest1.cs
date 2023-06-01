@@ -7,40 +7,7 @@ using System.Net.Mime;
 using System.Threading;
 using System.ComponentModel;
 namespace TestProject1;
-[TestClass]
-public class EmailTest
-    {
-  
 
-        [TestMethod]
-        public void TestinMail()
-        {
-            EmailLogic.SendEmail("j@j.com",new DateTime(2003,12,3),"RE1",new TimeSpan(10,2,3),
-                new TimeSpan(12,0,0));
-            Assert.IsTrue(EmailLogic.mailSent);
-        }
-        // private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
-        // {
-        //     // Get the unique identifier for this asynchronous operation.
-        //     String token = (string)e.UserState;
-        //     mailSent = false;
-        //     if (e.Cancelled)
-        //     {
-        //         mailSent = false;
-        //     }
-        //
-        //     if (e.Error != null)
-        //     {
-        //         mailSent = false;
-        //     }
-        //     else
-        //     {
-        //         mailSent = true;
-        //     }
-        //
-        //     Assert.IsTrue(mailSent);
-        // }
-    }
 [TestClass]
 public class UnitTest1
 {
@@ -145,5 +112,12 @@ public class UnitTest1
         int expectAns = 1;
         int actAns = AnswerLogic.CheckInput(answer);
         Assert.AreEqual(expectAns, actAns);
+    }
+    [TestMethod]
+    public void TestinMail()
+    {
+        EmailLogic.SendEmail("j@j.com",new DateTime(2003,12,3),"RE1",new TimeSpan(10,2,3),
+            new TimeSpan(12,0,0));
+        Assert.IsTrue(EmailLogic.mailSent);
     }
 }

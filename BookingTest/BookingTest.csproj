@@ -19,4 +19,14 @@
     <ProjectReference Include="..\Project\Project.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="bin\Debug\net6.0\DataSources\360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg" />
+    <Content Include="bin\Debug\net6.0\DataSources\accounts.json" />
+    <Content Include="bin\Debug\net6.0\DataSources\Dishes.json" />
+    <Content Include="bin\Debug\net6.0\DataSources\Events.json" />
+    <Content Include="bin\Debug\net6.0\DataSources\Menu.json" />
+    <Content Include="bin\Debug\net6.0\DataSources\reservations.json" />
+    <Content Include="bin\Debug\net6.0\DataSources\WineMenu.json" />
+  </ItemGroup>
+
 </Project>
