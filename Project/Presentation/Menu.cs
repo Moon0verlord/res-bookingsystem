@@ -118,7 +118,7 @@ public static class Dishes
 
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Druk op een knop om terug te gaan naar het menu");
+        Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ResetColor();
         Console.ReadKey();
         MainMenu.Start();
@@ -218,6 +218,8 @@ public static class Dishes
         { 
             Console.WriteLine("Keuze ongeldig probeer opnieuw");
         }
+        
+        // displays available dishes to change to
         JObject dishtoadd = DisplayDishes(type, category);
 
 
@@ -309,13 +311,13 @@ public static class Dishes
     // Gives manager option to change price of items on menu
     public static void PriceManager()
 {
-    
     string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
     string json = File.ReadAllText(path);
     JObject menu = JObject.Parse(json);
     string? price2 = (string)menu["Prijzen"]!["Prijzen"]![0]!;
     string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
     string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
+    Console.CursorVisible = true;
     Console.OutputEncoding = System.Text.Encoding.Unicode;
 
     string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
@@ -460,7 +462,7 @@ public static class Dishes
             Console.WriteLine("-------");
             Console.WriteLine();
         }
-        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ReadKey();
         MainMenu.Start();
     }
@@ -468,7 +470,7 @@ public static class Dishes
     // Gives manager option to add dish to dishes.json
     public static void AddToDishes()
     {
-        Console.CursorVisible = false;
+        Console.CursorVisible = true;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
@@ -536,7 +538,7 @@ public static class Dishes
                 Console.WriteLine("Keuze ongeldig probeer opnieuw");
                 break;
         }
-
+        Console.CursorVisible = true;
         // takes dish name from user and writes this to the json
         Console.WriteLine("Wat is de naam van het gerecht?");
         name = Console.ReadLine();
@@ -558,7 +560,7 @@ public static class Dishes
         Console.WriteLine($"\n{name} is Toegevoegd aan de Dishes\n");
         Console.ResetColor();
         File.WriteAllText(path, output);
-        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ReadKey();
         MainMenu.Start();
     }

@@ -153,7 +153,9 @@ public class EmployeeManagerLogic : IMenuLogic
     // Remove an employee
     public static void RemoveEmployee(){
         Console.Clear();
-        Console.WriteLine("Email");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Active Employee accounts:");
+        Console.ResetColor();
         // Show all employees
         foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
         {
@@ -163,7 +165,12 @@ public class EmployeeManagerLogic : IMenuLogic
         while (true)
         {
             string email = Console.ReadLine()!;
-            if (email!=null!&&AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
+            if (email == "")
+            {
+                MainMenu.Start();
+                break;
+            }
+            else if (email!=null!&&AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
             {
                 Console.WriteLine("Weet je zeker dat je deze medewerker wilt verwijderen? (j/n)");
                 string answer = Console.ReadLine()!.ToLower();
@@ -171,11 +178,18 @@ public class EmployeeManagerLogic : IMenuLogic
                 {
                     case 1:
                         AccountsAccess.RemoveAccount(email);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Medewerker verwijderd");
-                        Thread.Sleep(3000);
+                        Thread.Sleep(2000);
+                        Console.ResetColor();
+                        UserLogin.DiscardKeys();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Medewerker niet verwijderd");
+                        Thread.Sleep(2000);
+                        Console.ResetColor();
+                        UserLogin.DiscardKeys();
                         break;
                     case -1:
                         break;
@@ -185,6 +199,8 @@ public class EmployeeManagerLogic : IMenuLogic
             {
                 Console.WriteLine("Deze medewerker bestaat niet");
                 Thread.Sleep(2000);
+                UserLogin.DiscardKeys();
+                MainMenu.Start();
                 break;
             }
         }
@@ -215,8 +231,11 @@ public class EmployeeManagerLogic : IMenuLogic
             }
             if (!resIds.Contains(id))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Dit ID bestaat niet, vul het opnieuw in.");
                 Thread.Sleep(500);
+                Console.ResetColor();
+                UserLogin.DiscardKeys();
                 Console.Clear();
                 continue;
             }
@@ -352,8 +371,11 @@ public class EmployeeManagerLogic : IMenuLogic
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Dit is geen geldig email adres");
                         Thread.Sleep(2000);
+                        Console.ResetColor();
+                        UserLogin.DiscardKeys();
                     }
                     break;
                 // save changes and send email if possible else send cancellation email
