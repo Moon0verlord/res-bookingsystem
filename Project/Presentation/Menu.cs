@@ -40,6 +40,7 @@ public static class Dishes
     }
 
 
+
     // Displays the current dishes to the user
     public static void JsonCursor(string choice)
     {
@@ -52,62 +53,76 @@ public static class Dishes
         string price3 = (string)menu["Prijzen"]!["Prijzen"]![1]!;
         string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
         Console.Clear();
-    
+
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Prijzen:");
         Console.WriteLine("-------");
+        Console.ResetColor();
         Console.WriteLine($"2 gangen: {price2}");
         Console.WriteLine($"3 gangen: {price3}");
         Console.WriteLine($"4 gangen: {price4}");
         
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"{choice} gerechten:");
-
+        Console.ResetColor();
         Console.WriteLine();
+
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Voorgerechten:");
-        Console.WriteLine("-------");
+        Console.WriteLine("--------------");
+        Console.ResetColor();
         var appetizers2 = menu[choice]!["Voorgerecht"]!
             .Select(item => (string)item!);
         foreach (var appetizer in appetizers2)
         {
-            Console.WriteLine($"{appetizer}");
+            Console.WriteLine($"• {appetizer}");
         }
+        
+
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Soepen:");
         Console.WriteLine("-------");
+        Console.ResetColor();
         var soups = menu[choice]!["Soep"]!
             .Select(item => (string)item!);
         foreach (var soup in soups)
         {
-            Console.WriteLine($"{soup}");
+            Console.WriteLine($"• {soup}");
         }
         
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Hoofdgerechten:");
-        Console.WriteLine("-------");
+        Console.WriteLine("----------------");
+        Console.ResetColor();
         var entrees = menu[choice]!["Maaltijd"]!
             .Select(item => (string)item!);
         foreach (var entree in entrees)
         {
-            Console.WriteLine($"{entree}");
+            Console.WriteLine($"• {entree}");
         }
         
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Nagerechten:");
-        Console.WriteLine("-------");
+        Console.WriteLine("------------");
+        Console.ResetColor();
         var desserts = menu[choice]!["Nagerecht"]!
             .Select(item => (string)item!);
         foreach (var dessert in desserts)
         {
-            Console.WriteLine($"{dessert}");
+            Console.WriteLine($"• {dessert}");
         }
+
         Console.WriteLine();
-        Console.WriteLine("Druk op een knop om verder te gaan");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Druk op een knop om terug te gaan naar het menu");
+        Console.ResetColor();
         Console.ReadKey();
         MainMenu.Start();
     }
-
-    
-
 
     // adds the ability to update dishes on the menu
     public static void ManageMenu()
@@ -421,8 +436,11 @@ public static class Dishes
         string json = File.ReadAllText(path);
         JObject Wines = JObject.Parse(json);
         Console.Clear();
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"{choice} Wijn Arrangement:");
         Console.WriteLine("-------");
+        Console.ResetColor();
         var selection = Wines["Winemenu"]![choice]!
             .Select(item => new
             {
@@ -440,6 +458,7 @@ public static class Dishes
             Match match = Regex.Match(wine.price, @"^€(\d+),\d+");
             Console.WriteLine($"Price per glass is: €{Convert.ToInt32(match.Groups[1].Value) / 4},00");
             Console.WriteLine("-------");
+            Console.WriteLine();
         }
         Console.WriteLine("Druk op een knop om verder te gaan");
         Console.ReadKey();
