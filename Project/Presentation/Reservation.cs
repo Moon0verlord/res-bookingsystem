@@ -503,7 +503,6 @@ static class Reservation
     }
     
     // ask user how many people the group will consist of.
-
     public static int ChooseGroupSize()
     {
         Console.Clear();
