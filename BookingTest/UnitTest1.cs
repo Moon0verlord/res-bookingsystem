@@ -17,6 +17,7 @@ public class EmailTest
         {
             EmailLogic.SendEmail("j@j.com",new DateTime(2003,12,3),"RE1",new TimeSpan(10,2,3),
                 new TimeSpan(12,0,0));
+            Assert.IsTrue(EmailLogic.mailSent);
         }
         // private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         // {
