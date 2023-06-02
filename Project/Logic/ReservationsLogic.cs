@@ -176,7 +176,7 @@ public class ReservationsLogic
     }
 
 
-    public void CreateReservation(string email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id, int course)
+    public void CreateReservation(string? email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id, int course)
     {
         AccountModel User = AccountsAccess.LoadAll().Find(account => email == account.EmailAddress)!;
         if(User!=null)

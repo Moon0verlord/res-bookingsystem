@@ -7,7 +7,7 @@ public class AccountModel:IComparable<AccountModel>
     public int Id { get; set; }
 
     [JsonPropertyName("emailAddress")]
-    public string EmailAddress { get; set; }
+    public string? EmailAddress { get; set; }
 
     [JsonPropertyName("password")]
     public string Password { get; set; }
@@ -23,7 +23,7 @@ public class AccountModel:IComparable<AccountModel>
     
     [JsonIgnore]
     public bool LoggedIn { get; set; }
-    public AccountModel(int id, string emailAddress, string password, string fullName,bool isemployee,bool ismanager)
+    public AccountModel(int id, string? emailAddress, string password, string fullName,bool isemployee,bool ismanager)
     {
         Id = id;
         EmailAddress = emailAddress;

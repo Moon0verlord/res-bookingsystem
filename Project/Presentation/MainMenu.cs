@@ -5,7 +5,7 @@ using Project.Presentation;
 class MainMenu : IMenuLogic
 {
     private static MenuLogic _myMenu = new MenuLogic();
-    public static AccountModel Account { get; set; }
+    public static AccountModel? Account { get; set; }
 
     private static string _ascii = @"  
 ██╗  ██╗ ██████╗  ██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗

@@ -30,7 +30,7 @@ public static class UserLogin
 
     public static void StartLogin()
     {
-        string userEmail = null!;
+        string? userEmail = null!;
         string userPassword = null!;
         while (true)
         {
@@ -102,7 +102,7 @@ public static class UserLogin
 
     public static void StartAccCreation()
     {
-        string userEmail = null!;
+        string? userEmail = null!;
         string userPassword = null!;
         string fullName = null!;
         while (true)
@@ -223,7 +223,7 @@ public static class UserLogin
 
     public static void PasswordReset()
     {
-        string userEmail = null!;
+        string? userEmail = null!;
         while (true)
         {
             string[] options = { $"Vul hier uw e-mail in" + (userEmail == null ? "\n" : $": {userEmail}\n"), "Reset wachtwoord voor ingevulde email", "Ga terug" };
@@ -260,7 +260,7 @@ public static class UserLogin
             }
         }
     }
-    private static AccountModel CreateAccount(string email, string password, string name,bool isEmployee,bool isManager)
+    private static AccountModel CreateAccount(string? email, string password, string name,bool isEmployee,bool isManager)
     {
         var newAccount = AccountsAccess.AddAccount(email, password, name,isEmployee,isManager);
         return newAccount;

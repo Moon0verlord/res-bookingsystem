@@ -5,7 +5,7 @@ public class EmployeeManagerLogic : IMenuLogic
     private static MenuLogic _myMenu = new();
     private static AccountsLogic _logicMenu = new();
     static private MenuLogic myMenu = new();
-    private static string employeeEmail;
+    private static string? employeeEmail;
     private static string employeePassword;
     //Employee and manager method
     public static void CheckReservations()
@@ -364,7 +364,7 @@ public class EmployeeManagerLogic : IMenuLogic
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe email in");
-                    string email = Console.ReadLine()!;
+                    string? email = Console.ReadLine()!;
                     if (EmailLogic.IsValidEmail(email))
                     {
                         reservation.EmailAddress = email;

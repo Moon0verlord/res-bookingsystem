@@ -8,7 +8,7 @@ public class EmailLogic
 {
     public static bool mailSent = false;
     // check if the domain of the email is valid
-    private static bool CheckDomain(string email)
+    private static bool CheckDomain(string? email)
     {
         email = email.ToLower();
         string page = "https://data.iana.org/TLD/tlds-alpha-by-domain.txt";
@@ -36,7 +36,7 @@ public class EmailLogic
     }
 
     // check if the email is valid
-    public static bool IsValidEmail( string email)
+    public static bool IsValidEmail( string? email)
     {
         try
         {
@@ -54,7 +54,7 @@ public class EmailLogic
     }
 
     // Send an email to the user after they have made a reservation
-    public static void SendEmail(string email, DateTime Date, string code, TimeSpan StartTime, TimeSpan LeaveTime)
+    public static void SendEmail(string? email, DateTime Date, string code, TimeSpan StartTime, TimeSpan LeaveTime)
     {
         try
         {
@@ -111,7 +111,7 @@ public class EmailLogic
     }
 
     // sends a mail to the user with a verification code if they want to change their password
-    public static void SendVerificationMail(string email, string name, string vrfyCode){
+    public static void SendVerificationMail(string? email, string name, string vrfyCode){
        try
        {
            //Which of the servers hostnames is gonna be used to send emails
@@ -152,7 +152,7 @@ public class EmailLogic
     }
 
     // sends a mail to the user if their reservation couldn't be altered
-    public static void SendCancellationMail(string email, string name){
+    public static void SendCancellationMail(string? email, string name){
        try
        {
             //Which of the servers hostnames is gonna be used to send emails

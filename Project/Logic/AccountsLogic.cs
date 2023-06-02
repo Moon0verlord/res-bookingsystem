@@ -43,11 +43,11 @@ class AccountsLogic:IMenuLogic
     
 
     // get an account by email
-    public AccountModel GetByEmail(string email)
+    public AccountModel GetByEmail(string? email)
         => _accounts.Find(i => i.EmailAddress == email)!;
     
     // check if a login is valid
-    public AccountModel CheckLogin(string email, string password)
+    public AccountModel CheckLogin(string? email, string password)
     {
         AccountModel? acc = GetByEmail(email);
         if (acc != null!)
@@ -62,7 +62,7 @@ class AccountsLogic:IMenuLogic
     }
 
     // method used if you forgot your password
-    public void ForgotPassword(string email)
+    public void ForgotPassword(string? email)
     {
         // get the account by email
         AccountModel? acc = GetByEmail(email);

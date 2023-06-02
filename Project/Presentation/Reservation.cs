@@ -6,25 +6,24 @@ using Newtonsoft.Json.Linq;
 
 static class Reservation
 {
-    private static AccountModel _acc = null;
-    private static MenuLogic _my1DMenu = new MenuLogic();
-    private static _2DMenuLogic _my2DMenu = new _2DMenuLogic();
-    private static readonly ReservationsLogic Reservations = new ReservationsLogic();
-    private static AnswerLogic _answerLogic = new AnswerLogic();
-    private static ReservationTableLogic _tableLogic = new ReservationTableLogic();
-    private static string _userEmail;
-    private static string _userName;
+    private static AccountModel? _acc;
+    private static MenuLogic _my1DMenu = new();
+    private static _2DMenuLogic _my2DMenu = new();
+    private static readonly ReservationsLogic Reservations = new();
+    private static ReservationTableLogic _tableLogic = new();
+    private static string? _userEmail;
+    private static string? _userName;
     private static int _amountOfPeople;
     private static int _underageMembers;
     private static DateTime _chosenDate;
     private static (TimeSpan, TimeSpan) _chosenTimeslot;
-    private static string _chosenTable;
+    private static string? _chosenTable;
     private static int _chosenCourse;
     private static bool _chosenWine;
     private static int _howManyWine;
     private static int _stepCounter;
 
-    public static void ResStart(AccountModel acc = null)
+    public static void ResStart(AccountModel? acc = null)
     {
         // resetting all static fields for a fresh reservation start
         _acc = acc;
@@ -166,7 +165,7 @@ static class Reservation
         if (_acc == null!)
         {
             string name = null!;
-            string email = null!;
+            string? email = null!;
             bool loop = true;
             while (loop)
             {

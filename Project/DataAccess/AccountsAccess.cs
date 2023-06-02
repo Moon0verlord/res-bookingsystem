@@ -45,7 +45,7 @@ public static class AccountsAccess
     }
 
     // add an account to the json file
-    public static AccountModel AddAccount(string email, string password, string name, bool IsEmployee, bool IsManager)
+    public static AccountModel AddAccount(string? email, string password, string name, bool IsEmployee, bool IsManager)
     {
         var allAccounts = LoadAll();
         AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name, IsEmployee, IsManager);
