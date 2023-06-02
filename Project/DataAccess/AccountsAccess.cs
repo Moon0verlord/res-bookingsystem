@@ -11,37 +11,75 @@ public static class AccountsAccess
     // load all accounts from the json file
     public static List<AccountModel> LoadAll()
     {
-        string json = File.ReadAllText(_accPath);
-        return JsonSerializer.Deserialize<List<AccountModel>>(json)!;
+        try
+        {
+            string json = File.ReadAllText(_accPath);
+            return JsonSerializer.Deserialize<List<AccountModel>>(json)!;
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine($"Missing JSON file. {e.Message}");
+            return null!;
+        }
     }
 
     // load all reservations from the json file
     public static List<ReservationModel> LoadAllReservations()
     {
-        string json = File.ReadAllText(_resPath);
-        return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
+        try
+        {
+            string json = File.ReadAllText(_resPath);
+            return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine($"Missing JSON file. {e.Message}");
+            return null!;
+        }
     }
     
     public static JObject LoadAllMenu()
     {
-        string json = File.ReadAllText(_menuPath);
-        return JObject.Parse(json);
+        try
+        {
+            string json = File.ReadAllText(_menuPath);
+            return JObject.Parse(json);
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine($"Missing JSON file. {e.Message}");
+            return null!;
+        }
     }
 
     // write all accounts to the json file
     public static void WriteAll(List<AccountModel> accounts)
     {
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(accounts, options);
-        File.WriteAllText(_accPath, json);
+        try
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(accounts, options);
+            File.WriteAllText(_accPath, json);
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine($"Missing JSON file. {e.Message}");
+        }
     }
 
     // write all reservations to the json file
     public static void WriteAllReservations(List<ReservationModel> reservations)
     {
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(reservations, options);
-        File.WriteAllText(_resPath, json);
+        try
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(reservations, options);
+            File.WriteAllText(_resPath, json);
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine($"Missing JSON file. {e.Message}");
+        }
     }
 
     // add an account to the json file
