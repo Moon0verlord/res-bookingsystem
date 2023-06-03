@@ -45,7 +45,11 @@ static class Reservation
                     if (ResMenu())
                         _stepCounter++;
                     else
+                    {
                         _stepCounter--;
+                        if (_acc != null)
+                            loop = false;
+                    }
                     break;      
                 case 3:
                     if (HasUnderageMembers())
