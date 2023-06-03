@@ -16,6 +16,7 @@ De openingstijden zijn dan:
 wij hopen u snel te zien in ons restaurant!
 ";
 
+    // Displays the opening hours of the restaurant
     public static void Start()
     {
         Console.Clear();

@@ -1,5 +1,6 @@
 ﻿static class HTMLInfo
 {
+    // This is the HTML cod for the email that is sent to the user when they make a reservation.
     public static string GetHTML(string date, string code, string timeslot)
     {
         string htmlBody = $@"

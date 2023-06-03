@@ -28,6 +28,7 @@ public static class UserLogin
         }
     }
 
+    // starts the login process
     public static void StartLogin()
     {
         string? userEmail = null!;
@@ -100,6 +101,7 @@ public static class UserLogin
     }
     
 
+    // starts the account creation process
     public static void StartAccCreation()
     {
         string? userEmail = null!;
@@ -221,6 +223,8 @@ public static class UserLogin
         }
     }
 
+    
+    // Gives the user the option to reset their password
     public static void PasswordReset()
     {
         string? userEmail = null!;
@@ -253,6 +257,7 @@ public static class UserLogin
                         DiscardKeys();
                         Console.ResetColor();
                     }
+                    
                     break;
                 case 2:
                     Start();
@@ -266,6 +271,7 @@ public static class UserLogin
         return newAccount;
     }
 
+    // hides the password with stars
     public static string HidePass(string pass)
     {
         string hiddenPass = "";
@@ -277,6 +283,7 @@ public static class UserLogin
         return hiddenPass;
     }
 
+    // hides the password with stars when writing
     public static string WritePassword()
     {
         string currentMode = "stars";
@@ -321,6 +328,7 @@ public static class UserLogin
         return password;
     }
 
+    // checks if the password meets the requirements
     public static bool PasswordCheck(string password)
     {
         if (password.Length < 8 || password.Length > 15) return false;
@@ -329,6 +337,7 @@ public static class UserLogin
         return true;
     }
     
+    // Discard keys in stream to prevent spamming
     public static void DiscardKeys()
     {
         while (Console.KeyAvailable)

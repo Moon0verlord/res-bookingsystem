@@ -540,7 +540,7 @@ public static class Dishes
         }
         Console.CursorVisible = true;
         // takes dish name from user and writes this to the json
-        Console.WriteLine("Wat is de naam van het gerecht?");
+        Console.WriteLine("Wat is de naam van het gerecht?:");
         name = Console.ReadLine();
 
         if (!IsValidDishName(name) || name == "")

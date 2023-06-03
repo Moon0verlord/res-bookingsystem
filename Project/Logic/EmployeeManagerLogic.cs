@@ -154,7 +154,7 @@ public class EmployeeManagerLogic : IMenuLogic
     public static void RemoveEmployee(){
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Active Employee accounts:");
+        Console.WriteLine("Accounts van actieve medewerks:");
         Console.ResetColor();
         // Show all employees
         foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))

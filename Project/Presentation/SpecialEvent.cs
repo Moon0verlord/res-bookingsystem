@@ -166,7 +166,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         return false;
     }
 
-    // start function for the events
+    // display the events
     public static void ViewEvents()
     {
         JArray eventMenu = AccountsAccess.ReadAllEvents();
@@ -174,7 +174,9 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
 
         if (CheckIfEvent())
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Komende evenementen:");
+            Console.ResetColor();
             foreach (var eventItem in eventMenu)
             {
                 DateTime eventDate = DateTime.ParseExact(eventItem["eventdate"]!.ToString(), "dd-MM-yyyy", null);

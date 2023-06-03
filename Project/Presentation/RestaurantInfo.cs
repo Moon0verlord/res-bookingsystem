@@ -31,6 +31,7 @@ Er zijn op dit moment nog geen evenementen.
 Kom terug op een later moment om te zien of er al evenementen zijn.
 ";
 
+    // Displays information about the restaurant
     public static void Start()
     {
         Console.Clear();
