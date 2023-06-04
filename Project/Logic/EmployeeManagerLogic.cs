@@ -2,9 +2,8 @@ using Microsoft.VisualBasic.CompilerServices;
 
 public class EmployeeManagerLogic : IMenuLogic
 {
-    private static MenuLogic _myMenu = new();
     private static AccountsLogic _logicMenu = new();
-    static private MenuLogic myMenu = new();
+    private static MenuLogic myMenu = new();
     private static string? employeeEmail;
     private static string employeePassword;
     //Employee and manager method

@@ -195,13 +195,16 @@ public static class UserLogin
                             Thread.Sleep(2000);
                             DiscardKeys();
                             Console.ResetColor();
+                            continue;
                         }
+                       
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(
-                            $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: " +
-                            $"{HidePass(userPassword)}\nWeet u zeker dat u een account wil aanmaken met deze gegevens? (j/n)");
+                                    $"\nVolledige naam: {fullName}\nE-mail: {userEmail}\nWachtwoord: " +
+                                    $"{HidePass(userPassword)}\nWeet u zeker dat u een account wil aanmaken met deze gegevens? (j/n)");
                         Console.ResetColor();
+                        
                         var answer = Console.ReadLine()!;
                         if (AnswerLogic.CheckInput(answer)==1)
                         {

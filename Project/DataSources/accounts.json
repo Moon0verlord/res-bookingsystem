@@ -94,5 +94,21 @@
     "fullName": "Persoon",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 24,
+    "emailAddress": "manager@res.nl",
+    "password": "$2a$12$.auVL3JjqoJ4dH4BSWuIYexdJ9UCWGN9l1r3aTG1/13OEGMZroSv6",
+    "fullName": "Nep Manager",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 25,
+    "emailAddress": "account@res.nl",
+    "password": "$2a$12$F07ZfNfxrKMe4wrPHsxdpeMhNQq8Un0n1wmrAzsDtWAeRekXJNAta",
+    "fullName": "n w",
+    "Employee": false,
+    "Manager": false
   }
 ]
