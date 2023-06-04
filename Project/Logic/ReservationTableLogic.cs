@@ -59,7 +59,7 @@
                     if (table.Id == id)
                     {
                         bool groupcheck = (_groupSize - table.TableSize == 0 || _groupSize - table.TableSize == -1);
-                        if (table.isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                        if (table.IsReserved) Console.ForegroundColor = ConsoleColor.Red;
                         else if (!groupcheck) Console.ForegroundColor = ConsoleColor.DarkGray;
                         else Console.ForegroundColor = ConsoleColor.Green;
                     }

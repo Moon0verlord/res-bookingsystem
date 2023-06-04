@@ -23,7 +23,7 @@ public class EmployeeManagerLogic : IMenuLogic
                 string id = Convert.ToString(item.Id);
                 string time = $"{item.StartTime:hh}:{item.StartTime:mm} - {item.LeaveTime:hh}:{item.LeaveTime:mm}";
                 Console.WriteLine(String.Format("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-13} | {5,-13} | {6,-10}", 
-                    id, item.Res_ID, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString()));
+                    id, item.ResId, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString()));
 
             }
         }
@@ -151,26 +151,28 @@ public class EmployeeManagerLogic : IMenuLogic
     }
 
     // Remove an employee
-    public static void RemoveEmployee(){
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Accounts van actieve medewerks:");
-        Console.ResetColor();
-        // Show all employees
-        foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
-        {
-            Console.WriteLine(item.EmailAddress);
-        }
-        Console.WriteLine("Vul hier de email in van de medewerker die je wilt verwijderen (druk op enter om terug te gaan)");
+    public static void RemoveEmployee()
+    {
+       
         while (true)
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Accounts van actieve medewerks:");
+            Console.ResetColor();
+            // Show all employees
+            foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
+            {
+                Console.WriteLine(item.EmailAddress);
+            }
+            Console.WriteLine("Vul hier de email in van de medewerker die je wilt verwijderen (druk op q om terug te gaan)");
             string email = Console.ReadLine()!;
-            if (email == "")
+            if (email == "q")
             {
                 MainMenu.Start();
                 break;
-            }
-            else if (email!=null!&&AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
+            } 
+            if (email!=null!&&AccountsAccess.LoadAll().Any(d => d.EmailAddress == email))
             {
                 Console.WriteLine("Weet je zeker dat je deze medewerker wilt verwijderen? (j/n)");
                 string answer = Console.ReadLine()!.ToLower();
@@ -183,6 +185,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         Thread.Sleep(2000);
                         Console.ResetColor();
                         UserLogin.DiscardKeys();
+                        MainMenu.Start();
                         break;
                     case 0:
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -200,8 +203,7 @@ public class EmployeeManagerLogic : IMenuLogic
                 Console.WriteLine("Deze medewerker bestaat niet");
                 Thread.Sleep(2000);
                 UserLogin.DiscardKeys();
-                MainMenu.Start();
-                break;
+              
             }
         }
     }
@@ -220,11 +222,11 @@ public class EmployeeManagerLogic : IMenuLogic
             {
                 var date = item.Date.ToString("dd-MM-yy");
                 string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
-                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.Res_ID, date, time, item.EmailAddress));
+                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.ResId, date, time, item.EmailAddress));
             }
             Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen (druk op enter om terug te gaan)");
             id = Console.ReadLine()!.ToUpper();
-            string[] resIds = (from res in AccountsAccess.LoadAllReservations() select res.Res_ID).ToArray();
+            string[] resIds = (from res in AccountsAccess.LoadAllReservations() select res.ResId).ToArray();
             if (id == "")
             {
                 MainMenu.Start();
@@ -365,17 +367,18 @@ public class EmployeeManagerLogic : IMenuLogic
                     Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe email in");
                     string? email = Console.ReadLine()!;
-                    if (EmailLogic.IsValidEmail(email))
+                    switch (EmailLogic.IsValidEmail(email))
                     {
-                        reservation.EmailAddress = email;
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Dit is geen geldig email adres");
-                        Thread.Sleep(2000);
-                        Console.ResetColor();
-                        UserLogin.DiscardKeys();
+                        case true:
+                            reservation.EmailAddress = email;
+                            break;
+                        case false:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Dit is geen geldig email adres");
+                            Thread.Sleep(2000);
+                            Console.ResetColor();
+                            UserLogin.DiscardKeys();
+                            break;
                     }
                     break;
                 // save changes and send email if possible else send cancellation email
@@ -406,7 +409,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         }
                     }
                     AccountsAccess.ChangeReservationJson(reservation);
-                    EmailLogic.SendEmail(reservation.EmailAddress!, reservation.Date, reservation.Res_ID, reservation.StartTime, reservation.LeaveTime);
+                    EmailLogic.SendEmail(reservation.EmailAddress!, reservation.Date, reservation.ResId, reservation.StartTime, reservation.LeaveTime);
                     Console.WriteLine("Reservering aangepast");
                     Thread.Sleep(2000);
                     MainMenu.Start();

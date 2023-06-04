@@ -54,9 +54,9 @@ class _2DMenuLogic
                 if (Tables[i, j] != null!)
                 {
                     bool groupcheck = (res_GroupSize - Tables[i, j].TableSize == 0 || res_GroupSize - Tables[i, j].TableSize == -1);
-                    string toWrite = $"Tafel {Tables[i, j].Id}: {(Tables[i, j].isReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
+                    string toWrite = $"Tafel {Tables[i, j].Id}: {(Tables[i, j].IsReserved ? "Bezet" : !groupcheck ? "Onbeschikbaar" : "Beschikbaar")}";
                     // assign foreground colors based on availability
-                    if (Tables[i, j].isReserved) Console.ForegroundColor = ConsoleColor.Red;
+                    if (Tables[i, j].IsReserved) Console.ForegroundColor = ConsoleColor.Red;
                     else if (!groupcheck) Console.ForegroundColor = ConsoleColor.DarkGray;
                     else Console.ForegroundColor = ConsoleColor.Green;
                     // assign background colors and prefix based on what's currently chosen
@@ -205,7 +205,7 @@ class _2DMenuLogic
             {
                 if (tables[i, j] != null)
                 {
-                    if (tables[i, j].isReserved)
+                    if (tables[i, j].IsReserved)
                     {
                         forbiddenIndex.Add((i, j));
                     }

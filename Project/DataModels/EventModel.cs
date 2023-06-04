@@ -12,11 +12,11 @@ public class EventModel
     [JsonPropertyName("eventdate")]
     public string EventDate { get; set; }
 
-    public EventModel(string eventname, string eventinfo, string eventdate)
+    public EventModel(string eventName, string eventInfo, string eventDate)
     {
-        EventName = eventname;
-        EventInfo = eventinfo;
-        EventDate = eventdate;
+        EventName = eventName;
+        EventInfo = eventInfo;
+        EventDate = eventDate;
     }
 }
 

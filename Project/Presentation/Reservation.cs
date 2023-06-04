@@ -1,8 +1,6 @@
-using System.ComponentModel.Design;
-using System.ComponentModel.Design.Serialization;
 using System.Globalization;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Newtonsoft.Json.Linq;
+using System.Runtime.InteropServices;
 
 static class Reservation
 {
@@ -146,9 +144,9 @@ static class Reservation
             switch (AnswerLogic.CheckInput(answer))
             {
                 case 1:
-                    string Res_ID = Reservations.CreateID();
-                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable, _amountOfPeople,
-                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, Res_ID, _chosenCourse);
+                    string resId = Reservations.CreateID();
+                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
+                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
                     Console.Clear();
                     Console.WriteLine("\nReservatie is gemaakt.");
                     Thread.Sleep(1500);
@@ -208,7 +206,7 @@ static class Reservation
                         name = Console.ReadLine()!;
                         if (!name.Contains(" "))
                         {
-                            name = null;
+                            name = null!;
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(
@@ -225,13 +223,11 @@ static class Reservation
                             _userName = name;
                             return true;
                         }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write("\nVul eerst al uw gegevens in.");
-                            Thread.Sleep(1800);
-                            Console.ResetColor();
-                        }
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\nVul eerst al uw gegevens in.");
+                        Thread.Sleep(1800);
+                        Console.ResetColor();
+                        
                         break;
                     case 3:
                         return false;
@@ -246,18 +242,17 @@ static class Reservation
     // asks user to enter group size and course.
     public static bool ResMenu()
     {
-        int gr_size = 0;
+        int grSize = 0;
         int course = 0;
-        bool loop = true;
         Console.Clear();
-        while (loop)
+        while (true)
         {
             Console.Clear();
             Console.ResetColor();
             string prompt = $"\n\n\nVul hier een paar gegevens in die nodig zijn voor uw reservering";
             string[] options =
             {
-                $"Vul hier groepsgrootte in" + (gr_size == 0 ? "" : $": {gr_size}"),
+                $"Vul hier groepsgrootte in" + (grSize == 0 ? "" : $": {grSize}"),
                 "Kies hier uw gewenste gang" + (course == 0 ? "\n" : $": {course} gangen\n"),
                 "Doorgaan", "Ga terug"
             };
@@ -265,13 +260,13 @@ static class Reservation
             switch (selectedIndex)
             {
                 case 0:
-                    gr_size = ChooseGroupSize();
+                    grSize = ChooseGroupSize();
                     break;
                 case 1:
                     course = ChooseCourse();
                     break;
                 case 2:
-                    if (gr_size == 0 || course == 0)
+                    if (grSize == 0 || course == 0)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -283,7 +278,7 @@ static class Reservation
                     }
                     else
                     {
-                        _amountOfPeople = gr_size;
+                        _amountOfPeople = grSize;
                         _chosenCourse = course;
                         return true;
                     }
@@ -339,7 +334,7 @@ static class Reservation
     // calculates group size - amount of minors in the group, so you can't order 6 wine arrangements when you have 3 kids with you.
     public static bool ChooseWineAmount()
     {
-        int wineamount = 0;
+        int wineAmount = 0;
         int num;
         while (true)
         {
@@ -347,7 +342,7 @@ static class Reservation
             string prompt = "\n\n\nU heeft aangegeven dat u een wijnarrangement wilt.\n" +
                             "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
                             "Let op: per persoon kost een wijnarrangement €10.";
-            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineamount == 0 ? "\n" : $": {wineamount}\n"), 
+            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineAmount == 0 ? "\n" : $": {wineAmount}\n"), 
                 "Doorgaan", "Ga terug"};
             int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
@@ -395,11 +390,11 @@ static class Reservation
                             Console.ReadKey(true);
                         }
                         else
-                            wineamount = num;
+                            wineAmount = num;
                     }
                     break;
                 case 1:
-                    if (wineamount == 0)
+                    if (wineAmount == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"\nVul eerst in hoeveel mensen een wijnarrangement willen.");
@@ -408,7 +403,7 @@ static class Reservation
                     }
                     else
                     {
-                        _howManyWine = wineamount;
+                        _howManyWine = wineAmount;
                         return true;
                     }
                     break;
@@ -422,8 +417,7 @@ static class Reservation
     public static bool HasUnderageMembers()
     {
         int num;
-        bool loop = true;
-        while (loop)
+        while (true)
         {
             string prompt = "\n\n\nHeeft u minderjarige personen in uw groep?\n" +
                             "Als dit zo is, kies dan 'Ja', en vul in hoeveel personen minderjarig zijn\n" +
@@ -566,8 +560,8 @@ static class Reservation
     {
         bool todayeventcheck = false;
         JArray allEvents = AccountsAccess.ReadAllEvents();
-        TimeSpan ts1 = default;
-        TimeSpan ts2 = default;
+        TimeSpan ts1;
+        TimeSpan ts2;
         foreach (var eventItem in allEvents)
         {
             string date = Convert.ToString(eventItem["eventdate"])!;
@@ -579,7 +573,7 @@ static class Reservation
 
         if (todayeventcheck)
         {
-            string[] optionsEvent = new[] { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
+            string[] optionsEvent =  { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
             int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "\n\n\nVandaag is er een event kies uw tijdslot:");
             switch (selectedIndexEvent)
             {
@@ -647,19 +641,15 @@ static class Reservation
     }
 
     // let user choose the table they want
-    public static bool ChooseTable(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
+    public static bool ChooseTable(DateTime resDate, (TimeSpan, TimeSpan) chosenTime)
     {
-        var tablesOnly = Reservations.PopulateTables2D(res_Date, chosenTime);
+        var tablesOnly = Reservations.PopulateTables2D(resDate, chosenTime);
         // another setwindowsize here to make sure the user didn't make the window too small when choosing other options
         // Picking a setwindowsize under 171 will make the console crash with a bounding error.
-        try
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            Console.SetWindowSize(180, 35);
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
-        catch
-        {
-        }
-
         _tableLogic.TableStart(tablesOnly, _amountOfPeople, _stepCounter);
         ReservationModel selectedTable = _my2DMenu.RunTableMenu(tablesOnly,
             "  Kies uw tafel (of druk op 'q' om terug te gaan):", _amountOfPeople);
@@ -683,7 +673,7 @@ static class Reservation
         string? resid = Console.ReadLine();
         foreach (ReservationModel res in allRes)
         {
-            if (email == res.EmailAddress && res.Res_ID == resid && res.Date >= DateTime.Now.Date)
+            if (email == res.EmailAddress && res.ResId == resid && res.Date >= DateTime.Now.Date)
             {
                 reservationsPerson.Add(
                     $"U heeft een reservering onder de Email: {res.EmailAddress}. Voor tafel {res.Id} en De datum van de resevering is: {res.Date.ToString("dd-MM-yyyy")}. Tijdslot: {res.StartTime} - {res.LeaveTime}");
@@ -715,7 +705,7 @@ static class Reservation
                         Console.ResetColor();
                         Console.CursorVisible = true;
                         var choice = Console.ReadLine();
-                        switch (AnswerLogic.CheckInput(choice))
+                        switch (AnswerLogic.CheckInput(choice!))
                         {
                             case 1:
                                 Console.WriteLine("De reservatie is verwijderd");
@@ -761,25 +751,25 @@ static class Reservation
                     inMenu = false;
                     break;
                 default:
-                    ViewRes2(allRes[chosenOption].Res_ID);
+                    ViewRes2(allRes[chosenOption].ResId);
                     break;
             }   
         }
     }
 
     // todo : name is this for now to not be an overload for martijn's viewres. will change.
-    public static void ViewRes2(string resid = null)
+    public static void ViewRes2(string resId = null!)
     {
         Console.Clear();
         List<ReservationModel> allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).ToList();
         Console.CursorVisible = true;
-        if (resid == null)
+        if (resId == null!)
         {
             Console.Write("Voer uw reservatie ID in: ");
-            resid = Console.ReadLine()!.ToUpper();
-            resid = resid!.Contains("RES-") ? resid : "RES-" + resid;   
+            resId = Console.ReadLine()!.ToUpper();
+            resId = resId.Contains("RES-") ? resId : "RES-" + resId;   
         }
-        ReservationModel? chosenRes = allRes.Find(x => x.Res_ID == resid);
+        ReservationModel? chosenRes = allRes.Find(x => x.ResId == resId);
         if (chosenRes == default)
         {
             Console.WriteLine($"Geen reservatie gevonden met het gegeven reservatie ID.");
@@ -792,7 +782,7 @@ static class Reservation
             while (inMenu)
             {
                 string resInfo =
-                    $"Reservatie {resid}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
+                    $"Reservatie {resId}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
                     $"Tijd: {chosenRes.StartTime:hh}:{chosenRes.StartTime:mm} - {chosenRes.LeaveTime:hh}:{chosenRes.LeaveTime:mm}" +
                     $"\nTafel: {chosenRes.Id}\nGroepsgrootte: {chosenRes.GroupSize}\nGekozen gang: {chosenRes.Course}\n";
                 int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservatie annuleren", "Ga terug" }, resInfo);

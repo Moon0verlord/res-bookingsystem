@@ -8,7 +8,7 @@ public class ReservationModel
     
     [JsonPropertyName("res_id")]
     
-    public string Res_ID { get; set; }
+    public string ResId { get; set; }
 
     [JsonPropertyName("emailAddress")]
     public string? EmailAddress { get; set; }
@@ -29,7 +29,7 @@ public class ReservationModel
     public int Course { get; set; }
     
     [JsonIgnore]
-    public bool isReserved { get; set; }
+    public bool IsReserved { get; set; }
     
     [JsonIgnore]
     public int TableSize { get; set; }
@@ -43,8 +43,8 @@ public class ReservationModel
         GroupSize = groupsize;
         StartTime = starttime;
         LeaveTime = leavetime;
-        Res_ID = res_id;
+        ResId = res_id;
         Course = course;
-        isReserved = false;
+        IsReserved = false;
     }
 }

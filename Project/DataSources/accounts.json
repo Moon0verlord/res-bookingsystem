@@ -8,14 +8,6 @@
     "Manager": true
   },
   {
-    "id": 12,
-    "emailAddress": "employee@res.nl",
-    "password": "$2a$12$9HayKpa5fnQimbkc3uDvbOoziijgAJKQzRtwRyLGlgHi/iz0404ni",
-    "fullName": "employee",
-    "Employee": true,
-    "Manager": false
-  },
-  {
     "id": 13,
     "emailAddress": "j@j.com",
     "password": "$2a$12$WgDbA83wVuZpohnDgQqoxeGsw93StR6v.4DliUrxBNB5VIdcHpyRq",
@@ -85,6 +77,22 @@
     "password": "$2a$12$h1IwI1QjYELEaJOciXW7fehQ41i73ctZsPK6TrQHnp/z7yoIIZn6y",
     "fullName": "Nee",
     "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 22,
+    "emailAddress": "Medewerker@res.nl",
+    "password": "$2a$12$1MJ1vdKC91au/3s4z0YHFuIsSAvEg.2A7htjTm9ZNhey.jRIFkd5a",
+    "fullName": "Mede Werker",
+    "Employee": true,
+    "Manager": false
+  },
+  {
+    "id": 23,
+    "emailAddress": "Persoon@res.nl",
+    "password": "$2a$12$ArlpX5V5.iZP7s7jWGdWbOuVq95hAFhyFxAFM6wuOV9r33U.9/nSe",
+    "fullName": "Persoon",
+    "Employee": false,
     "Manager": false
   }
 ]

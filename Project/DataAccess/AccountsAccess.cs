@@ -3,17 +3,17 @@ using Newtonsoft.Json.Linq;
 
 public static class AccountsAccess
 {
-    static string _accPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
-    static string _resPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
-    static string _menuPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
-    private static AccountsLogic _accountsLogic = new AccountsLogic();
+    private static readonly string AccPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
+    private static readonly string  ResPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/reservations.json"));
+    private static readonly string MenuPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
+    private static readonly AccountsLogic AccountsLogic = new ();
 
     // load all accounts from the json file
     public static List<AccountModel> LoadAll()
     {
         try
         {
-            string json = File.ReadAllText(_accPath);
+            string json = File.ReadAllText(AccPath);
             return JsonSerializer.Deserialize<List<AccountModel>>(json)!;
         }
         catch (FileNotFoundException e)
@@ -28,7 +28,7 @@ public static class AccountsAccess
     {
         try
         {
-            string json = File.ReadAllText(_resPath);
+            string json = File.ReadAllText(ResPath);
             return JsonSerializer.Deserialize<List<ReservationModel>>(json)!;
         }
         catch (FileNotFoundException e)
@@ -42,7 +42,7 @@ public static class AccountsAccess
     {
         try
         {
-            string json = File.ReadAllText(_menuPath);
+            string json = File.ReadAllText(MenuPath);
             return JObject.Parse(json);
         }
         catch (FileNotFoundException e)
@@ -59,7 +59,7 @@ public static class AccountsAccess
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize(accounts, options);
-            File.WriteAllText(_accPath, json);
+            File.WriteAllText(AccPath, json);
         }
         catch (FileNotFoundException e)
         {
@@ -74,7 +74,7 @@ public static class AccountsAccess
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize(reservations, options);
-            File.WriteAllText(_resPath, json);
+            File.WriteAllText(ResPath, json);
         }
         catch (FileNotFoundException e)
         {
@@ -89,7 +89,7 @@ public static class AccountsAccess
         AccountModel newAccount = new AccountModel(allAccounts[^1].Id + 1, email, BCrypt.Net.BCrypt.HashPassword(password, 12), name, IsEmployee, IsManager);
         allAccounts.Add(newAccount);
         WriteAll(allAccounts);
-        _accountsLogic.UpdateList(allAccounts[^1]);
+        AccountsLogic.UpdateList(allAccounts[^1]);
         return allAccounts[^1];
     }
 
@@ -114,7 +114,7 @@ public static class AccountsAccess
     // add a reservation to the json file
     public static void AddReservation(ReservationModel resm)
     {
-        resm.isReserved = true;
+        resm.IsReserved = true;
         var allReservations = LoadAllReservations();
         allReservations.Add(resm);
         WriteAllReservations(allReservations);

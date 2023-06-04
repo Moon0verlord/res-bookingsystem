@@ -11,6 +11,7 @@ public class AnswerLogic
         string pattern = @"^j[a]+$";
         string pattern2 = @"^n[e]+$";
        
+        
             if (Regex.IsMatch(answer.ToLower(),pattern)||answer =="j")
             {
                 return 1;

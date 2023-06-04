@@ -115,7 +115,7 @@ public static class UserLogin
                 "Vul hier uw wachtwoord in" + $"{(userPassword == null ? "" : $": {HidePass(userPassword)}")}",
                 "Vul hier uw volledige naam in" + (fullName == null ? "\n" : $": {fullName}\n"), "Account aanmaken met ingevulde gegevens", "Ga terug" 
             };
-             int chosenOption = _myMenu.RunMenu(options, "");
+            var chosenOption = _myMenu.RunMenu(options, "");
             switch (chosenOption)
             {
                 case 0:
@@ -272,10 +272,10 @@ public static class UserLogin
     }
 
     // hides the password with stars
-    public static string HidePass(string pass)
+    private static string HidePass(string pass)
     {
-        string hiddenPass = "";
-        for (int i = 0; i < pass.Length; i++)
+        var hiddenPass = "";
+        for (var i = 0; i < pass.Length; i++)
         {
             hiddenPass += "*";
         }
@@ -345,5 +345,4 @@ public static class UserLogin
             Console.ReadKey(true);
         }
     }
-    
 }

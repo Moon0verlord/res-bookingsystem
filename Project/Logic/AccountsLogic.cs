@@ -20,27 +20,20 @@ class AccountsLogic:IMenuLogic
     {
         //Find if there is already an model with the same id
         int index = _accounts.FindIndex(s => s.Id == acc.Id);
-
-        if (index != -1)
+        switch (index)
         {
-            //update existing model
-            _accounts[index] = acc;
-        }
-        else
-        {
-            //add new model
-            _accounts.Add(acc);
+            case -1:
+                _accounts.Add(acc);
+                break;
+            default:
+                _accounts[index] = acc;
+                break;
         }
         AccountsAccess.WriteAll(_accounts);
-
     }
     
     public void RefreshList()
     => _accounts = AccountsAccess.LoadAll();
-
-    // get an account by id
-    public AccountModel GetById(int id) => _accounts.Find(i => i.Id == id)!;
-    
 
     // get an account by email
     public AccountModel GetByEmail(string? email)
@@ -100,8 +93,7 @@ class AccountsLogic:IMenuLogic
                 {
                     Console.WriteLine("Wachtwoord moet minimaal 8 karakters bevatten, een hoofdletter, een kleine letter, een cijfer en een speciaal teken");
                 }
-            }
-            while (UserLogin.PasswordCheck(password) == false);
+            } while (UserLogin.PasswordCheck(password) == false);
 
             if (password == confirmPassword)
             {
@@ -134,18 +126,17 @@ class AccountsLogic:IMenuLogic
         {
             //1 after a true output
             case 1:
-            MainMenu.Account = null!;
-            MainMenu.Start();
-            break;
+                MainMenu.Account = null!;
+                MainMenu.Start();
+                break;
             //0 after a false output
             case 0:
                 break;
+            //-1 after a incorrect input
             case -1: 
-                //-1 after a incorrect input 
                 LogOut();
                 break;
         }
-        
     }
 }
 

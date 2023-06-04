@@ -7,7 +7,7 @@ public static class Dishes
 {
     private static int _currentIndex;
 
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _myMenu = new();
     
     // Takes user selection and opens the menu
     public static void UserSelection()
@@ -196,10 +196,10 @@ public static class Dishes
         // grabs menu from json
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
-        JObject MenuOBJ = JObject.Parse(menu);
-        int dishtochange = 0;
+        JObject menuObj = JObject.Parse(menu);
+        int dishChange = 0;
         // Retrieve dish to change
-        JArray menuCourse = (JArray)MenuOBJ[type]![category]!;
+        JArray menuCourse = (JArray)menuObj[type]![category]!;
 
         string[] options3 = menuCourse.Select((dish, index) => $"{dish} ({index + 1})").ToArray();
         options3 = options3.Append("Terug naar hoofdmenu").ToArray();
@@ -208,7 +208,7 @@ public static class Dishes
         _currentIndex = 0;
         if (input3 >= 1 && input3 <= menuCourse.Count)
         {
-            dishtochange = input3 - 1;
+            dishChange = input3 - 1;
         }
         else if (input3 == menuCourse.Count + 1)
         {
@@ -220,14 +220,14 @@ public static class Dishes
         }
         
         // displays available dishes to change to
-        JObject dishtoadd = DisplayDishes(type, category);
+        JObject dishToad = DisplayDishes(type, category);
 
 
         // checks if dish is the same as the one that is already on the menu 
         // if it is not the same it will update the dish
-        JArray SelectionArray = (JArray)MenuOBJ[type]![category]!;
-        string updatedValue = dishtoadd[category]?.ToString()!;
-        if (dishtoadd.GetValue(category)!.ToString() ==  SelectionArray[dishtochange].ToString())
+        JArray selectionArray = (JArray)menuObj[type]![category]!;
+        string updatedValue = dishToad[category]?.ToString()!;
+        if (dishToad.GetValue(category)!.ToString() ==  selectionArray[dishChange].ToString())
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -237,10 +237,10 @@ public static class Dishes
             UserLogin.DiscardKeys();
             ManageMenu();
         }
-        SelectionArray[dishtochange] = updatedValue;
+        selectionArray[dishChange] = updatedValue;
 
         // writes the updated menu to the json file
-        File.WriteAllText(path2, MenuOBJ.ToString());
+        File.WriteAllText(path2, menuObj.ToString());
 
         // Displays the added dish to the user
         Console.ForegroundColor = ConsoleColor.Green;
@@ -248,16 +248,16 @@ public static class Dishes
         switch (category)
         {
             case "Voorgerecht":
-                Console.WriteLine($"Voorgerecht: {dishtoadd["Voorgerecht"]}");
+                Console.WriteLine($"Voorgerecht: {dishToad["Voorgerecht"]}");
                 break;
             case "Soep":
-                Console.WriteLine($"Soep: {dishtoadd["Soep"]}");
+                Console.WriteLine($"Soep: {dishToad["Soep"]}");
                 break;
             case "Maaltijd":
-                Console.WriteLine($"Maaltijd: {dishtoadd["Maaltijd"]}");
+                Console.WriteLine($"Maaltijd: {dishToad["Maaltijd"]}");
                 break;
             case "Nagerecht":
-                Console.WriteLine($"Nagerecht: {dishtoadd["Nagerecht"]}");
+                Console.WriteLine($"Nagerecht: {dishToad["Nagerecht"]}");
                 break;
         }
         Console.WriteLine("is toegevoegd aan het menu");
@@ -280,7 +280,7 @@ public static class Dishes
         string[] options = new string[dishArray.Count + 1];
         for (int i = 0; i < dishArray.Count; i++)
         {
-            string dish = (string)dishArray[i];
+            string dish = (string)dishArray[i]!;
             options[i] = dish;
         }
         options[dishArray.Count] = "Terug naar hoofdmenu";
@@ -292,8 +292,8 @@ public static class Dishes
         if (input >= 0 && input < dishArray.Count)
         {
             return new JObject(new JProperty(category, dishArray[input]));
-        }
-        else if (input == dishArray.Count)
+        } 
+        if (input == dishArray.Count)
         {
             MainMenu.Start();
         }
@@ -309,8 +309,8 @@ public static class Dishes
 
 
     // Gives manager option to change price of items on menu
-    public static void PriceManager()
-{
+    public static void PriceManager() 
+    {
     string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
     string json = File.ReadAllText(path);
     JObject menu = JObject.Parse(json);
@@ -319,7 +319,6 @@ public static class Dishes
     string price4 = (string)menu["Prijzen"]!["Prijzen"]![2]!;
     Console.CursorVisible = true;
     Console.OutputEncoding = System.Text.Encoding.Unicode;
-
     string[] options = { $"2 gang:{price2}", $"3 gang:{price3}", $"4 gang:{price4}", "Terug naar hoofdmenu" };
     string prompt = "\nWelke prijs wil je veranderen:";
     int input = _myMenu.RunMenu(options, prompt);
@@ -436,14 +435,14 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/WineMenu.json"));
         string json = File.ReadAllText(path);
-        JObject Wines = JObject.Parse(json);
+        JObject wines = JObject.Parse(json);
         Console.Clear();
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"{choice} Wijn Arrangement:");
         Console.WriteLine("-------");
         Console.ResetColor();
-        var selection = Wines["Winemenu"]![choice]!
+        var selection = wines["Winemenu"]![choice]!
             .Select(item => new
             {
                 name = (string)item["name"]!,
@@ -474,7 +473,7 @@ public static class Dishes
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Dishes.json"));
         string json = File.ReadAllText(path);
-        JObject DishesOBJ = JObject.Parse(json);
+        JObject dishesObj = JObject.Parse(json);
 
         string type = "";
         string category = "";
@@ -541,7 +540,7 @@ public static class Dishes
         Console.CursorVisible = true;
         // takes dish name from user and writes this to the json
         Console.WriteLine("Wat is de naam van het gerecht?:");
-        name = Console.ReadLine();
+        name = Console.ReadLine()!;
 
         if (!IsValidDishName(name) || name == "")
         {
@@ -553,9 +552,9 @@ public static class Dishes
             return;
         }
 
-        JArray SelectionArray = (JArray)DishesOBJ[type]![category]!;
-        SelectionArray.Add(name);
-        string output = Newtonsoft.Json.JsonConvert.SerializeObject(DishesOBJ, Newtonsoft.Json.Formatting.Indented);
+        JArray selectionArray = (JArray)dishesObj[type]![category]!;
+        selectionArray.Add(name);
+        string output = Newtonsoft.Json.JsonConvert.SerializeObject(dishesObj, Newtonsoft.Json.Formatting.Indented);
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"\n{name} is Toegevoegd aan de Dishes\n");
         Console.ResetColor();
@@ -568,7 +567,7 @@ public static class Dishes
     // Use regex to validate the dish name (only letters and spaces allowed)
     private static bool IsValidDishName(string name)
     {
-        string pattern = @"^[a-zA-Z\s]+$";
+        var pattern = @"^[a-zA-Z\s]+$";
         return Regex.IsMatch(name, pattern);
     }
 
@@ -578,7 +577,7 @@ public static class Dishes
     {
         Console.CursorVisible = false;
         string[] options = { "Bekijk het menu", "Wijn Arrangement", "Terug naar hoofdmenu" };
-        string prompt = "\nKies een optie:";
+        var prompt = "\nKies een optie:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
