@@ -35,7 +35,7 @@ public class ReservationModel
     public int TableSize { get; set; }
     
     
-    public ReservationModel(string id, string? emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime, string res_id, int course)
+    public ReservationModel(string id, string? emailAddress, DateTime date, int groupsize, TimeSpan starttime, TimeSpan leavetime, string resid, int course)
     {
         Id = id;
         EmailAddress = emailAddress;
@@ -43,7 +43,7 @@ public class ReservationModel
         GroupSize = groupsize;
         StartTime = starttime;
         LeaveTime = leavetime;
-        ResId = res_id;
+        ResId = resid;
         Course = course;
         IsReserved = false;
     }
