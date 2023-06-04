@@ -7,7 +7,7 @@ using System.ComponentModel;
 public class EmailLogic
 {
     public static bool mailSent = false;
-    // check if the domain of the email is valid
+    // check if the top-level domain of the email is valid
     private static bool CheckDomain(string? email)
     {
         email = email.ToLower();
@@ -15,14 +15,16 @@ public class EmailLogic
         using (HttpClient httpClient = new HttpClient())
         {
             HttpResponseMessage response = httpClient.GetAsync(page).Result;
+            //A connection to the api has been established 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine();
+                //get the part of the email from the '.' until the end
                 int index = email.LastIndexOf(".");
                 string domain = email.Substring(index +1);
                 
                 string responseBody = response.Content.ReadAsStringAsync().Result.ToLower();
-                
+                //domain.length is here due to a bug allowing empty top level domains to pass
+                //Still gotta dive into the api to check 
                 if (domain.Length>0 && responseBody.Contains(domain))
                 {
                     return true;
@@ -192,7 +194,7 @@ public class EmailLogic
             throw new ApplicationException(ex.Message);
        } 
     }
-        //Progress bar
+        //Adjusts mailsent depending on if sending the email was a succes or not
         private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         {
             // Get the unique identifier for this asynchronous operation.
