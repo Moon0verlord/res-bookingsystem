@@ -158,20 +158,25 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
         string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Events.json"));
         string json = File.ReadAllText(path);
         JArray eventMenu = JArray.Parse(json);
-        foreach (var _ in eventMenu)
+        if (eventMenu.Count > 0)
         {
-            if (json != null) return true;
+            return true;
         }
-
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Er zijn nog geen evenementen.");
+        Console.ResetColor();
+        Thread.Sleep(2000);
+        UserLogin.DiscardKeys();
+        MainMenu.Start();
         return false;
     }
 
     // display the events
     public static void ViewEvents()
     {
+        DeleteOldEvents();
         JArray eventMenu = AccountsAccess.ReadAllEvents();
         Console.Clear();
-
         if (CheckIfEvent())
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -188,15 +193,23 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
                     Console.WriteLine($"{eventItem["eventdate"]}");
                 }
             }
-
             Console.WriteLine();
             Console.WriteLine("Druk op een knop om verder te gaan");
             Console.ReadKey();
             MainMenu.Start();
         }
-        else
-        {
-            Console.WriteLine(_events);
-        }
     }
+    
+    // function to delete old events
+    public static void DeleteOldEvents()
+    {
+        List<EventModel> eventMenu = AccountsAccess.ReadAllEvents().ToObject<List<EventModel>>();
+        eventMenu.RemoveAll(eventItem =>
+        {
+            DateTime eventDate = DateTime.ParseExact(eventItem.EventDate, "dd-MM-yyyy", null);
+            return eventDate < DateTime.Now;
+        });
+        AccountsAccess.WriteAllEventsJson(eventMenu);
+    }
+
 }

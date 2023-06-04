@@ -197,7 +197,7 @@ public static class Dishes
         string path2 = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/Menu.json"));
         string menu = File.ReadAllText(path2);
         JObject menuObj = JObject.Parse(menu);
-        int dishChange = 0;
+        int dishIndex = 0;
         // Retrieve dish to change
         JArray menuCourse = (JArray)menuObj[type]![category]!;
 
@@ -206,9 +206,10 @@ public static class Dishes
         string prompt3 = "\nWelke wil je vervangen?:";
         int input3 = _myMenu.RunMenu(options3, prompt3);
         _currentIndex = 0;
+        //  dynamic index for dish to change
         if (input3 >= 1 && input3 <= menuCourse.Count)
         {
-            dishChange = input3 - 1;
+            dishIndex = input3 - 1;
         }
         else if (input3 == menuCourse.Count + 1)
         {
@@ -220,24 +221,27 @@ public static class Dishes
         }
         
         // displays available dishes to change to
-        JObject dishToad = DisplayDishes(type, category);
+        JObject Newdish = DisplayDishes(type, category);
 
 
         // checks if dish is the same as the one that is already on the menu 
         // if it is not the same it will update the dish
         JArray selectionArray = (JArray)menuObj[type]![category]!;
-        string updatedValue = dishToad[category]?.ToString()!;
-        if (dishToad.GetValue(category)!.ToString() ==  selectionArray[dishChange].ToString())
+        string updatedValue = Newdish[category]?.ToString()!;
+        foreach (var dish in selectionArray)
         {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Het gekozen gerecht is hetzelfde als het huidige gerecht");
-            Thread.Sleep(2000);
-            Console.ResetColor();
-            UserLogin.DiscardKeys();
-            ManageMenu();
+            if (Newdish.GetValue(category)!.ToString() ==  dish.ToString() || Newdish.GetValue(category)!.ToString() == dish.ToString())
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Het gekozen gerecht staat al op het menu");
+                Thread.Sleep(2000);
+                Console.ResetColor();
+                UserLogin.DiscardKeys();
+                ManageMenu();
+            }
         }
-        selectionArray[dishChange] = updatedValue;
+        selectionArray[dishIndex] = updatedValue;
 
         // writes the updated menu to the json file
         File.WriteAllText(path2, menuObj.ToString());
@@ -248,16 +252,16 @@ public static class Dishes
         switch (category)
         {
             case "Voorgerecht":
-                Console.WriteLine($"Voorgerecht: {dishToad["Voorgerecht"]}");
+                Console.WriteLine($"Voorgerecht: {Newdish["Voorgerecht"]}");
                 break;
             case "Soep":
-                Console.WriteLine($"Soep: {dishToad["Soep"]}");
+                Console.WriteLine($"Soep: {Newdish["Soep"]}");
                 break;
             case "Maaltijd":
-                Console.WriteLine($"Maaltijd: {dishToad["Maaltijd"]}");
+                Console.WriteLine($"Maaltijd: {Newdish["Maaltijd"]}");
                 break;
             case "Nagerecht":
-                Console.WriteLine($"Nagerecht: {dishToad["Nagerecht"]}");
+                Console.WriteLine($"Nagerecht: {Newdish["Nagerecht"]}");
                 break;
         }
         Console.WriteLine("is toegevoegd aan het menu");
@@ -388,6 +392,7 @@ public static class Dishes
             Console.WriteLine("Keuze ongeldig. Probeer opnieuw.");
             break;
     }
+    
     // write the updated JSON to the file
     string updatedJson = menu.ToString();
     File.WriteAllText(path, updatedJson);
