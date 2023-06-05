@@ -181,12 +181,11 @@ static class InfoBoxes
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
         string information =
             @"
-            Hier in Rotterdam vind u het prachtige restaurant 'De Witte Haven'.
-            Wij serveren uit een keuze van 2, 3 of 4 gangen menu's. 
+            Hier in Rotterdam vindt u het prachtige restaurant 'De Witte Haven'.
+            U kunt bij ons kiezen uit een 2, 3 of 4 gangen menu. 
             Ook is het mogelijk om er een wijnarrangement bij te boeken. 
-            Naast het reserveren van een tafel is er ook nog beschikking tot een bar.
-            Verder wanneer u klaar bent kunt u ook een filmpje pakken bij het dichtbijgelegen bioscoop
-            die zich op hetzelfde adres bevind als ons restaurant.
+            Naast het reserveren van een tafel hebben wij in het restaurant ook nog een bar.
+            Als u uw avond wilt voortzetten, dan kunt u ook nog een filmpje pakken bij de dichtbijgelegen bioscoop.
             ";
         int x = 10;
         int y = 0;
@@ -254,7 +253,7 @@ static class InfoBoxes
                                                                       18:00 tot 20:00
                                                                       20:00 tot 22:00
 
-                                        wanneer er een evenement plaatst vindt in ons restaurant zijn de openingstijden anders.
+                                        wanneer er een evenement plaatsvindt in ons restaurant zijn de openingstijden anders.
                                                                   De openingstijden zijn dan:
                                                                       16:00 tot 19:00
                                                                       19:00 tot 22:00
