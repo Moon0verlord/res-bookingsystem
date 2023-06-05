@@ -88,5 +88,55 @@
     "start_time": "16:00:00",
     "leave_time": "18:00:00",
     "chosen_course": 3
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-230356",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-06-12T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "17:30:00",
+    "leave_time": "19:00:00",
+    "chosen_course": 2
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-709389",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-06-15T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "16:00:00",
+    "leave_time": "17:30:00",
+    "chosen_course": 2
+  },
+  {
+    "table_id": "1M",
+    "res_id": "RES-246038",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-06-20T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "18:00:00",
+    "leave_time": "20:00:00",
+    "chosen_course": 3
+  },
+  {
+    "table_id": "1M",
+    "res_id": "RES-762613",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-06-16T00:00:00+02:00",
+    "group_size": 4,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
+  },
+  {
+    "table_id": "1L",
+    "res_id": "RES-808573",
+    "emailAddress": "martijnwarnas@icloud.com",
+    "res_date": "2023-06-16T00:00:00+02:00",
+    "group_size": 6,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
   }
 ]

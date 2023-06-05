@@ -126,5 +126,13 @@
     "fullName": "mwarnas",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 28,
+    "emailAddress": "martijnwarnas@icloud.com",
+    "password": "$2a$11$Xfw6Y0K2oERLABisOBqO8OoeQzanZnPJDmG7X01ZAERD5fF8YgSvu",
+    "fullName": "mwarnas",
+    "Employee": false,
+    "Manager": false
   }
 ]
