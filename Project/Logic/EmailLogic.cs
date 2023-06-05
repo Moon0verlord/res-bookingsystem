@@ -90,7 +90,7 @@ public class EmailLogic
                 myMail.ReplyToList.Add(replyTo);
 
                 //What is the subject, the encoding, the message in the body and its encoding etc
-                myMail.Subject = "reservering";
+                myMail.Subject = "Reservering";
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
                 myMail.IsBodyHtml = true;
