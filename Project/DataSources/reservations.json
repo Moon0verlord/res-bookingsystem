@@ -28,5 +28,15 @@
     "start_time": "16:00:00",
     "leave_time": "18:00:00",
     "chosen_course": 3
+  },
+  {
+    "table_id": "1S",
+    "res_id": "RES-400391",
+    "emailAddress": "mwarnas@gmail.com",
+    "res_date": "2023-06-21T00:00:00+02:00",
+    "group_size": 2,
+    "start_time": "16:00:00",
+    "leave_time": "18:30:00",
+    "chosen_course": 4
   }
 ]

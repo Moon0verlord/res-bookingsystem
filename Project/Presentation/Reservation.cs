@@ -736,15 +736,17 @@ static class Reservation
         }
     }
 
-    public static void ViewResAccount()
+    public static void ViewResAccount(AccountModel account)
     {
         bool inMenu = true;
         while (inMenu)
         {
-            var allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= DateTime.Now).OrderBy(x => x.Date).ToArray();
+            ReservationModel[] allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= 
+                DateTime.Now&&x.EmailAddress==account.EmailAddress).OrderBy(x => x.Date).ToArray();
             var menuViewable = allRes.Select(x => 
                     x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})").Append("Ga terug").ToArray();
-            int chosenOption = _my1DMenu.RunMenu(menuViewable, "Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n");
+            int chosenOption = _my1DMenu.RunMenu(menuViewable, allRes.Length>0?"Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n":
+                "U heeft momenteel geen reserveringen\n");
             switch (menuViewable[chosenOption])
             {
                 case "Ga terug":

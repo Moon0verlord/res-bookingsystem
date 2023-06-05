@@ -156,7 +156,7 @@ class MainMenu : IMenuLogic
                         Reservation.ResStart(Account);
                         break;
                     case 3:
-                        Reservation.ViewResAccount();
+                        Reservation.ViewResAccount(Account);
                         break;
                     case 4:
                         if (Account.LoggedIn)
