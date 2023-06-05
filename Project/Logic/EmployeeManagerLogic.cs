@@ -10,9 +10,9 @@ public class EmployeeManagerLogic : IMenuLogic
     public static void CheckReservations()
     {
         Console.Clear();
-        Console.WriteLine("Overzicht van alle reservaties\n-------------------------------");
+        Console.WriteLine("Overzicht van alle reserveringen\n-------------------------------");
         Console.WriteLine(String.Format("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-13} | {5,-13} | {6,-10}", 
-            "Tafel ID", "Reservatie ID", "Datum", "Tijd", "Email", "Aantal pers.", "Gekozen gang"));
+            "Tafel ID", "Reserverings ID", "Datum", "Tijd", "Email", "Aantal pers.", "Gekozen gang"));
         Console.ForegroundColor = ConsoleColor.White;
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
@@ -214,7 +214,7 @@ public class EmployeeManagerLogic : IMenuLogic
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Reservatie id |  Datum    | Tijd        | Email");
+            Console.WriteLine("Reserverings id |  Datum    | Tijd        | Email");
 
             // show all reservations
             foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))

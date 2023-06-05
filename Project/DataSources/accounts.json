@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -117,6 +116,14 @@
     "emailAddress": "mwarnas@gmail.com",
     "password": "$2a$12$Cbboq1Pw05cUG3N/hGvniuTqOFhdLlPeqzEEWPVHTKiHp4QPVeM9W",
     "fullName": "Mirjam Warnas",
+    "Employee": false,
+    "Manager": false
+  },
+  {
+    "id": 27,
+    "emailAddress": "m@w.nl",
+    "password": "$2a$12$4A9/98.8wGh5pEIWMrnPZ.04hcP1p4eJwgYQf8b3zA/g3hf4FWCnO",
+    "fullName": "mwarnas",
     "Employee": false,
     "Manager": false
   }

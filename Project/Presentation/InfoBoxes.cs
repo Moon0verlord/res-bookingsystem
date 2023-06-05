@@ -289,7 +289,7 @@ static class InfoBoxes
         // i hate it too
         string information = @"
                                                 Ons restaurant is geopend van 16:00 tot 00:00.
-                                                Onze reservatie tijden hangen af van uw gekozen gang.
+                                                Onze reserveringstijden hangen af van uw gekozen gang.
                                                 Wanneer er een evenement plaatsvindt in ons restaurant zijn de tijden anders.
 
                                                                2 Gangen        3 Gangen       4 Gangen      

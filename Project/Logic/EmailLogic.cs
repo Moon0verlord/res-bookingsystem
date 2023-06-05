@@ -90,7 +90,7 @@ public class EmailLogic
                 myMail.ReplyToList.Add(replyTo);
 
                 //What is the subject, the encoding, the message in the body and its encoding etc
-                myMail.Subject = "Reservatie";
+                myMail.Subject = "reservering";
                 myMail.SubjectEncoding = System.Text.Encoding.UTF8;
                 myMail.BodyEncoding = System.Text.Encoding.UTF8;
                 myMail.IsBodyHtml = true;
@@ -172,7 +172,7 @@ public class EmailLogic
             MailMessage myMail = new MailMessage(from, to);
             MailAddress replyTo = new MailAddress("testrestaurant12356789@gmail.com");
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
-                $"<html><body><div><h1>Hallo {name}!</h1></div><div><p><h3>U heeft aangegeven dat u uw reservatie verkeerd heeft ingevoerd. Helaas is het ons niet gelukt om uw gewenste tijd in te voeren. " +
+                $"<html><body><div><h1>Hallo {name}!</h1></div><div><p><h3>U heeft aangegeven dat u uw reservering verkeerd heeft ingevoerd. Helaas is het ons niet gelukt om uw gewenste tijd in te voeren. " +
                 $"<br>U kunt zelf een nieuwe reservering invullen. Hopelijk zien wij u snel bij de Witte haven!</br></h3></div></body></html>", null, "text/html");
             myMail.AlternateViews.Add(htmlView);
             
@@ -180,7 +180,7 @@ public class EmailLogic
             myMail.ReplyToList.Add(replyTo);
             
             //What is the subject, the encoding, the message in the body and its encoding etc
-            myMail.Subject = "Annulatie van reservatie";
+            myMail.Subject = "Annulatie van reservering";
             myMail.SubjectEncoding = System.Text.Encoding.UTF8;
             myMail.BodyEncoding = System.Text.Encoding.UTF8;
             myMail.IsBodyHtml = true;

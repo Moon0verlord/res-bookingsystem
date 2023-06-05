@@ -135,7 +135,7 @@ static class Reservation
             Console.SetCursorPosition(2, 3);
             Console.WriteLine(
                 $"\n   Email: {_userEmail}\n   Naam: {_userName}\n   Groepgrootte: {_amountOfPeople}\n" +
-                $"   Reservatie tafel nummer: {_chosenTable}\n   Datum: {_chosenDate.Date.ToString("dd-MM-yyyy")}" +
+                $"   Reservering tafel nummer: {_chosenTable}\n   Datum: {_chosenDate.Date.ToString("dd-MM-yyyy")}" +
                 $"\n   Tijd: ({_chosenTimeslot.Item1} - {_chosenTimeslot.Item2})\n");
             Console.Write("\n \n        Weet u zeker dat u met deze gegevens wilt reserveren? (j/n): ");
             Console.ResetColor();
@@ -148,7 +148,7 @@ static class Reservation
                     Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
                     Console.Clear();
-                    Console.WriteLine("\nReservatie is gemaakt.");
+                    Console.WriteLine("Reservering is gemaakt.");
                     Thread.Sleep(1500);
                     UserLogin.DiscardKeys();
                     return true;
@@ -172,7 +172,7 @@ static class Reservation
             while (loop)
             {
                 Console.Clear();
-                string prompt = $"\n\n\nVul hier uw e-mail in om een reservatie te maken.";
+                string prompt = $"\n\n\nVul hier uw e-mail in om een reservering te maken.";
                 string[] options =
                 {
                     $"Vul hier uw e-mail in" + (email == null ? "" : $": {email}"),
@@ -543,7 +543,7 @@ static class Reservation
         Console.Clear();
         var thisMonth = Reservations.PopulateDates();
         Console.WriteLine(
-            $"\n\n\nU kunt alleen een reservatie maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):");
+            $"\n\n\nU kunt alleen een reservering maken voor de huidige maand ({ReservationsLogic.CurMonth})\nKies een datum (of druk op 'q' om terug te gaan):");
         for (int i = 0; i < thisMonth.GetLength(1); i++)
         {
             Console.Write($"{thisMonth[0, i].Date.ToString("ddd", CultureInfo.GetCultureInfo("nl"))}\t");
@@ -669,7 +669,7 @@ static class Reservation
         List<ReservationModel> allRes = AccountsAccess.LoadAllReservations();
         List<string> reservationsPerson = new();
         List<int> reservationPersonPositions = new();
-        Console.WriteLine("Voer uw reservatie ID in: ");
+        Console.WriteLine("Voer uw reservering ID in: ");
         string? resid = Console.ReadLine();
         foreach (ReservationModel res in allRes)
         {
@@ -708,7 +708,7 @@ static class Reservation
                         switch (AnswerLogic.CheckInput(choice!))
                         {
                             case 1:
-                                Console.WriteLine("De reservatie is verwijderd");
+                                Console.WriteLine("De reservering is verwijderd");
                                 allRes.RemoveAt(reservationPersonPositions[reservInput]);
                                 reservationsPerson.RemoveAt(reservInput);
                                 AccountsAccess.WriteAllReservations(allRes);
@@ -716,7 +716,7 @@ static class Reservation
                                 UserLogin.DiscardKeys();
                                 break;
                             case 0:
-                                Console.WriteLine("De reservatie is niet verwijderd");
+                                Console.WriteLine("De reservering is niet verwijderd");
                                 Thread.Sleep(2000);
                                 UserLogin.DiscardKeys();
                                 break;
@@ -745,7 +745,7 @@ static class Reservation
                 DateTime.Now&&x.EmailAddress==account.EmailAddress).OrderBy(x => x.Date).ToArray();
             var menuViewable = allRes.Select(x => 
                     x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})").Append("Ga terug").ToArray();
-            int chosenOption = _my1DMenu.RunMenu(menuViewable, allRes.Length>0?"Overzicht van al uw reservaties.\nKlik op een datum om meer informatie te zien.\n":
+            int chosenOption = _my1DMenu.RunMenu(menuViewable, allRes.Length>0?"Overzicht van al uw reserveringen.\nKlik op een datum om meer informatie te zien.\n":
                 "U heeft momenteel geen reserveringen\n");
             switch (menuViewable[chosenOption])
             {
@@ -767,14 +767,14 @@ static class Reservation
         Console.CursorVisible = true;
         if (resId == null!)
         {
-            Console.Write("Voer uw reservatie ID in: ");
+            Console.Write("Voer uw reservering ID in: ");
             resId = Console.ReadLine()!.ToUpper();
             resId = resId.Contains("RES-") ? resId : "RES-" + resId;   
         }
         ReservationModel? chosenRes = allRes.Find(x => x.ResId == resId);
         if (chosenRes == default)
         {
-            Console.WriteLine($"Geen reservatie gevonden met het gegeven reservatie ID.");
+            Console.WriteLine($"Geen reservering gevonden met het gegeven reserverings ID.");
             Thread.Sleep(1500);
             UserLogin.DiscardKeys();
         }
@@ -784,10 +784,10 @@ static class Reservation
             while (inMenu)
             {
                 string resInfo =
-                    $"Reservatie {resId}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
+                    $"Reservering {resId}:\nEmail: {chosenRes.EmailAddress}\nDatum: {chosenRes.Date.Date:dd-MM-yyyy}\n" +
                     $"Tijd: {chosenRes.StartTime:hh}:{chosenRes.StartTime:mm} - {chosenRes.LeaveTime:hh}:{chosenRes.LeaveTime:mm}" +
                     $"\nTafel: {chosenRes.Id}\nGroepsgrootte: {chosenRes.GroupSize}\nGekozen gang: {chosenRes.Course}\n";
-                int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservatie annuleren", "Ga terug" }, resInfo);
+                int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservering annuleren", "Ga terug" }, resInfo);
                 switch (chosenOption)
                 {
                    case 0 :
@@ -795,7 +795,7 @@ static class Reservation
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Reservatie is morgen, en dan kunt u" +
+                            Console.WriteLine("Reservering is morgen, en dan kunt u" +
                                               " niet annuleren via dit programma.\nVerwijs naar het informatie tab " +
                                               "binnen het hoofdmenu om te bellen voor annulering.\n\n\nDruk op een knop om terug te gaan.");
                             Console.ReadKey(true);
@@ -806,20 +806,20 @@ static class Reservation
 
                             Console.Clear();
                             Console.CursorVisible = true;
-                            Console.Write("Weet u zeker dat u deze reservatie wilt annuleren? (j/n): ");
+                            Console.Write("Weet u zeker dat u deze reservering wilt annuleren? (j/n): ");
                             string choice = Console.ReadLine()!.ToLower();
                             switch (AnswerLogic.CheckInput(choice))
                             {
                                 case 1: 
                                     allRes.Remove(chosenRes);
                                     AccountsAccess.WriteAllReservations(allRes);
-                                    Console.WriteLine("\nReservatie is verwijderd.");
+                                    Console.WriteLine("\nReservering is verwijderd.");
                                     Thread.Sleep(1500);
                                     UserLogin.DiscardKeys();
                                     inMenu = false;
                                     break;
                                 case 0 :
-                                    Console.WriteLine("\nReservatie is niet verwijderd.");
+                                    Console.WriteLine("\nReservering is niet verwijderd.");
                                     Thread.Sleep(1500);
                                     UserLogin.DiscardKeys();
                                     break;

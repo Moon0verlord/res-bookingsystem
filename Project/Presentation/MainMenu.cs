@@ -30,7 +30,7 @@ class MainMenu : IMenuLogic
             while (true)
             {
                 // main menu functionality for non-logged in users.
-                string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Reservaties bekijken", "Maak een reservatie met e-mail", "Afsluiten" };
+                string[] options = { "Log-in portal", "Informatie", "Bekijk het menu","Special Events", "Reserveringen bekijken", "Maak een reservering met e-mail", "Afsluiten" };
                 string prompt = $"{_ascii}";
                 int input = _myMenu.RunMenu(options, prompt);
                 switch (input)
@@ -69,7 +69,7 @@ class MainMenu : IMenuLogic
                 while (true)
                 {
                     // displays menu with various management options if the user is a manager
-                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verwijder een medewerker", "Verander menu", "Event organiseren", "Reservatie overzicht", "Reservering aanpassen" };
+                    string[] options = { "Uitloggen", "Voeg medewerker toe", "Verwijder een medewerker", "Verander menu", "Event organiseren", "Reserverings overzicht", "Reservering aanpassen" };
                     string prompt = $"\nWelkom {Account.FullName}:";
                     int input = _myMenu.RunMenu(options, prompt);
                     switch (input)
