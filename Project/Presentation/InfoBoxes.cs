@@ -3,8 +3,8 @@ using System.Text.RegularExpressions;
 
 static class InfoBoxes
 {
-    public static int origRow = 0;
-    public static int origCol = 0;
+    private static int origRow;
+    private static int origCol;
     //this writes the tutorial box that explains to the user what all the terms behind the tables mean.
     public static void WriteBoxReservations(int groupsize, int origrow, int origcol)
     {
@@ -185,7 +185,8 @@ static class InfoBoxes
             U kunt bij ons kiezen uit een 2, 3 of 4 gangen menu. 
             Ook is het mogelijk om er een wijnarrangement bij te boeken. 
             Naast het reserveren van een tafel hebben wij in het restaurant ook nog een bar.
-            Als u uw avond wilt voortzetten, dan kunt u ook nog een filmpje pakken bij de dichtbijgelegen bioscoop.
+            Als u uw avond wilt voortzetten, dan kunt u ook nog een filmpje pakken
+            bij de dichtbijgelegen bioscoop.
             ";
         int x = 10;
         int y = 0;

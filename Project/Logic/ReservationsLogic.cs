@@ -173,7 +173,6 @@ public class ReservationsLogic
                 }
             }
         }
-
         return null!;
     }
 }

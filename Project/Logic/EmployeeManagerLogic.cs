@@ -122,7 +122,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 case 1:
                                     {
                                         Console.Clear();
-                                        var employeeAcc = AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                        AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
                                         Console.WriteLine("Medewerker toegevoegd");
                                         Thread.Sleep(3000);
                                         MainMenu.Start();
@@ -160,7 +160,7 @@ public class EmployeeManagerLogic : IMenuLogic
             Console.WriteLine("Accounts van actieve medewerks:");
             Console.ResetColor();
             // Show all employees
-            foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee == true && d.IsManager == false))
+            foreach (var item in AccountsAccess.LoadAll().Where(d => d.IsEmployee && !d.IsManager))
             {
                 Console.WriteLine(item.EmailAddress);
             }

@@ -92,6 +92,7 @@ public static class AccountsAccess
         AccountsLogic.UpdateList(allAccounts[^1]);
         return allAccounts[^1];
     }
+    
 
     // remove an account from the json file
     public static void RemoveAccount(string email)

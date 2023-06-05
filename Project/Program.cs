@@ -8,10 +8,6 @@ public class Program
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-        {
-            Console.WriteLine("Ha ha apple");
-        }
         Console.Clear();
         MainMenu.Start();
     }

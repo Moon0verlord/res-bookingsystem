@@ -211,8 +211,9 @@ public class EmailLogic
                 mailSent = false;
             } else
             {
-                Console.WriteLine("Bericht verstuurd.");
+                Console.WriteLine($"Bericht verstuurd.");
                 mailSent = true;
+               
             }
             
         }
