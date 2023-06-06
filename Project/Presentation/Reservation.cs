@@ -1,6 +1,7 @@
 using System.Globalization;
 using Newtonsoft.Json.Linq;
 using System.Runtime.InteropServices;
+using IronBarCode;
 
 static class Reservation
 {
@@ -48,12 +49,12 @@ static class Reservation
                         if (_acc != null)
                             loop = false;
                     }
-                    break;      
+                    break;
                 case 3:
                     if (HasUnderageMembers())
                         _stepCounter++;
-                    else 
-                        _stepCounter --;
+                    else
+                        _stepCounter--;
                     break;
                 // ChooseWine returns an int, because there are 3 options. A bool would not work.
                 // 0: go back, 1: yes to wine, 2: no to wine
@@ -67,7 +68,7 @@ static class Reservation
                             _stepCounter++;
                             break;
                         case 2:
-                            _stepCounter += 2; 
+                            _stepCounter += 2;
                             break;
                     }
                     break;
@@ -77,7 +78,7 @@ static class Reservation
                     else
                         _stepCounter--;
                     break;
-          
+
                 case 6:
                     if (ChooseDate())
                         _stepCounter++;
@@ -102,7 +103,7 @@ static class Reservation
                     else
                         _stepCounter--;
                     break;
-            }   
+            }
         }
     }
 
@@ -148,6 +149,15 @@ static class Reservation
                     Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
                     Console.Clear();
+                    try
+                    {
+                        CreateQRCodeWithInfo(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
+                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("het was niet mogelijk om een qr code aan te maken");
+                    }
                     Console.WriteLine("Reservering is gemaakt.");
                     Thread.Sleep(1500);
                     UserLogin.DiscardKeys();
@@ -158,6 +168,23 @@ static class Reservation
                     break;
             }
         }
+    }
+
+    public static string CreateQRCodeWithInfo(string _userEmail, DateTime _chosenDate, string _chosenTable, int _amountOfPeople,
+                            TimeSpan _chosenTimeslotstart, TimeSpan _chosenTimeslotend, string resId, int _chosenCourse)
+    {
+        string information =
+@$"
+Email: {_userEmail}
+Datum: {_chosenDate}
+tafel nummer: {_chosenTable}
+aantal mensen: {_amountOfPeople}
+start en eindtijd: {_chosenTimeslotstart} tot {_chosenTimeslotend}
+reservationid: {resId}
+aantal gangen: {_chosenCourse}
+";
+        QRCodeWriter.CreateQrCode(information, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf($"{_userEmail}/{resId}.pdf");
+        return "Er is een qr code aangemaakt voor u om te scannen.";
     }
 
     // ask users to fill in their email en full name.
@@ -227,7 +254,7 @@ static class Reservation
                         Console.Write("\nVul eerst al uw gegevens in.");
                         Thread.Sleep(1800);
                         Console.ResetColor();
-                        
+
                         break;
                     case 3:
                         return false;
@@ -302,7 +329,7 @@ static class Reservation
                             "Een wijnarrangement geeft een samengestelde wijnselectie bij iedere course.\n" +
                             "Een wijnarrangement kost €10 extra voor ieder persoon in uw groep die het wilt.\n" +
                             "Als u 'Ja' invult, vragen wij dalijk hoeveel mensen een wijnarrangement willen.";
-            string[] options = new[] { "Ja, ik wil een wijnarrangement", "Nee, ik wil geen wijnarrangement\n", "Ga terug"};
+            string[] options = new[] { "Ja, ik wil een wijnarrangement", "Nee, ik wil geen wijnarrangement\n", "Ga terug" };
             int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
             {
@@ -326,10 +353,10 @@ static class Reservation
                     return 2;
                 default:
                     return 0;
-            }   
+            }
         }
     }
-    
+
     // if user said yes to wine, user chooses amount of wine arrangements wanted here
     // calculates group size - amount of minors in the group, so you can't order 6 wine arrangements when you have 3 kids with you.
     public static bool ChooseWineAmount()
@@ -342,7 +369,7 @@ static class Reservation
             string prompt = "\n\n\nU heeft aangegeven dat u een wijnarrangement wilt.\n" +
                             "Hoeveel personen uit u groep willen een wijnarrangement?\n" +
                             "Let op: per persoon kost een wijnarrangement €10.";
-            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineAmount == 0 ? "\n" : $": {wineAmount}\n"), 
+            string[] options = new[] { "Vul hier in hoeveel personen een wijnarrangement willen" + (wineAmount == 0 ? "\n" : $": {wineAmount}\n"),
                 "Doorgaan", "Ga terug"};
             int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
@@ -409,10 +436,10 @@ static class Reservation
                     break;
                 case 2:
                     return false;
-            }   
+            }
         }
     }
-    
+
     // asks user if there are any minors in the group, so they can get a discount and aren't eligible for the wine course.
     public static bool HasUnderageMembers()
     {
@@ -422,7 +449,7 @@ static class Reservation
             string prompt = "\n\n\nHeeft u minderjarige personen in uw groep?\n" +
                             "Als dit zo is, kies dan 'Ja', en vul in hoeveel personen minderjarig zijn\n" +
                             "Dit geeft u wat extra korting per minderjarig persoon. (10%)";
-            string[] options = new[] { "Ja, ik heb minderjarige in mijn groep", "Nee, ik heb geen minderjarige in mijn groep\n", "Ga terug"};
+            string[] options = new[] { "Ja, ik heb minderjarige in mijn groep", "Nee, ik heb geen minderjarige in mijn groep\n", "Ga terug" };
             int chosenOption = _my1DMenu.RunResMenu(options, prompt, _stepCounter);
             switch (chosenOption)
             {
@@ -498,7 +525,7 @@ static class Reservation
                 return 0;
         }
     }
-    
+
     // ask user how many people the group will consist of.
     public static int ChooseGroupSize()
     {
@@ -573,7 +600,7 @@ static class Reservation
 
         if (todayeventcheck)
         {
-            string[] optionsEvent =  { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
+            string[] optionsEvent = { "16:00 - 19:00", "19:00 - 22:00", "Ga terug" };
             int selectedIndexEvent = _my1DMenu.RunMenu(optionsEvent, "\n\n\nVandaag is er een event kies uw tijdslot:");
             switch (selectedIndexEvent)
             {
@@ -661,7 +688,7 @@ static class Reservation
         return false;
     }
 
- 
+
     public static void ViewRes(string email)
     {
         Console.Clear();
@@ -741,11 +768,11 @@ static class Reservation
         bool inMenu = true;
         while (inMenu)
         {
-            ReservationModel[] allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >= 
-                DateTime.Now&&x.EmailAddress==account.EmailAddress).OrderBy(x => x.Date).ToArray();
-            var menuViewable = allRes.Select(x => 
+            ReservationModel[] allRes = AccountsAccess.LoadAllReservations().Where(x => x.Date.AddHours(x.StartTime.Hours) >=
+                DateTime.Now && x.EmailAddress == account.EmailAddress).OrderBy(x => x.Date).ToArray();
+            var menuViewable = allRes.Select(x =>
                     x.Date.ToString("dd-MM-yyyy") + $" ({x.StartTime:hh}:{x.StartTime:mm} - {x.LeaveTime:hh}:{x.LeaveTime:mm})").Append("Ga terug").ToArray();
-            int chosenOption = _my1DMenu.RunMenu(menuViewable, allRes.Length>0?"Overzicht van al uw reserveringen.\nKlik op een datum om meer informatie te zien.\n":
+            int chosenOption = _my1DMenu.RunMenu(menuViewable, allRes.Length > 0 ? "Overzicht van al uw reserveringen.\nKlik op een datum om meer informatie te zien.\n" :
                 "U heeft momenteel geen reserveringen\n");
             switch (menuViewable[chosenOption])
             {
@@ -755,7 +782,7 @@ static class Reservation
                 default:
                     ViewRes2(allRes[chosenOption].ResId);
                     break;
-            }   
+            }
         }
     }
 
@@ -769,7 +796,7 @@ static class Reservation
         {
             Console.Write("Voer uw reservering ID in: ");
             resId = Console.ReadLine()!.ToUpper();
-            resId = resId.Contains("RES-") ? resId : "RES-" + resId;   
+            resId = resId.Contains("RES-") ? resId : "RES-" + resId;
         }
         ReservationModel? chosenRes = allRes.Find(x => x.ResId == resId);
         if (chosenRes == default)
@@ -790,7 +817,7 @@ static class Reservation
                 int? chosenOption = _my1DMenu.RunMenu(new[] { "Reservering annuleren", "Ga terug" }, resInfo);
                 switch (chosenOption)
                 {
-                   case 0 :
+                    case 0:
                         if ((chosenRes.Date.Date - DateTime.Now.Date).Days <= 1)
                         {
                             Console.Clear();
@@ -810,7 +837,7 @@ static class Reservation
                             string choice = Console.ReadLine()!.ToLower();
                             switch (AnswerLogic.CheckInput(choice))
                             {
-                                case 1: 
+                                case 1:
                                     allRes.Remove(chosenRes);
                                     AccountsAccess.WriteAllReservations(allRes);
                                     Console.WriteLine("\nReservering is verwijderd.");
@@ -818,7 +845,7 @@ static class Reservation
                                     UserLogin.DiscardKeys();
                                     inMenu = false;
                                     break;
-                                case 0 :
+                                case 0:
                                     Console.WriteLine("\nReservering is niet verwijderd.");
                                     Thread.Sleep(1500);
                                     UserLogin.DiscardKeys();
