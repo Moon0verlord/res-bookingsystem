@@ -34,7 +34,6 @@ public class EmailLogic
             return false;
         }
     }
-
     // check if the email is valid
     public static bool IsValidEmail( string? email)
     {

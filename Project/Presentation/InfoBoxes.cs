@@ -3,13 +3,13 @@ using System.Text.RegularExpressions;
 
 static class InfoBoxes
 {
-    private static int origRow;
-    private static int origCol;
+    private static int _origRow;
+    private static int _origCol;
     //this writes the tutorial box that explains to the user what all the terms behind the tables mean.
     public static void WriteBoxReservations(int groupsize, int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string msg1 = " Beschikbaar: Deze tafel is nog niet gereserveerd en is gepast voor uw groepsgrootte.";
         string msg2 = $" Onbeschikbaar: Deze tafel is ongepast voor uw groepsgrootte ({groupsize}).";
         string msg3 = " Bezet: Deze tafel is al gereserveerd door een andere klant.";
@@ -38,8 +38,8 @@ static class InfoBoxes
     
     public static void WriteBoxUserEmail(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         int x = 1;
         int y = 3;
         string boxBorder = "───────────────────────────────";
@@ -65,8 +65,8 @@ static class InfoBoxes
     
     public static void WriteBoxUserPassword(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         int x = 0;
         int y = 5;
         string boxBorder = "──────────────────────────";
@@ -91,8 +91,8 @@ static class InfoBoxes
 
     public static void WriteBoxStepCounter(int origrow, int origcol, int stepcount)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         int x = 4;
         int y = 0;
         string boxBorder = "───────────────";
@@ -114,8 +114,8 @@ static class InfoBoxes
     public static void WriteBill(int origrow, int origcol,int _amountOfPeople, int _underageMembers, int chosenCourse, bool _chosenWine, int _howManyWine)
     {
         // variables here
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         int x = 20;
         int y = 0;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -165,8 +165,8 @@ static class InfoBoxes
 
     public static void WriteInformation(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         WriteHours(origrow, origcol);
         WriteDescription(origrow, origcol);
         WriteContactInfo(origrow, origcol);
@@ -176,8 +176,8 @@ static class InfoBoxes
 
     private static void WriteDescription(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "────────────────────────────────────────────────────────────────────────────────────────────";
         string information =
             @"
@@ -210,8 +210,8 @@ static class InfoBoxes
     
     private static void WriteContactInfo(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "─────────────────────────────────────────";
         string information =
             @"
@@ -240,8 +240,8 @@ static class InfoBoxes
     }
     public static void WriteTimeInfo(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "───────────────────────────────────────────────────────────────────────────────";
         // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
         // so i have to use manual whitespaces to format it correctly
@@ -281,8 +281,8 @@ static class InfoBoxes
     }
     private static void WriteHours(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "───────────────────────────────────────────────────────────────────────────────";
         // i know this is very ugly, but @ string literals dont seem to be affected by writing at certain X coordinates
         // so i have to use manual whitespaces to format it correctly
@@ -322,8 +322,8 @@ static class InfoBoxes
     
     private static void WriteQuit(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "─────────────────────────────────────────";
         string information =
             @"
@@ -350,16 +350,16 @@ static class InfoBoxes
     }
     private static void WriteEvents(int origrow, int origcol)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         int x = 0;
         int y = 0;
     }
 
     public static void WritePasswordToggle(int origrow, int origcol, bool register)
     {
-        origRow = origrow;
-        origCol = origcol;
+        _origRow = origrow;
+        _origCol = origcol;
         string boxBorder = "───────────────────────────────────────────────────────";
         string information =
             @"
@@ -392,7 +392,7 @@ static class InfoBoxes
     {
         try
         {
-            Console.SetCursorPosition(origCol + x, origRow + y);
+            Console.SetCursorPosition(_origCol + x, _origRow + y);
             Console.Write(s);
         }
         catch (ArgumentOutOfRangeException e)
