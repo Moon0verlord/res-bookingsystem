@@ -12,8 +12,8 @@ public class EmployeeManagerLogic : IMenuLogic
         
         Console.Clear();
         Console.WriteLine("Overzicht van alle reserveringen\n-------------------------------");
-        Console.WriteLine(String.Format($"{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", 
-            "Tafel ID", "Reserverings ID", "Datum", "Tijd", "Email", "Aantal pers.", "Gekozen gang"));
+        Console.WriteLine("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", 
+            "Tafel ID", "Reserverings ID", "Datum", "Tijd", "Email", "Aantal pers.", "Gekozen gang");
         Console.ForegroundColor = ConsoleColor.White;
         foreach (var item in AccountsAccess.LoadAllReservations().OrderBy(d => d.Date))
         {
@@ -22,8 +22,7 @@ public class EmployeeManagerLogic : IMenuLogic
                 var Date = item.Date.ToString("dd-MM-yy");
                 string id = Convert.ToString(item.Id);
                 string time = $"{item.StartTime:hh}:{item.StartTime:mm} - {item.LeaveTime:hh}:{item.LeaveTime:mm}";
-                Console.WriteLine(String.Format("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", 
-                    id, item.ResId, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString()));
+                Console.WriteLine("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", id, item.ResId, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString());
 
             }
         }
