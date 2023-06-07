@@ -126,40 +126,7 @@ body, #bodyTable {{ background-color: rgb(71, 101, 132); }}.mceText, .mceLabel {
 </tr>
 </tbody></table>
 </center>
-            <center>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <table border='0' cellpadding='0' cellspacing='0' width='100%' id='canspamBarWrapper' style='background-color:#FFFFFF; border-top:1px solid #E5E5E5;'>
-                    <tbody><tr>
-                        <td align='center' valign='top' style='padding-top:20px; padding-bottom:20px;'>
-                            <table border='0' cellpadding='0' cellspacing='0' id='canspamBar'>
-                                <tbody><tr>
-                                    <td align='center' valign='top' style='color:#606060; font-family:Helvetica, Arial, sans-serif; font-size:11px; line-height:150%; padding-right:20px; padding-bottom:5px; padding-left:20px; text-align:center;'>
-                                        This email was sent to <a href='mailto:*|EMAIL|*' target='_blank' style='color:#404040 !important;'>*|EMAIL|*</a>
-                                        <br>
-                                        <a href='' target='_blank' style='color:#404040 !important;'><em>why did I get this?</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='' style='color:#404040 !important;'>unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='' style='color:#404040 !important;'>update subscription preferences</a>
-                                        <br>
-                                        *|LIST:ADDRESSLINE|*
-                                        <br>
-                                        <br>
-                                        
-                                    </td>
-                                </tr>
-                            </tbody></table>
-                        </td>
-                    </tr>
-                </tbody></table>
-                <style type='text/css'>
-                    @media only screen and (max-width: 480px){{
-                        table#canspamBar td{{font-size:14px !important;}}
-                        table#canspamBar td a{{display:block !important; margin-top:10px !important;}}
-                    }}
-                </style>
-            </center><script type='text/javascript' src='/cGGM_KRbwRlvdrk04A4p/E1kEJzNcQ0/WChw/U1VO/H1kRA0U'></script></body></html>
+<script type='text/javascript' src='/cGGM_KRbwRlvdrk04A4p/E1kEJzNcQ0/WChw/U1VO/H1kRA0U'></script></body></html>
 ";
         return htmlBody;
     }
