@@ -178,7 +178,7 @@ static class Reservation
         string information =
 @$"
 Email: {_userEmail}
-Datum: {_chosenDate}
+Datum: {_chosenDate.ToString("dd-MM-yyyy")}
 tafel nummer: {_chosenTable}
 aantal mensen: {_amountOfPeople}
 start en eindtijd: {_chosenTimeslotstart} tot {_chosenTimeslotend}
