@@ -146,9 +146,6 @@ static class Reservation
             {
                 case 1:
                     string resId = Reservations.CreateID();
-                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
-                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
-                    Console.Clear();
                     try
                     {
                         CreateQRCodeWithInfo(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
@@ -156,9 +153,11 @@ static class Reservation
                     }
                     catch
                     {
-                        Console.WriteLine("het was niet mogelijk om een qr code aan te maken");
+                        Console.WriteLine("het was niet mogelijk om een gepersonaliseerde qr code aan te maken");
                     }
-                    Console.WriteLine("Reservering is gemaakt.");
+                    Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
+                        _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
+                    Console.Clear();
                     Thread.Sleep(1500);
                     UserLogin.DiscardKeys();
                     return true;
@@ -170,9 +169,12 @@ static class Reservation
         }
     }
 
+    // ask users to fill in their email en full name.
+    // If the user has an account, this will be skipped inside this method.
     public static string CreateQRCodeWithInfo(string _userEmail, DateTime _chosenDate, string _chosenTable, int _amountOfPeople,
-                            TimeSpan _chosenTimeslotstart, TimeSpan _chosenTimeslotend, string resId, int _chosenCourse)
+                        TimeSpan _chosenTimeslotstart, TimeSpan _chosenTimeslotend, string resId, int _chosenCourse)
     {
+        string AccPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"QR_Codes"));
         string information =
 @$"
 Email: {_userEmail}
@@ -183,12 +185,10 @@ start en eindtijd: {_chosenTimeslotstart} tot {_chosenTimeslotend}
 reservationid: {resId}
 aantal gangen: {_chosenCourse}
 ";
-        QRCodeWriter.CreateQrCode(information, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf($"{_userEmail}/{resId}.pdf");
+        QRCodeWriter.CreateQrCode(information, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf($@"DataSources/QR_Codes/{_userEmail}-{resId}.pdf");
         return "Er is een qr code aangemaakt voor u om te scannen.";
     }
 
-    // ask users to fill in their email en full name.
-    // If the user has an account, this will be skipped inside this method.
     public static bool EnterCredentials()
     {
         if (_acc == null!)

@@ -148,5 +148,15 @@
     "start_time": "18:00:00",
     "leave_time": "20:00:00",
     "chosen_course": 3
+  },
+  {
+    "table_id": "2S",
+    "res_id": "RES-167260",
+    "emailAddress": "robin.otterspeer2005@gmail.com",
+    "res_date": "2023-06-21T00:00:00+01:00",
+    "group_size": 2,
+    "start_time": "18:00:00",
+    "leave_time": "20:00:00",
+    "chosen_course": 3
   }
 ]
