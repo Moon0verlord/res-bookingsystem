@@ -68,7 +68,7 @@ public class EmailLogic
                 string qrcodeimagePath = Path.Combine(Environment.CurrentDirectory, @"DataSources/QR_Codes",
                 $"{email}-{code}.pdf");
                 LinkedResource imageResourceqrcode = new LinkedResource(qrcodeimagePath);
-                imageResourceqrcode.ContentId = "image2";
+                imageResourceqrcode.ContentId = "QRCode.pdf";
                 mail.htmlView.LinkedResources.Add(imageResourceqrcode);
                 mail.mailMessage.AlternateViews.Add(mail.htmlView);
                 mail.Client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
@@ -79,7 +79,7 @@ public class EmailLogic
                 mail.mailMessage.Dispose();
             }
 
-            // if the qrcode can't be found, send a mail with a default qrcode
+            // if the personalized qrcode can't be found, send a mail with a default qrcode
             catch
             {
                 EmailModel mail = new EmailModel(email, "Reservering", HTMLInfo.GetHTML(Date.ToString("dd-MM-yyyy"), code,
@@ -89,7 +89,7 @@ public class EmailLogic
                 string imagePath = Path.Combine(Environment.CurrentDirectory, "DataSources",
                     "VoorbeeldQRCode.pdf");
                 LinkedResource imageResource = new LinkedResource(imagePath);
-                imageResource.ContentId = "image1";
+                imageResource.ContentId = "VoorbeeldQRCode.pdf";
                 mail.htmlView.LinkedResources.Add(imageResource);
                 mail.mailMessage.AlternateViews.Add(mail.htmlView);
                 mail.Client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
