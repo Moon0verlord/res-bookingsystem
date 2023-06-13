@@ -220,7 +220,7 @@ public class EmployeeManagerLogic : IMenuLogic
             {
                 var date = item.Date.ToString("dd-MM-yy");
                 string time = $"{item.StartTime.Hours}:00-{item.LeaveTime.Hours}:00";
-                Console.WriteLine(String.Format("{0,-8} |  {1,-6} | {2,5} | {3,5}", item.ResId, date, time, item.EmailAddress));
+                Console.WriteLine(String.Format("{0,-15} |  {1,-6} | {2,5} | {3,5}", item.ResId, date, time, item.EmailAddress));
             }
             Console.WriteLine("Vul hier het id in van de reservering die je wilt aanpassen (druk op enter om terug te gaan)");
             id = Console.ReadLine()!.ToUpper();
