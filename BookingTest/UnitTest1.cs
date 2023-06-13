@@ -114,6 +114,9 @@ public class UnitTest1
         Assert.AreEqual(expectAns, actAns);
     }
     [TestMethod]
+
+    // Made by Martijn & Jona
+    // test if the email is sent
     public void TestingMail()
     {
         EmailLogic.SendEmail("j@j.com",new DateTime(2003,12,3),"RE1",new TimeSpan(10,2,3),
