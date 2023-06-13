@@ -50,7 +50,13 @@ public static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw e-mail in: ");
                     userEmail = Console.ReadLine()!;
+                    Console.Clear();
+                    if (userPassword == null)
+                    {
+                        goto case 1;
+                    }
                     break;
+                    
                 case 1:
                     Console.CursorVisible = true;
                     Console.Clear();
@@ -58,6 +64,10 @@ public static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw wachtwoord in: ");
                     userPassword = WritePassword();
+                    if (userEmail == null)
+                    {
+                        goto case 0;
+                    }
                     break;
                 case 2:
                     if (userEmail == null || userPassword == null)

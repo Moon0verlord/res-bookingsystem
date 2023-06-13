@@ -12,7 +12,7 @@
     "emailAddress": "j@j.com",
     "password": "$2a$12$WgDbA83wVuZpohnDgQqoxeGsw93StR6v.4DliUrxBNB5VIdcHpyRq",
     "fullName": "jojo",
-    "Employee": false,
+    "Employee": true,
     "Manager": false
   },
   {

@@ -33,7 +33,6 @@ public class EmailModel
         mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
         mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
         mailMessage.IsBodyHtml = true;
-        
         Client.EnableSsl = true;
     }
 }
