@@ -5,8 +5,7 @@ using System.Text.Json;
 static class restaurantInfo
 {
     private static int _currentIndex;
-
-    private static MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _myMenu = new ();
     static string Information =
 @"
 De Witte Haven

@@ -402,13 +402,7 @@ public static class Dishes
 
 
     // Use regex to validate the price format (00,00)
-    private static bool IsValidPriceFormat(string price)
-    {
-        string pattern = @"^\d{1,3}(,\d{2})?$";
-        return Regex.IsMatch(price, pattern);
-    }
-
-
+    private static bool IsValidPriceFormat(string price) => Regex.IsMatch(price, @"^\d{1,3}(,\d{2})?$");
     // Displays wines based on user selection
     public static void WineDisplay()
     {

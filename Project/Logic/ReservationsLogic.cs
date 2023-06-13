@@ -143,22 +143,12 @@ public class ReservationsLogic
         return $"RES-{intId}";
     }
 
-    private bool IDExists(int id_num)
+    private bool IDExists(int idNum)
     {
-        var allRes =  AccountsAccess.LoadAllReservations();
-        foreach (ReservationModel res in allRes)
-        {
-            if (res.ResId != null!)
-            {
-                var number = Regex.Match(res.ResId, @"[0-9]+");
-                if (id_num == Convert.ToInt32(number.Value))
-                {
-                    return true;
-                }   
-            }
-        }
-
-        return false;
+        var allRes = (from res in AccountsAccess.LoadAllReservations()
+            where idNum == Convert.ToInt32(Regex.Match(res.ResId, @"[0-9]+").Value)
+            select res).ToList();
+        return allRes.Count > 0;
     }
 
     public static ReservationModel GetReservationById(string resId)

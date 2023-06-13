@@ -6,7 +6,7 @@ public class SpecialEvent
 {
     private static int _currentIndex;
 
-    static private MenuLogic _myMenu = new MenuLogic();
+    private static MenuLogic _myMenu = new ();
 
     // function where you can see the events menu
     public static void Eventmenu()
@@ -60,7 +60,6 @@ public class SpecialEvent
                         Console.WriteLine("De naam van het event is langer dan 30 tekens.");
                         Thread.Sleep(3000);
                         ResEvent();
-                        break;
                     }
 
                     break;
@@ -203,7 +202,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
     // function to delete old events
     public static void DeleteOldEvents()
     {
-        List<EventModel> eventMenu = AccountsAccess.ReadAllEvents().ToObject<List<EventModel>>();
+        List<EventModel> eventMenu = AccountsAccess.ReadAllEvents().ToObject<List<EventModel>>()!;
         eventMenu.RemoveAll(eventItem =>
         {
             DateTime eventDate = DateTime.ParseExact(eventItem.EventDate, "dd-MM-yyyy", null);

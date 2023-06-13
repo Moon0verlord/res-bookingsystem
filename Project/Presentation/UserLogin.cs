@@ -292,7 +292,6 @@ public static class UserLogin
         {
             hiddenPass += "*";
         }
-
         return hiddenPass;
     }
 
@@ -353,9 +352,8 @@ public static class UserLogin
     // Discard keys in stream to prevent spamming
     public static void DiscardKeys()
     {
-        while (Console.KeyAvailable)
-        {
-            Console.ReadKey(true);
-        }
+        do
+        { Console.ReadKey(true);
+        } while (Console.KeyAvailable);
     }
 }
