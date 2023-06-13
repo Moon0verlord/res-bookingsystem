@@ -144,7 +144,7 @@ static class Reservation
             switch (AnswerLogic.CheckInput(answer))
             {
                 case 1:
-                    string resId = Reservations.CreateID();
+                    string resId = Reservations.CreateId();
                     Reservations.CreateReservation(_userEmail, _chosenDate, _chosenTable!, _amountOfPeople,
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
                     Console.Clear();

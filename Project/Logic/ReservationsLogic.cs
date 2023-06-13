@@ -33,7 +33,7 @@ public class ReservationsLogic
     }
     
     
-    public ReservationModel[,] PopulateTables2D(DateTime res_Date, (TimeSpan, TimeSpan) chosenTime)
+    public ReservationModel[,] PopulateTables2D(DateTime resDate, (TimeSpan, TimeSpan) chosenTime)
     {
         int rowCount = -1;
         int columnCount = -1;
@@ -47,7 +47,7 @@ public class ReservationsLogic
         {
             // create the ID (1-9S / 1-5M / 1-2L) even within a loop that goes to 15.
             string ID = (i < 9 ? $"{i}S" : i < 14 ? $"{i - 8}M" : $"{i - 13}L");
-            IEnumerable<ReservationModel> tablesWithThisId = reservedTables.Where(res => res.Id.Equals(ID)&&res.Date==res_Date);
+            IEnumerable<ReservationModel> tablesWithThisId = reservedTables.Where(res => res.Id.Equals(ID)&&res.Date==resDate);
             if (i == 1 || i == 9 || i == 14)
             {
                 tableIndex++;
@@ -58,7 +58,7 @@ public class ReservationsLogic
             {
                 foreach (ReservationModel table in tablesWithThisId)
                 {
-                    if (table.Date == res_Date.Date)
+                    if (table.Date == resDate.Date)
                     {
                         if (table.StartTime >= chosenTime.Item1 && table.LeaveTime <= chosenTime.Item2)
                         {
@@ -71,7 +71,7 @@ public class ReservationsLogic
                             bool noDuplicates = true;
                             foreach (ReservationModel check in tables2D)
                             {
-                                if (check != null)
+                                if (check != null!)
                                 {
                                     if (check.Id == ID)
                                         noDuplicates = false;
@@ -103,9 +103,10 @@ public class ReservationsLogic
 
         return tables2D;
     }
-
+   
     public ReservationModel AddDefaultTable(string id, int size)
     {
+        
         ReservationModel resm = new ReservationModel(id,null, new DateTime(0), 0, default, default, null, default);
         resm.IsReserved = false;
         resm.TableSize = size;
@@ -113,32 +114,32 @@ public class ReservationsLogic
     }
 
 
-    public void CreateReservation(string? email, DateTime res_Date, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string res_id, int course)
+    public void CreateReservation(string? email, DateTime resDate, string chosenTable, int groupsize, TimeSpan entertime, TimeSpan leavetime, string resId, int course)
     {
         AccountModel user = AccountsAccess.LoadAll().Find(account => email == account.EmailAddress)!;
         if(user!=null!)
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
-            EmailLogic.SendEmail(email, res_Date, res_id, entertime, leavetime);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, resDate, groupsize, entertime, leavetime, resId, course);
+            EmailLogic.SendEmail(email, resDate, resId, entertime, leavetime);
             AccountsAccess.AddReservation(newReservation);
         }
         else
         {
-            ReservationModel newReservation = new ReservationModel(chosenTable, email, res_Date, groupsize, entertime, leavetime, res_id, course);
-            EmailLogic.SendEmail(email, res_Date, res_id, entertime, leavetime);
+            ReservationModel newReservation = new ReservationModel(chosenTable, email, resDate, groupsize, entertime, leavetime, resId, course);
+            EmailLogic.SendEmail(email, resDate, resId, entertime, leavetime);
             AccountsAccess.AddReservation(newReservation);
         }
         
     }
 
-    public string CreateID()
+    public string CreateId()
     {
         Random rand = new();
-        int intId = rand.Next(100000, 999999);
-        if (IDExists(intId))
+        int intId;
+        do
         {
-            return CreateID();
-        }
+            intId = rand.Next(100000, 999999);
+        } while (IDExists(intId));
         return $"RES-{intId}";
     }
 
@@ -160,18 +161,12 @@ public class ReservationsLogic
         return false;
     }
 
-    public static ReservationModel GetReservationById(string res_id)
+    public static ReservationModel GetReservationById(string resId)
     {
-        var allRes = AccountsAccess.LoadAllReservations();
-        foreach (ReservationModel res in allRes)
+        var GetRes = (from res in AccountsAccess.LoadAllReservations() where res.ResId == resId select res).ToList();
+        if (GetRes.Count > 0)
         {
-            if (res.ResId != null!)
-            {
-                if (res_id == res.ResId)
-                {
-                    return res;
-                }
-            }
+            return GetRes[0];
         }
         return null!;
     }

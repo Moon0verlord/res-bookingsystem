@@ -3,9 +3,9 @@ using Microsoft.VisualBasic.CompilerServices;
 public class EmployeeManagerLogic : IMenuLogic
 {
     private static AccountsLogic _logicMenu = new();
-    private static MenuLogic myMenu = new();
-    private static string? employeeEmail;
-    private static string employeePassword;
+    private static MenuLogic _myMenu = new();
+    private static string? _employeeEmail;
+    private static string _employeePassword ="";
     //Employee and manager method
     public static void CheckReservations()
     {
@@ -19,10 +19,10 @@ public class EmployeeManagerLogic : IMenuLogic
         {
             if (item.Date > DateTime.Today)
             {
-                var Date = item.Date.ToString("dd-MM-yy");
+                var date = item.Date.ToString("dd-MM-yy");
                 string id = Convert.ToString(item.Id);
                 string time = $"{item.StartTime:hh}:{item.StartTime:mm} - {item.LeaveTime:hh}:{item.LeaveTime:mm}";
-                Console.WriteLine("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", id, item.ResId, Date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString());
+                Console.WriteLine("{0,-8} | {1,-15} | {2, -10} | {3,-15} | {4,-35} | {5,-12} | {6,-10}", id, item.ResId, date, time, item.EmailAddress, item.GroupSize.ToString(), item.Course.ToString());
 
             }
         }
@@ -34,17 +34,17 @@ public class EmployeeManagerLogic : IMenuLogic
     //Manager only methods
     public static void AddEmployee()
     {
-        employeeEmail = null!;
-        employeePassword = null!;
+        _employeeEmail = null!;
+        _employeePassword = null!;
         while (true)
         {
             string[] options =
             {
-                $"Vul hier de e-mail in" + (employeeEmail == null ? "" : $": {employeeEmail}"),
-                "Vul hier het wachtwoord in" + $"{(employeePassword == null ? "\n" : $": {HidePass(employeePassword)}\n")}",
+                $"Vul hier de e-mail in" + (_employeeEmail == null ? "" : $": {_employeeEmail}"),
+                "Vul hier het wachtwoord in" + $"{(_employeePassword == null ? "\n" : $": {HidePass(_employeePassword)}\n")}",
                 "Maak account", "Afsluiten"
             };
-            var selectedIndex = myMenu.RunMenu(options, "Medewerker toevoegen");
+            var selectedIndex = _myMenu.RunMenu(options, "Medewerker toevoegen");
             switch (selectedIndex)
             {
                 // add email of employee
@@ -52,14 +52,14 @@ public class EmployeeManagerLogic : IMenuLogic
                     Console.Clear();
                     Console.CursorVisible = true;
                     Console.Write("\n vul hier de e-mail in: ");
-                    employeeEmail = Console.ReadLine()!;
-                    if (!employeeEmail.Contains("@") || employeeEmail.Length < 3)
+                    _employeeEmail = Console.ReadLine()!;
+                    if (!_employeeEmail.Contains("@") || _employeeEmail.Length < 3)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nOnjuiste email.\nEmail moet minimaal een @ hebben en 3 tekens lang zijn.");
                         Console.ResetColor();
-                        employeeEmail = null!;
+                        _employeeEmail = null!;
                         Thread.Sleep(3000);
                     }
 
@@ -69,11 +69,11 @@ public class EmployeeManagerLogic : IMenuLogic
                     Console.Clear();
                     Console.CursorVisible = true;
                     Console.Write("\n Vul hier het wachtwoord in: ");
-                    employeePassword = WritePassword()!;
+                    _employeePassword = WritePassword()!;
                     Console.Clear();
                     Console.Write("\n Vul het wachtwoord opnieuw in voor bevestiging: ");
                     var verifyUserPassword = WritePassword()!;
-                    if (employeePassword == verifyUserPassword)
+                    if (_employeePassword == verifyUserPassword)
                         break;
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -81,12 +81,12 @@ public class EmployeeManagerLogic : IMenuLogic
                             "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
                         Console.ResetColor();
                         Thread.Sleep(2000);
-                        employeePassword = null!;
+                        _employeePassword = null!;
                         break;
                     }
                 // create account
                 case 2:
-                    if (employeeEmail == null || employeePassword == null)
+                    if (_employeeEmail == null || _employeePassword == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nVul de gegevens in om een account aan te maken.");
@@ -96,7 +96,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     else
                     {
                         Console.Clear();
-                        var emailExists = _logicMenu.GetByEmail(employeeEmail);
+                        var emailExists = _logicMenu.GetByEmail(_employeeEmail);
                         if (emailExists != null!)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -112,17 +112,16 @@ public class EmployeeManagerLogic : IMenuLogic
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(
-                                $"\nVolledige naam: {fullName}\nE-mail: {employeeEmail}\nWachtwoord: " +
-                                $"{HidePass(employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
+                                $"\nVolledige naam: {fullName}\nE-mail: {_employeeEmail}\nWachtwoord: " +
+                                $"{HidePass(_employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
                             Console.ResetColor();
                             var answer = Console.ReadLine()!;
                             switch (AnswerLogic.CheckInput(answer))
                             {
-
                                 case 1:
                                     {
                                         Console.Clear();
-                                        AccountsAccess.AddAccount(employeeEmail, employeePassword, fullName, true, false);
+                                        AccountsAccess.AddAccount(_employeeEmail, _employeePassword, fullName, true, false);
                                         Console.WriteLine("Medewerker toegevoegd");
                                         Thread.Sleep(3000);
                                         MainMenu.Start();
@@ -247,13 +246,13 @@ public class EmployeeManagerLogic : IMenuLogic
         {
             string[] options =
             {
-                $"Vul hier de nieuwe datum in" + (reservation.Date == null ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
-                "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == null ? "" : $": {reservation.StartTime} - {reservation.LeaveTime}"),
+                $"Vul hier de nieuwe datum in" + (reservation.Date == default ? "" : $": {reservation.Date.ToString("dd-MM-yy")}"),
+                "Vul hier het nieuwe tijdsslot in" + (reservation.StartTime == default ? "" : $": {reservation.StartTime} - {reservation.LeaveTime}"),
                 "Vul hier de nieuwe email in" + (reservation.EmailAddress == null ? "" : $": {reservation.EmailAddress}"),
                 "Terug en opslaan",
                 "Terug zonder opslaan"
             };
-            var selectedIndex = myMenu.RunMenu(options, "Vul hier de gegevens in");
+            var selectedIndex = _myMenu.RunMenu(options, "Vul hier de gegevens in");
             switch (selectedIndex)
             {
                 // set new date
@@ -277,7 +276,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 "19:00-20:30",
                                 "Terug"
                             };
-                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            var sltdIndex = _myMenu.RunMenu(time, "selecteer een tijdsslot");
                             switch (sltdIndex)
                             {
                                 case 0:
@@ -308,7 +307,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 "20:00-22:00",
                                 "Terug"
                             };
-                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            var sltdIndex = _myMenu.RunMenu(time, "selecteer een tijdsslot");
                             switch (sltdIndex)
                             {
                                 case 0:
@@ -339,7 +338,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                 "21:00-23:30",
                                 "Terug"
                             };
-                            var sltdIndex = myMenu.RunMenu(time, "selecteer een tijdsslot");
+                            var sltdIndex = _myMenu.RunMenu(time, "selecteer een tijdsslot");
                             switch (sltdIndex)
                             {
                                 case 0:
@@ -382,7 +381,7 @@ public class EmployeeManagerLogic : IMenuLogic
                     break;
                 // save changes and send email if possible else send cancellation email
                 case 3:
-                    var User = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
+                    var user = AccountsAccess.LoadAll().Find(account => reservation.EmailAddress == account.EmailAddress)!;
                     foreach (var item in AccountsAccess.LoadAllReservations())
                     {
                         if (item.Date == reservation.Date && item.StartTime == reservation.StartTime && item.LeaveTime == reservation.LeaveTime && item.Id == reservation.Id && item.EmailAddress == reservation.EmailAddress)
@@ -393,8 +392,8 @@ public class EmployeeManagerLogic : IMenuLogic
                             switch (AnswerLogic.CheckInput(answer))
                             {
                                 case 1:
-                                    if (User != null)
-                                        EmailLogic.SendCancellationMail(item.EmailAddress, User.FullName);
+                                    if (user != null)
+                                        EmailLogic.SendCancellationMail(item.EmailAddress, user.FullName);
                                     else
                                         EmailLogic.SendCancellationMail(item.EmailAddress, "Gebruiker");
                                     AccountsAccess.RemoveReservation(item);
@@ -437,7 +436,7 @@ public class EmployeeManagerLogic : IMenuLogic
     public static string WritePassword()
     {
         string password = "";
-        ConsoleKey currKey = default;
+        ConsoleKey currKey;
         do
         {
             var keyInfo = Console.ReadKey(true);
