@@ -352,8 +352,9 @@ public static class UserLogin
     // Discard keys in stream to prevent spamming
     public static void DiscardKeys()
     {
-        do
-        { Console.ReadKey(true);
-        } while (Console.KeyAvailable);
+        while (Console.KeyAvailable)
+        { 
+            Console.ReadKey(true);
+        }
     }
 }
