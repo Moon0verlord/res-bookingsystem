@@ -149,8 +149,9 @@ static class Reservation
                         _chosenTimeslot.Item1, _chosenTimeslot.Item2, resId, _chosenCourse);
                     Console.Clear();
                     Console.WriteLine("Reservering is gemaakt.");
-                    Thread.Sleep(1500);
-                    UserLogin.DiscardKeys();
+                    Console.WriteLine($"Uw reserveringsnummer is: {resId}");
+                    Console.WriteLine("Druk op een toets om terug te gaan naar het hoofdmenu...");
+                    Console.ReadKey();
                     return true;
                 case 0:
                     return false;

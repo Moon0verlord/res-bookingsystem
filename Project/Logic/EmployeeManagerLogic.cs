@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.VisualBasic.CompilerServices;
 
 public class EmployeeManagerLogic : IMenuLogic
@@ -259,8 +260,19 @@ public class EmployeeManagerLogic : IMenuLogic
                 case 0:
                     Console.Clear();
                     Console.WriteLine("Vul hier de nieuwe datum in (dd-mm-jjjj)");
-                    DateTime date = Convert.ToDateTime(Console.ReadLine());
-                    reservation.Date = date;
+                    string dateInput = Console.ReadLine()!;
+                    if (IsValidDateFormat(dateInput))
+                    {
+                        DateTime date = Convert.ToDateTime(dateInput);
+                        reservation.Date = date;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Dit is geen geldige datum");
+                        Thread.Sleep(2000);
+                        Console.ResetColor();
+                    }
                     break;
                 // set new time
                 case 1:
@@ -453,6 +465,14 @@ public class EmployeeManagerLogic : IMenuLogic
             }
         } while (currKey != ConsoleKey.Enter);
         return password;
+    }
+    
+    
+    // checks if date matches the dd-mm-yyyy format
+    public static bool IsValidDateFormat(string input)
+    {
+        var pattern = @"^(0[1-9]|1[0-9]|2[0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$";
+        return Regex.IsMatch(input,pattern);
     }
 }
 

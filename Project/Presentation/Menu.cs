@@ -248,7 +248,7 @@ public static class Dishes
 
         // Displays the added dish to the user
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Het type menu: {type} in {category} is aangepast.");
+        Console.WriteLine($"Het {category} in het menu {type} is aangepast.");
         switch (category)
         {
             case "Voorgerecht":
