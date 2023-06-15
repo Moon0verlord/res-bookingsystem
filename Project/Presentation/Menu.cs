@@ -121,6 +121,7 @@ public static class Dishes
         Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ResetColor();
         Console.ReadKey();
+        Console.Clear();
         MainMenu.Start();
     }
 
@@ -130,7 +131,6 @@ public static class Dishes
         Console.CursorVisible = false;
         string type = "";
         string category = "";
-        
         
         // select type of food
         string[] options = { "Vegetarisch", "Vis", "Vlees", "Veganistisch", "kerst gerechten", "paas gerechten", "Terug naar hoofdmenu" };
@@ -398,11 +398,16 @@ public static class Dishes
     File.WriteAllText(path, updatedJson);
     Thread.Sleep(2000);
     UserLogin.DiscardKeys();
-}
+    }
 
 
     // Use regex to validate the price format (00,00)
-    private static bool IsValidPriceFormat(string price) => Regex.IsMatch(price, @"^\d{1,3}(,\d{2})?$");
+    private static bool IsValidPriceFormat(string price)
+    {
+        string pattern = @"^\d{1,3}(,\d{2})?$";
+        return Regex.IsMatch(price, pattern);
+    }    
+    
     // Displays wines based on user selection
     public static void WineDisplay()
     {
@@ -462,6 +467,7 @@ public static class Dishes
         }
         Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ReadKey();
+        Console.Clear();
         MainMenu.Start();
     }
     
@@ -537,6 +543,7 @@ public static class Dishes
                 break;
         }
         Console.CursorVisible = true;
+        
         // takes dish name from user and writes this to the json
         Console.WriteLine("Wat is de naam van het gerecht?:");
         name = Console.ReadLine()!;
