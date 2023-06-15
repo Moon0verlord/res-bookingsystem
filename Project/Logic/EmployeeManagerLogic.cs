@@ -126,21 +126,26 @@ public class EmployeeManagerLogic : IMenuLogic
                             Console.CursorVisible = true;
                             Console.Write("Vul hier de medewerkers volledige naam in: ");
                             var fullName = Console.ReadLine()!;
-                            if (UserLogin.NameCheck(fullName))
+                            if (!UserLogin.NameCheck(fullName))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("\nNaam mag alleen letters bevatten.");
+                                Thread.Sleep(1500);
+                                UserLogin.DiscardKeys();
+                                Console.ResetColor();
                             }
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Clear();
-                            Console.WriteLine(
-                                $"\nVolledige naam: {fullName}\nE-mail: {_employeeEmail}\nWachtwoord: " +
-                                $"{HidePass(_employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
-                            Console.ResetColor();
-                            var answer = Console.ReadLine()!;
-                            switch (AnswerLogic.CheckInput(answer))
+                            else
                             {
-                                case 1:
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Clear();
+                                Console.WriteLine(
+                                    $"\nVolledige naam: {fullName}\nE-mail: {_employeeEmail}\nWachtwoord: " +
+                                    $"{HidePass(_employeePassword)}\nWeet je zeker dat je een account wil aanmaken met deze gegevens? (j/n)");
+                                Console.ResetColor();
+                                var answer = Console.ReadLine()!;
+                                switch (AnswerLogic.CheckInput(answer))
+                                {
+                                    case 1:
                                     {
                                         Console.Clear();
                                         AccountsAccess.AddAccount(_employeeEmail, _employeePassword, fullName, true, false);
@@ -149,14 +154,14 @@ public class EmployeeManagerLogic : IMenuLogic
                                         UserLogin.DiscardKeys();
                                         MainMenu.Start();
                                     }
-                                    break;
-                                case 0:
-                                    Console.WriteLine("Medewerker niet toegevoegd");
-                                    Thread.Sleep(3000);
-                                    break;
-                                case -1:
-                                    break;
-                                    
+                                        break;
+                                    case 0:
+                                        Console.WriteLine("Medewerker niet toegevoegd");
+                                        Thread.Sleep(3000);
+                                        break;
+                                    case -1:
+                                        break;
+                                }
                             }
                         }
                     }
