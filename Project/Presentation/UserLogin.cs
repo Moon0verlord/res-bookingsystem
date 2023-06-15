@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 public static class UserLogin
 {
     private static AccountsLogic _accountsLogic = new();
@@ -367,9 +369,11 @@ public static class UserLogin
         }
     }
     
+    
+    // checks if the name meets the requirements
     public static bool NameCheck(string name)
     {
-        if (name.Length < 3) return false;
-        return true;
+        var pattern = @"^[A-Za-z]+ [A-Za-z]+$";
+        return Regex.IsMatch(name, pattern);
     }
 }
