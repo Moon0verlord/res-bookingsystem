@@ -71,6 +71,12 @@ public class EmployeeManagerLogic : IMenuLogic
                     Console.CursorVisible = true;
                     Console.Write("\n Vul hier het wachtwoord in: ");
                     _employeePassword = WritePassword()!;
+                    if (!UserLogin.PasswordCheck(_employeePassword))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\nWachtwoord moet minimaal 8 tekens lang zijn, een hoofdletter, een kleine letter, een cijfer en een speciaal teken bevatten.");
+                    }
                     Console.Clear();
                     Console.Write("\n Vul het wachtwoord opnieuw in voor bevestiging: ");
                     var verifyUserPassword = WritePassword()!;
@@ -110,6 +116,11 @@ public class EmployeeManagerLogic : IMenuLogic
                             Console.CursorVisible = true;
                             Console.Write("Vul hier de medewerkers volledige naam in: ");
                             var fullName = Console.ReadLine()!;
+                            if (UserLogin.NameCheck(fullName))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\nNaam mag alleen letters bevatten.");
+                            }
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine(

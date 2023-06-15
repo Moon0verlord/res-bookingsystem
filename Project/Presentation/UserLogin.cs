@@ -185,6 +185,15 @@ public static class UserLogin
                     Console.SetCursorPosition(1, 1);
                     Console.Write("\n Vul hier uw volledige naam in: ");
                     fullName = Console.ReadLine()!;
+                    if (!NameCheck(fullName))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nUw naam moet minimaal 3 tekens lang zijn.");
+                        Console.ResetColor();
+                        Thread.Sleep(2000);
+                        DiscardKeys();
+                        fullName = null!;
+                    }
                     break;
                 case 3:
                     if (userEmail == null || userPassword == null || fullName == null)
@@ -356,5 +365,11 @@ public static class UserLogin
         { 
             Console.ReadKey(true);
         }
+    }
+    
+    public static bool NameCheck(string name)
+    {
+        if (name.Length < 3) return false;
+        return true;
     }
 }

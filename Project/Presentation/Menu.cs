@@ -122,7 +122,7 @@ public static class Dishes
         Console.ResetColor();
         Console.ReadKey();
         Console.Clear();
-        MainMenu.Start();
+        UserSelection();
     }
 
     // adds the ability to update dishes on the menu
@@ -467,8 +467,7 @@ public static class Dishes
         }
         Console.WriteLine("Druk op een knop om verder te gaan......");
         Console.ReadKey();
-        Console.Clear();
-        MainMenu.Start();
+        WineDisplay();
     }
     
     // Gives manager option to add dish to dishes.json
