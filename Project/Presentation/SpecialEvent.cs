@@ -55,22 +55,28 @@ public class SpecialEvent
                     Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
                     eventName = Console.ReadLine()!;
                     int nameLength = eventName.Length;
-                    if (nameLength > 30 && nameLength < 1)
+                    if (nameLength > 30 || nameLength < 3)
                     {
-                        Console.WriteLine("De naam van het event is langer dan 30 tekens.");
+                        Console.WriteLine("De naam van het event moet minimaal 3 karakters en maximaal 30 karakters lang zijn.");
                         Thread.Sleep(3000);
                         ResEvent();
                     }
 
                     break;
                 case 1:
-                    Console.Write("wat wordt de extra informatie van het event: ");
+                    Console.Write("Wat wordt de extra informatie van het event: ");
                     eventInfo = Console.ReadLine()!;
+                    if (eventInfo.Length < 3 || eventInfo.Length > 30)
+                    {
+                        Console.WriteLine("De informatie van het event moet minimaal 3 karakters en maximaal 30 karakters lang zijn.");
+                        Thread.Sleep(3000);
+                        ResEvent();
+                    }
                     break;
                 case 2:
-                    Console.Write("wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
+                    Console.Write("Wat wordt de datum van het event: (gebruik deze format dd-MM-YYYY)");
                     eventDate = Console.ReadLine()!;
-                    if (eventDate.Contains("-") && eventDate.Length == 10)
+                    if (EmployeeManagerLogic.IsValidDateFormat(eventDate))
                     {
                         JArray allEvents = AccountsAccess.ReadAllEvents();
                         foreach (var eventItem in allEvents)
