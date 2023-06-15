@@ -6,7 +6,7 @@ public class SpecialEvent
 {
     private static int _currentIndex;
 
-    private static MenuLogic _myMenu = new ();
+    private static MenuLogic _myMenu = new();
 
     // function where you can see the events menu
     public static void Eventmenu()
@@ -55,7 +55,7 @@ public class SpecialEvent
                     Console.Write("Wat is de naam van het event: (gebruik max 30 tekens!)");
                     eventName = Console.ReadLine()!;
                     int nameLength = eventName.Length;
-                    if (nameLength > 30)
+                    if (nameLength > 30 && nameLength < 1)
                     {
                         Console.WriteLine("De naam van het event is langer dan 30 tekens.");
                         Thread.Sleep(3000);
@@ -198,7 +198,7 @@ Kom terug op een later moment om te zien of er al evenementen zijn.
             MainMenu.Start();
         }
     }
-    
+
     // function to delete old events
     public static void DeleteOldEvents()
     {

@@ -134,5 +134,13 @@
     "fullName": "mwarnas",
     "Employee": false,
     "Manager": false
+  },
+  {
+    "id": 29,
+    "emailAddress": "abcdef@gmail.com",
+    "password": "$2a$12$7ihtjt2QzVSurV7k.2ksLeFfvQ.T6Yg3z25lKDlCuv7KKbCh7dxuC",
+    "fullName": "OOPs ",
+    "Employee": false,
+    "Manager": false
   }
 ]
