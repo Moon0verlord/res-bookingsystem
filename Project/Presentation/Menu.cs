@@ -415,7 +415,7 @@ public static class Dishes
         string choice = "";
         Console.CursorVisible = false;
         string[] options = { "Rode Wijn", "Witte Wijn", "Champagne", "Terug naar hoofdmenu"};
-        string prompt = "\nKies een type gerechten:";
+        string prompt = "\nKies een type Wijn:";
         int input = _myMenu.RunMenu(options, prompt);
         switch (input)
         {
@@ -553,7 +553,7 @@ public static class Dishes
             Console.WriteLine("Ongeldige gerechtnaam. Voer een geldige naam in zonder speciale tekens.");
             Console.ResetColor();
             Thread.Sleep(2000);
-            MainMenu.Start();
+            AddToDishes();
             return;
         }
 
