@@ -62,6 +62,7 @@ public class EmployeeManagerLogic : IMenuLogic
                         Console.ResetColor();
                         _employeeEmail = null!;
                         Thread.Sleep(3000);
+                        UserLogin.DiscardKeys();
                     }
 
                     break;
@@ -70,27 +71,35 @@ public class EmployeeManagerLogic : IMenuLogic
                     Console.Clear();
                     Console.CursorVisible = true;
                     Console.Write("\n Vul hier het wachtwoord in: ");
-                    _employeePassword = WritePassword()!;
+                    _employeePassword = UserLogin.WritePassword()!;
                     if (!UserLogin.PasswordCheck(_employeePassword))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(
                             "\nWachtwoord moet minimaal 8 tekens lang zijn, een hoofdletter, een kleine letter, een cijfer en een speciaal teken bevatten.");
-                    }
-                    Console.Clear();
-                    Console.Write("\n Vul het wachtwoord opnieuw in voor bevestiging: ");
-                    var verifyUserPassword = WritePassword()!;
-                    if (_employeePassword == verifyUserPassword)
-                        break;
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(
-                            "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
+                        Thread.Sleep(3000);
+                        UserLogin.DiscardKeys();
                         Console.ResetColor();
-                        Thread.Sleep(2000);
                         _employeePassword = null!;
-                        break;
                     }
+                    else
+                    {
+                        Console.Clear();
+                        Console.Write("\n Vul het wachtwoord opnieuw in voor bevestiging: ");
+                        var verifyUserPassword = WritePassword()!;
+                        if (_employeePassword == verifyUserPassword)
+                            break;
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                "\nHet bevestigings wachtwoord is anders dan het eerste wachtwoord, probeer opnieuw.");
+                            Console.ResetColor();
+                            Thread.Sleep(2000);
+                            UserLogin.DiscardKeys();
+                            _employeePassword = null!;
+                        }
+                    }
+                    break;
                 // create account
                 case 2:
                     if (_employeeEmail == null || _employeePassword == null)
@@ -109,6 +118,7 @@ public class EmployeeManagerLogic : IMenuLogic
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nEr bestaat al een account met deze e-mail.");
                             Thread.Sleep(2000);
+                            UserLogin.DiscardKeys();
                             Console.ResetColor();
                         }
                         else
@@ -136,6 +146,7 @@ public class EmployeeManagerLogic : IMenuLogic
                                         AccountsAccess.AddAccount(_employeeEmail, _employeePassword, fullName, true, false);
                                         Console.WriteLine("Medewerker toegevoegd");
                                         Thread.Sleep(3000);
+                                        UserLogin.DiscardKeys();
                                         MainMenu.Start();
                                     }
                                     break;
